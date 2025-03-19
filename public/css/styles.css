@@ -1,0 +1,171 @@
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&display=swap');
+
+* {
+    font-family: "Josefin Sans", serif;
+    margin:0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body {
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+header, footer {
+    background-color: gray;
+    color: white;
+    text-align: center;
+    padding: 1em;
+}
+.container {
+    border: blue solid;
+    display: flex;
+    flex: 1;
+    justify-content: center;
+    /* flex-direction: column; */
+    align-items: center;
+}
+
+.data-container {
+    border: solid 1px red;
+    border-radius: 0.3rem;
+
+    div.info {
+        max-height: 320px;
+        overflow-y: auto;
+        padding: 0.5em 1em;
+    }
+}
+
+div.record {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 2.5rem;
+    padding: .2rem 0;
+    margin-top: 10px;
+    padding: 30px 15px;
+    height: 50px;
+    border: 1px dotted black;
+    border-radius: 3px;
+    margin-bottom: 5px;
+    background-color: rgb(224, 224, 224);
+}
+
+div.record-one{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 1rem;
+}
+
+.buttons {
+    display: flex;
+    flex-direction: row;
+    gap: .4rem;
+    justify-content: center;
+    align-items: center;
+}
+.buttons button, .buttons a {
+    cursor: pointer;
+    padding: .1rem .5rem;
+    background-color: #000;
+    color: #fff;
+    border-bottom: none;
+    border: none;
+    padding: .8em;
+    border-radius: 3px;
+}
+
+/* Desde aqui create poser */
+.create {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 50%;
+    transition: .2s all ease-in;
+
+    button {
+        background-color: #000;
+        border-radius: 50%;
+        height: 35px;
+        width: 35px;
+        font-size: 18px;
+        color: #fff;
+        cursor: pointer;
+    }
+}
+.create:hover{
+    transform: scale(1.1);
+}
+
+.form-group button{
+    cursor: pointer;
+    padding: 0.1rem .5rem;
+    background-color: #00973f;
+    color: #fff;
+    border-bottom: none;
+    border: none;
+    padding: .8em;
+    border-radius: 5px;
+    margin-bottom: 5px;
+}
+
+.form-group {
+    margin-top: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: start;
+    flex-direction: column;
+}
+
+.form-group input, select, textarea {
+    margin-bottom: .8em;
+    height: 22px;
+    width: 250px;
+}
+
+
+span{
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    text-align: center;
+}
+
+.back a {
+    cursor: pointer;
+    height: 34px;
+    transition: .2s all ease-in;
+    img{
+        width: 34px;
+        height: 34px;
+    }
+}
+
+.back a:hover{
+    transform: scale(1.1);
+}
+
+.back{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 50%;
+}
+
+.navegate-group{
+    height: 50px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    border-bottom: 1px solid gray;
+    padding: 35px;
+    border-radius: 5px;
+    gap: 80px;
+}
