@@ -57,7 +57,7 @@
                     <?php
                     if (isset($gestores) && is_array($gestores)) {
                         foreach ($gestores as $gestor) {
-                            echo "<option value='" . $gestor->id . "'>" . $gestor->nombre . "</option>";
+                            echo "<option value='" . $gestor->idGestor . "'>" . $gestor->nombreCompleto . "</option>";
                         }
                     } else {
                         echo "<option value=''>No hay gestores disponibles</option>";

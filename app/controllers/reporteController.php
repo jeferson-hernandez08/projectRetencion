@@ -2,12 +2,12 @@
 namespace App\Controllers;
 use App\Models\ReporteModel;
 // use App\Models\AprendizModel; // Importar la clase AprendizModel
-// use App\Models\GestorModel;   // Importar la clase GestorModel
+use App\Models\GestorModel;   // Importar la clase GestorModel
 
 require_once 'baseController.php';
 require_once MAIN_APP_ROUTE . "../models/ReporteModel.php";
 // require_once MAIN_APP_ROUTE . "../models/AprendizModel.php";
-// require_once MAIN_APP_ROUTE . "../models/GestorModel.php";
+require_once MAIN_APP_ROUTE . "../models/GestorModel.php";
 
 class ReporteController extends BaseController {
 
@@ -44,14 +44,14 @@ class ReporteController extends BaseController {
         // $aprendizObj = new AprendizModel();
         // $aprendices = $aprendizObj->getAll();
 
-        // $gestorObj = new GestorModel();
-        // $gestores = $gestorObj->getAll();
+        $gestorObj = new GestorModel();
+        $gestores = $gestorObj->getAll();
 
         // Llamamos a la vista
         $data = [
             "title"     => "Nuevo Reporte",
             // "aprendices" => $aprendices, // Lista de aprendices
-            // "gestores"   => $gestores    // Lista de gestores
+            "gestores"   => $gestores    // Lista de gestores
         ];
         $this->render('reporte/newReporte.php', $data); // Renderiza la vista con los datos
     }
@@ -96,14 +96,14 @@ class ReporteController extends BaseController {
         // $aprendizObj = new AprendizModel();
         // $aprendices = $aprendizObj->getAll();
 
-        // $gestorObj = new GestorModel();
-        // $gestores = $gestorObj->getAll();
+        $gestorObj = new GestorModel();
+        $gestores = $gestorObj->getAll();
 
         $data = [
             "title"      => "Editar Reporte",
             "reporte"    => $reporteInfo, // Información del reporte
             // "aprendices" => $aprendices,  // Lista de aprendices
-            // "gestores"   => $gestores     // Lista de gestores
+            "gestores"   => $gestores     // Lista de gestores
         ];
         $this->render('reporte/editReporte.php', $data); // Renderiza la vista con los datos
     }

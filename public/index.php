@@ -3,6 +3,7 @@
 require_once '../app/config/global.php';                // Se crea la ruta para ingresar a la app
 require_once '../app/controllers/homeController.php';   // Se crea la ruta para ingresar a la app
 require_once '../app/controllers/reporteController.php';   // Se crea la ruta para ingresar a la app
+require_once '../app/controllers/gestorController.php';
 
 // require_once '../app/controllers/loginController.php';
 
