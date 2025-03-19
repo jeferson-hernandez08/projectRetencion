@@ -47,6 +47,40 @@ return [         // Prueba cimmit | base contrller , programa formacion controll
         'action' => 'deleteReporte'
     ],
 
+    // Rutas para Gestor
+    '/gestor/index' => [
+        "controller" => 'App\Controllers\gestorController',
+        "action" => 'index'
+    ],
+    '/gestor/view' => [
+        "controller" => 'App\Controllers\gestorController',
+        "action" => 'view'
+    ],
+    '/gestor/new' => [
+        "controller" => 'App\Controllers\gestorController',
+        "action" => 'newGestor'
+    ],
+    '/gestor/create' => [
+        "controller" => 'App\Controllers\gestorController',
+        "action" => 'createGestor'
+    ],
+    '/gestor/view/(\d+)' => [
+        "controller" => 'App\Controllers\gestorController',
+        "action" => 'viewGestor'
+    ],
+    '/gestor/edit/(\d+)' => [
+        "controller" => 'App\Controllers\gestorController',
+        "action" => 'editGestor'
+    ],
+    '/gestor/update' => [
+        "controller" => 'App\Controllers\gestorController',
+        "action" => 'updateGestor'
+    ],
+    '/gestor/delete/(\d+)' => [
+        "controller" => 'App\Controllers\gestorController',
+        "action" => 'deleteGestor'
+    ],
+
     
 
 ];
