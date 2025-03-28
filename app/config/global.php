@@ -7,6 +7,6 @@ define("DRIVER", 'mysql');
 define("HOST", 'localhost');
 define("USERNAME_DB", 'root');
 define("PASSWORD_DB", '');
-define("DATABASE", 'retencioncpic');
+define("DATABASE", 'retencion_cpic');
 define("CHARSET", 'utf8mb4');
 define("COLLATION", 'utf8mb4_unicode_ci');

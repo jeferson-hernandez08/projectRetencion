@@ -13,73 +13,41 @@ return [         // Prueba cimmit | base contrller , programa formacion controll
         'action' => 'index'
     ], 
 
-    // reporte
-    '/reporte/index' => [
-        'controller' => 'App\Controllers\reporteController',
+    // Tabla rol
+    '/rol/index' => [
+        'controller' => 'App\Controllers\RolController',
         'action' => 'index'
     ], 
-    '/reporte/view' => [
-        'controller' => 'App\Controllers\reporteController',
+    '/rol/view' => [
+        'controller' => 'App\Controllers\RolController',
         'action' => 'view'
     ], 
-    '/reporte/new' => [
-        'controller' => 'App\Controllers\reporteController',
-        'action' => 'newReporte'     // Nombre de la funcion 
+    '/rol/new' => [
+        'controller' => 'App\Controllers\RolController',
+        'action' => 'newRol'     // Nombre de la funcion 
     ], 
-    '/reporte/create'=> [
-        'controller' =>'App\Controllers\reporteController',
-        'action' => 'createReporte'
+    '/rol/create'=> [
+        'controller' =>'App\Controllers\RolController',
+        'action' => 'createRol'
     ],
-    '/reporte/view/(\d+)'=> [
-        'controller' =>'App\Controllers\reporteController',
-        'action' => 'viewReporte'
+    '/rol/view/(\d+)'=> [
+        'controller' =>'App\Controllers\RolController',
+        'action' => 'viewRol'
     ],
-    '/reporte/edit/(\d+)'=> [
-        'controller' =>'App\Controllers\reporteController',
-        'action' => 'editReporte'
+    '/rol/edit/(\d+)'=> [
+        'controller' =>'App\Controllers\RolController',
+        'action' => 'editRol'
     ],
-    '/reporte/update'=> [
-        'controller' =>'App\Controllers\reporteController',
-        'action' => 'updateReporte'
+    '/rol/update'=> [
+        'controller' =>'App\Controllers\RolController',
+        'action' => 'updateRol'
     ],
-    '/reporte/delete/(\d+)'=> [
-        'controller' =>'App\Controllers\reporteController',
-        'action' => 'deleteReporte'
+    '/rol/delete/(\d+)'=> [
+        'controller' =>'App\Controllers\RolController',
+        'action' => 'deleteRol'
     ],
 
-    // Rutas para Gestor
-    '/gestor/index' => [
-        "controller" => 'App\Controllers\gestorController',
-        "action" => 'index'
-    ],
-    '/gestor/view' => [
-        "controller" => 'App\Controllers\gestorController',
-        "action" => 'view'
-    ],
-    '/gestor/new' => [
-        "controller" => 'App\Controllers\gestorController',
-        "action" => 'newGestor'
-    ],
-    '/gestor/create' => [
-        "controller" => 'App\Controllers\gestorController',
-        "action" => 'createGestor'
-    ],
-    '/gestor/view/(\d+)' => [
-        "controller" => 'App\Controllers\gestorController',
-        "action" => 'viewGestor'
-    ],
-    '/gestor/edit/(\d+)' => [
-        "controller" => 'App\Controllers\gestorController',
-        "action" => 'editGestor'
-    ],
-    '/gestor/update' => [
-        "controller" => 'App\Controllers\gestorController',
-        "action" => 'updateGestor'
-    ],
-    '/gestor/delete/(\d+)' => [
-        "controller" => 'App\Controllers\gestorController',
-        "action" => 'deleteGestor'
-    ],
+    
 
     
 

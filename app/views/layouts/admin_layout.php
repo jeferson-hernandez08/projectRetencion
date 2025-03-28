@@ -25,7 +25,7 @@
                             <li><a href="/centroFormacion/view"><i class="fas fa-building"></i><span class="info-text">Centros</span></a></li>
                             <li><a href="/programaFormacion/view"><i class="fas fa-dumbbell"></i><span class="info-text">Programas</span></a></li>
                         <?php endif ?>   
-                        <li><a href="/reporte/view"><i class="fas fa-file-alt"></i><span class="info-text">Reportes</span></a></li>
+                        <li><a href="/rol/view"><i class="fas fa-file-alt"></i><span class="info-text">Reportes</span></a></li>
                         <li><a href="/gestor/view"><i class="fas fa-user-cog"></i><span class="info-text">Gestores</span></a></li>
                         <li><a href="/aprendiz/view"><i class="fas fa-graduation-cap"></i><span class="info-text">Aprendiz</span></a></li>
                         <li><a href="/intervencion/view"><i class="fas fa-hands-helping"></i><span class="info-text">Intervencion</span></a></li>
