@@ -31,20 +31,54 @@ return [         // Prueba cimmit | base contrller , programa formacion controll
         'action' => 'createRol'
     ],
     '/rol/view/(\d+)'=> [
-        'controller' =>'App\Controllers\RolController',
+        'controller' =>'App\Controllers\rolController',
         'action' => 'viewRol'
     ],
     '/rol/edit/(\d+)'=> [
-        'controller' =>'App\Controllers\RolController',
+        'controller' =>'App\Controllers\rolController',
         'action' => 'editRol'
     ],
     '/rol/update'=> [
-        'controller' =>'App\Controllers\RolController',
+        'controller' =>'App\Controllers\rolController',
         'action' => 'updateRol'
     ],
     '/rol/delete/(\d+)'=> [
-        'controller' =>'App\Controllers\RolController',
+        'controller' =>'App\Controllers\rolController',
         'action' => 'deleteRol'
+    ],
+
+    // Tabla usuario
+    '/usuario/index' => [
+        'controller' => 'App\Controllers\usuarioController',
+        'action' => 'index'
+    ], 
+    '/usuario/view' => [
+        'controller' => 'App\Controllers\usuarioController',
+        'action' => 'view'
+    ], 
+    '/usuario/new' => [
+        'controller' => 'App\Controllers\usuarioController',
+        'action' => 'newUsuario'     // Nombre de la funcion 
+    ], 
+    '/usuario/create'=> [
+        'controller' =>'App\Controllers\usuarioController',
+        'action' => 'createUsuario'
+    ],
+    '/usuario/view/(\d+)'=> [
+        'controller' =>'App\Controllers\usuarioController',
+        'action' => 'viewUsuario'
+    ],
+    '/usuario/edit/(\d+)'=> [
+        'controller' =>'App\Controllers\usuarioController',
+        'action' => 'editUsuario'
+    ],
+    '/usuario/update'=> [
+        'controller' =>'App\Controllers\usuarioController',
+        'action' => 'updateUsuario'
+    ],
+    '/usuario/delete/(\d+)'=> [
+        'controller' =>'App\Controllers\usuarioController',
+        'action' => 'deleteUsuario'
     ],
 
     
