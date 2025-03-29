@@ -81,6 +81,40 @@ return [         // Prueba cimmit | base contrller , programa formacion controll
         'action' => 'deleteUsuario'
     ],
 
+    // Tabla programaFormacion
+    '/programaFormacion/index'=> [
+        'controller' =>'App\Controllers\programaFormacionController',
+        'action' => 'index'
+    ],
+    '/programaFormacion/view'=> [
+        'controller' =>'App\Controllers\programaFormacionController',
+        'action' => 'view'
+    ],
+    '/programaFormacion/new' => [
+        'controller' => 'App\Controllers\programaFormacionController',
+        'action' => 'newProgramaFormacion'     // Nombre de la funcion 
+    ], 
+    '/programaFormacion/create'=> [
+        'controller' =>'App\Controllers\programaFormacionController',
+        'action' => 'createProgramaFormacion'
+    ],
+    '/programaFormacion/view/(\d+)'=> [
+        'controller' =>'App\Controllers\programaFormacionController',
+        'action' => 'viewProgramaFormacion'
+    ],
+    '/programaFormacion/edit/(\d+)'=> [
+        'controller' =>'App\Controllers\programaFormacionController',
+        'action' => 'editProgramaFormacion'
+    ],
+    '/programaFormacion/update'=> [
+        'controller' =>'App\Controllers\programaFormacionController',
+        'action' => 'updateProgramaFormacion'
+    ],
+    '/programaFormacion/delete/(\d+)'=> [
+        'controller' =>'App\Controllers\programaFormacionController',
+        'action' => 'deleteProgramaFormacion'                          // Llama a la funcion deleteProgramaFormacion del programaFormacionModel
+    ],
+
     
 
     
