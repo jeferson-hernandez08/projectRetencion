@@ -28,7 +28,7 @@
                         <li><a href="/rol/view"><i class="fas fa-file-alt"></i><span class="info-text">Roles</span></a></li>
                         <li><a href="/usuario/view"><i class="fas fa-user-cog"></i><span class="info-text">Usuarios</span></a></li>
                         <li><a href="/programaFormacion/view"><i class="fas fa-bullseye"></i><span class="info-text">Programas</span></a></li>
-                        <li><a href="/aprendiz/view"><i class="fas fa-graduation-cap"></i><span class="info-text">Aprendiz</span></a></li>
+                        <li><a href="/grupo/view"><i class="fas fa-graduation-cap"></i><span class="info-text">Grupos</span></a></li>
                         <li><a href="/intervencion/view"><i class="fas fa-hands-helping"></i><span class="info-text">Intervencion</span></a></li>
                         <li><a href="/objetivo/view"><i class="fas fa-bullseye"></i><span class="info-text">Objetivos</span></a></li>
                         <li><a href="/alerta/view"><i class="fas fa-bell"></i><span class="info-text">Alertas</span></a></li>

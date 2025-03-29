@@ -115,6 +115,40 @@ return [         // Prueba cimmit | base contrller , programa formacion controll
         'action' => 'deleteProgramaFormacion'                          // Llama a la funcion deleteProgramaFormacion del programaFormacionModel
     ],
 
+    // Tabla Grupo
+    '/grupo/index'=> [
+        'controller' =>'App\Controllers\grupoController',
+        'action' => 'index'
+    ],
+    '/grupo/view'=> [
+        'controller' =>'App\Controllers\grupoController',
+        'action' => 'view'
+    ],
+    '/grupo/new' => [
+        'controller' => 'App\Controllers\grupoController',
+        'action' => 'newGrupo'     // Nombre de la funcion 
+    ], 
+    '/grupo/create'=> [
+        'controller' =>'App\Controllers\grupoController',
+        'action' => 'createGrupo'
+    ],
+    '/grupo/view/(\d+)'=> [
+        'controller' =>'App\Controllers\grupoController',
+        'action' => 'viewGrupo'
+    ],
+    '/grupo/edit/(\d+)'=> [
+        'controller' =>'App\Controllers\grupoController',
+        'action' => 'editGrupo'
+    ],
+    '/grupo/update'=> [
+        'controller' =>'App\Controllers\grupoController',
+        'action' => 'updateGrupo'
+    ],
+    '/grupo/delete/(\d+)'=> [
+        'controller' =>'App\Controllers\grupoController',
+        'action' => 'deleteGrupo'                          // Llama a la funcion deleteProgramaFormacion del programaFormacionModel
+    ],
+
     // Tabla Aprendiz
     '/aprendiz/index'=> [
         'controller' =>'App\Controllers\aprendizController',
