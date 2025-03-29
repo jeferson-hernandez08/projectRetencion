@@ -115,6 +115,40 @@ return [         // Prueba cimmit | base contrller , programa formacion controll
         'action' => 'deleteProgramaFormacion'                          // Llama a la funcion deleteProgramaFormacion del programaFormacionModel
     ],
 
+    // Tabla Aprendiz
+    '/aprendiz/index'=> [
+        'controller' =>'App\Controllers\aprendizController',
+        'action' => 'index'
+    ],
+    '/aprendiz/view'=> [
+        'controller' =>'App\Controllers\aprendizController',
+        'action' => 'view'
+    ],
+    '/aprendiz/new' => [
+        'controller' => 'App\Controllers\aprendizController',
+        'action' => 'newAprendiz'     // Nombre de la funcion 
+    ], 
+    '/aprendiz/create'=> [
+        'controller' =>'App\Controllers\aprendizController',
+        'action' => 'createAprendiz'
+    ],
+    '/aprendiz/view/(\d+)'=> [
+        'controller' =>'App\Controllers\aprendizController',
+        'action' => 'viewAprendiz'
+    ],
+    '/aprendiz/edit/(\d+)'=> [
+        'controller' =>'App\Controllers\aprendizController',
+        'action' => 'editAprendiz'
+    ],
+    '/aprendiz/update'=> [
+        'controller' =>'App\Controllers\aprendizController',
+        'action' => 'updateAprendiz'
+    ],
+    '/aprendiz/delete/(\d+)'=> [
+        'controller' =>'App\Controllers\aprendizController',
+        'action' => 'deleteAprendiz'                          // Llama a la funcion deleteProgramaFormacion del programaFormacionModel
+    ],
+
     
 
     
