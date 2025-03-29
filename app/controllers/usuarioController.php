@@ -1,7 +1,7 @@
 <?php
 namespace App\Controllers;
 use App\Models\UsuarioModel;
-use App\Models\RolModel;
+use App\Models\RolModel;        // Importar la clase RolModel
 
 require_once 'baseController.php';
 require_once MAIN_APP_ROUTE."../models/UsuarioModel.php";
