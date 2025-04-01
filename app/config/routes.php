@@ -149,7 +149,7 @@ return [         // Prueba cimmit | base contrller , programa formacion controll
         'action' => 'deleteGrupo'                          // Llama a la funcion deleteProgramaFormacion del programaFormacionModel
     ],
 
-    // Tabla Aprendiz
+    // Tabla aprendiz
     '/aprendiz/index'=> [
         'controller' =>'App\Controllers\aprendizController',
         'action' => 'index'
@@ -181,6 +181,40 @@ return [         // Prueba cimmit | base contrller , programa formacion controll
     '/aprendiz/delete/(\d+)'=> [
         'controller' =>'App\Controllers\aprendizController',
         'action' => 'deleteAprendiz'                          // Llama a la funcion deleteProgramaFormacion del programaFormacionModel
+    ],
+
+    // Tabla reporte
+    '/reporte/index'=> [
+        'controller' =>'App\Controllers\reporteController',
+        'action' => 'index'
+    ],
+    '/reporte/view'=> [
+        'controller' =>'App\Controllers\reporteController',
+        'action' => 'view'
+    ],
+    '/reporte/new' => [
+        'controller' => 'App\Controllers\reporteController',
+        'action' => 'newReporte'     // Nombre de la funcion 
+    ], 
+    '/reporte/create'=> [
+        'controller' =>'App\Controllers\reporteController',
+        'action' => 'createReporte'
+    ],
+    '/reporte/view/(\d+)'=> [
+        'controller' =>'App\Controllers\reporteController',
+        'action' => 'viewReporte'
+    ],
+    '/reporte/edit/(\d+)'=> [
+        'controller' =>'App\Controllers\reporteController',
+        'action' => 'editReporte'
+    ],
+    '/reporte/update'=> [
+        'controller' =>'App\Controllers\reporteController',
+        'action' => 'updateReporte'
+    ],
+    '/reporte/delete/(\d+)'=> [
+        'controller' =>'App\Controllers\reporteController',
+        'action' => 'deleteReporte'                          // Llama a la funcion deleteProgramaFormacion del programaFormacionModel
     ],
 
     

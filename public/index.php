@@ -7,6 +7,7 @@ require_once '../app/controllers/usuarioController.php';   // Se crea la ruta pa
 require_once '../app/controllers/programaFormacionController.php';
 require_once '../app/controllers/grupoController.php';
 require_once '../app/controllers/aprendizController.php';
+require_once '../app/controllers/reporteController.php';
 
 // require_once '../app/controllers/loginController.php';
 
