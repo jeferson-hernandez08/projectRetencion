@@ -30,7 +30,7 @@
                     <option value="" selected disabled>Seleccione una modalidad</option>
                     <option value="Presencial">Presencial</option>
                     <option value="Virtual">Virtual</option>
-                    <option value="Híbrida">Híbrida</option>
+                    <!-- <option value="Híbrida">Híbrida</option> -->
                 </select>
             </div>
 

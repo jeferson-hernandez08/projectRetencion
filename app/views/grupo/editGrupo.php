@@ -34,7 +34,7 @@
                 <select name="txtModalidad" id="txtModalidad" class="form-control">
                     <option value="Presencial" <?php echo ($grupo->modalidad == 'Presencial') ? 'selected' : '' ?>>Presencial</option>
                     <option value="Virtual" <?php echo ($grupo->modalidad == 'Virtual') ? 'selected' : '' ?>>Virtual</option>
-                    <option value="Híbrida" <?php echo ($grupo->modalidad == 'Híbrida') ? 'selected' : '' ?>>Híbrida</option>
+                    <!-- <option value="Híbrida" <?php echo ($grupo->modalidad == 'Híbrida') ? 'selected' : '' ?>>Híbrida</option> -->
                 </select>
             </div>
 
