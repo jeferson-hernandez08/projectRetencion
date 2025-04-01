@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 29-03-2025 a las 04:05:59
+-- Tiempo de generación: 02-04-2025 a las 01:14:12
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -38,6 +38,15 @@ CREATE TABLE `aprendiz` (
   `fkIdUsuario` int(11) NOT NULL,
   `fkIdGrupo` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+--
+-- Volcado de datos para la tabla `aprendiz`
+--
+
+INSERT INTO `aprendiz` (`idAprendiz`, `nombre`, `email`, `telefono`, `trimestre`, `programaFormacion`, `ficha`, `fkIdUsuario`, `fkIdGrupo`) VALUES
+(1, 'Jeferson Hernandez', 'jefer.hernandez1@gmail.com', '3113975576', '5', 'ADSO', '2873711', 3, 10),
+(2, 'Juan Jose Posada', 'juan@gmail.com', '3245678978', '5', 'ADSO', '2873711', 1, 10),
+(3, 'Juan Esteban Calle', 'juan@gmail.com', '3127827845', '5', 'ADSO', '2873711', 1, 10);
 
 -- --------------------------------------------------------
 
@@ -102,6 +111,14 @@ CREATE TABLE `grupo` (
   `fkIdProgramaFormacion` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
+--
+-- Volcado de datos para la tabla `grupo`
+--
+
+INSERT INTO `grupo` (`idGrupo`, `ficha`, `jornada`, `modalidad`, `fkIdProgramaFormacion`) VALUES
+(10, '2873711', 'Diurna', 'Presencial', 1),
+(11, '299200', 'Mixta', 'Presencial', 3);
+
 -- --------------------------------------------------------
 
 --
@@ -152,6 +169,15 @@ CREATE TABLE `reporte` (
   `fkIdAprendiz` int(11) NOT NULL,
   `fkIdUsuario` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+--
+-- Volcado de datos para la tabla `reporte`
+--
+
+INSERT INTO `reporte` (`idReporte`, `fechaCreacion`, `descripcion`, `direccionamiento`, `estado`, `fkIdAprendiz`, `fkIdUsuario`) VALUES
+(3, '2025-03-30 09:30:00', 'Aprendiz con problemas actitudinales', 'Coordinador de ', 'En proceso', 2, 3),
+(4, '2025-03-31 10:45:00', 'Aprendiz con problemas acadÃ©micos', 'Coordinador aca', 'Registrado', 2, 1),
+(6, '2025-03-20 09:05:00', 'Aprendiz es insoportable en clase', 'Coordinador aca', 'En proceso', 3, 1);
 
 -- --------------------------------------------------------
 
@@ -308,13 +334,13 @@ ALTER TABLE `usuario`
 -- AUTO_INCREMENT de la tabla `aprendiz`
 --
 ALTER TABLE `aprendiz`
-  MODIFY `idAprendiz` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idAprendiz` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `grupo`
 --
 ALTER TABLE `grupo`
-  MODIFY `idGrupo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `idGrupo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT de la tabla `intervencion`
@@ -332,7 +358,7 @@ ALTER TABLE `programaformacion`
 -- AUTO_INCREMENT de la tabla `reporte`
 --
 ALTER TABLE `reporte`
-  MODIFY `idReporte` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idReporte` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT de la tabla `rol`
