@@ -24,33 +24,32 @@
                 <input type="text" name="txtTelefono" id="txtTelefono" class="form-control" required>
             </div>
 
-            <!-- Campo Trimestre -->
+            <!-- Campo Trimestre (actualizado hasta 9) -->
             <div class="form-group">
                 <label for="txtTrimestre">Trimestre</label>
-                <input type="text" name="txtTrimestre" id="txtTrimestre" class="form-control" required>
+                <select name="txtTrimestre" id="txtTrimestre" class="form-control" required>
+                    <option value="" selected disabled>Seleccione el trimestre</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
+                    <option value="9">9</option>
+                </select>
             </div>
 
-            <!-- Campo Programa de Formación -->
+            <!-- Campo Grupo -->
             <div class="form-group">
-                <label for="txtProgramaFormacion">Programa de Formación</label>
-                <input type="text" name="txtProgramaFormacion" id="txtProgramaFormacion" class="form-control" required>
-            </div>
-
-            <!-- Campo Ficha -->
-            <div class="form-group">
-                <label for="txtFicha">Ficha</label>
-                <input type="text" name="txtFicha" id="txtFicha" class="form-control" required>
-            </div>
-
-            <!-- Campo Usuario asociado -->
-            <div class="form-group">
-                <label for="txtFkIdUsuario">Usuario asociado</label>
-                <select name="txtFkIdUsuario" id="txtFkIdUsuario" class="form-control" required>
-                    <option value="">Selecciona un usuario</option>
+                <label for="txtFkIdGrupo">Grupo</label>
+                <select name="txtFkIdGrupo" id="txtFkIdGrupo" class="form-control" required>
+                    <option value="">Selecciona un grupo</option>
                     <?php
-                        if (isset($usuarios) && is_array($usuarios)) {
-                            foreach ($usuarios as $key => $value) {
-                                echo "<option value='".$value->idUsuario."'>".$value->nombre."</option>";
+                        if (isset($grupos) && is_array($grupos)) {
+                            foreach ($grupos as $grupo) {
+                                echo "<option value='".$grupo->idGrupo."'>".$grupo->ficha." - ".$grupo->jornada."</option>";
                             }
                         } else {
                             echo "ERROR";
@@ -59,15 +58,15 @@
                 </select>
             </div>
 
-            <!-- Campo Grupo asociado -->
+            <!-- Campo Programa de Formación -->
             <div class="form-group">
-                <label for="txtFkIdGrupo">Grupo asociado</label>
-                <select name="txtFkIdGrupo" id="txtFkIdGrupo" class="form-control" required>
-                    <option value="">Selecciona un grupo</option>
+                <label for="txtFkIdProgramaFormacion">Programa de Formación</label>
+                <select name="txtFkIdProgramaFormacion" id="txtFkIdProgramaFormacion" class="form-control" required>
+                    <option value="">Selecciona un programa</option>
                     <?php
-                        if (isset($grupos) && is_array($grupos)) {
-                            foreach ($grupos as $key => $value) {
-                                echo "<option value='".$value->idGrupo."'>".$value->ficha."</option>";
+                        if (isset($programas) && is_array($programas)) {
+                            foreach ($programas as $programa) {
+                                echo "<option value='".$programa->idProgramaFormacion."'>".$programa->nombre."</option>";
                             }
                         } else {
                             echo "ERROR";

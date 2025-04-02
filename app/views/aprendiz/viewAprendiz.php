@@ -15,7 +15,7 @@
                 foreach ($aprendices as $key => $value) {
                     echo
                     "<div class='record'>
-                        <span> ID: $value->idAprendiz - $value->nombre ($value->email) - Ficha: $value->ficha</span>
+                        <span> ID: $value->idAprendiz - $value->nombre ($value->email) - Trimestre: $value->trimestre</span>
                         <div class='buttons'>
                             <a href='/aprendiz/view/$value->idAprendiz'> <button>Consultar</button> </a> 
                             <a href='/aprendiz/edit/$value->idAprendiz'> <button>Editar</button> </a> 

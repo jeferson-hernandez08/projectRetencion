@@ -16,10 +16,8 @@
                         <span>Email: $aprendiz->email</span>
                         <span>Teléfono: $aprendiz->telefono</span>
                         <span>Trimestre: $aprendiz->trimestre</span>
-                        <span>Programa Formación: $aprendiz->programaFormacion</span>
-                        <span>Ficha: $aprendiz->ficha</span>
-                        <span>Usuario asociado: ".($aprendiz->nombreUsuario ?? 'No asignado')."</span>
-                        <span>Grupo asociado: ".($aprendiz->fichaGrupo ?? 'No asignado')."</span>
+                        <span>Ficha Grupo: $aprendiz->fichaGrupo</span>
+                        <span>Programa Formación: $aprendiz->nombrePrograma</span>
                       </div>";
             }
         ?>
