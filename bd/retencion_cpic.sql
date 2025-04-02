@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 02-04-2025 a las 04:08:30
+-- Tiempo de generación: 02-04-2025 a las 06:12:49
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -33,20 +33,18 @@ CREATE TABLE `aprendiz` (
   `email` varchar(50) NOT NULL,
   `telefono` varchar(20) NOT NULL,
   `trimestre` varchar(20) NOT NULL,
-  `programaFormacion` varchar(40) NOT NULL,
-  `ficha` varchar(20) NOT NULL,
-  `fkIdUsuario` int(11) NOT NULL,
-  `fkIdGrupo` int(11) NOT NULL
+  `fkIdGrupo` int(11) NOT NULL,
+  `fkIdProgramaFormacion` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Volcado de datos para la tabla `aprendiz`
 --
 
-INSERT INTO `aprendiz` (`idAprendiz`, `nombre`, `email`, `telefono`, `trimestre`, `programaFormacion`, `ficha`, `fkIdUsuario`, `fkIdGrupo`) VALUES
-(1, 'Jeferson Hernandez', 'jefer.hernandez1@gmail.com', '3113975576', '5', 'ADSO', '2873711', 3, 10),
-(2, 'Juan Jose Posada', 'juan@gmail.com', '3245678978', '5', 'ADSO', '2873711', 1, 10),
-(3, 'Juan Esteban Calle', 'juan@gmail.com', '3127827845', '5', 'ADSO', '2873711', 1, 10);
+INSERT INTO `aprendiz` (`idAprendiz`, `nombre`, `email`, `telefono`, `trimestre`, `fkIdGrupo`, `fkIdProgramaFormacion`) VALUES
+(2, 'Juan Jose Posada', 'juan@gmail.com', '3245678978', '7', 10, 2),
+(3, 'Juan Esteban Calle', 'juan@gmail.com', '3127827845', '5', 10, 1),
+(4, 'Daniel Duque', 'dani@gmail.com', '3127827845', '6', 11, 3);
 
 -- --------------------------------------------------------
 
@@ -247,8 +245,8 @@ INSERT INTO `usuario` (`idUsuario`, `nombre`, `email`, `password`, `telefono`, `
 --
 ALTER TABLE `aprendiz`
   ADD PRIMARY KEY (`idAprendiz`),
-  ADD KEY `fkIdUsuario` (`fkIdUsuario`),
-  ADD KEY `fkIdGrupo` (`fkIdGrupo`);
+  ADD KEY `fkIdGrupo` (`fkIdGrupo`),
+  ADD KEY `fk_programa_formacion` (`fkIdProgramaFormacion`);
 
 --
 -- Indices de la tabla `categoria`
@@ -334,7 +332,7 @@ ALTER TABLE `usuario`
 -- AUTO_INCREMENT de la tabla `aprendiz`
 --
 ALTER TABLE `aprendiz`
-  MODIFY `idAprendiz` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `idAprendiz` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de la tabla `grupo`
@@ -381,7 +379,7 @@ ALTER TABLE `usuario`
 --
 ALTER TABLE `aprendiz`
   ADD CONSTRAINT `fkIdGrupo` FOREIGN KEY (`fkIdGrupo`) REFERENCES `grupo` (`idGrupo`) ON UPDATE CASCADE,
-  ADD CONSTRAINT `fkIdUsuario` FOREIGN KEY (`fkIdUsuario`) REFERENCES `usuario` (`idUsuario`) ON UPDATE CASCADE;
+  ADD CONSTRAINT `fk_programa_formacion` FOREIGN KEY (`fkIdProgramaFormacion`) REFERENCES `programaformacion` (`idProgramaFormacion`) ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `categoria`
