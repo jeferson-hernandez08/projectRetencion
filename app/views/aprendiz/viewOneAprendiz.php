@@ -6,7 +6,7 @@
     </div>
     <div class="info">
         <?php
-            if($aprendiz && is_object($aprendiz)) {
+            if($aprendiz && is_object($aprendiz)) {    // Se arreglan las vistas y selects
                 // echo "<pre>";
                 // print_r($aprendiz);
                 // echo "<pre>";
