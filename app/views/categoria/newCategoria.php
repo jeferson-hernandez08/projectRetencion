@@ -36,7 +36,7 @@
                     <?php
                         if (isset($causas) && is_array($causas)) {
                             foreach ($causas as $causa) {
-                                echo "<option value='".$causa->idCausa."'>".$causa->nombre."</option>";
+                                echo "<option value='".$causa->idCausa."'>".$causa->causa."</option>";     // PONER CUIDADO AQUI ES EL ERROR : En tu base de datos, el campo se llama causa (no nombre), por lo que en el select debes usar $causa->causa en lugar de $causa->nombre.
                             }
                         } else {
                             echo "ERROR";
