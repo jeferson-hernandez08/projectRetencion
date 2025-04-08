@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 08-04-2025 a las 18:49:24
+-- Tiempo de generación: 08-04-2025 a las 19:01:17
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.0.30
 
@@ -59,6 +59,13 @@ CREATE TABLE `categoria` (
   `direccionamiento` varchar(15) NOT NULL,
   `fkIdCausa` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+--
+-- Volcado de datos para la tabla `categoria`
+--
+
+INSERT INTO `categoria` (`idCategoria`, `nombre`, `descripcion`, `direccionamiento`, `fkIdCausa`) VALUES
+(1, 'Motivos Academicos del Aprendiz', 'El aprendiz posee problemas económicos', 'Coordinador de ', 1);
 
 -- --------------------------------------------------------
 
@@ -346,7 +353,7 @@ ALTER TABLE `aprendiz`
 -- AUTO_INCREMENT de la tabla `categoria`
 --
 ALTER TABLE `categoria`
-  MODIFY `idCategoria` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idCategoria` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `causa`
