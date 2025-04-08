@@ -31,7 +31,7 @@
                         <li><a href="/grupo/view"><i class="fas fa-graduation-cap"></i><span class="info-text">Grupos</span></a></li>
                         <li><a href="/aprendiz/view"><i class="fas fa-hands-helping"></i><span class="info-text">Aprendices</span></a></li>
                         <li><a href="/reporte/view"><i class="fas fa-bullseye"></i><span class="info-text">Reportes</span></a></li>
-                        <li><a href="/alerta/view"><i class="fas fa-bell"></i><span class="info-text">Alertas</span></a></li>
+                        <li><a href="/estrategias/view"><i class="fas fa-bell"></i><span class="info-text">Estrategias</span></a></li>
                         <li><a href="/registroIngreso/view"><i class="fas fa-sign-in-alt"></i><span class="info-text">Registro Ingreso</span></a></li>
                         <?php if(isset($_SESSION['nombre'])) {  ?> 
                         <li><a href="/login/logout">

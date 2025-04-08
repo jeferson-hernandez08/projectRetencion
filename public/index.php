@@ -9,6 +9,7 @@ require_once '../app/controllers/grupoController.php';
 require_once '../app/controllers/aprendizController.php';
 require_once '../app/controllers/reporteController.php';
 require_once '../app/controllers/estrategiasController.php';
+require_once '../app/controllers/categoriaController.php';
 
 // require_once '../app/controllers/loginController.php';
 

@@ -252,37 +252,37 @@ return [         // Prueba cimmit | base contrller , programa formacion controll
     ],
 
     // Tabla Categoria
-    '/estrategias/index'=> [
-        'controller' =>'App\Controllers\estrategiasController',
+    '/categoria/index'=> [
+        'controller' =>'App\Controllers\categoriaController',
         'action' => 'index'
     ],
-    '/estrategias/view'=> [
-        'controller' =>'App\Controllers\estrategiasController',
+    '/categoria/view'=> [
+        'controller' =>'App\Controllers\categoriaController',
         'action' => 'view'
     ],
-    '/estrategias/new' => [
-        'controller' => 'App\Controllers\estrategiasController',
-        'action' => 'newEstrategias'     // Nombre de la funcion 
+    '/categoria/new' => [
+        'controller' => 'App\Controllers\categoriaController',
+        'action' => 'newCategoria'     // Nombre de la funcion 
     ], 
-    '/estrategias/create'=> [
-        'controller' =>'App\Controllers\estrategiasController',
-        'action' => 'createEstrategias'
+    '/categoria/create'=> [
+        'controller' =>'App\Controllers\categoriaController',
+        'action' => 'createCategoria'
     ],
-    '/estrategias/view/(\d+)'=> [
-        'controller' =>'App\Controllers\estrategiasController',
-        'action' => 'viewEstrategias'
+    '/categoria/view/(\d+)'=> [
+        'controller' =>'App\Controllers\categoriaController',
+        'action' => 'viewCategoria'
     ],
-    '/estrategias/edit/(\d+)'=> [
-        'controller' =>'App\Controllers\estrategiasController',
-        'action' => 'editEstrategias'
+    '/categoria/edit/(\d+)'=> [
+        'controller' =>'App\Controllers\categoriaController',
+        'action' => 'editCategoria'
     ],
-    '/estrategias/update'=> [
-        'controller' =>'App\Controllers\estrategiasController',
-        'action' => 'updateEstrategias'
+    '/categoria/update'=> [
+        'controller' =>'App\Controllers\categoriaController',
+        'action' => 'updateCategoria'
     ],
-    '/estrategias/delete/(\d+)'=> [
-        'controller' =>'App\Controllers\estrategiasController',
-        'action' => 'deleteEstrategias'                          // Llama a la funcion deleteProgramaFormacion del programaFormacionModel
+    '/categoria/delete/(\d+)'=> [
+        'controller' =>'App\Controllers\categoriaController',
+        'action' => 'deleteCategoria'                          // Llama a la funcion deleteProgramaFormacion del programaFormacionModel
     ],
 
 
