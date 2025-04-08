@@ -285,6 +285,40 @@ return [         // Prueba cimmit | base contrller , programa formacion controll
         'action' => 'deleteCategoria'                          // Llama a la funcion deleteProgramaFormacion del programaFormacionModel
     ],
 
+    // Tabla Causa 
+    '/causa/index'=> [
+        'controller' =>'App\Controllers\causaController',
+        'action' => 'index'
+    ],
+    '/causa/view'=> [
+        'controller' =>'App\Controllers\causaController',
+        'action' => 'view'
+    ],
+    '/causa/new' => [
+        'controller' => 'App\Controllers\causaController',
+        'action' => 'newCausa'     // Nombre de la funcion 
+    ], 
+    '/causa/create'=> [
+        'controller' =>'App\Controllers\causaController',
+        'action' => 'createCausa'
+    ],
+    '/causa/view/(\d+)'=> [
+        'controller' =>'App\Controllers\causaController',
+        'action' => 'viewCausa'
+    ],
+    '/causa/edit/(\d+)'=> [
+        'controller' =>'App\Controllers\causaController',
+        'action' => 'editCausa'
+    ],
+    '/causa/update'=> [
+        'controller' =>'App\Controllers\causaController',
+        'action' => 'updateCausa'
+    ],
+    '/causa/delete/(\d+)'=> [
+        'controller' =>'App\Controllers\causaController',
+        'action' => 'deleteCausa'                          // Llama a la funcion deleteProgramaFormacion del programaFormacionModel
+    ],
+
 
     
 

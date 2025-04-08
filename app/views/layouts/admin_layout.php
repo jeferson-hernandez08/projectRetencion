@@ -32,7 +32,7 @@
                         <li><a href="/aprendiz/view"><i class="fas fa-hands-helping"></i><span class="info-text">Aprendices</span></a></li>
                         <li><a href="/reporte/view"><i class="fas fa-bullseye"></i><span class="info-text">Reportes</span></a></li>
                         <li><a href="/estrategias/view"><i class="fas fa-bell"></i><span class="info-text">Estrategias</span></a></li>
-                        <li><a href="/registroIngreso/view"><i class="fas fa-sign-in-alt"></i><span class="info-text">Registro Ingreso</span></a></li>
+                        <li><a href="/causa/view"><i class="fas fa-exclamation-circle"></i><span class="info-text">Causas</span></a></li>
                         <?php if(isset($_SESSION['nombre'])) {  ?> 
                         <li><a href="/login/logout">
                                 <i class="fas fa-sign-in-alt"></i>
