@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 02-04-2025 a las 06:12:49
+-- Tiempo de generación: 08-04-2025 a las 18:49:24
 -- Versión del servidor: 10.4.32-MariaDB
--- Versión de PHP: 8.2.12
+-- Versión de PHP: 8.0.30
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -71,6 +71,14 @@ CREATE TABLE `causa` (
   `causa` varchar(100) NOT NULL,
   `variables` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+--
+-- Volcado de datos para la tabla `causa`
+--
+
+INSERT INTO `causa` (`idCausa`, `causa`, `variables`) VALUES
+(1, 'No cuento con recursos económicos para estudiar en el SENA', 'Necesidad del auto sostenimiento del aprendiz'),
+(2, 'Tuve que dedicarme a trabajar por no contar con apoyo económico para dedicarme a estudiar', 'Necesidad del auto sostenimiento del aprendiz');
 
 -- --------------------------------------------------------
 
@@ -333,6 +341,24 @@ ALTER TABLE `usuario`
 --
 ALTER TABLE `aprendiz`
   MODIFY `idAprendiz` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT de la tabla `categoria`
+--
+ALTER TABLE `categoria`
+  MODIFY `idCategoria` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `causa`
+--
+ALTER TABLE `causa`
+  MODIFY `idCausa` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT de la tabla `estrategias`
+--
+ALTER TABLE `estrategias`
+  MODIFY `idEstrategias` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `grupo`
