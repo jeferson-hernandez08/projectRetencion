@@ -251,6 +251,41 @@ return [         // Prueba cimmit | base contrller , programa formacion controll
         'action' => 'deleteEstrategias'                          // Llama a la funcion deleteProgramaFormacion del programaFormacionModel
     ],
 
+    // Tabla Categoria
+    '/estrategias/index'=> [
+        'controller' =>'App\Controllers\estrategiasController',
+        'action' => 'index'
+    ],
+    '/estrategias/view'=> [
+        'controller' =>'App\Controllers\estrategiasController',
+        'action' => 'view'
+    ],
+    '/estrategias/new' => [
+        'controller' => 'App\Controllers\estrategiasController',
+        'action' => 'newEstrategias'     // Nombre de la funcion 
+    ], 
+    '/estrategias/create'=> [
+        'controller' =>'App\Controllers\estrategiasController',
+        'action' => 'createEstrategias'
+    ],
+    '/estrategias/view/(\d+)'=> [
+        'controller' =>'App\Controllers\estrategiasController',
+        'action' => 'viewEstrategias'
+    ],
+    '/estrategias/edit/(\d+)'=> [
+        'controller' =>'App\Controllers\estrategiasController',
+        'action' => 'editEstrategias'
+    ],
+    '/estrategias/update'=> [
+        'controller' =>'App\Controllers\estrategiasController',
+        'action' => 'updateEstrategias'
+    ],
+    '/estrategias/delete/(\d+)'=> [
+        'controller' =>'App\Controllers\estrategiasController',
+        'action' => 'deleteEstrategias'                          // Llama a la funcion deleteProgramaFormacion del programaFormacionModel
+    ],
+
+
     
 
     
