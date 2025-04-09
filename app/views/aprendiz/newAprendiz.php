@@ -58,23 +58,6 @@
                 </select>
             </div>
 
-            <!-- Campo Programa de Formación -->
-            <div class="form-group">
-                <label for="txtFkIdProgramaFormacion">Programa de Formación</label>
-                <select name="txtFkIdProgramaFormacion" id="txtFkIdProgramaFormacion" class="form-control" required>
-                    <option value="">Selecciona un programa</option>
-                    <?php
-                        if (isset($programas) && is_array($programas)) {
-                            foreach ($programas as $programa) {
-                                echo "<option value='".$programa->idProgramaFormacion."'>".$programa->nombre."</option>";
-                            }
-                        } else {
-                            echo "ERROR";
-                        }
-                    ?>
-                </select>
-            </div>
-
             <!-- Botón de Guardar -->
             <div class="form-group">
                 <button type="submit">Guardar</button>

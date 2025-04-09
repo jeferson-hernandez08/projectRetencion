@@ -13,18 +13,17 @@ class AprendizModel extends BaseModel {
         ?string $email = null,
         ?string $telefono = null,
         ?string $trimestre = null,
-        ?string $fkIdGrupo = null,
-        ?string $fkIdProgramaFormacion = null
+        ?string $fkIdGrupo = null
     ) {
         $this->table = "aprendiz";
         // Se llama al constructor del padre
         parent::__construct();
     }
 
-    public function saveAprendiz($nombre, $email, $telefono, $trimestre, $fkIdGrupo, $fkIdProgramaFormacion) {
+    public function saveAprendiz($nombre, $email, $telefono, $trimestre, $fkIdGrupo) {
         try {
-            $sql = "INSERT INTO $this->table (nombre, email, telefono, trimestre, fkIdGrupo, fkIdProgramaFormacion) 
-                    VALUES (:nombre, :email, :telefono, :trimestre, :fkIdGrupo, :fkIdProgramaFormacion)";
+            $sql = "INSERT INTO $this->table (nombre, email, telefono, trimestre, fkIdGrupo) 
+                    VALUES (:nombre, :email, :telefono, :trimestre, :fkIdGrupo)";
             // 1. Se prepara la consulta
             $statement = $this->dbConnection->prepare($sql);
             // $nombre = $this->nombre ?? '';         // Estos datos es opcional
@@ -32,7 +31,6 @@ class AprendizModel extends BaseModel {
             // $telefono = $this->telefono ?? '';
             // $trimestre = $this->trimestre ?? '';
             // $fkIdGrupo = $this->fkIdGrupo ?? '';
-            // $fkIdProgramaFormacion = $this->fkIdProgramaFormacion ?? '';
 
             // 2. BindParam para sanitizar los datos de entrada
             $statement->bindParam('nombre', $nombre, PDO::PARAM_STR);
@@ -40,7 +38,6 @@ class AprendizModel extends BaseModel {
             $statement->bindParam('telefono', $telefono, PDO::PARAM_STR);
             $statement->bindParam('trimestre', $trimestre, PDO::PARAM_STR);
             $statement->bindParam('fkIdGrupo', $fkIdGrupo, PDO::PARAM_INT);
-            $statement->bindParam('fkIdProgramaFormacion', $fkIdProgramaFormacion, PDO::PARAM_INT);
 
             // 3. Ejecutar la consulta
             $result = $statement->execute();
@@ -55,7 +52,7 @@ class AprendizModel extends BaseModel {
             $sql = "SELECT aprendiz.*, grupo.ficha AS fichaGrupo, programaformacion.nombre AS nombrePrograma 
                     FROM aprendiz 
                     INNER JOIN grupo ON aprendiz.fkIdGrupo = grupo.idGrupo
-                    INNER JOIN programaformacion ON aprendiz.fkIdProgramaFormacion = programaformacion.idProgramaFormacion
+                    INNER JOIN programaformacion ON grupo.fkIdProgramaFormacion = programaformacion.idProgramaFormacion
                     WHERE aprendiz.idAprendiz=:id";
             $statement = $this->dbConnection->prepare($sql);
             $statement->bindParam(":id", $id, PDO::PARAM_INT);
@@ -67,15 +64,14 @@ class AprendizModel extends BaseModel {
         }
     }
 
-    public function editAprendiz($id, $nombre, $email, $telefono, $trimestre, $fkIdGrupo, $fkIdProgramaFormacion) {
+    public function editAprendiz($id, $nombre, $email, $telefono, $trimestre, $fkIdGrupo) {
         try {
             $sql = "UPDATE $this->table SET 
                         nombre=:nombre, 
                         email=:email, 
                         telefono=:telefono, 
                         trimestre=:trimestre, 
-                        fkIdGrupo=:fkIdGrupo, 
-                        fkIdProgramaFormacion=:fkIdProgramaFormacion 
+                        fkIdGrupo=:fkIdGrupo 
                     WHERE idAprendiz=:id";
             $statement = $this->dbConnection->prepare($sql);
             $statement->bindParam(":id", $id, PDO::PARAM_INT);
@@ -84,7 +80,6 @@ class AprendizModel extends BaseModel {
             $statement->bindParam(":telefono", $telefono, PDO::PARAM_STR);
             $statement->bindParam(":trimestre", $trimestre, PDO::PARAM_STR);
             $statement->bindParam(":fkIdGrupo", $fkIdGrupo, PDO::PARAM_INT);
-            $statement->bindParam(":fkIdProgramaFormacion", $fkIdProgramaFormacion, PDO::PARAM_INT);
             $result = $statement->execute();
             return $result;
         } catch (PDOException $ex) {

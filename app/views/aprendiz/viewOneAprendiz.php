@@ -17,8 +17,8 @@
                         <span>Teléfono: $aprendiz->telefono</span>
                         <span>Trimestre: $aprendiz->trimestre</span>
                         <span>Ficha Grupo: $aprendiz->fichaGrupo</span>
-                        <span>Programa Formación: $aprendiz->nombrePrograma</span>
-                      </div>";
+                        <span>Programa Formación: $aprendiz->nombrePrograma</span>  
+                      </div>";                                                       // Se deja este <span>Programa Formación: $aprendiz->nombrePrograma</span> por que con fkIdGrupo podemos tomar el programa de formacion
             }
         ?>
     </div>

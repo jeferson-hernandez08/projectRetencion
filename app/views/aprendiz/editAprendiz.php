@@ -34,6 +34,7 @@
             <div class="form-group">
                 <label for="txtTrimestre">Trimestre</label>
                 <select name="txtTrimestre" id="txtTrimestre" class="form-control" required>
+                    <option value="" disabled>Seleccione el trimestre</option>
                     <option value="1" <?php echo ($aprendiz->trimestre == '1') ? 'selected' : '' ?>>1</option>
                     <option value="2" <?php echo ($aprendiz->trimestre == '2') ? 'selected' : '' ?>>2</option>
                     <option value="3" <?php echo ($aprendiz->trimestre == '3') ? 'selected' : '' ?>>3</option>
@@ -56,24 +57,6 @@
                             foreach ($grupos as $grupo) {
                                 $selected = ($aprendiz->fkIdGrupo == $grupo->idGrupo) ? 'selected' : '';
                                 echo "<option value='".$grupo->idGrupo."' $selected>".$grupo->ficha." - ".$grupo->jornada."</option>";
-                            }
-                        } else {
-                            echo "ERROR";
-                        }
-                    ?>
-                </select>
-            </div>
-
-            <!-- Campo Programa de Formación -->
-            <div class="form-group">
-                <label for="txtFkIdProgramaFormacion">Programa de Formación</label>
-                <select name="txtFkIdProgramaFormacion" id="txtFkIdProgramaFormacion" class="form-control" required>
-                    <option value="">Selecciona un programa</option>
-                    <?php
-                        if (isset($programas) && is_array($programas)) {
-                            foreach ($programas as $programa) {
-                                $selected = ($aprendiz->fkIdProgramaFormacion == $programa->idProgramaFormacion) ? 'selected' : '';
-                                echo "<option value='".$programa->idProgramaFormacion."' $selected>".$programa->nombre."</option>";
                             }
                         } else {
                             echo "ERROR";
