@@ -42,7 +42,7 @@
                         if (isset($causas) && is_array($causas)) {
                             foreach ($causas as $causa) {
                                 $selected = ($categoria->fkIdCausa == $causa->idCausa) ? 'selected' : '';
-                                echo "<option value='".$causa->idCausa."' $selected>".$causa->nombre."</option>";
+                                echo "<option value='".$causa->idCausa."' $selected>".$causa->causa."</option>";
                             }
                         } else {
                             echo "ERROR";

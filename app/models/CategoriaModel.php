@@ -46,7 +46,7 @@ class CategoriaModel extends BaseModel {
 
     public function getCategoria($id) {
         try {
-            $sql = "SELECT categoria.*, causa.nombre AS nombreCausa 
+            $sql = "SELECT categoria.*, causa.causa AS nombreCausa 
                     FROM categoria 
                     INNER JOIN causa 
                     ON categoria.fkIdCausa = causa.idCausa 
