@@ -11,6 +11,7 @@ require_once '../app/controllers/reporteController.php';
 require_once '../app/controllers/estrategiasController.php';
 require_once '../app/controllers/categoriaController.php';
 require_once '../app/controllers/causaController.php';
+require_once '../app/controllers/intervencionController.php';
 
 // require_once '../app/controllers/loginController.php';
 

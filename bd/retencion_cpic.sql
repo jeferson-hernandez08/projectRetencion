@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 08-04-2025 a las 19:01:17
+-- Tiempo de generación: 09-04-2025 a las 23:44:46
 -- Versión del servidor: 10.4.32-MariaDB
--- Versión de PHP: 8.0.30
+-- Versión de PHP: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -33,18 +33,17 @@ CREATE TABLE `aprendiz` (
   `email` varchar(50) NOT NULL,
   `telefono` varchar(20) NOT NULL,
   `trimestre` varchar(20) NOT NULL,
-  `fkIdGrupo` int(11) NOT NULL,
-  `fkIdProgramaFormacion` int(11) NOT NULL
+  `fkIdGrupo` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Volcado de datos para la tabla `aprendiz`
 --
 
-INSERT INTO `aprendiz` (`idAprendiz`, `nombre`, `email`, `telefono`, `trimestre`, `fkIdGrupo`, `fkIdProgramaFormacion`) VALUES
-(2, 'Juan Jose Posada', 'juan@gmail.com', '3245678978', '7', 10, 2),
-(3, 'Juan Esteban Calle', 'juan@gmail.com', '3127827845', '5', 10, 1),
-(4, 'Daniel Duque', 'dani@gmail.com', '3127827845', '6', 11, 3);
+INSERT INTO `aprendiz` (`idAprendiz`, `nombre`, `email`, `telefono`, `trimestre`, `fkIdGrupo`) VALUES
+(2, 'Juan Jose Posada', 'juan@gmail.com', '3245678978', '7', 10),
+(3, 'Juan Esteban Calle', 'juan@gmail.com', '3127827845', '5', 10),
+(4, 'Daniel Duque', 'dani@gmail.com', '3127827845', '6', 11);
 
 -- --------------------------------------------------------
 
@@ -56,7 +55,7 @@ CREATE TABLE `categoria` (
   `idCategoria` int(11) NOT NULL,
   `nombre` varchar(80) NOT NULL,
   `descripcion` varchar(255) NOT NULL,
-  `direccionamiento` varchar(15) NOT NULL,
+  `direccionamiento` varchar(60) NOT NULL,
   `fkIdCausa` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
@@ -65,7 +64,8 @@ CREATE TABLE `categoria` (
 --
 
 INSERT INTO `categoria` (`idCategoria`, `nombre`, `descripcion`, `direccionamiento`, `fkIdCausa`) VALUES
-(1, 'Motivos Academicos del Aprendiz', 'El aprendiz posee problemas económicos', 'Coordinador de ', 1);
+(1, 'Motivos EconÃ³micos', 'El aprendiz posee problemas econÃ³micos', 'Coordinador de formaciÃ³n', 1),
+(3, 'Motivos Sociales', 'El aprendiz presenta problemas de discriminaciÃ³n en el SENA', 'Coordinador de formaciÃ³n', 3);
 
 -- --------------------------------------------------------
 
@@ -84,8 +84,9 @@ CREATE TABLE `causa` (
 --
 
 INSERT INTO `causa` (`idCausa`, `causa`, `variables`) VALUES
-(1, 'No cuento con recursos económicos para estudiar en el SENA', 'Necesidad del auto sostenimiento del aprendiz'),
-(2, 'Tuve que dedicarme a trabajar por no contar con apoyo económico para dedicarme a estudiar', 'Necesidad del auto sostenimiento del aprendiz');
+(1, 'No cuento con recursos econÃ³micos para estudiar en el SENA', 'Necesidad del auto sostenimiento del aprendiz'),
+(2, 'Tuve que dedicarme a trabajar por no contar con apoyo economico para dedicarme a estudiar', 'Necesidad del auto sostenimiento del aprendiz'),
+(3, 'Me sentÃ­ discriminado por mis instructores o personal del SENA', 'RelaciÃ³n entre pares');
 
 -- --------------------------------------------------------
 
@@ -106,9 +107,17 @@ CREATE TABLE `causa_reporte` (
 
 CREATE TABLE `estrategias` (
   `idEstrategias` int(11) NOT NULL,
-  `estrategia` varchar(80) NOT NULL,
+  `estrategia` varchar(255) NOT NULL,
   `fkIdCategoria` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+--
+-- Volcado de datos para la tabla `estrategias`
+--
+
+INSERT INTO `estrategias` (`idEstrategias`, `estrategia`, `fkIdCategoria`) VALUES
+(2, 'Orientar al aprendiz sobre las oportunidades a aplicar a apoyos socioeconÃ³micos.', 1),
+(3, 'OrganizaciÃ³n de grupos focales o campaÃ±as con aprendices para orientaciÃ³n de herramientas o habilidades sociales y sana convivencia entre pares.', 3);
 
 -- --------------------------------------------------------
 
@@ -139,7 +148,7 @@ INSERT INTO `grupo` (`idGrupo`, `ficha`, `jornada`, `modalidad`, `fkIdProgramaFo
 --
 
 CREATE TABLE `intervencion` (
-  `idIntervención` int(11) NOT NULL,
+  `idIntervencion` int(11) NOT NULL,
   `fechaCreacion` datetime NOT NULL,
   `descripcion` text NOT NULL,
   `fkIdEstrategias` int(11) NOT NULL,
@@ -177,7 +186,7 @@ CREATE TABLE `reporte` (
   `idReporte` int(11) NOT NULL,
   `fechaCreacion` datetime NOT NULL,
   `descripcion` varchar(255) NOT NULL,
-  `direccionamiento` varchar(15) NOT NULL,
+  `direccionamiento` varchar(60) NOT NULL,
   `estado` varchar(45) NOT NULL,
   `fkIdAprendiz` int(11) NOT NULL,
   `fkIdUsuario` int(11) NOT NULL
@@ -188,9 +197,9 @@ CREATE TABLE `reporte` (
 --
 
 INSERT INTO `reporte` (`idReporte`, `fechaCreacion`, `descripcion`, `direccionamiento`, `estado`, `fkIdAprendiz`, `fkIdUsuario`) VALUES
-(3, '2025-03-30 09:30:00', 'Aprendiz con problemas actitudinales', 'Coordinador de ', 'En proceso', 2, 3),
-(4, '2025-03-31 10:45:00', 'Aprendiz con problemas acadÃ©micos', 'Coordinador aca', 'Registrado', 2, 1),
-(6, '2025-03-20 09:05:00', 'Aprendiz es insoportable en clase', 'Coordinador aca', 'En proceso', 3, 1);
+(3, '2025-03-30 09:30:00', 'Aprendiz con problemas actitudinales', 'Coordinador de formaciÃ³n', 'En proceso', 2, 3),
+(4, '2025-03-31 10:45:00', 'Aprendiz con problemas acadÃ©micos', 'Coordinador acadÃ©mico', 'Registrado', 2, 1),
+(6, '2025-03-20 09:05:00', 'Aprendiz es insoportable en clase', 'Coordinador acadÃ©mico', 'En proceso', 3, 1);
 
 -- --------------------------------------------------------
 
@@ -260,8 +269,7 @@ INSERT INTO `usuario` (`idUsuario`, `nombre`, `email`, `password`, `telefono`, `
 --
 ALTER TABLE `aprendiz`
   ADD PRIMARY KEY (`idAprendiz`),
-  ADD KEY `fkIdGrupo` (`fkIdGrupo`),
-  ADD KEY `fk_programa_formacion` (`fkIdProgramaFormacion`);
+  ADD KEY `fkIdGrupo` (`fkIdGrupo`);
 
 --
 -- Indices de la tabla `categoria`
@@ -301,7 +309,7 @@ ALTER TABLE `grupo`
 -- Indices de la tabla `intervencion`
 --
 ALTER TABLE `intervencion`
-  ADD PRIMARY KEY (`idIntervención`),
+  ADD PRIMARY KEY (`idIntervencion`),
   ADD KEY `fkIdEstrategias` (`fkIdEstrategias`),
   ADD KEY `fkIdReporte` (`fkIdReporte`),
   ADD KEY `fkIdUsuario3` (`fkIdUsuario`);
@@ -353,19 +361,19 @@ ALTER TABLE `aprendiz`
 -- AUTO_INCREMENT de la tabla `categoria`
 --
 ALTER TABLE `categoria`
-  MODIFY `idCategoria` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `idCategoria` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `causa`
 --
 ALTER TABLE `causa`
-  MODIFY `idCausa` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `idCausa` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `estrategias`
 --
 ALTER TABLE `estrategias`
-  MODIFY `idEstrategias` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idEstrategias` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `grupo`
@@ -377,7 +385,7 @@ ALTER TABLE `grupo`
 -- AUTO_INCREMENT de la tabla `intervencion`
 --
 ALTER TABLE `intervencion`
-  MODIFY `idIntervención` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idIntervencion` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `programaformacion`
@@ -411,8 +419,7 @@ ALTER TABLE `usuario`
 -- Filtros para la tabla `aprendiz`
 --
 ALTER TABLE `aprendiz`
-  ADD CONSTRAINT `fkIdGrupo` FOREIGN KEY (`fkIdGrupo`) REFERENCES `grupo` (`idGrupo`) ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_programa_formacion` FOREIGN KEY (`fkIdProgramaFormacion`) REFERENCES `programaformacion` (`idProgramaFormacion`) ON UPDATE CASCADE;
+  ADD CONSTRAINT `fkIdGrupo` FOREIGN KEY (`fkIdGrupo`) REFERENCES `grupo` (`idGrupo`) ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `categoria`

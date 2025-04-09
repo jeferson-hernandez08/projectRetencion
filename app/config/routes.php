@@ -319,6 +319,40 @@ return [         // Prueba cimmit | base contrller , programa formacion controll
         'action' => 'deleteCausa'                          // Llama a la funcion deleteProgramaFormacion del programaFormacionModel
     ],
 
+    // Tabla Intervencion 
+    '/intervencion/index'=> [
+        'controller' =>'App\Controllers\intervencionController',
+        'action' => 'index'
+    ],
+    '/intervencion/view'=> [
+        'controller' =>'App\Controllers\intervencionController',
+        'action' => 'view'
+    ],
+    '/intervencion/new' => [
+        'controller' => 'App\Controllers\intervencionController',
+        'action' => 'newIntervencion'     // Nombre de la funcion 
+    ], 
+    '/intervencion/create'=> [
+        'controller' =>'App\Controllers\intervencionController',
+        'action' => 'createIntervencion'
+    ],
+    '/intervencion/view/(\d+)'=> [
+        'controller' =>'App\Controllers\intervencionController',
+        'action' => 'viewIntervencion'
+    ],
+    '/intervencion/edit/(\d+)'=> [
+        'controller' =>'App\Controllers\intervencionController',
+        'action' => 'editIntervencion'
+    ],
+    '/intervencion/update'=> [
+        'controller' =>'App\Controllers\intervencionController',
+        'action' => 'updateIntervencion'
+    ],
+    '/intervencion/delete/(\d+)'=> [
+        'controller' =>'App\Controllers\intervencionController',
+        'action' => 'deleteIntervencion'                          // Llama a la funcion deleteProgramaFormacion del programaFormacionModel
+    ],
+
 
     
 

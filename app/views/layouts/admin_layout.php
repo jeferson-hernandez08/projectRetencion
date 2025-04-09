@@ -34,6 +34,7 @@
                         <li><a href="/estrategias/view"><i class="fas fa-bell"></i><span class="info-text">Estrategias</span></a></li>
                         <li><a href="/categoria/view"><i class="fas fa-bell"></i><span class="info-text">Categorias</span></a></li>
                         <li><a href="/causa/view"><i class="fas fa-exclamation-circle"></i><span class="info-text">Causas</span></a></li>
+                        <li><a href="/intervencion/view"><i class="fas fa-exclamation-circle"></i><span class="info-text">Intervenciones</span></a></li>
                         <?php if(isset($_SESSION['nombre'])) {  ?> 
                         <li><a href="/login/logout">
                                 <i class="fas fa-sign-in-alt"></i>
