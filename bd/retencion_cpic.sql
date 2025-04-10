@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 09-04-2025 a las 23:44:46
+-- Tiempo de generación: 10-04-2025 a las 03:53:44
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -155,6 +155,14 @@ CREATE TABLE `intervencion` (
   `fkIdReporte` int(11) NOT NULL,
   `fkIdUsuario` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+--
+-- Volcado de datos para la tabla `intervencion`
+--
+
+INSERT INTO `intervencion` (`idIntervencion`, `fechaCreacion`, `descripcion`, `fkIdEstrategias`, `fkIdReporte`, `fkIdUsuario`) VALUES
+(1, '2025-04-16 07:09:00', 'Se habla con el aprendiz sobre el cas de ls problemas econÃ³micos que tiene y tanto familiares sdd', 2, 4, 3),
+(2, '2025-04-09 20:37:00', 'Se realiza atenciÃ³n psicolÃ³gica a aprendiz por comportamientos de rabia y problemas mentales', 3, 6, 4);
 
 -- --------------------------------------------------------
 
@@ -385,7 +393,7 @@ ALTER TABLE `grupo`
 -- AUTO_INCREMENT de la tabla `intervencion`
 --
 ALTER TABLE `intervencion`
-  MODIFY `idIntervencion` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idIntervencion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `programaformacion`
