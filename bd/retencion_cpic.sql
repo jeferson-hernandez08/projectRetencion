@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 10-04-2025 a las 03:53:44
+-- Tiempo de generación: 14-04-2025 a las 22:56:34
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -212,18 +212,6 @@ INSERT INTO `reporte` (`idReporte`, `fechaCreacion`, `descripcion`, `direccionam
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `resultado`
---
-
-CREATE TABLE `resultado` (
-  `idResultado` int(11) NOT NULL,
-  `resultadocol` varchar(45) DEFAULT NULL,
-  `estado` varchar(45) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
-
--- --------------------------------------------------------
-
---
 -- Estructura de tabla para la tabla `rol`
 --
 
@@ -337,12 +325,6 @@ ALTER TABLE `reporte`
   ADD KEY `fkIdUsuario2` (`fkIdUsuario`);
 
 --
--- Indices de la tabla `resultado`
---
-ALTER TABLE `resultado`
-  ADD PRIMARY KEY (`idResultado`);
-
---
 -- Indices de la tabla `rol`
 --
 ALTER TABLE `rol`
@@ -375,7 +357,7 @@ ALTER TABLE `categoria`
 -- AUTO_INCREMENT de la tabla `causa`
 --
 ALTER TABLE `causa`
-  MODIFY `idCausa` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `idCausa` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT de la tabla `estrategias`
@@ -405,13 +387,13 @@ ALTER TABLE `programaformacion`
 -- AUTO_INCREMENT de la tabla `reporte`
 --
 ALTER TABLE `reporte`
-  MODIFY `idReporte` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `idReporte` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT de la tabla `rol`
 --
 ALTER TABLE `rol`
-  MODIFY `idRol` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `idRol` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT de la tabla `usuario`
