@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 14-04-2025 a las 22:56:34
+-- Tiempo de generación: 15-04-2025 a las 03:42:48
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -98,6 +98,17 @@ CREATE TABLE `causa_reporte` (
   `fkIdReporte` int(11) NOT NULL,
   `fkIdCausa` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+--
+-- Volcado de datos para la tabla `causa_reporte`
+--
+
+INSERT INTO `causa_reporte` (`fkIdReporte`, `fkIdCausa`) VALUES
+(4, 1),
+(3, 3),
+(6, 3),
+(3, 2),
+(6, 3);
 
 -- --------------------------------------------------------
 
@@ -357,7 +368,7 @@ ALTER TABLE `categoria`
 -- AUTO_INCREMENT de la tabla `causa`
 --
 ALTER TABLE `causa`
-  MODIFY `idCausa` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `idCausa` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT de la tabla `estrategias`
@@ -387,7 +398,7 @@ ALTER TABLE `programaformacion`
 -- AUTO_INCREMENT de la tabla `reporte`
 --
 ALTER TABLE `reporte`
-  MODIFY `idReporte` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `idReporte` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT de la tabla `rol`
