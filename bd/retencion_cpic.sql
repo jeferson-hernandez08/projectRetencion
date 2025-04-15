@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 15-04-2025 a las 03:42:48
+-- Tiempo de generación: 15-04-2025 a las 20:59:06
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -104,11 +104,11 @@ CREATE TABLE `causa_reporte` (
 --
 
 INSERT INTO `causa_reporte` (`fkIdReporte`, `fkIdCausa`) VALUES
-(4, 1),
-(3, 3),
+(3, 1),
 (6, 3),
-(3, 2),
-(6, 3);
+(4, 2),
+(6, 1),
+(3, 3);
 
 -- --------------------------------------------------------
 
