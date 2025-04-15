@@ -29,7 +29,8 @@ class CausaReporteController extends BaseController {
         $causaReporteObj = new CausaReporteModel();
         // Necesitamos una forma de listar todas las relaciones causa-reporte
         // Podemos usar un método personalizado o JOINs complejos
-        $causasReportes = []; // Implementar lógica para obtener todas las relaciones
+        //$causasReportes = []; // Implementar lógica para obtener todas las relaciones
+        $causasReportes = $causaReporteObj->getAllRelaciones();
         
         // Llamamos a la vista
         $data = [
@@ -59,72 +60,140 @@ class CausaReporteController extends BaseController {
     public function createCausaReporte() {
         if (isset($_POST['txtFkIdReporte']) && isset($_POST['txtFkIdCausa'])) {
             
-            $fkIdReporte = $_POST['txtFkIdReporte'] ?? null;
-            $fkIdCausa = $_POST['txtFkIdCausa'] ?? null;
+            // $fkIdReporte = $_POST['txtFkIdReporte'] ?? null;
+            // $fkIdCausa = $_POST['txtFkIdCausa'] ?? null;
+
+            $fkIdReporte = (int)$_POST['txtFkIdReporte'];
+            $fkIdCausa = (int)$_POST['txtFkIdCausa'];
 
             // Creamos instancia del Modelo CausaReporte
             $causaReporteObj = new CausaReporteModel();
+
+            // Verificar si la relación ya existe
+            if ($causaReporteObj->exists($fkIdReporte, $fkIdCausa)) {
+                $_SESSION['message'] = "Esta relación ya existe";
+                $_SESSION['message_type'] = "warning";
+                $this->redirectTo("causaReporte/new");
+                return;
+            }
             
             // Se llama al método que guarda en la base de datos
-            $causaReporteObj->saveCausaReporte($fkIdReporte, $fkIdCausa);
+            //$causaReporteObj->saveCausaReporte($fkIdReporte, $fkIdCausa);
+            if ($causaReporteObj->saveCausaReporte($fkIdReporte, $fkIdCausa)) {
+                $_SESSION['message'] = "Relación creada correctamente";
+                $_SESSION['message_type'] = "success";
+            } else {
+                $_SESSION['message'] = "Error al crear la relación";
+                $_SESSION['message_type'] = "danger";
+            }
+
             $this->redirectTo("causaReporte/view");
         } else {
-            echo "No se capturaron todos los datos de la relación causa-reporte";
+            $_SESSION['message'] = "Datos incompletos";
+            $_SESSION['message_type'] = "danger";
+            $this->redirectTo("causaReporte/new");
+            //echo "No se capturaron todos los datos de la relación causa-reporte";
         }
     }
 
-    public function viewCausaReporte($fkIdReporte, $fkIdCausa) {
+    public function viewCausaReporte($params) {      //$fkIdReporte, $fkIdCausa
+        if (count($params) < 2) {
+            $this->redirectTo("causaReporte/view");
+            return;
+        }
+        
+        $fkIdReporte = (int)$params[0];
+        $fkIdCausa = (int)$params[1];
+        
         $causaReporteObj = new CausaReporteModel();
         $causaReporteInfo = $causaReporteObj->getCausaReporte($fkIdReporte, $fkIdCausa);
+        
+        if (!$causaReporteInfo) {
+            $_SESSION['message'] = "Relación no encontrada";
+            $_SESSION['message_type'] = "warning";
+            $this->redirectTo("causaReporte/view");
+            return;
+        }
+        
         $data = [
-            "title" => "Relación Causa-Reporte",
+            "title" => "Detalle Relación Causa-Reporte",
             'causaReporte' => $causaReporteInfo
         ];
         $this->render('causaReporte/viewOneCausaReporte.php', $data);
+
+        // Codigo anterior comentado
+        // $causaReporteObj = new CausaReporteModel();
+        // $causaReporteInfo = $causaReporteObj->getCausaReporte($fkIdReporte, $fkIdCausa);
+        // $data = [
+        //     "title" => "Relación Causa-Reporte",
+        //     'causaReporte' => $causaReporteInfo
+        // ];
+        // $this->render('causaReporte/viewOneCausaReporte.php', $data);
     }
 
-    public function editCausaReporte($fkIdReporte, $fkIdCausa) {
-        $causaReporteObj = new CausaReporteModel();
-        $causaReporteInfo = $causaReporteObj->getCausaReporte($fkIdReporte, $fkIdCausa);
+    // public function editCausaReporte($fkIdReporte, $fkIdCausa) {
+    //     $causaReporteObj = new CausaReporteModel();
+    //     $causaReporteInfo = $causaReporteObj->getCausaReporte($fkIdReporte, $fkIdCausa);
         
-        $causaObj = new CausaModel();
-        $causasInfo = $causaObj->getAll();
+    //     $causaObj = new CausaModel();
+    //     $causasInfo = $causaObj->getAll();
         
-        $reporteObj = new ReporteModel();
-        $reportesInfo = $reporteObj->getAll();
+    //     $reporteObj = new ReporteModel();
+    //     $reportesInfo = $reporteObj->getAll();
         
-        $data = [
-            "title" => "Editar Relación Causa-Reporte",
-            "causaReporte" => $causaReporteInfo,
-            "causas" => $causasInfo,
-            "reportes" => $reportesInfo
-        ];
-        $this->render('causaReporte/editCausaReporte.php', $data);
-    }
+    //     $data = [
+    //         "title" => "Editar Relación Causa-Reporte",
+    //         "causaReporte" => $causaReporteInfo,
+    //         "causas" => $causasInfo,
+    //         "reportes" => $reportesInfo
+    //     ];
+    //     $this->render('causaReporte/editCausaReporte.php', $data);
+    // }
 
-    public function updateCausaReporte() {
-        if (isset($_POST['txtOldFkIdReporte']) && isset($_POST['txtOldFkIdCausa']) && 
-            isset($_POST['txtNewFkIdReporte']) && isset($_POST['txtNewFkIdCausa'])) {
+    // public function updateCausaReporte() {
+    //     if (isset($_POST['txtOldFkIdReporte']) && isset($_POST['txtOldFkIdCausa']) && 
+    //         isset($_POST['txtNewFkIdReporte']) && isset($_POST['txtNewFkIdCausa'])) {
             
-            $oldFkIdReporte = $_POST['txtOldFkIdReporte'] ?? null;
-            $oldFkIdCausa = $_POST['txtOldFkIdCausa'] ?? null;
-            $newFkIdReporte = $_POST['txtNewFkIdReporte'] ?? null;
-            $newFkIdCausa = $_POST['txtNewFkIdCausa'] ?? null;
+    //         $oldFkIdReporte = $_POST['txtOldFkIdReporte'] ?? null;
+    //         $oldFkIdCausa = $_POST['txtOldFkIdCausa'] ?? null;
+    //         $newFkIdReporte = $_POST['txtNewFkIdReporte'] ?? null;
+    //         $newFkIdCausa = $_POST['txtNewFkIdCausa'] ?? null;
 
-            $causaReporteObj = new CausaReporteModel();
-            $respuesta = $causaReporteObj->editCausaReporte(
-                $oldFkIdReporte, 
-                $oldFkIdCausa, 
-                $newFkIdReporte, 
-                $newFkIdCausa
-            );
-        }
-        header("location: /causaReporte/view");
-    }
+    //         $causaReporteObj = new CausaReporteModel();
+    //         $respuesta = $causaReporteObj->editCausaReporte(
+    //             $oldFkIdReporte, 
+    //             $oldFkIdCausa, 
+    //             $newFkIdReporte, 
+    //             $newFkIdCausa
+    //         );
+    //     }
+    //     header("location: /causaReporte/view");
+    // }
 
     public function deleteCausaReporte($fkIdReporte, $fkIdCausa) {
+        // Validación básica
+        if (!is_numeric($fkIdReporte) || !is_numeric($fkIdCausa)) {
+            $_SESSION['message'] = "IDs no válidos";
+            $_SESSION['message_type'] = "danger";
+            $this->redirectTo("causaReporte/view");
+            return;
+        }
+
+        // Convertir parámetros a enteros
+        $fkIdReporte = (int)$fkIdReporte;
+        $fkIdCausa = (int)$fkIdCausa;
+        
         $causaReporteObj = new CausaReporteModel();
-        $causaReporteObj->deleteCausaReporte($fkIdReporte, $fkIdCausa);
+        $resultado = $causaReporteObj->deleteCausaReporte($fkIdReporte, $fkIdCausa);
+        if ($resultado === true) {
+            $_SESSION['message'] = "Relación eliminada correctamente";
+            $_SESSION['message_type'] = "success";
+        } else {
+            error_log("Error al eliminar: Reporte $fkIdReporte, Causa $fkIdCausa");
+            $_SESSION['message'] = "Error al eliminar la relación";
+            $_SESSION['message_type'] = "danger";
+        }
+        
         $this->redirectTo("causaReporte/view");
     }
 

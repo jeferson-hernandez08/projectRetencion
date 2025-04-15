@@ -5,7 +5,13 @@
         </div>
     </div>
     <div class="info">
-        <form action="/causaReporte/create" method="post">
+        <?php if (isset($_SESSION['message'])): ?>
+            <div class="alert alert-<?php echo $_SESSION['message_type']; ?>">
+                <?php echo $_SESSION['message']; ?>
+                <?php unset($_SESSION['message']); unset($_SESSION['message_type']); ?>
+            </div>
+        <?php endif; ?>
+        <form action="/causaReporte/create" method="post" onsubmit="return validateForm()">
             <!-- Campo Reporte -->
             <div class="form-group">
                 <label for="txtFkIdReporte">Reporte</label>
@@ -47,3 +53,16 @@
         </form>
     </div>
 </div>
+
+<script>
+function validateForm() {
+    const reporte = document.getElementById('txtFkIdReporte').value;
+    const causa = document.getElementById('txtFkIdCausa').value;
+    
+    if (!reporte || !causa) {
+        alert('Por favor seleccione ambos campos');
+        return false;
+    }
+    return true;
+}
+</script>

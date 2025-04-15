@@ -15,15 +15,16 @@
                 foreach ($causasReportes as $relacion) {
                     echo
                     "<div class='record'>
-                        <span>Reporte #$relacion->fkIdReporte - Causa: $relacion->nombreCausa</span>
-                        <div class='buttons'>
-                            <a href='/causaReporte/view/$relacion->fkIdReporte/$relacion->fkIdCausa'> <button>Consultar</button> </a> 
-                            <a href='/causaReporte/edit/$relacion->fkIdReporte/$relacion->fkIdCausa'> <button>Editar</button> </a> 
-                            <a href='/causaReporte/delete/$relacion->fkIdReporte/$relacion->fkIdCausa'> <button>Eliminar</button> </a> 
+                        <span>Reporte #$relacion->fkIdReporte - Causa: $relacion->causa_nombre</span>
+                        <div class='buttons'> 
+                            <a href='/causaReporte/delete/$relacion->fkIdReporte/$relacion->fkIdCausa' 
+                            onclick='return confirm(\"¿Está seguro de eliminar esta relación?\")'>     <button>Eliminar Relación</button> </a> 
                         </div>
                     </div>";
                 }
             }
         ?>
     </div>
+    <!-- <a href='/causaReporte/view/$relacion->fkIdReporte/$relacion->fkIdCausa'>  <button>Consultar</button> </a> 
+    <a href='/causaReporte/edit/$relacion->fkIdReporte/$relacion->fkIdCausa'>  <button>Editar</button> </a> -->
 </div>

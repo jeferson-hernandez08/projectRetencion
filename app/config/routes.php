@@ -382,10 +382,12 @@ return [         // Prueba cimmit | base contrller , programa formacion controll
         'controller' =>'App\Controllers\causaReporteController',
         'action' => 'updateCausaReporte'
     ],
-    '/causaReporte/delete/(\d+)'=> [
+    '/causaReporte/delete/(\d+)/(\d+)'=> [       // Problema de la Ruta: (\d+)/(\d+)
         'controller' =>'App\Controllers\causaReporteController',
         'action' => 'deleteCausaReporte'                          // Llama a la funcion deleteProgramaFormacion del programaFormacionModel
     ],
+
+    
     
 
 

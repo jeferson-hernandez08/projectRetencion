@@ -39,11 +39,11 @@ class CausaReporteModel extends BaseModel {
 
     public function getCausaReporte($fkIdReporte, $fkIdCausa) {
         try {
-            $sql = "SELECT causa_reporte.*, causa.causa AS nombreCausa, reporte.descripcion AS descripcionReporte
-                    FROM causa_reporte 
-                    INNER JOIN causa ON causa_reporte.fkIdCausa = causa.idCausa
-                    INNER JOIN reporte ON causa_reporte.fkIdReporte = reporte.idReporte
-                    WHERE causa_reporte.fkIdReporte=:fkIdReporte AND causa_reporte.fkIdCausa=:fkIdCausa";
+            $sql = "SELECT cr.*, c.causa, r.descripcion AS reporte_descripcion
+                    FROM causa_reporte cr
+                    INNER JOIN causa c ON cr.fkIdCausa = c.idCausa
+                    INNER JOIN reporte r ON cr.fkIdReporte = r.idReporte
+                    WHERE cr.fkIdReporte=:fkIdReporte AND cr.fkIdCausa=:fkIdCausa";
             $statement = $this->dbConnection->prepare($sql);
             $statement->bindParam(":fkIdReporte", $fkIdReporte, PDO::PARAM_INT);
             $statement->bindParam(":fkIdCausa", $fkIdCausa, PDO::PARAM_INT);
@@ -55,34 +55,40 @@ class CausaReporteModel extends BaseModel {
         }
     }
 
-    public function editCausaReporte($oldFkIdReporte, $oldFkIdCausa, $newFkIdReporte, $newFkIdCausa) {
-        try {
-            $sql = "UPDATE $this->table SET 
-                        fkIdReporte=:newFkIdReporte, 
-                        fkIdCausa=:newFkIdCausa 
-                    WHERE fkIdReporte=:oldFkIdReporte AND fkIdCausa=:oldFkIdCausa";
-            $statement = $this->dbConnection->prepare($sql);
-            $statement->bindParam(":oldFkIdReporte", $oldFkIdReporte, PDO::PARAM_INT);
-            $statement->bindParam(":oldFkIdCausa", $oldFkIdCausa, PDO::PARAM_INT);
-            $statement->bindParam(":newFkIdReporte", $newFkIdReporte, PDO::PARAM_INT);
-            $statement->bindParam(":newFkIdCausa", $newFkIdCausa, PDO::PARAM_INT);
-            $result = $statement->execute();
-            return $result;
-        } catch (PDOException $ex) {
-            echo "No se pudo editar la causa reporte".$ex->getMessage();
-        }
-    }
+    // public function editCausaReporte($oldFkIdReporte, $oldFkIdCausa, $newFkIdReporte, $newFkIdCausa) {
+    //     try {
+    //         $sql = "UPDATE $this->table SET 
+    //                     fkIdReporte=:newFkIdReporte, 
+    //                     fkIdCausa=:newFkIdCausa 
+    //                 WHERE fkIdReporte=:oldFkIdReporte AND fkIdCausa=:oldFkIdCausa";
+    //         $statement = $this->dbConnection->prepare($sql);
+    //         $statement->bindParam(":oldFkIdReporte", $oldFkIdReporte, PDO::PARAM_INT);
+    //         $statement->bindParam(":oldFkIdCausa", $oldFkIdCausa, PDO::PARAM_INT);
+    //         $statement->bindParam(":newFkIdReporte", $newFkIdReporte, PDO::PARAM_INT);
+    //         $statement->bindParam(":newFkIdCausa", $newFkIdCausa, PDO::PARAM_INT);
+    //         $result = $statement->execute();
+    //         return $result;
+    //     } catch (PDOException $ex) {
+    //         echo "No se pudo editar la causa reporte".$ex->getMessage();
+    //     }
+    // }
 
     public function deleteCausaReporte($fkIdReporte, $fkIdCausa) {
         try {
             $sql = "DELETE FROM $this->table WHERE fkIdReporte=:fkIdReporte AND fkIdCausa=:fkIdCausa";
+
             $statement = $this->dbConnection->prepare($sql);
             $statement->bindParam(":fkIdReporte", $fkIdReporte, PDO::PARAM_INT);
             $statement->bindParam(":fkIdCausa", $fkIdCausa, PDO::PARAM_INT);
             $result = $statement->execute();
-            return $result;
+
+            // Verificamos si se afectó alguna fila
+            return $statement->rowCount() > 0;
+            //return $result;
         } catch (PDOException $ex) {
-            echo "No se pudo eliminar la causa reporte".$ex->getMessage();
+            error_log("Error al eliminar causa_reporte: ".$ex->getMessage());
+            //echo "No se pudo eliminar la causa reporte".$ex->getMessage();
+            return false;
         }
     }
 
@@ -102,24 +108,50 @@ class CausaReporteModel extends BaseModel {
             echo "Error al obtener las causas del reporte" . $ex->getMessage();
         }
     }
-}
 
-// public function getAllRelaciones() {
-//     try {
-//         $sql = "SELECT cr.*, 
-//                 r.descripcion AS descripcion_reporte, 
-//                 c.causa AS nombre_causa
-//                 FROM causa_reporte cr
-//                 JOIN reporte r ON cr.fkIdReporte = r.idReporte
-//                 JOIN causa c ON cr.fkIdCausa = c.idCausa
-//                 ORDER BY cr.fkIdReporte";
-        
-//         $statement = $this->dbConnection->prepare($sql);
-//         $statement->execute();
-        
-//         return $statement->fetchAll(PDO::FETCH_OBJ);
-//     } catch (PDOException $ex) {
-//         error_log("Error al obtener todas las relaciones causa-reporte: " . $ex->getMessage());
-//         return [];
-//     }
-// }
+    public function getAllRelaciones() {
+        try {
+            $sql = "SELECT cr.*, r.descripcion AS reporte_descripcion, c.causa AS causa_nombre
+                    FROM causa_reporte cr
+                    JOIN reporte r ON cr.fkIdReporte = r.idReporte
+                    JOIN causa c ON cr.fkIdCausa = c.idCausa
+                    ORDER BY cr.fkIdReporte";
+            $statement = $this->dbConnection->prepare($sql);
+            $statement->execute();
+            return $statement->fetchAll(PDO::FETCH_OBJ);
+        } catch (PDOException $ex) {
+            echo "Error al obtener todas las relaciones causa-reporte: " . $ex->getMessage();
+            return [];
+        }
+    }
+
+    public function getByReporte($idReporte) {
+        try {
+            $sql = "SELECT c.* FROM causa c
+                    JOIN causa_reporte cr ON c.idCausa = cr.fkIdCausa
+                    WHERE cr.fkIdReporte = :idReporte";
+            $statement = $this->dbConnection->prepare($sql);
+            $statement->bindParam(':idReporte', $idReporte, PDO::PARAM_INT);
+            $statement->execute();
+            return $statement->fetchAll(PDO::FETCH_OBJ);
+        } catch (PDOException $ex) {
+            echo "Error al obtener causas por reporte: " . $ex->getMessage();
+            return [];
+        }
+    }
+    
+    public function exists($fkIdReporte, $fkIdCausa) {
+        try {
+            $sql = "SELECT COUNT(*) FROM $this->table 
+                    WHERE fkIdReporte = :fkIdReporte AND fkIdCausa = :fkIdCausa";
+            $statement = $this->dbConnection->prepare($sql);
+            $statement->bindParam(':fkIdReporte', $fkIdReporte, PDO::PARAM_INT);
+            $statement->bindParam(':fkIdCausa', $fkIdCausa, PDO::PARAM_INT);
+            $statement->execute();
+            return $statement->fetchColumn() > 0;
+        } catch (PDOException $ex) {
+            echo "Error al verificar existencia: " . $ex->getMessage();
+            return false;
+        }
+    }
+}

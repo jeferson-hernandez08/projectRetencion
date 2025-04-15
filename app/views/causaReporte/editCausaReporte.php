@@ -21,7 +21,7 @@
             <div class="form-group">
                 <label>Causa Actual</label>
                 <input type="text" class="form-control" readonly 
-                       value="<?php echo $causaReporte->nombreCausa ?>">
+                    value="<?php echo $causaReporte->causa_nombre ?>">
             </div>
 
             <!-- Campo Nuevo Reporte -->
