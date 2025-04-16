@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 15-04-2025 a las 20:59:06
+-- Tiempo de generación: 17-04-2025 a las 01:06:47
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -108,7 +108,9 @@ INSERT INTO `causa_reporte` (`fkIdReporte`, `fkIdCausa`) VALUES
 (6, 3),
 (4, 2),
 (6, 1),
-(3, 3);
+(3, 3),
+(4, 3),
+(3, 2);
 
 -- --------------------------------------------------------
 
@@ -410,7 +412,7 @@ ALTER TABLE `rol`
 -- AUTO_INCREMENT de la tabla `usuario`
 --
 ALTER TABLE `usuario`
-  MODIFY `idUsuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `idUsuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- Restricciones para tablas volcadas
