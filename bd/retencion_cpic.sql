@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 17-04-2025 a las 01:06:47
+-- Tiempo de generación: 23-04-2025 a las 16:33:31
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -267,7 +267,8 @@ CREATE TABLE `usuario` (
 INSERT INTO `usuario` (`idUsuario`, `nombre`, `email`, `password`, `telefono`, `tipoCoordinador`, `gestor`, `fkIdRol`) VALUES
 (1, 'Julian Salazar', 'julian@gmail.com', '123', '3245678978', 'No es coordinador', 1, 4),
 (3, 'Oscar Aristizabal (Ofac)', 'ofac@gmail.com', '123', '3127827845', 'No es coordinador', 0, 4),
-(4, 'Santiago Becerra', 'santiago@gmail.com', '123', '3127827845', 'Coordinador acadÃ©mico', 0, 5);
+(4, 'Santiago Becerra', 'santiago@gmail.com', '123', '3127827845', 'Coordinador acadÃ©mico', 0, 5),
+(10, 'Juan Estaban Calle', 'juan@gmail.com', '123', '3245678978', 'No es coordinador', 0, 7);
 
 --
 -- Índices para tablas volcadas
@@ -412,7 +413,7 @@ ALTER TABLE `rol`
 -- AUTO_INCREMENT de la tabla `usuario`
 --
 ALTER TABLE `usuario`
-  MODIFY `idUsuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `idUsuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- Restricciones para tablas volcadas
