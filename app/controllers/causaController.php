@@ -94,7 +94,21 @@ class CausaController extends BaseController {
 
     public function deleteCausa($id) {
         $causaObj = new CausaModel();
-        $causaObj->deleteCausa($id);
-        $this->redirectTo("causa/view");
+        $causa = $causaObj->getCausa($id);
+        $data = [
+            "title" => "Eliminar Causa",
+            "causa" => $causa,
+        ];
+        $this->render('causa/deleteCausa.php', $data);
+    }
+
+    public function removeCausa()
+    {
+        if (isset($_POST['txtId'])) {   
+            $id = $_POST['txtId'] ?? null;
+            $causaObj = new CausaModel();
+            $causaObj->removeCausa($id);
+            $this->redirectTo("causa/view");
+        }
     }
 }

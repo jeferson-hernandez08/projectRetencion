@@ -133,7 +133,21 @@ class IntervencionController extends BaseController {
 
     public function deleteIntervencion($id) {
         $intervencionObj = new IntervencionModel();
-        $intervencionObj->deleteIntervencion($id);
-        $this->redirectTo("intervencion/view");
+        $intervencion = $intervencionObj->getIntervencion($id);
+        $data = [
+            "title" => "Eliminar Intervencion",
+            "intervencion" => $intervencion,
+        ];
+        $this->render('intervencion/deleteIntervencion.php', $data);
+    }
+
+    public function removeIntervencion()
+    {
+        if (isset($_POST['txtId'])) {   
+            $id = $_POST['txtId'] ?? null;
+            $intervencionObj = new IntervencionModel();
+            $intervencionObj->removeIntervencion($id);
+            $this->redirectTo("intervencion/view");
+        }
     }
 }

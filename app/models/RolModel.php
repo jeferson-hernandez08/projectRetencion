@@ -63,7 +63,7 @@ class RolModel extends BaseModel {
         }
     }
 
-    public function deleteRol($id) {
+    public function removeRol($id) {
         try {
             $sql = "DELETE FROM $this->table WHERE idRol=:id";
             $statement = $this->dbConnection->prepare($sql);

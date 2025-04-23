@@ -63,7 +63,7 @@ class ProgramaFormacionModel extends BaseModel {
         }
     }
 
-    public function deleteProgramaFormacion($id) {
+    public function removeProgramaFormacion($id) {
         try {
             $sql = "DELETE FROM $this->table WHERE idProgramaFormacion=:id";
             $statement = $this->dbConnection->prepare($sql);

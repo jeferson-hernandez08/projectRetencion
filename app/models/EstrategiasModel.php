@@ -72,7 +72,7 @@ class EstrategiasModel extends BaseModel {
         }
     }
 
-    public function deleteEstrategias($id) {
+    public function removeEstrategias($id) {
         try {
             $sql = "DELETE FROM $this->table WHERE idEstrategias=:id";
             $statement = $this->dbConnection->prepare($sql);

@@ -89,7 +89,7 @@ class IntervencionModel extends BaseModel {
         }
     }
 
-    public function deleteIntervencion($id) {
+    public function removeIntervencion($id) {
         try {
             $sql = "DELETE FROM $this->table WHERE idIntervencion=:id";
             $statement = $this->dbConnection->prepare($sql);

@@ -94,7 +94,7 @@ class ReporteModel extends BaseModel {
         }
     }
 
-    public function deleteReporte($id) {
+    public function removeReporte($id) {
         try {
             $sql = "DELETE FROM $this->table WHERE idReporte=:id";
             $statement = $this->dbConnection->prepare($sql);

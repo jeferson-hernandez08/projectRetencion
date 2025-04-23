@@ -82,7 +82,7 @@ class GrupoModel extends BaseModel {
         }
     }
 
-    public function deleteGrupo($id) {
+    public function removeGrupo($id) {
         try {
             $sql = "DELETE FROM $this->table WHERE idGrupo=:id";
             $statement = $this->dbConnection->prepare($sql);

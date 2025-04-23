@@ -111,7 +111,21 @@ class AprendizController extends BaseController {
 
     public function deleteAprendiz($id) {
         $aprendizObj = new AprendizModel();
-        $aprendizObj->deleteAprendiz($id);
-        $this->redirectTo("aprendiz/view");
+        $aprendiz = $aprendizObj->getAprendiz($id);
+        $data = [
+            "title" => "Eliminar Aprendiz",
+            "aprendiz" => $aprendiz,
+        ];
+        $this->render('aprendiz/deleteAprendiz.php', $data);
+    }
+
+    public function removeAprendiz()
+    {
+        if (isset($_POST['txtId'])) {   
+            $id = $_POST['txtId'] ?? null;
+            $aprendizObj = new AprendizModel();
+            $aprendizObj->removeAprendiz($id);
+            $this->redirectTo("aprendiz/view");
+        }
     }
 }

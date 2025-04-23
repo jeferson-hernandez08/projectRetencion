@@ -126,7 +126,21 @@ class ReporteController extends BaseController {
 
     public function deleteReporte($id) {
         $reporteObj = new ReporteModel();
-        $reporteObj->deleteReporte($id);
-        $this->redirectTo("reporte/view");
+        $reporte = $reporteObj->getReporte($id);
+        $data = [
+            "title" => "Eliminar Reporte",
+            "reporte" => $reporte,
+        ];
+        $this->render('reporte/deleteReporte.php', $data);
+    }
+
+    public function removeReporte()
+    {
+        if (isset($_POST['txtId'])) {   
+            $id = $_POST['txtId'] ?? null;
+            $reporteObj = new ReporteModel();
+            $reporteObj->removeReporte($id);
+            $this->redirectTo("reporte/view");
+        }
     }
 }

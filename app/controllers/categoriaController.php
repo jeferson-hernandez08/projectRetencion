@@ -2,6 +2,7 @@
 namespace App\Controllers;
 use App\Models\CategoriaModel;
 use App\Models\CausaModel;        // Importar la clase CausaModel
+use FFI\CType;
 
 require_once 'baseController.php';
 require_once MAIN_APP_ROUTE."../models/CategoriaModel.php";
@@ -109,7 +110,21 @@ class CategoriaController extends BaseController {
 
     public function deleteCategoria($id) {
         $categoriaObj = new CategoriaModel();
-        $categoriaObj->deleteCategoria($id);
-        $this->redirectTo("categoria/view");
+        $categoria = $categoriaObj->getCategoria($id);
+        $data = [
+            "title" => "Eliminar Usuario",
+            "categoria" => $categoria,
+        ];
+        $this->render('categoria/deleteCategoria.php', $data);
+    }
+
+    public function removeCategoria()
+    {
+        if (isset($_POST['txtId'])) {   
+            $id = $_POST['txtId'] ?? null;
+            $categoriaObj = new CategoriaModel();
+            $categoriaObj->removeCategoria($id);
+            $this->redirectTo("categoria/view");
+        }
     }
 }

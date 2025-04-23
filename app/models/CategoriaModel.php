@@ -82,7 +82,7 @@ class CategoriaModel extends BaseModel {
         }
     }
 
-    public function deleteCategoria($id) {
+    public function removeCategoria($id) {
         try {
             $sql = "DELETE FROM $this->table WHERE idCategoria=:id";
             $statement = $this->dbConnection->prepare($sql);

@@ -92,8 +92,22 @@ class ProgramaFormacionController extends BaseController {
     }
 
     public function deleteProgramaFormacion($id) {
-        $programaObj = new ProgramaFormacionModel();
-        $programaObj->deleteProgramaFormacion($id);
-        $this->redirectTo("programaFormacion/view");
+        $programaFormacionObj = new ProgramaFormacionModel();
+        $programaFormacion = $programaFormacionObj->getProgramaFormacion($id);
+        $data = [
+            "title" => "Eliminar Programa de Formación",
+            "programaFormacion" => $programaFormacion,
+        ];
+        $this->render('programaFormacion/deleteProgramaFormacion.php', $data);
+    }
+
+    public function removeProgramaFormacion()
+    {
+        if (isset($_POST['txtId'])) {   
+            $id = $_POST['txtId'] ?? null;
+            $programaFormacionObj = new ProgramaFormacionModel();
+            $programaFormacionObj->removeProgramaFormacion($id);
+            $this->redirectTo("programaFormacion/view");
+        }
     }
 }

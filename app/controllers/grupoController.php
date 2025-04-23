@@ -109,7 +109,21 @@ class GrupoController extends BaseController {
 
     public function deleteGrupo($id) {
         $grupoObj = new GrupoModel();
-        $grupoObj->deleteGrupo($id);
-        $this->redirectTo("grupo/view");
+        $grupo = $grupoObj->getGrupo($id);
+        $data = [
+            "title" => "Eliminar Grupo",
+            "grupo" => $grupo,
+        ];
+        $this->render('grupo/deleteGrupo.php', $data);
+    }
+
+    public function removeGrupo()
+    {
+        if (isset($_POST['txtId'])) {   
+            $id = $_POST['txtId'] ?? null;
+            $grupoObj = new GrupoModel();
+            $grupoObj->removeGrupo($id);
+            $this->redirectTo("grupo/view");
+        }
     }
 }

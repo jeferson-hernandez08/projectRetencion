@@ -91,9 +91,23 @@ class RolController extends BaseController {
         header("location: /rol/view");
     }
 
-    public function deleteRol($id) {
+    public function deleteRol($id) {   // Render Vista deleteRol.php
         $rolObj = new RolModel();
-        $rolObj->deleteRol($id);
-        $this->redirectTo("rol/view");
+        $rol = $rolObj->getRol($id);
+        $data = [
+            "title" => "Eliminar Rol",
+            "rol" => $rol,
+        ];
+        $this->render('rol/deleteRol.php', $data);
+    }
+
+    public function removeRol()
+    {
+        if (isset($_POST['txtId'])) {   
+            $id = $_POST['txtId'] ?? null;
+            $rolObj = new RolModel();
+            $rolObj->removeRol($id);
+            $this->redirectTo("rol/view");
+        }
     }
 }

@@ -103,7 +103,21 @@ class EstrategiasController extends BaseController {
 
     public function deleteEstrategias($id) {
         $estrategiasObj = new EstrategiasModel();
-        $estrategiasObj->deleteEstrategias($id);
-        $this->redirectTo("estrategias/view");
+        $estrategias = $estrategiasObj->getEstrategias($id);
+        $data = [
+            "title" => "Eliminar Estrategia",
+            "estrategias" => $estrategias,
+        ];
+        $this->render('estrategias/deleteEstrategias.php', $data);
+    }
+
+    public function removeEstrategias()
+    {
+        if (isset($_POST['txtId'])) {   
+            $id = $_POST['txtId'] ?? null;
+            $estrategiaObj = new EstrategiasModel();
+            $estrategiaObj->removeEstrategias($id);
+            $this->redirectTo("estrategias/view");
+        }
     }
 }

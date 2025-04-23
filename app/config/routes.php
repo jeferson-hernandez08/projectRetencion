@@ -15,19 +15,19 @@ return [         // Prueba cimmit | base contrller , programa formacion controll
 
     // Tabla rol
     '/rol/index' => [
-        'controller' => 'App\Controllers\RolController',
+        'controller' => 'App\Controllers\rolController',
         'action' => 'index'
     ], 
     '/rol/view' => [
-        'controller' => 'App\Controllers\RolController',
+        'controller' => 'App\Controllers\rolController',
         'action' => 'view'
     ], 
     '/rol/new' => [
-        'controller' => 'App\Controllers\RolController',
+        'controller' => 'App\Controllers\rolController',
         'action' => 'newRol'     // Nombre de la funcion 
     ], 
     '/rol/create'=> [
-        'controller' =>'App\Controllers\RolController',
+        'controller' =>'App\Controllers\rolController',
         'action' => 'createRol'
     ],
     '/rol/view/(\d+)'=> [
@@ -45,6 +45,10 @@ return [         // Prueba cimmit | base contrller , programa formacion controll
     '/rol/delete/(\d+)'=> [
         'controller' =>'App\Controllers\rolController',
         'action' => 'deleteRol'
+    ],
+    "/rol/remove" => [
+        "controller" => "App\Controllers\RolController",
+        "action" => "removeRol"
     ],
 
     // Tabla usuario
@@ -118,6 +122,10 @@ return [         // Prueba cimmit | base contrller , programa formacion controll
         'controller' =>'App\Controllers\programaFormacionController',
         'action' => 'deleteProgramaFormacion'                          // Llama a la funcion deleteProgramaFormacion del programaFormacionModel
     ],
+    "/programaFormacion/remove" => [
+        "controller" => "App\Controllers\programaFormacionController",
+        "action" => "removeProgramaFormacion"
+    ],
 
     // Tabla Grupo
     '/grupo/index'=> [
@@ -151,6 +159,10 @@ return [         // Prueba cimmit | base contrller , programa formacion controll
     '/grupo/delete/(\d+)'=> [
         'controller' =>'App\Controllers\grupoController',
         'action' => 'deleteGrupo'                          // Llama a la funcion deleteProgramaFormacion del programaFormacionModel
+    ],
+    "/grupo/remove" => [
+        "controller" => "App\Controllers\grupoController",
+        "action" => "removeGrupo"
     ],
 
     // Tabla aprendiz
@@ -186,6 +198,10 @@ return [         // Prueba cimmit | base contrller , programa formacion controll
         'controller' =>'App\Controllers\aprendizController',
         'action' => 'deleteAprendiz'                          // Llama a la funcion deleteProgramaFormacion del programaFormacionModel
     ],
+    "/aprendiz/remove" => [
+        "controller" => "App\Controllers\aprendizController",
+        "action" => "removeAprendiz"
+    ],
 
     // Tabla reporte
     '/reporte/index'=> [
@@ -219,6 +235,10 @@ return [         // Prueba cimmit | base contrller , programa formacion controll
     '/reporte/delete/(\d+)'=> [
         'controller' =>'App\Controllers\reporteController',
         'action' => 'deleteReporte'                          // Llama a la funcion deleteProgramaFormacion del programaFormacionModel
+    ],
+    "/reporte/remove" => [
+        "controller" => "App\Controllers\ReporteController",   // Error de r en minuscula
+        "action" => "removeReporte"
     ],
 
     // Tabla estrategias
@@ -254,6 +274,10 @@ return [         // Prueba cimmit | base contrller , programa formacion controll
         'controller' =>'App\Controllers\estrategiasController',
         'action' => 'deleteEstrategias'                          // Llama a la funcion deleteProgramaFormacion del programaFormacionModel
     ],
+    "/estrategias/remove" => [
+        "controller" => "App\Controllers\EstrategiasController",   // Error de r en minuscula
+        "action" => "removeEstrategias"
+    ],
 
     // Tabla Categoria
     '/categoria/index'=> [
@@ -287,6 +311,10 @@ return [         // Prueba cimmit | base contrller , programa formacion controll
     '/categoria/delete/(\d+)'=> [
         'controller' =>'App\Controllers\categoriaController',
         'action' => 'deleteCategoria'                          // Llama a la funcion deleteProgramaFormacion del programaFormacionModel
+    ],
+    "/categoria/remove" => [
+        "controller" => "App\Controllers\categoriaController",  
+        "action" => "removeCategoria"
     ],
 
     // Tabla Causa 
@@ -322,6 +350,10 @@ return [         // Prueba cimmit | base contrller , programa formacion controll
         'controller' =>'App\Controllers\causaController',
         'action' => 'deleteCausa'                          // Llama a la funcion deleteProgramaFormacion del programaFormacionModel
     ],
+    "/causa/remove" => [
+        "controller" => "App\Controllers\causaController",  
+        "action" => "removeCausa"
+    ],
 
     // Tabla Intervencion 
     '/intervencion/index'=> [
@@ -355,6 +387,10 @@ return [         // Prueba cimmit | base contrller , programa formacion controll
     '/intervencion/delete/(\d+)'=> [
         'controller' =>'App\Controllers\intervencionController',
         'action' => 'deleteIntervencion'                          // Llama a la funcion deleteProgramaFormacion del programaFormacionModel
+    ],
+    "/intervencion/remove" => [
+        "controller" => "App\Controllers\intervencionController",  
+        "action" => "removeIntervencion"
     ],
 
     // Tabla causa_reporte 

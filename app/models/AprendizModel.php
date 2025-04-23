@@ -87,7 +87,7 @@ class AprendizModel extends BaseModel {
         }
     }
 
-    public function deleteAprendiz($id) {
+    public function removeAprendiz($id) {
         try {
             $sql = "DELETE FROM $this->table WHERE idAprendiz=:id";
             $statement = $this->dbConnection->prepare($sql);

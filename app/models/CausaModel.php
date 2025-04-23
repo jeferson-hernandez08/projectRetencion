@@ -68,7 +68,7 @@ class CausaModel extends BaseModel {
         }
     }
 
-    public function deleteCausa($id) {
+    public function removeCausa($id) {
         try {
             $sql = "DELETE FROM $this->table WHERE idCausa=:id";
             $statement = $this->dbConnection->prepare($sql);
