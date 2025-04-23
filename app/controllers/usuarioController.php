@@ -117,7 +117,21 @@ class UsuarioController extends BaseController {
 
     public function deleteUsuario($id) {
         $usuarioObj = new UsuarioModel();
-        $usuarioObj->deleteUsuario($id);
-        $this->redirectTo("usuario/view");
+        $usuario = $usuarioObj->getUsuario($id);
+        $data = [
+            "title" => "Eliminar Usuario",
+            "usuario" => $usuario,
+        ];
+        $this->render('usuario/deleteUsuario.php', $data);
+    }
+
+    public function removeUsuario()
+    {
+        if (isset($_POST['txtId'])) {   
+            $id = $_POST['txtId'] ?? null;
+            $usuarioObj = new UsuarioModel();
+            $usuarioObj->removeUsuario($id);
+            $this->redirectTo("usuario/view");
+        }
     }
 }

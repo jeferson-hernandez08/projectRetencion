@@ -80,6 +80,10 @@ return [         // Prueba cimmit | base contrller , programa formacion controll
         'controller' =>'App\Controllers\usuarioController',
         'action' => 'deleteUsuario'
     ],
+    "/usuario/remove" => [
+        "controller" => "App\Controllers\usuarioController",
+        "action" => "removeUsuario"
+    ],
 
     // Tabla programaFormacion
     '/programaFormacion/index'=> [

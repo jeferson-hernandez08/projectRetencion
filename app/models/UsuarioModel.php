@@ -97,7 +97,7 @@ class UsuarioModel extends BaseModel {
         }
     }
 
-    public function deleteUsuario($id) {
+    public function removeUsuario($id) {
         try {
             $sql = "DELETE FROM $this->table WHERE idUsuario=:id";
             $statement = $this->dbConnection->prepare($sql);
