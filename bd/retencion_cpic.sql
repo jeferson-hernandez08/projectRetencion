@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 23-04-2025 a las 16:33:31
+-- Tiempo de generación: 23-04-2025 a las 19:18:16
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -43,7 +43,9 @@ CREATE TABLE `aprendiz` (
 INSERT INTO `aprendiz` (`idAprendiz`, `nombre`, `email`, `telefono`, `trimestre`, `fkIdGrupo`) VALUES
 (2, 'Juan Jose Posada', 'juan@gmail.com', '3245678978', '7', 10),
 (3, 'Juan Esteban Calle', 'juan@gmail.com', '3127827845', '5', 10),
-(4, 'Daniel Duque', 'dani@gmail.com', '3127827845', '6', 11);
+(4, 'Daniel Duque', 'dani@gmail.com', '3127827845', '6', 11),
+(6, 'Angie Rios', 'angie@gmail.com', '3245678978', '5', 11),
+(7, 'Daniel Gallego', 'daniel@gmail.com', '3245678978', '8', 13);
 
 -- --------------------------------------------------------
 
@@ -130,7 +132,8 @@ CREATE TABLE `estrategias` (
 
 INSERT INTO `estrategias` (`idEstrategias`, `estrategia`, `fkIdCategoria`) VALUES
 (2, 'Orientar al aprendiz sobre las oportunidades a aplicar a apoyos socioeconÃ³micos.', 1),
-(3, 'OrganizaciÃ³n de grupos focales o campaÃ±as con aprendices para orientaciÃ³n de herramientas o habilidades sociales y sana convivencia entre pares.', 3);
+(3, 'OrganizaciÃ³n de grupos focales o campaÃ±as con aprendices para orientaciÃ³n de herramientas o habilidades sociales y sana convivencia entre pares.', 3),
+(6, 'Organización de grupos focales o campañas con aprendices para orientación de herramientas o habilidades sociales y sana convivencia entre pares ', 3);
 
 -- --------------------------------------------------------
 
@@ -152,7 +155,9 @@ CREATE TABLE `grupo` (
 
 INSERT INTO `grupo` (`idGrupo`, `ficha`, `jornada`, `modalidad`, `fkIdProgramaFormacion`) VALUES
 (10, '2873711', 'Diurna', 'Presencial', 1),
-(11, '299200', 'Mixta', 'Presencial', 3);
+(11, '299200', 'Mixta', 'Presencial', 3),
+(13, '2873456', 'Diurna', 'Presencial', 5),
+(15, '299299', 'Diurna', 'Presencial', 6);
 
 -- --------------------------------------------------------
 
@@ -195,7 +200,10 @@ CREATE TABLE `programaformacion` (
 INSERT INTO `programaformacion` (`idProgramaFormacion`, `nombre`) VALUES
 (1, 'AnÃ¡lisis y Desarrollo de Software'),
 (2, 'ElectrÃ³nica'),
-(3, 'AutomatizaciÃ³n Industrial');
+(3, 'AutomatizaciÃ³n Industrial'),
+(5, 'Mantenimiento de Equipos Biomédicos'),
+(6, 'Mecánica Industrial'),
+(8, 'Motores Diesel');
 
 -- --------------------------------------------------------
 
@@ -220,7 +228,8 @@ CREATE TABLE `reporte` (
 INSERT INTO `reporte` (`idReporte`, `fechaCreacion`, `descripcion`, `direccionamiento`, `estado`, `fkIdAprendiz`, `fkIdUsuario`) VALUES
 (3, '2025-03-30 09:30:00', 'Aprendiz con problemas actitudinales', 'Coordinador de formaciÃ³n', 'En proceso', 2, 3),
 (4, '2025-03-31 10:45:00', 'Aprendiz con problemas acadÃ©micos', 'Coordinador acadÃ©mico', 'Registrado', 2, 1),
-(6, '2025-03-20 09:05:00', 'Aprendiz es insoportable en clase', 'Coordinador acadÃ©mico', 'En proceso', 3, 1);
+(6, '2025-03-20 09:05:00', 'Aprendiz es insoportable en clase', 'Coordinador acadÃ©mico', 'En proceso', 3, 1),
+(11, '2025-04-23 11:19:00', ' Aprendiz agrede físicamente a otro aprendiz dentro el ambiente de formación', 'Coordinador académico', 'En proceso', 7, 1);
 
 -- --------------------------------------------------------
 
@@ -241,7 +250,7 @@ INSERT INTO `rol` (`idRol`, `nombre`) VALUES
 (4, 'Instructor'),
 (5, 'Coordinador'),
 (6, 'Profesional Bienestar'),
-(7, 'Vocero');
+(9, 'Vocero');
 
 -- --------------------------------------------------------
 
@@ -267,8 +276,7 @@ CREATE TABLE `usuario` (
 INSERT INTO `usuario` (`idUsuario`, `nombre`, `email`, `password`, `telefono`, `tipoCoordinador`, `gestor`, `fkIdRol`) VALUES
 (1, 'Julian Salazar', 'julian@gmail.com', '123', '3245678978', 'No es coordinador', 1, 4),
 (3, 'Oscar Aristizabal (Ofac)', 'ofac@gmail.com', '123', '3127827845', 'No es coordinador', 0, 4),
-(4, 'Santiago Becerra', 'santiago@gmail.com', '123', '3127827845', 'Coordinador acadÃ©mico', 0, 5),
-(10, 'Juan Estaban Calle', 'juan@gmail.com', '123', '3245678978', 'No es coordinador', 0, 7);
+(4, 'Santiago Becerra', 'santiago@gmail.com', '123', '3127827845', 'Coordinador acadÃ©mico', 0, 5);
 
 --
 -- Índices para tablas volcadas
@@ -359,55 +367,55 @@ ALTER TABLE `usuario`
 -- AUTO_INCREMENT de la tabla `aprendiz`
 --
 ALTER TABLE `aprendiz`
-  MODIFY `idAprendiz` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `idAprendiz` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT de la tabla `categoria`
 --
 ALTER TABLE `categoria`
-  MODIFY `idCategoria` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `idCategoria` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT de la tabla `causa`
 --
 ALTER TABLE `causa`
-  MODIFY `idCausa` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `idCausa` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT de la tabla `estrategias`
 --
 ALTER TABLE `estrategias`
-  MODIFY `idEstrategias` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `idEstrategias` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT de la tabla `grupo`
 --
 ALTER TABLE `grupo`
-  MODIFY `idGrupo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `idGrupo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT de la tabla `intervencion`
 --
 ALTER TABLE `intervencion`
-  MODIFY `idIntervencion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `idIntervencion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de la tabla `programaformacion`
 --
 ALTER TABLE `programaformacion`
-  MODIFY `idProgramaFormacion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `idProgramaFormacion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT de la tabla `reporte`
 --
 ALTER TABLE `reporte`
-  MODIFY `idReporte` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `idReporte` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT de la tabla `rol`
 --
 ALTER TABLE `rol`
-  MODIFY `idRol` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `idRol` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT de la tabla `usuario`
