@@ -13,6 +13,7 @@ require_once '../app/controllers/categoriaController.php';
 require_once '../app/controllers/causaController.php';
 require_once '../app/controllers/intervencionController.php';
 require_once '../app/controllers/causaReporteController.php';
+require_once '../app/controllers/mainController.php'; 
 
 // require_once '../app/controllers/loginController.php';
 

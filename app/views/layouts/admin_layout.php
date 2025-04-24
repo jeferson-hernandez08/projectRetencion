@@ -21,6 +21,7 @@
                 </div>
                 <nav class="menu">
                     <ul>
+                        <li><a href="/main"><i class="fas fa-home"></i><span class="span">INICIO</span></a></li>
                         <?php if(isset($_SESSION['rol']) && $_SESSION['rol'] == 1): ?>
                             <li><a href="/centroFormacion/view"><i class="fas fa-building"></i><span class="info-text">Centros</span></a></li>
                             <li><a href="/programaFormacion/view"><i class="fas fa-dumbbell"></i><span class="info-text">Programas</span></a></li>

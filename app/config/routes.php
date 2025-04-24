@@ -427,8 +427,10 @@ return [         // Prueba cimmit | base contrller , programa formacion controll
         'action' => 'deleteCausaReporte'                          // Llama a la funcion deleteProgramaFormacion del programaFormacionModel
     ],
 
+    // Página Principal
+    "/main" => [
+        "controller" => "App\Controllers\MainController",
+        "action" => "view"
+    ],
     
-    
-
-
 ];
