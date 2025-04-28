@@ -21,11 +21,11 @@
                 </div>
                 <nav class="menu">
                     <ul>
-                        <li><a href="/main"><i class="fas fa-home"></i><span class="span">INICIO</span></a></li>
                         <?php if(isset($_SESSION['rol']) && $_SESSION['rol'] == 1): ?>
                             <li><a href="/centroFormacion/view"><i class="fas fa-building"></i><span class="info-text">Centros</span></a></li>
                             <li><a href="/programaFormacion/view"><i class="fas fa-dumbbell"></i><span class="info-text">Programas</span></a></li>
-                        <?php endif ?>   
+                            <?php endif ?>   
+                        <li><a href="/main"><i class="fas fa-home"></i><span class="info-text">Inicio</span></a></li>
                         <li><a href="/rol/view"><i class="fas fa-users-cog"></i><span class="info-text">Roles</span></a></li>
                         <li><a href="/usuario/view"><i class="fas fa-users"></i><span class="info-text">Usuarios</span></a></li>
                         <li><a href="/programaFormacion/view"><i class="fas fa-chalkboard-teacher"></i><span class="info-text">Programas</span></a></li>
@@ -50,7 +50,7 @@
         <main class="main-content">
             <header class="header">
                 <div class="header-container">
-                    <button class="menu-toggle"><i class="fas fa-bars"></i> Menu</button>
+                    <button class="menu-toggle"><i class="fas fa-bars"></i></button>
                     <h1> <?php echo $title ?> </h1>
                     <div class="search-container">
                         <i class="fas fa-search"></i>
@@ -68,8 +68,11 @@
             </div>
         </main>
     </div>
-
-    
+    <footer class="footer">
+        <div class="footer-container">
+            <p>&copy; <?php echo date('Y'); ?> RetencionCPIC. Todos los derechos reservados.</p>
+        </div>
+    </footer>
     <script>
         // Funcionabilidad de Cambiar de tema a oscuro
         document.getElementById('theme-toggle').addEventListener('click', function() {
