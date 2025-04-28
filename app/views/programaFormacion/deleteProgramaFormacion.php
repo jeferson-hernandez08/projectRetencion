@@ -1,6 +1,6 @@
 <div class="data-container">
     
-    <div class="info">
+    <!-- <div class="info">
         <form action="/programaFormacion/remove" method="post">
             <div class="form-group">
                 <label>ID del Programa de Formación: </label>
@@ -15,5 +15,19 @@
         <div class="back">
             <a href="/programaFormacion/view"><img src="/img/back.svg"></a>
         </div>
+    </div> -->
+
+    <div class="confirmation-modal">
+        <img src="/img/warning.svg" alt="Advertencia" class="confirmation-icon">
+        <h2 class="confirmation-title">¿Está seguro de realizar esta acción?</h2>
+        <p class="confirmation-message">Se eliminará este programa de formación y todos sus grupos asociados</p>
+        
+        <form action="/programaFormacion/remove" method="post">
+            <input type="hidden" value="<?php echo $programaFormacion->idProgramaFormacion ?>" name="txtId">
+            <div class="confirmation-buttons">
+                <button type="submit" class="btn-confirm">Confirmar</button>
+                <a href="/programaFormacion/view" class="btn-cancel">Cancelar</a>
+            </div>
+        </form>
     </div>
 </div>

@@ -92,6 +92,7 @@
             const sidebar = document.getElementById('sidebar');                            // Seleccionamos el sidebar por su ID
             sidebar.classList.toggle('sidebar-hidden');                                    // Método que alterna (agrega o quita) una clase en un elemento.
         });
+
     </script>
 </body>
 
