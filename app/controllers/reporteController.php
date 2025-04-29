@@ -4,10 +4,16 @@ use App\Models\ReporteModel;
 use App\Models\UsuarioModel;        // Importar la clase UsuarioModel
 use App\Models\AprendizModel;       // Importar la clase AprendizModel
 
+use App\Models\CausaReporteModel;
+use App\Models\CausaModel;
+
 require_once 'baseController.php';
 require_once MAIN_APP_ROUTE."../models/ReporteModel.php";
 require_once MAIN_APP_ROUTE."../models/UsuarioModel.php";
 require_once MAIN_APP_ROUTE."../models/AprendizModel.php";
+
+require_once MAIN_APP_ROUTE."../models/CausaReporteModel.php";
+require_once MAIN_APP_ROUTE."../models/CausaModel.php";
 
 class ReporteController extends BaseController {
     
@@ -44,12 +50,22 @@ class ReporteController extends BaseController {
         
         $aprendizObj = new AprendizModel();
         $aprendices = $aprendizObj->getAll();
+
+         // Lógica para capturar causas y reportes disponibles
+         $causaObj = new CausaModel();
+         $causas = $causaObj->getAll();
+         
+         $reporteObj = new ReporteModel();
+         $reportes = $reporteObj->getAll();
         
         // Llamamos a la vista
         $data = [
             "title" => "Reportes",
             "usuarios" => $usuarios,
-            "aprendices" => $aprendices
+            "aprendices" => $aprendices,
+
+            "causas" => $causas,         // Capturamos los datos de causamodel y reportemodel para rendenrizar y relacionar datos en newReporte.php
+            "reportes" => $reportes
         ];
         $this->render('reporte/newReporte.php', $data);
     }
@@ -143,4 +159,11 @@ class ReporteController extends BaseController {
             $this->redirectTo("reporte/view");
         }
     }
+
+
+
+
+
+
+    
 }

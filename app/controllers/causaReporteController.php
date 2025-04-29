@@ -54,7 +54,7 @@ class CausaReporteController extends BaseController {
             "causas" => $causas,
             "reportes" => $reportes
         ];
-        $this->render('causaReporte/newCausaReporte.php', $data);
+        $this->render('causaReporte/newCausaReporte.php', $data);    // causaReporte/newCausaReporte.php
     }
 
     public function createCausaReporte() {

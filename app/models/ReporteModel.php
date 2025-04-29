@@ -105,4 +105,6 @@ class ReporteModel extends BaseModel {
             echo "No se pudo eliminar el reporte".$ex->getMessage();
         }
     }
+
+
 }
