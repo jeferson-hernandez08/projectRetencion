@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 23-04-2025 a las 19:18:16
+-- Tiempo de generación: 29-04-2025 a las 04:35:00
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -45,7 +45,8 @@ INSERT INTO `aprendiz` (`idAprendiz`, `nombre`, `email`, `telefono`, `trimestre`
 (3, 'Juan Esteban Calle', 'juan@gmail.com', '3127827845', '5', 10),
 (4, 'Daniel Duque', 'dani@gmail.com', '3127827845', '6', 11),
 (6, 'Angie Rios', 'angie@gmail.com', '3245678978', '5', 11),
-(7, 'Daniel Gallego', 'daniel@gmail.com', '3245678978', '8', 13);
+(7, 'Daniel Gallego', 'daniel@gmail.com', '3245678978', '8', 13),
+(9, 'David Gonzales', 'david@gmail.com', '3245678978', '5', 11);
 
 -- --------------------------------------------------------
 
@@ -107,12 +108,11 @@ CREATE TABLE `causa_reporte` (
 
 INSERT INTO `causa_reporte` (`fkIdReporte`, `fkIdCausa`) VALUES
 (3, 1),
-(6, 3),
-(4, 2),
-(6, 1),
 (3, 3),
 (4, 3),
-(3, 2);
+(3, 2),
+(4, 1),
+(6, 2);
 
 -- --------------------------------------------------------
 
@@ -229,7 +229,11 @@ INSERT INTO `reporte` (`idReporte`, `fechaCreacion`, `descripcion`, `direccionam
 (3, '2025-03-30 09:30:00', 'Aprendiz con problemas actitudinales', 'Coordinador de formaciÃ³n', 'En proceso', 2, 3),
 (4, '2025-03-31 10:45:00', 'Aprendiz con problemas acadÃ©micos', 'Coordinador acadÃ©mico', 'Registrado', 2, 1),
 (6, '2025-03-20 09:05:00', 'Aprendiz es insoportable en clase', 'Coordinador acadÃ©mico', 'En proceso', 3, 1),
-(11, '2025-04-23 11:19:00', ' Aprendiz agrede físicamente a otro aprendiz dentro el ambiente de formación', 'Coordinador académico', 'En proceso', 7, 1);
+(11, '2025-04-23 11:19:00', ' Aprendiz agrede físicamente a otro aprendiz dentro el ambiente de formación', 'Coordinador académico', 'En proceso', 7, 1),
+(12, '2025-04-28 20:31:00', 'dfdsfdsfdsfddfdsfdsf', 'Coordinador académico', 'Registrado', 3, 3),
+(13, '2025-04-28 21:24:00', 'hghgfhgfhf', 'Coordinador de formación', 'En proceso', 6, 1),
+(14, '2025-04-28 21:25:00', 'hgjghjghjghjhgj', 'Coordinador de formación', 'En proceso', 4, 1),
+(15, '2025-04-28 21:25:00', 'dfgdfgfdgdg', 'Coordinador de formación', 'En proceso', 2, 3);
 
 -- --------------------------------------------------------
 
@@ -276,7 +280,8 @@ CREATE TABLE `usuario` (
 INSERT INTO `usuario` (`idUsuario`, `nombre`, `email`, `password`, `telefono`, `tipoCoordinador`, `gestor`, `fkIdRol`) VALUES
 (1, 'Julian Salazar', 'julian@gmail.com', '123', '3245678978', 'No es coordinador', 1, 4),
 (3, 'Oscar Aristizabal (Ofac)', 'ofac@gmail.com', '123', '3127827845', 'No es coordinador', 0, 4),
-(4, 'Santiago Becerra', 'santiago@gmail.com', '123', '3127827845', 'Coordinador acadÃ©mico', 0, 5);
+(4, 'Santiago Becerra', 'santiago@gmail.com', '123', '3127827845', 'Coordinador acadÃ©mico', 0, 5),
+(13, 'German Estrada', 'german@gmail.com', '123', '3245678978', 'No es coordinador', 0, 4);
 
 --
 -- Índices para tablas volcadas
@@ -367,7 +372,7 @@ ALTER TABLE `usuario`
 -- AUTO_INCREMENT de la tabla `aprendiz`
 --
 ALTER TABLE `aprendiz`
-  MODIFY `idAprendiz` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `idAprendiz` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT de la tabla `categoria`
@@ -409,7 +414,7 @@ ALTER TABLE `programaformacion`
 -- AUTO_INCREMENT de la tabla `reporte`
 --
 ALTER TABLE `reporte`
-  MODIFY `idReporte` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `idReporte` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT de la tabla `rol`
@@ -421,7 +426,7 @@ ALTER TABLE `rol`
 -- AUTO_INCREMENT de la tabla `usuario`
 --
 ALTER TABLE `usuario`
-  MODIFY `idUsuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `idUsuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- Restricciones para tablas volcadas
