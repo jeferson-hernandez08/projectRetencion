@@ -216,7 +216,7 @@ div.record-one{
     transform: translateY(-2px);
 }
 
-.create{
+.create {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -224,24 +224,35 @@ div.record-one{
     transition: .2s all ease-in;
 }
 
-.create button{
-    background-color: #008000; /* Verde */
+.create button {
+    background-color: #008000;
+    border: none;
     border-radius: 50%;
-    height: 40px;
-    width: 40px;
-    font-size: 18px;
-    color: #fff;
+    height: 45px;
+    width: 45px;
+    color: white;
+    font-size: 28px;
     cursor: pointer;
     transition: all 0.2s ease;
     box-shadow: 0 4px 8px rgba(67, 97, 238, 0.3);
+    position: relative;
+    overflow: hidden;
 }
 
-.create:hover{
+/* Eliminamos el ::before anterior y usamos el contenido directamente */
+.create button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-bottom: 4px; /* Ajuste fino para centrado visual */
+}
+
+.create:hover {
     transform: scale(1.05);
 }
 
 .create button:hover {
-    background-color: #00ff00; /* Verde más oscuro */
+    background-color: #00ff00;
     box-shadow: 0 6px 12px rgba(67, 97, 238, 0.4);
 }
 
@@ -285,7 +296,7 @@ div.record-one{
     width: 100%;          /* Asegura que los campos ocupen todo el ancho disponible */
    /* max-width: none;      /* Elimina cualquier límite de ancho */
     height: 50px;         /* Aumenta la altura de los campos */
-    /*padding: 0.8rem;      /* Ajusta el relleno interno */
+    padding: 0.8rem;      /* Ajusta el relleno interno */
 }
 
 .form-group input:focus, select:focus, textarea:focus {
@@ -747,9 +758,62 @@ body.dark-mode .confirmation-message {
     }
 }
 
+/* Estilos para modo oscuro en la sección de causa-reporte */
+body.dark-mode .info-causa-reporte {
+    background-color: #1e1e1e;
+    border-color: #4a5568;
+    color: #e0e0e0;
+}
 
+body.dark-mode .info-causa-reporte select,
+body.dark-mode .info-causa-reporte input {
+    background-color: #2d3748;
+    color: #e0e0e0;
+    border-color: #4a5568;
+}
 
+body.dark-mode .info-causa-reporte label {
+    color: #e0e0e0;
+}
 
+body.dark-mode .info-card {
+    background-color: #1e1e1e;
+    border-color: #4a5568;
+}
+
+body.dark-mode .info-card .record {
+    background-color: #2d3748;
+    border-color: #4a5568;
+}
+
+body.dark-mode .info-card .record:hover {
+    background-color: #3d4a5f;
+}
+
+body.dark-mode .info-card .record span {
+    color: #e0e0e0;
+}
+
+body.dark-mode .navegate-group {
+    background-color: #1e1e1e;
+    border-color: #4a5568;
+}
+
+body.dark-mode .data-container {
+    background-color: #1e1e1e;
+    border-color: #4a5568;
+}
+
+body.dark-mode select {
+    background-color: #2d3748;
+    color: #e0e0e0;
+    border-color: #4a5568;
+}
+
+body.dark-mode select:focus {
+    border-color: #63b3ed;
+    box-shadow: 0 0 0 3px rgba(99, 179, 237, 0.3);
+}
 
 /* Estilos para el contenedor principal */
 /* Estilos para el contenedor principal */
@@ -881,4 +945,13 @@ body.dark-mode .new-causa-reporte select:focus {
     .new-causa-reporte button[type="submit"] {
         width: 100%;
     }
+}
+
+/* Estilos para las flechas en modo oscuro */
+body.dark-mode .back a img {
+    filter: invert(1); /* Hace que las imágenes negras se vuelvan blancas */
+}
+
+body.dark-mode .back a {
+    color: white; /* Cambia el color del texto a blanco si hay alguno */
 }

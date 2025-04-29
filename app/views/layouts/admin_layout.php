@@ -50,7 +50,9 @@
         <main class="main-content">
             <header class="header">
                 <div class="header-container">
-                    <button class="menu-toggle"><i class="fas fa-bars"></i></button>
+                    <button class="menu-toggle" id="menu-toggle">
+                        <i class="fas fa-bars"></i>
+                    </button>
                     <h1> <?php echo $title ?> </h1>
                     <div class="search-container">
                         <i class="fas fa-search"></i>
@@ -59,7 +61,7 @@
                     <div class="header-icons">
                         <a href="#" class="icon-link"><i class="fas fa-user-circle"></i></a>
                         <a href="#" class="icon-link"><i class="fas fa-bell"></i></a>
-                        <a href="#" class="icon-link" id="theme-toggle"><i class="fas fa-moon"></i></a>
+                        <a href="#" class="icon-link" id="theme-toggle-link" onclick="toggleDarkMode(); return false;"><i class="fas fa-moon"></i></a>
                     </div>
                 </div>
             </header>
@@ -74,25 +76,39 @@
         </div>
     </footer>
     <script>
-        // Funcionabilidad de Cambiar de tema a oscuro
-        document.getElementById('theme-toggle').addEventListener('click', function() {
-            document.body.classList.toggle('dark-mode');
-            const icon = this.querySelector('i');
-            if (icon.classList.contains('fa-moon')) {
-                icon.classList.remove('fa-moon');
-                icon.classList.add('fa-sun');
+        // Función para cambiar el icono
+        function updateThemeIcon(isDark) {
+            const themeIcon = document.querySelector('#theme-toggle-link i');
+            if (isDark) {
+                themeIcon.classList.remove('fa-moon');
+                themeIcon.classList.add('fa-sun');
             } else {
-                icon.classList.remove('fa-sun');
-                icon.classList.add('fa-moon');
+                themeIcon.classList.remove('fa-sun');
+                themeIcon.classList.add('fa-moon');
+            }
+        }
+
+        // Función para alternar el modo oscuro
+        function toggleDarkMode() {
+            const isDarkMode = document.body.classList.toggle('dark-mode');
+            localStorage.setItem('darkMode', isDarkMode);
+            updateThemeIcon(isDarkMode);
+        }
+
+        // Aplicar el tema guardado al cargar la página
+        document.addEventListener('DOMContentLoaded', function() {
+            const isDarkMode = localStorage.getItem('darkMode') === 'true';
+            if (isDarkMode) {
+                document.body.classList.add('dark-mode');
+                updateThemeIcon(true);
             }
         });
 
-        // Funcionabilidad de Sidebar
-        document.querySelector('.menu-toggle').addEventListener('click', function() {      // Selecciona el botón con la clase menu-toggle. y Cuando el usuario haga clic en el botón, se ejecutará la función que está dentro del addEventListener.
-            const sidebar = document.getElementById('sidebar');                            // Seleccionamos el sidebar por su ID
-            sidebar.classList.toggle('sidebar-hidden');                                    // Método que alterna (agrega o quita) una clase en un elemento.
+        // Event listeners
+        document.querySelector('#menu-toggle').addEventListener('click', function() {
+            const sidebar = document.getElementById('sidebar');
+            sidebar.classList.toggle('sidebar-hidden');
         });
-
     </script>
 </body>
 
