@@ -1,0 +1,156 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #f9f9f9;
+    margin: 0;
+}
+
+.left-panel {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    justify-content: space-between;
+    border-right: 1px solid #e0e0e0;
+}
+
+.logo {
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+}
+
+.logo img {
+    max-width: 80px;
+    margin-bottom: 20px;
+}
+
+.system-title {
+    text-align: center;
+    margin: 50px 0;
+}
+
+.system-title h2 {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.sena-title {
+    text-align: center;
+    color: #39B54A;
+    font-size: 30px;
+    font-weight: bold;
+    margin: 20px 0;
+}
+
+.system-footer {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.system-footer p {
+    font-size: 14px;
+    color: #666;
+}
+
+.right-panel {
+    width: 55%; /* Incrementa el ancho relativo del panel derecho */
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    
+}
+
+.content-wrapper {
+    display: flex;
+    width: 100%;
+    gap: 20px; /* Espacio entre izquierda y formulario */
+}
+
+.izquierda {
+    width: 40%; /* Ancho de la sección izquierda */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.formulario {
+    width: 35%; /* Mantén o ajusta el ancho según sea necesario */
+    display: flex;
+    flex-direction: column; /* Apila los elementos verticalmente */
+    justify-content: center;
+    margin-left: 10%; /* Empuja el formulario hacia la derecha */
+}
+
+.login-title {
+    font-size: 21px; /* Mantén el tamaño del título */
+    font-weight: bold;
+    margin-bottom: 20%; /* Reduce el espacio debajo del título */
+    text-align: center;
+}
+
+.login-form {
+    width: 100%;
+}
+
+.input-group {
+    position: relative;
+    margin-bottom: 20px;
+}
+
+.input-group .icon {
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 30px; /* Incrementa ligeramente el tamaño del ícono */
+    color: #000;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 14px 14px 14px 50px; /* Ajusta el padding para mantener proporción */
+    background-color: #f0f0f0;
+    border: none;
+    border-radius: 5px;
+    font-size: 15px; /* Incrementa ligeramente el tamaño del texto en los inputs */
+}
+
+.forgot-password {
+    display: block;
+    text-align: center;
+    margin-bottom: 20px;
+    color: #000;
+    text-decoration: none;
+    font-size: 14px; /* Incrementa ligeramente el tamaño del texto del enlace */
+}
+
+.login-button {
+    width: 100%;
+    padding: 14px; /* Ajusta el padding del botón */
+    background-color: #39B54A;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 15px; /* Incrementa ligeramente el tamaño del texto del botón */
+    font-weight: bold;
+    cursor: pointer;
+    text-transform: uppercase;
+}
+
+.login-button:hover {
+    background-color: #2e9e3c;
+}

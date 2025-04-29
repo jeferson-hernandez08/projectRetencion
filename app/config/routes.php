@@ -452,5 +452,16 @@ return [         // Prueba cimmit | base contrller , programa formacion controll
         'controller' => 'App\Controllers\reporteController',
         'action' => 'removeCausaFromReporte'
     ],
+
+
+    //Login
+    '/login/init' => [
+        "controller" => 'App\Controllers\LoginController',
+        "action" => 'initLogin'
+    ],
+    '/login/logout' => [
+        "controller" => 'App\Controllers\LoginController',
+        "action" => 'LogoutLogin'
+    ],
     
 ];
