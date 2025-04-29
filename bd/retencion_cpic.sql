@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 29-04-2025 a las 04:35:00
+-- Tiempo de generación: 29-04-2025 a las 18:44:33
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -58,17 +58,16 @@ CREATE TABLE `categoria` (
   `idCategoria` int(11) NOT NULL,
   `nombre` varchar(80) NOT NULL,
   `descripcion` varchar(255) NOT NULL,
-  `direccionamiento` varchar(60) NOT NULL,
-  `fkIdCausa` int(11) NOT NULL
+  `direccionamiento` varchar(60) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Volcado de datos para la tabla `categoria`
 --
 
-INSERT INTO `categoria` (`idCategoria`, `nombre`, `descripcion`, `direccionamiento`, `fkIdCausa`) VALUES
-(1, 'Motivos EconÃ³micos', 'El aprendiz posee problemas econÃ³micos', 'Coordinador de formaciÃ³n', 1),
-(3, 'Motivos Sociales', 'El aprendiz presenta problemas de discriminaciÃ³n en el SENA', 'Coordinador de formaciÃ³n', 3);
+INSERT INTO `categoria` (`idCategoria`, `nombre`, `descripcion`, `direccionamiento`) VALUES
+(1, 'Motivos EconÃ³micos', 'El aprendiz posee problemas econÃ³micos', 'Coordinador de formaciÃ³n'),
+(3, 'Motivos Sociales', 'El aprendiz presenta problemas de discriminaciÃ³n en el SENA', 'Coordinador de formaciÃ³n');
 
 -- --------------------------------------------------------
 
@@ -298,8 +297,7 @@ ALTER TABLE `aprendiz`
 -- Indices de la tabla `categoria`
 --
 ALTER TABLE `categoria`
-  ADD PRIMARY KEY (`idCategoria`),
-  ADD KEY `fkIdCausa` (`fkIdCausa`);
+  ADD PRIMARY KEY (`idCategoria`);
 
 --
 -- Indices de la tabla `causa`
@@ -437,12 +435,6 @@ ALTER TABLE `usuario`
 --
 ALTER TABLE `aprendiz`
   ADD CONSTRAINT `fkIdGrupo` FOREIGN KEY (`fkIdGrupo`) REFERENCES `grupo` (`idGrupo`) ON UPDATE CASCADE;
-
---
--- Filtros para la tabla `categoria`
---
-ALTER TABLE `categoria`
-  ADD CONSTRAINT `fkIdCausa` FOREIGN KEY (`fkIdCausa`) REFERENCES `causa` (`idCausa`) ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `causa_reporte`
