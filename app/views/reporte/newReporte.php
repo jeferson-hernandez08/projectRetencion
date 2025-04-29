@@ -18,39 +18,76 @@
                 <textarea name="txtDescripcion" id="txtDescripcion" class="form-control" required></textarea>
             </div>
 
+            <!-- *********************************************************** -->
             <!-- Campo Reporte -->
-            <div class="form-group">
-                <label for="txtFkIdReporte">Reporte</label>
-                <select name="txtFkIdReporte" id="txtFkIdReporte" class="form-control" required>
-                    <option value="">Selecciona un reporte</option>
+            <label for="txtFkIdReporte">Causas con Reportes</label>
+            <div class="info-causa-reporte">
+                <div class="new-causa-reporte">
+                    <div> 
+                        <div class="form-group">
+                            <label for="txtFkIdReporte">Reporte</label>
+                            <select name="txtFkIdReporte" id="txtFkIdReporte" class="form-control" required>
+                                <option value="">Selecciona un reporte</option>
+                                <?php
+                                    if (isset($reportes) && is_array($reportes)) {
+                                        foreach ($reportes as $reporte) {
+                                            echo "<option value='".$reporte->idReporte."'>Reporte #".$reporte->idReporte." - ".substr($reporte->descripcion, 0, 30)."...</option>";
+                                        }
+                                    } else {
+                                        echo "<option value=''>No hay reportes disponibles</option>";
+                                    }
+                                ?>
+                            </select>
+                        </div>
+            
+                        <!-- Campo Causa -->
+                        <div class="form-group">
+                            <label for="txtFkIdCausa">Causa</label>
+                            <select name="txtFkIdCausa" id="txtFkIdCausa" class="form-control" required>
+                                <option value="">Selecciona una causa</option>
+                                <?php
+                                    if (isset($causas) && is_array($causas)) {
+                                        foreach ($causas as $causa) {
+                                            echo "<option value='".$causa->idCausa."'>".$causa->causa."</option>";
+                                        }
+                                    } else {
+                                        echo "<option value=''>No hay causas disponibles</option>";
+                                    }
+                                ?>
+                            </select>
+                        </div>
+                    </div>
+                  
+                    <div>
+                        <!-- Botón de Guardar -->
+                        <div class="form-group">
+                            <button type="submit">Guardar Relación</button>
+                        </div>
+                    </div> 
+                </div>
+                               
+                <!-- View causa-reporte -->
+                <div class="info-card">
                     <?php
-                        if (isset($reportes) && is_array($reportes)) {
-                            foreach ($reportes as $reporte) {
-                                echo "<option value='".$reporte->idReporte."'>Reporte #".$reporte->idReporte." - ".substr($reporte->descripcion, 0, 30)."...</option>";
-                            }
+                        if (empty($causasReportes)) {
+                            echo '<br>No se encuentran relaciones causa-reporte en la base de datos';
                         } else {
-                            echo "<option value=''>No hay reportes disponibles</option>";
+                            foreach ($causasReportes as $relacion) {
+                                echo
+                                "<div class='record'>
+                                    <span>Reporte #$relacion->fkIdReporte - Causa: $relacion->causa_nombre</span>
+                                    <div class='buttons'> 
+                                        <a href='/causaReporte/delete/$relacion->fkIdReporte/$relacion->fkIdCausa' 
+                                        onclick='return confirm(\"¿Está seguro de eliminar esta relación?\")'>     <button>Eliminar</button> </a> 
+                                    </div>
+                                </div>";
+                            }
                         }
                     ?>
-                </select>
+                </div>
             </div>
+            <!-- ******************************************************************** -->
 
-            <!-- Campo Causa -->
-            <div class="form-group">
-                <label for="txtFkIdCausa">Causa</label>
-                <select name="txtFkIdCausa" id="txtFkIdCausa" class="form-control" required>
-                    <option value="">Selecciona una causa</option>
-                    <?php
-                        if (isset($causas) && is_array($causas)) {
-                            foreach ($causas as $causa) {
-                                echo "<option value='".$causa->idCausa."'>".$causa->causa."</option>";
-                            }
-                        } else {
-                            echo "<option value=''>No hay causas disponibles</option>";
-                        }
-                    ?>
-                </select>
-            </div>
 
             <!-- Campo Direccionamiento (select) -->
             <div class="form-group">

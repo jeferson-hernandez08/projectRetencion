@@ -34,11 +34,17 @@ class ReporteController extends BaseController {
         // Llamamos al modelo de Reporte
         $reporteObj = new ReporteModel();
         $reportes = $reporteObj->getAll();
+
+        // Llamamos al modelo de CausaReporte
+        $causaReporteObj = new CausaReporteModel();
+        $causasReportes = $causaReporteObj->getAllRelaciones();
         
         // Llamamos a la vista
         $data = [
             "title"     => "Reportes",
-            "reportes" => $reportes
+            "reportes" => $reportes,
+
+            "causasReportes" => $causasReportes           // Capturamos los datos de CausaReporteModel para rendenrizar y relacionar datos en newReporte.php
         ];
         $this->render('reporte/viewReporte.php', $data);
     }
@@ -51,12 +57,16 @@ class ReporteController extends BaseController {
         $aprendizObj = new AprendizModel();
         $aprendices = $aprendizObj->getAll();
 
-         // Lógica para capturar causas y reportes disponibles
-         $causaObj = new CausaModel();
-         $causas = $causaObj->getAll();
-         
-         $reporteObj = new ReporteModel();
-         $reportes = $reporteObj->getAll();
+        // Lógica para capturar causas y reportes disponibles
+        $causaObj = new CausaModel();
+        $causas = $causaObj->getAll();
+        
+        $reporteObj = new ReporteModel();
+        $reportes = $reporteObj->getAll();
+
+        // Llamamos al modelo de CausaReporte  | Aqui el view tiene que venir en newReporte.php
+        $causaReporteObj = new CausaReporteModel();
+        $causasReportes = $causaReporteObj->getAllRelaciones();
         
         // Llamamos a la vista
         $data = [
@@ -65,7 +75,9 @@ class ReporteController extends BaseController {
             "aprendices" => $aprendices,
 
             "causas" => $causas,         // Capturamos los datos de causamodel y reportemodel para rendenrizar y relacionar datos en newReporte.php
-            "reportes" => $reportes
+            "reportes" => $reportes,
+
+            "causasReportes" => $causasReportes    // Capturamos los datos de CausaReporteModel para mostrar el viewCausaReporte
         ];
         $this->render('reporte/newReporte.php', $data);
     }
