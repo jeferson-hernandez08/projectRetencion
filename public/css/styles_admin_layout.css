@@ -296,7 +296,7 @@ div.record-one{
     width: 100%;          /* Asegura que los campos ocupen todo el ancho disponible */
    /* max-width: none;      /* Elimina cualquier límite de ancho */
     height: 50px;         /* Aumenta la altura de los campos */
-    padding: 0.8rem;      /* Ajusta el relleno interno */
+    /*padding: 0.8rem;      /* Ajusta el relleno interno */
 }
 
 .form-group input:focus, select:focus, textarea:focus {
@@ -549,14 +549,32 @@ body.dark-mode .menu-toggle:hover {
 .sidebar-hidden {
     width: 70px;
     transition: width 0.7s ease-in-out;
-    .info-text, .logo-text{
-        display: none;
-        border: none;
-    }
 }
 
-.sidebar {
-    transition: width 0.7s ease-in-out;
+.sidebar-hidden .logo {
+    padding: 10px 0;
+    margin: 0;
+}
+
+.sidebar-hidden .logo img {
+    width: 40px; /* Tamaño más pequeño cuando está colapsado */
+    transition: width 0.3s ease;
+}
+
+.sidebar-hidden .logo-text,
+.sidebar-hidden .info-text {
+    display: none;
+}
+
+/* Asegura que la transición sea suave */
+.logo, .logo img {
+    transition: all 0.3s ease;
+}
+
+/* Ajusta el tamaño del contenedor del logo */
+.sidebar-hidden .sidebar-content {
+    padding: 0.5rem;
+    align-items: center;
 }
 
 /* Cambiar el color del footer en modo oscuro */
