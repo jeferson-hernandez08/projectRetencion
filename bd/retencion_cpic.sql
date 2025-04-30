@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 30-04-2025 a las 01:33:41
+-- Tiempo de generación: 30-04-2025 a las 04:23:54
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -67,7 +67,8 @@ CREATE TABLE `categoria` (
 
 INSERT INTO `categoria` (`idCategoria`, `nombre`, `descripcion`, `direccionamiento`) VALUES
 (1, 'Motivos EconÃ³micos', 'El aprendiz posee problemas econÃ³micos', 'Coordinador de formaciÃ³n'),
-(3, 'Motivos Sociales', 'El aprendiz presenta problemas de discriminaciÃ³n en el SENA', 'Coordinador de formaciÃ³n');
+(3, 'Motivos Sociales', 'El aprendiz presenta problemas de discriminaciÃ³n en el SENA', 'Coordinador de formaciÃ³n'),
+(8, 'Motivos Familiares ', 'El aprendiz posee tristeza ', 'Coordinador de formación');
 
 -- --------------------------------------------------------
 
@@ -89,7 +90,8 @@ CREATE TABLE `causa` (
 INSERT INTO `causa` (`idCausa`, `causa`, `variables`, `fkIdCategoria`) VALUES
 (1, 'No cuento con recursos econÃ³micos para estudiar en el SENA', 'Necesidad del auto sostenimiento del aprendiz', 1),
 (2, 'Tuve que dedicarme a trabajar por no contar con apoyo economico para dedicarme a estudiar', 'Necesidad del auto sostenimiento del aprendiz', 1),
-(3, 'Me sentÃ­ discriminado por mis instructores o personal del SENA', 'RelaciÃ³n entre pares', 3);
+(3, 'Me sentÃ­ discriminado por mis instructores o personal del SENA', 'RelaciÃ³n entre pares', 3),
+(11, 'No cuento con recursos económicos para estudiar en el SENA', 'RelaciÃ³n entre pares', 1);
 
 -- --------------------------------------------------------
 
@@ -378,13 +380,13 @@ ALTER TABLE `aprendiz`
 -- AUTO_INCREMENT de la tabla `categoria`
 --
 ALTER TABLE `categoria`
-  MODIFY `idCategoria` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `idCategoria` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT de la tabla `causa`
 --
 ALTER TABLE `causa`
-  MODIFY `idCausa` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `idCausa` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT de la tabla `estrategias`
