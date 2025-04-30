@@ -1,16 +1,13 @@
 <?php
 namespace App\Controllers;
 use App\Models\CategoriaModel;
-use App\Models\CausaModel;        // Importar la clase CausaModel
-use FFI\CType;
 
 require_once 'baseController.php';
 require_once MAIN_APP_ROUTE."../models/CategoriaModel.php";
-require_once MAIN_APP_ROUTE."../models/CausaModel.php";
 
 class CategoriaController extends BaseController {
     
-    public function __construct() {            // Para que nos cargue y nos renderize es con esta funcion.
+    public function __construct() {
         # Se define la plantilla para este controlador
         $this->layout = "admin_layout";
         // Llamamos al constructor del padre
@@ -30,80 +27,68 @@ class CategoriaController extends BaseController {
         
         // Llamamos a la vista
         $data = [
-            "title"     => "Categorías",
+            "title" => "Categorías",
             "categorias" => $categorias
         ];
         $this->render('categoria/viewCategoria.php', $data);
     }
 
     public function newCategoria() {
-        // Lógica para capturar causas
-        $causaObj = new CausaModel();
-        $causas = $causaObj->getAll();
-        
         // Llamamos a la vista
         $data = [
-            "title" => "Categorías",
-            "causas" => $causas
+            "title" => "Nueva Categoría"
         ];
-        $this->render('categoria/newCategoria.php', $data);
+        $this->render('categoria/newCategoria.php', $data);     // Renderiza o muestra el formulario
     }
 
     public function createCategoria() {
-        if (isset($_POST['txtNombre']) && isset($_POST['txtDescripcion']) && isset($_POST['txtDireccionamiento']) && 
-            isset($_POST['txtFkIdCausa'])) {
-            
+        if (isset($_POST['txtNombre']) && isset($_POST['txtDescripcion']) && isset($_POST['txtDireccionamiento'])) {
             $nombre = $_POST['txtNombre'] ?? null;
             $descripcion = $_POST['txtDescripcion'] ?? null;
             $direccionamiento = $_POST['txtDireccionamiento'] ?? null;
-            $fkIdCausa = $_POST['txtFkIdCausa'] ?? null;
-
+            
             // Creamos instancia del Modelo Categoria
             $categoriaObj = new CategoriaModel();
             
             // Se llama al método que guarda en la base de datos
-            $categoriaObj->saveCategoria($nombre, $descripcion, $direccionamiento, $fkIdCausa);
+            $categoriaObj->saveCategoria($nombre, $descripcion, $direccionamiento);
             $this->redirectTo("categoria/view");
         } else {
-            echo "No se capturaron todos los datos de la categoría";
+            echo "No se capturaron todos los datos requeridos de la categoría";
         }
     }
 
     public function viewCategoria($id) {
         $categoriaObj = new CategoriaModel();
         $categoriaInfo = $categoriaObj->getCategoria($id);
+        
         $data = [
-            "title" => "Categorías",
+            "title" => "Detalle Categoría",
             'categoria' => $categoriaInfo
         ];
-        $this->render('categoria/viewOneCategoria.php', $data);
+        $this->render('categoria/viewOneCategoria.php', $data);    // Llamamos a la vista, renderizamos la vista y enviamos los datos. 
     }
 
     public function editCategoria($id) {
         $categoriaObj = new CategoriaModel();
         $categoriaInfo = $categoriaObj->getCategoria($id);
-        $causaObj = new CausaModel();
-        $causasInfo = $causaObj->getAll();
+        
         $data = [
-            "title" => "Categorías",
-            "categoria" => $categoriaInfo,
-            "causas" => $causasInfo
+            "title" => "Editar Categoría",
+            "categoria" => $categoriaInfo
         ];
         $this->render('categoria/editCategoria.php', $data);
     }
 
     public function updateCategoria() {
-        if (isset($_POST['txtId']) && isset($_POST['txtNombre']) && isset($_POST['txtDescripcion']) && 
-            isset($_POST['txtDireccionamiento']) && isset($_POST['txtFkIdCausa'])) {
-            
+        if (isset($_POST['txtId']) && isset($_POST['txtNombre']) && isset($_POST['txtDescripcion']) && isset($_POST['txtDireccionamiento'])) {
             $id = $_POST['txtId'] ?? null;
             $nombre = $_POST['txtNombre'] ?? null;
             $descripcion = $_POST['txtDescripcion'] ?? null;
             $direccionamiento = $_POST['txtDireccionamiento'] ?? null;
-            $fkIdCausa = $_POST['txtFkIdCausa'] ?? null;
-
+            
             $categoriaObj = new CategoriaModel();
-            $respuesta = $categoriaObj->editCategoria($id, $nombre, $descripcion, $direccionamiento, $fkIdCausa);
+            $respuesta = $categoriaObj->editCategoria($id, $nombre, $descripcion, $direccionamiento);
         }
         header("location: /categoria/view");
     }
@@ -112,7 +97,7 @@ class CategoriaController extends BaseController {
         $categoriaObj = new CategoriaModel();
         $categoria = $categoriaObj->getCategoria($id);
         $data = [
-            "title" => "Eliminar Usuario",
+            "title" => "Eliminar Categoría",
             "categoria" => $categoria,
         ];
         $this->render('categoria/deleteCategoria.php', $data);

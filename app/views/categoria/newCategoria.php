@@ -28,23 +28,6 @@
                 </select>
             </div>
 
-            <!-- Campo Causa (select) -->
-            <div class="form-group">
-                <label for="txtFkIdCausa">Causa</label>
-                <select name="txtFkIdCausa" id="txtFkIdCausa" class="form-control" required>
-                    <option value="">Selecciona una causa</option>
-                    <?php
-                        if (isset($causas) && is_array($causas)) {
-                            foreach ($causas as $causa) {
-                                echo "<option value='".$causa->idCausa."'>".$causa->causa."</option>";     // PONER CUIDADO AQUI ES EL ERROR : En tu base de datos, el campo se llama causa (no nombre), por lo que en el select debes usar $causa->causa en lugar de $causa->nombre.
-                            }
-                        } else {
-                            echo "ERROR";
-                        }
-                    ?>
-                </select>
-            </div>
-
             <!-- Botón de Guardar -->
             <div class="form-group">
                 <button type="submit">Guardar</button>

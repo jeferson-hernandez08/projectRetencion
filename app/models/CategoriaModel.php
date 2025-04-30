@@ -11,74 +11,61 @@ class CategoriaModel extends BaseModel {
         ?int $idCategoria = null,
         ?string $nombre = null,
         ?string $descripcion = null,
-        ?string $direccionamiento = null,
-        ?string $fkIdCausa = null
+        ?string $direccionamiento = null
     ) {
         $this->table = "categoria";
         // Se llama al constructor del padre
         parent::__construct();
     }
 
-    public function saveCategoria($nombre, $descripcion, $direccionamiento, $fkIdCausa) {
+    public function saveCategoria($nombre, $descripcion, $direccionamiento) {
         try {
-            $sql = "INSERT INTO $this->table (nombre, descripcion, direccionamiento, fkIdCausa) 
-                    VALUES (:nombre, :descripcion, :direccionamiento, :fkIdCausa)";
+            $sql = "INSERT INTO $this->table (nombre, descripcion, direccionamiento) VALUES (:nombre, :descripcion, :direccionamiento)";
             // 1. Se prepara la consulta
             $statement = $this->dbConnection->prepare($sql);
-            // $nombre = $this->nombre ?? '';         // Estos datos es opcional
-            // $descripcion = $this->descripcion ?? '';
-            // $direccionamiento = $this->direccionamiento ?? '';
-            // $fkIdCausa = $this->fkIdCausa ?? '';
 
             // 2. BindParam para sanitizar los datos de entrada
             $statement->bindParam('nombre', $nombre, PDO::PARAM_STR);
             $statement->bindParam('descripcion', $descripcion, PDO::PARAM_STR);
             $statement->bindParam('direccionamiento', $direccionamiento, PDO::PARAM_STR);
-            $statement->bindParam('fkIdCausa', $fkIdCausa, PDO::PARAM_INT);
 
             // 3. Ejecutar la consulta
             $result = $statement->execute();
             return $result;
         } catch (PDOException $ex) {
-            echo "Error al guardar la categoría> ".$ex->getMessage();
+            echo "Error al guardar la categoría: ".$ex->getMessage();
+            return false;
         }
     }
 
     public function getCategoria($id) {
         try {
-            $sql = "SELECT categoria.*, causa.causa AS nombreCausa 
-                    FROM categoria 
-                    INNER JOIN causa 
-                    ON categoria.fkIdCausa = causa.idCausa 
-                    WHERE categoria.idCategoria=:id";
+            $sql = "SELECT * FROM $this->table WHERE idCategoria=:id";
             $statement = $this->dbConnection->prepare($sql);
             $statement->bindParam(":id", $id, PDO::PARAM_INT);
             $statement->execute();
             $result = $statement->fetchAll(PDO::FETCH_OBJ);
-            return $result[0]; 
+            //print_r($result);
+            return $result[0];
         } catch (PDOException $ex) {
-            echo "Error al obtener la categoría" . $ex->getMessage();
+            echo "Error al obtener la categoría: " . $ex->getMessage();
+            return null;
         }
     }
 
-    public function editCategoria($id, $nombre, $descripcion, $direccionamiento, $fkIdCausa) {
+    public function editCategoria($id, $nombre, $descripcion, $direccionamiento) {
         try {
-            $sql = "UPDATE $this->table SET 
-                        nombre=:nombre, 
-                        descripcion=:descripcion, 
-                        direccionamiento=:direccionamiento, 
-                        fkIdCausa=:fkIdCausa 
-                    WHERE idCategoria=:id";
+            $sql = "UPDATE $this->table SET nombre=:nombre, descripcion=:descripcion, direccionamiento=:direccionamiento WHERE idCategoria=:id";
             $statement = $this->dbConnection->prepare($sql);
             $statement->bindParam(":id", $id, PDO::PARAM_INT);
             $statement->bindParam(":nombre", $nombre, PDO::PARAM_STR);
             $statement->bindParam(":descripcion", $descripcion, PDO::PARAM_STR);
             $statement->bindParam(":direccionamiento", $direccionamiento, PDO::PARAM_STR);
-            $statement->bindParam(":fkIdCausa", $fkIdCausa, PDO::PARAM_INT);
             $result = $statement->execute();
             return $result;
         } catch (PDOException $ex) {
-            echo "No se pudo editar la categoría".$ex->getMessage();
+            echo "No se pudo editar la categoría: ".$ex->getMessage();
+            return false;
         }
     }
 
@@ -90,7 +77,9 @@ class CategoriaModel extends BaseModel {
             $result = $statement->execute();
             return $result;
         } catch (PDOException $ex) {
-            echo "No se pudo eliminar la categoría".$ex->getMessage();
+            echo "No se pudo eliminar la categoría: ".$ex->getMessage();
+            return false;
         }
     }
+
 }

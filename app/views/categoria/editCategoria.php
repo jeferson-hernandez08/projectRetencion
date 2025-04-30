@@ -33,24 +33,6 @@
                 </select>
             </div>
 
-            <!-- Campo Causa (select) -->
-            <div class="form-group">
-                <label for="txtFkIdCausa">Causa</label>
-                <select name="txtFkIdCausa" id="txtFkIdCausa" class="form-control" required>
-                    <option value="">Selecciona una causa</option>
-                    <?php
-                        if (isset($causas) && is_array($causas)) {
-                            foreach ($causas as $causa) {
-                                $selected = ($categoria->fkIdCausa == $causa->idCausa) ? 'selected' : '';
-                                echo "<option value='".$causa->idCausa."' $selected>".$causa->causa."</option>";
-                            }
-                        } else {
-                            echo "ERROR";
-                        }
-                    ?>
-                </select>
-            </div>
-
             <!-- Botón de Guardar -->
             <div class="form-group">
                 <button type="submit">Editar</button>

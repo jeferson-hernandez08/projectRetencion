@@ -14,7 +14,6 @@
                         <span>Nombre: $categoria->nombre</span>
                         <span>Descripción: $categoria->descripcion</span>
                         <span>Direccionamiento: $categoria->direccionamiento</span>
-                        <span>Causa: $categoria->nombreCausa</span>
                       </div>";
             }
         ?>

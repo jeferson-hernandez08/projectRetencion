@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 29-04-2025 a las 18:44:33
+-- Tiempo de generación: 30-04-2025 a las 01:33:41
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -78,17 +78,18 @@ INSERT INTO `categoria` (`idCategoria`, `nombre`, `descripcion`, `direccionamien
 CREATE TABLE `causa` (
   `idCausa` int(11) NOT NULL,
   `causa` varchar(100) NOT NULL,
-  `variables` varchar(100) NOT NULL
+  `variables` varchar(100) NOT NULL,
+  `fkIdCategoria` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Volcado de datos para la tabla `causa`
 --
 
-INSERT INTO `causa` (`idCausa`, `causa`, `variables`) VALUES
-(1, 'No cuento con recursos econÃ³micos para estudiar en el SENA', 'Necesidad del auto sostenimiento del aprendiz'),
-(2, 'Tuve que dedicarme a trabajar por no contar con apoyo economico para dedicarme a estudiar', 'Necesidad del auto sostenimiento del aprendiz'),
-(3, 'Me sentÃ­ discriminado por mis instructores o personal del SENA', 'RelaciÃ³n entre pares');
+INSERT INTO `causa` (`idCausa`, `causa`, `variables`, `fkIdCategoria`) VALUES
+(1, 'No cuento con recursos econÃ³micos para estudiar en el SENA', 'Necesidad del auto sostenimiento del aprendiz', 1),
+(2, 'Tuve que dedicarme a trabajar por no contar con apoyo economico para dedicarme a estudiar', 'Necesidad del auto sostenimiento del aprendiz', 1),
+(3, 'Me sentÃ­ discriminado por mis instructores o personal del SENA', 'RelaciÃ³n entre pares', 3);
 
 -- --------------------------------------------------------
 
@@ -303,7 +304,8 @@ ALTER TABLE `categoria`
 -- Indices de la tabla `causa`
 --
 ALTER TABLE `causa`
-  ADD PRIMARY KEY (`idCausa`);
+  ADD PRIMARY KEY (`idCausa`),
+  ADD KEY `fk_causa_categoria` (`fkIdCategoria`);
 
 --
 -- Indices de la tabla `causa_reporte`
@@ -435,6 +437,12 @@ ALTER TABLE `usuario`
 --
 ALTER TABLE `aprendiz`
   ADD CONSTRAINT `fkIdGrupo` FOREIGN KEY (`fkIdGrupo`) REFERENCES `grupo` (`idGrupo`) ON UPDATE CASCADE;
+
+--
+-- Filtros para la tabla `causa`
+--
+ALTER TABLE `causa`
+  ADD CONSTRAINT `fk_causa_categoria` FOREIGN KEY (`fkIdCategoria`) REFERENCES `categoria` (`idCategoria`) ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `causa_reporte`
