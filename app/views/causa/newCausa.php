@@ -6,16 +6,33 @@
     </div>
     <div class="info">
         <form action="/causa/create" method="post">
-            <!-- Campo Nombre de la Causa -->
+            <!-- Campo Causa -->
             <div class="form-group">
-                <label for="txtCausa">Nombre de la Causa</label>
+                <label for="txtCausa">Causa</label>
                 <input type="text" name="txtCausa" id="txtCausa" class="form-control" required>
             </div>
             
             <!-- Campo Variables -->
             <div class="form-group">
                 <label for="txtVariables">Variables</label>
-                <textarea name="txtVariables" id="txtVariables" class="form-control" required></textarea>
+                <input type="text" name="txtVariables" id="txtVariables" class="form-control" required>
+            </div>
+
+            <!-- Campo Categoría -->
+            <div class="form-group">
+                <label for="txtFkIdCategoria">Categoría</label>
+                <select name="txtFkIdCategoria" id="txtFkIdCategoria" class="form-control" required>
+                    <option value="">Selecciona una categoría</option>
+                    <?php
+                        if (isset($categorias) && is_array($categorias)) {
+                            foreach ($categorias as $key => $value) {
+                                echo "<option value='".$value->idCategoria."'>".$value->nombre."</option>";
+                            }
+                        } else {
+                            echo "ERROR";
+                        }
+                    ?>
+                </select>
             </div>
 
             <!-- Botón de Guardar -->

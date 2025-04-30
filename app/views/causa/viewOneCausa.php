@@ -14,6 +14,7 @@
                         <span>ID: $causa->idCausa</span>
                         <span>Causa: $causa->causa</span>
                         <span>Variables: $causa->variables</span>
+                        <span>Categoría: $causa->nombreCategoria</span>
                       </div>";
             }
         ?>
