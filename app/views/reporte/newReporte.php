@@ -20,12 +20,12 @@
 
             <!-- *********************************************************** Commit-->
             <!-- Campo Reporte -->
-            <label for="txtFkIdReporte">Causas con Reportes</label>
+            <label for="txtFkIdReporte">Causas</label>
             <div class="info-causa-reporte">
                 <div class="new-causa-reporte">
                     <div> 
                         <div class="form-group">
-                            <label for="txtFkIdReporte">Reporte</label>
+                            <label for="txtFkIdReporte">Categoria</label>
                             <select name="txtFkIdReporte" id="txtFkIdReporte" class="form-control" required>
                                 <option value="">Selecciona un reporte</option>
                                 <?php
