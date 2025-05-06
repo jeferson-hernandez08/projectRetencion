@@ -18,7 +18,7 @@
                 <textarea name="txtDescripcion" id="txtDescripcion" class="form-control" required></textarea>
             </div>
 
-            <!-- *********************************************************** Commit-->
+            <!-- *********************************************************** Commit -- commit-->
             <!-- Campo Reporte -->
             <label for="txtFkIdReporte">Causas</label>
             <div class="info-causa-reporte">
