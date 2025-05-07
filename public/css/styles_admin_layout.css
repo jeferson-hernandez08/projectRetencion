@@ -281,12 +281,12 @@ div.record-one{
 
 .form-group {
     /* border: red solid 1px; */
-    margin-top: 10px;
+    /* margin-top: 10px; */       /* este presentaba problema de desbordamiento  */
     display: flex;
     justify-content: center;
     align-items: start;
     flex-direction: column;
-    width: 100%;              /* Asegura que los formularios ocupen todo el ancho del contenedor */
+    width: 90%;              /* Asegura que los formularios ocupen todo el ancho del contenedor */
 }
 
 .form-group input, select, textarea {
@@ -903,6 +903,7 @@ body.dark-mode select:focus {
 /* Estilo para el botón */
 .new-causa-reporte button[type="submit"] {
     background-color: #10b981;
+    margin-bottom: 16px;
     color: white;
     border: none;
     padding: 12px 24px;
