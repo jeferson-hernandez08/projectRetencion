@@ -59,32 +59,20 @@
                     </div>
                   
                     <div>
-                        <!-- Botón de Guardar -->
+                        <!-- Botón para agregar relación (cambiado a button type="button") -->
                         <div class="form-group">
-                            <button type="submit">Guardar Relación</button>
+                            <button type="button" id="btnAgregarRelacion">Guardar Relación</button>
                         </div>
                     </div> 
                 </div>
                                
-                <!-- View causa-reporte -->
-                <div class="info-card">
-                    <?php
-                        if (empty($causasReportes)) {
-                            echo '<br>No se encuentran relaciones causa-reporte en la base de datos';
-                        } else {
-                            foreach ($causasReportes as $relacion) {
-                                echo
-                                "<div class='record'>
-                                    <span>Reporte #$relacion->fkIdReporte - Causa: $relacion->causa_nombre</span>
-                                    <div class='buttons'> 
-                                        <a href='/causaReporte/delete/$relacion->fkIdReporte/$relacion->fkIdCausa' 
-                                        onclick='return confirm(\"¿Está seguro de eliminar esta relación?\")'>     <button>Eliminar</button> </a> 
-                                    </div>
-                                </div>";
-                            }
-                        }
-                    ?>
+                <!-- Contenedor para las cards de relaciones -->
+                <div class="info-card" id="relacionesContainer">
+                    <!-- Aquí se agregarán las cards dinámicamente -->
                 </div>
+
+                <!-- Input oculto para almacenar las relaciones -->
+                <input type="hidden" name="relacionesCausaReporte" id="relacionesCausaReporte">
             </div>
             <!-- ******************************************************************** -->
 
@@ -152,3 +140,158 @@
         </form>
     </div>
 </div>
+
+
+<!-- SE ELIMINA DESDE AQUÍ PARA QUE RENDERIZE CAUSA, REVISAR JS -->
+<!-- JavaScript para manejar las relaciones -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Variables globales
+    const relaciones = [];
+    
+    // Filtrar causas según categoría seleccionada
+    document.getElementById('txtFkIdCategoria').addEventListener('change', function() {
+        const categoriaId = this.value;
+        const causasSelect = document.getElementById('txtFkIdCausa');
+        const causasOptions = causasSelect.querySelectorAll('option');
+        
+        // Mostrar todas las opciones primero
+        causasOptions.forEach(option => {
+            option.style.display = '';
+        });
+        
+        if (categoriaId) {
+            // Ocultar causas que no pertenecen a la categoría seleccionada
+            causasOptions.forEach(option => {
+                if (option.value !== '' && option.dataset.categoria !== categoriaId) {
+                    option.style.display = 'none';
+                }
+            });
+            
+            // Seleccionar la primera opción visible
+            const primeraOpcionVisible = Array.from(causasOptions).find(option => 
+                option.style.display !== 'none' && option.value !== ''
+            );
+            if (primeraOpcionVisible) {
+                causasSelect.value = primeraOpcionVisible.value;
+            }
+        }
+    });
+    
+    // Agregar relación
+    document.getElementById('btnAgregarRelacion').addEventListener('click', function() {
+        const categoriaId = document.getElementById('txtFkIdCategoria').value;
+        const categoriaNombre = document.getElementById('txtFkIdCategoria').options[document.getElementById('txtFkIdCategoria').selectedIndex].text;
+        const causaId = document.getElementById('txtFkIdCausa').value;
+        const causaNombre = document.getElementById('txtFkIdCausa').options[document.getElementById('txtFkIdCausa').selectedIndex].text;
+        
+        if (!categoriaId || !causaId) {
+            alert('Por favor selecciona una categoría y una causa');
+            return;
+        }
+        
+        // Verificar si la relación ya existe
+        const relacionExistente = relaciones.find(r => r.categoriaId === categoriaId && r.causaId === causaId);
+        if (relacionExistente) {
+            alert('Esta relación ya ha sido agregada');
+            return;
+        }
+        
+        // Agregar a la lista de relaciones
+        const relacion = {
+            categoriaId,
+            categoriaNombre,
+            causaId,
+            causaNombre
+        };
+        relaciones.push(relacion);
+        
+        // Actualizar la vista
+        actualizarRelacionesView();
+        
+        // Limpiar selección
+        document.getElementById('txtFkIdCategoria').value = '';
+        document.getElementById('txtFkIdCausa').value = '';
+    });
+    
+    // Actualizar la vista de relaciones
+    function actualizarRelacionesView() {
+        const container = document.getElementById('relacionesContainer');
+        container.innerHTML = '';
+        
+        if (relaciones.length === 0) {
+            container.innerHTML = '<p>No hay relaciones agregadas</p>';
+            return;
+        }
+        
+        relaciones.forEach((relacion, index) => {
+            const card = document.createElement('div');
+            card.className = 'causa-card';
+            card.innerHTML = `
+                <div class="card-content">
+                    <h4>${relacion.categoriaNombre}</h4>
+                    <p>${relacion.causaNombre}</p>
+                </div>
+                <button type="button" class="btn-eliminar" data-index="${index}">
+                    <img src="/img/delete.svg" alt="Eliminar">
+                </button>
+            `;
+            container.appendChild(card);
+        });
+        
+        // Actualizar el input oculto con las relaciones
+        document.getElementById('relacionesCausaReporte').value = JSON.stringify(relaciones);
+    }
+    
+    // Eliminar relación
+    document.getElementById('relacionesContainer').addEventListener('click', function(e) {
+        if (e.target.closest('.btn-eliminar')) {
+            const index = e.target.closest('.btn-eliminar').dataset.index;
+            relaciones.splice(index, 1);
+            actualizarRelacionesView();
+        }
+    });
+    
+    // Validar antes de enviar el formulario
+    document.getElementById('reporteForm').addEventListener('submit', function(e) {
+        if (relaciones.length === 0) {
+            e.preventDefault();
+            alert('Debes agregar al menos una relación categoría-causa');
+        }
+    });
+});
+</script>
+
+<!-- Estilos para las cards -->
+<style>
+.causa-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+}
+
+.causa-card .card-content {
+    flex: 1;
+}
+
+.causa-card .btn-eliminar {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 5px;
+}
+
+.causa-card .btn-eliminar img {
+    width: 20px;
+    height: 20px;
+}
+
+.info-card {
+    margin-top: 20px;
+}
+</style>

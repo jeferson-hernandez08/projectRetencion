@@ -43,8 +43,9 @@ class ReporteModel extends BaseModel {
             $statement->bindParam('fkIdUsuario', $fkIdUsuario, PDO::PARAM_INT);
 
             // 3. Ejecutar la consulta
-            $result = $statement->execute();
-            return $result;
+            // $result = $statement->execute();
+            // return $result;
+            return $statement->execute();    // SE CAMBIA ESTO
         } catch (PDOException $ex) {
             echo "Error al guardar el reporte> ".$ex->getMessage();
         }
@@ -103,6 +104,27 @@ class ReporteModel extends BaseModel {
             return $result;
         } catch (PDOException $ex) {
             echo "No se pudo eliminar el reporte".$ex->getMessage();
+        }
+    }
+
+    // SE CAMBIA ESTO
+    public function getLastInsertId() {
+        return $this->dbConnection->lastInsertId();
+    }
+
+    public function guardarRelacionesCausa($idReporte, $causas) {
+        try {
+            foreach ($causas as $causa) {
+                $sql = "INSERT INTO causa_reporte (fkIdReporte, fkIdCausa) VALUES (:idReporte, :idCausa)";
+                $statement = $this->dbConnection->prepare($sql);
+                $statement->bindParam(':idReporte', $idReporte, PDO::PARAM_INT);
+                $statement->bindParam(':idCausa', $causa['causaId'], PDO::PARAM_INT);
+                $statement->execute();
+            }
+            return true;
+        } catch (PDOException $ex) {
+            error_log("Error al guardar relaciones: " . $ex->getMessage());
+            return false;
         }
     }
 

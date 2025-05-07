@@ -87,7 +87,9 @@ class ReporteController extends BaseController {
 
     public function createReporte() {
         if (isset($_POST['txtFechaCreacion']) && isset($_POST['txtDescripcion']) && isset($_POST['txtDireccionamiento']) && 
-            isset($_POST['txtEstado']) && isset($_POST['txtFkIdAprendiz']) && isset($_POST['txtFkIdUsuario'])) {
+            isset($_POST['txtEstado']) && isset($_POST['txtFkIdAprendiz']) && isset($_POST['txtFkIdUsuario']) &&
+            isset($_POST['relacionesCausaReporte'])) { // Capturamos el valor de la relación causa_reporte
+                // SE CAMBIA ESTO
             
             $fechaCreacion = date('Y-m-d H:i:s', strtotime($_POST['txtFechaCreacion']));      // Convertir el valor recibido al formato DATETIME de MySQL (Y-m-d H:i:s) y usé strtotime() para parsear correctamente la fecha+hora 
             $descripcion = $_POST['txtDescripcion'] ?? null;                                  // Convierte el valor recibido del formulario (datetime-local) al formato DATETIME de MySQL.
@@ -96,12 +98,38 @@ class ReporteController extends BaseController {
             $fkIdAprendiz = $_POST['txtFkIdAprendiz'] ?? null;
             $fkIdUsuario = $_POST['txtFkIdUsuario'] ?? null;
 
+            // SE CAMBIA ESTO
+            $relacionesCausaReporte = json_decode($_POST['relacionesCausaReporte'], true); // Decodificamos el JSON recibido del formulario
+
             // Creamos instancia del Modelo Reporte
             $reporteObj = new ReporteModel();
             
             // Se llama al método que guarda en la base de datos
-            $reporteObj->saveReporte($fechaCreacion, $descripcion, $direccionamiento, $estado, $fkIdAprendiz, $fkIdUsuario);
-            $this->redirectTo("reporte/view");
+            $result = $reporteObj->saveReporte($fechaCreacion, $descripcion, $direccionamiento, $estado, $fkIdAprendiz, $fkIdUsuario);
+            
+            // SE CAMBIA ESTO
+            if ($result) {
+                // Obtenemos el ID del reporte recién creado
+                $idReporte = $reporteObj->getLastInsertId();     // Método para obtener el último ID insertado en la tabla reporte  
+                
+                // Guardar las relaciones causa_reporte
+                if (is_array($relacionesCausaReporte) && count($relacionesCausaReporte) > 0) {
+                    foreach ($relacionesCausaReporte as $relacion) {
+                        $sql = "INSERT INTO causa_reporte (fkIdReporte, fkIdCausa) VALUES (:idReporte, :idCausa)";
+                        $statement = $reporteObj->dbConnection->prepare($sql);
+                        $statement->bindParam(':idReporte', $idReporte, PDO::PARAM_INT);
+                        $statement->bindParam(':idCausa', $relacion['causaId'], PDO::PARAM_INT);
+                        $statement->execute();
+                    }
+                }
+                
+                $this->redirectTo("reporte/view");
+            } else {
+                echo "Error al guardar el reporte";
+            }
+
+
+            //$this->redirectTo("reporte/view");  // SE CAMBIA ESTO
         } else {
             echo "No se capturaron todos los datos del reporte";
         }

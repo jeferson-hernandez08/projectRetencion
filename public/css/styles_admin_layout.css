@@ -901,7 +901,7 @@ body.dark-mode select:focus {
 }
 
 /* Estilo para el botón */
-.new-causa-reporte button[type="submit"] {
+.new-causa-reporte button[type="button"] {
     background-color: #10b981;
     margin-bottom: 16px;
     color: white;
@@ -921,18 +921,18 @@ body.dark-mode select:focus {
     box-shadow: 0 2px 5px rgba(16, 185, 129, 0.2);
 }
 
-.new-causa-reporte button[type="submit"]:hover {
+.new-causa-reporte button[type="button"]:hover {
     background-color: #0d9f6e;
     transform: translateY(-1px);
     box-shadow: 0 4px 8px rgba(16, 185, 129, 0.3);
 }
 
-.new-causa-reporte button[type="submit"]:active {
+.new-causa-reporte button[type="button"]:active {
     transform: translateY(0);
 }
 
 /* Icono para el botón (opcional) */
-.new-causa-reporte button[type="submit"]::before {
+.new-causa-reporte button[type="button"]::before {
     content: "✓";
     font-weight: bold;
 }
