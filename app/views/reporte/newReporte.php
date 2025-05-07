@@ -19,22 +19,22 @@
             </div>
 
             <!-- *********************************************************** Commit -->
-            <!-- Campo Reporte -->
             <label for="txtFkIdReporte">Causas</label>
             <div class="info-causa-reporte">
                 <div class="new-causa-reporte">
                     <div> 
+                        <!-- Campo Categoria -->
                         <div class="form-group">
-                            <label for="txtFkIdReporte">Categoria</label>
-                            <select name="txtFkIdReporte" id="txtFkIdReporte" class="form-control" required>
-                                <option value="">Selecciona un reporte</option>
+                            <label for="txtFkIdCategoria">Categoria</label>
+                            <select name="txtFkIdCategoria" id="txtFkIdCategoria" class="form-control" required>
+                                <option value="">Selecciona una categoria</option>
                                 <?php
-                                    if (isset($reportes) && is_array($reportes)) {
-                                        foreach ($reportes as $reporte) {
-                                            echo "<option value='".$reporte->idReporte."'>Reporte #".$reporte->idReporte." - ".substr($reporte->descripcion, 0, 30)."...</option>";
+                                    if (isset($categorias) && is_array($categorias)) {
+                                        foreach ($categorias as $categoria) {
+                                            echo "<option value='".$categoria->idCategoria."'>".$categoria->categoria."</option>";
                                         }
                                     } else {
-                                        echo "<option value=''>No hay reportes disponibles</option>";
+                                        echo "<option value=''>No hay categorias disponibles</option>";
                                     }
                                 ?>
                             </select>

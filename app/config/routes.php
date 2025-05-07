@@ -433,27 +433,6 @@ return [         // Prueba cimmit | base contrller , programa formacion controll
         "action" => "view"
     ],
 
-
-    // ****************************BORRAR**********************************************
-    // Nueva ruta para el formulario integrado
-    '/reporte/newWithCauses' => [
-        'controller' => 'App\Controllers\reporteController',
-        'action' => 'newReporteWithCauses'
-    ],
-
-    // Ruta para procesar el formulario integrado
-    '/reporte/createWithCauses' => [
-        'controller' => 'App\Controllers\reporteController',
-        'action' => 'createReporteWithCauses'
-    ],
-
-    // Ruta para eliminar causas de un reporte (AJAX)
-    '/reporte/removeCausa' => [
-        'controller' => 'App\Controllers\reporteController',
-        'action' => 'removeCausaFromReporte'
-    ],
-
-
     //Login
     '/login/init' => [
         "controller" => 'App\Controllers\LoginController',

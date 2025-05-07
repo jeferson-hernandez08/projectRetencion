@@ -4,15 +4,15 @@ use App\Models\ReporteModel;
 use App\Models\UsuarioModel;        // Importar la clase UsuarioModel
 use App\Models\AprendizModel;       // Importar la clase AprendizModel
 
-use App\Models\CausaReporteModel;
-use App\Models\CausaModel;
+use App\Models\CategoriaModel;       // Importar la clase CategoriaModel  | Capturas datos para tabla causa_reporte
+use App\Models\CausaModel;           // Importar la clase CausaModel
 
 require_once 'baseController.php';
 require_once MAIN_APP_ROUTE."../models/ReporteModel.php";
 require_once MAIN_APP_ROUTE."../models/UsuarioModel.php";
 require_once MAIN_APP_ROUTE."../models/AprendizModel.php";
 
-require_once MAIN_APP_ROUTE."../models/CausaReporteModel.php";
+require_once MAIN_APP_ROUTE."../models/CategoriaModel.php";    // Impoprtar para relacion tabla causa_reporte
 require_once MAIN_APP_ROUTE."../models/CausaModel.php";
 
 class ReporteController extends BaseController {
@@ -36,15 +36,15 @@ class ReporteController extends BaseController {
         $reportes = $reporteObj->getAll();
 
         // Llamamos al modelo de CausaReporte
-        $causaReporteObj = new CausaReporteModel();
-        $causasReportes = $causaReporteObj->getAllRelaciones();
+        //$causaReporteObj = new CategoriaModel();
+        //$causasReportes = $causaReporteObj->getAll();    // Comentado no sirve
         
         // Llamamos a la vista
         $data = [
             "title"     => "Reportes",
             "reportes" => $reportes,
 
-            "causasReportes" => $causasReportes           // Capturamos los datos de CausaReporteModel para rendenrizar y relacionar datos en newReporte.php
+            //"causasReportes" => $causasReportes           // Capturamos los datos de CausaReporteModel para rendenrizar y relacionar datos en newReporte.php
         ];
         $this->render('reporte/viewReporte.php', $data);
     }
@@ -57,16 +57,19 @@ class ReporteController extends BaseController {
         $aprendizObj = new AprendizModel();
         $aprendices = $aprendizObj->getAll();
 
-        // Lógica para capturar causas y reportes disponibles
+        // Lógica para capturar categorias y causas disponibles | Para relacioanr tabla causa_reporte desde newReporte.php
+        $categoriaObj = new CategoriaModel();
+        $categorias = $categoriaObj->getAll();
+
         $causaObj = new CausaModel();
         $causas = $causaObj->getAll();
         
-        $reporteObj = new ReporteModel();
-        $reportes = $reporteObj->getAll();
+        // $reporteObj = new ReporteModel();
+        // $reportes = $reporteObj->getAll();
 
         // Llamamos al modelo de CausaReporte  | Aqui el view tiene que venir en newReporte.php
-        $causaReporteObj = new CausaReporteModel();
-        $causasReportes = $causaReporteObj->getAllRelaciones();
+        //$causaReporteObj = new CausaReporteModel();
+        //$causasReportes = $causaReporteObj->getAllRelaciones();
         
         // Llamamos a la vista
         $data = [
@@ -74,10 +77,10 @@ class ReporteController extends BaseController {
             "usuarios" => $usuarios,
             "aprendices" => $aprendices,
 
-            "causas" => $causas,         // Capturamos los datos de causamodel y reportemodel para rendenrizar y relacionar datos en newReporte.php
-            "reportes" => $reportes,
+            "categorias" => $categorias,     // Capturamos los datos de CategoriaModel y CausaModel para rendenrizar y relacionar datos en newReporte.php
+            "causas" => $causas             // QUEDE AQUI ******   
 
-            "causasReportes" => $causasReportes    // Capturamos los datos de CausaReporteModel para mostrar el viewCausaReporte
+            //"causasReportes" => $causasReportes    // Capturamos los datos de CausaReporteModel para mostrar el viewCausaReporte
         ];
         $this->render('reporte/newReporte.php', $data);
     }
