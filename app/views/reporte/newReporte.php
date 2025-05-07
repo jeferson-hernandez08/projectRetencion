@@ -31,7 +31,7 @@
                                 <?php
                                     if (isset($categorias) && is_array($categorias)) {
                                         foreach ($categorias as $categoria) {
-                                            echo "<option value='".$categoria->idCategoria."'>".$categoria->categoria."</option>";
+                                            echo "<option value='".$categoria->idCategoria."'>".$categoria->nombre."</option>";  // Aqui era el ERROR nombre de la colomna nombre
                                         }
                                     } else {
                                         echo "<option value=''>No hay categorias disponibles</option>";
