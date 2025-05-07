@@ -5,7 +5,11 @@
             <h1 class="titulo-principal">¡Bienvenido!</h1>
             <h2 class="subtitulo">QUERIDO USUARIO</h2>
             <p class="parrafo">
-                ¡Bienvenido a nuestra página de asistencias! Aquí encontrarás un espacio dedicado a brindarte el apoyo y la información que necesitas para resolver tus dudas y mejorar tu experiencia. Nuestro equipo está comprometido a ofrecerle respuestas rápidas y efectivas, asegurando que cada consulta sea atendida con la mayor atención y profesionalismo. No dudes en explorar nuestros recursos y ponerte en contacto con nosotros para cualquier pregunta o inquietud. ¡Estamos aquí para ayudarte!
+                ¡Bienvenido al Sistema de Retención Estudiantil SENA! Este espacio está diseñado para acompañarte en tu proceso de formación, brindándote el apoyo necesario para superar cualquier desafío que pueda afectar tu permanencia en la institución. Aquí, podrás generar reportes sobre situaciones académicas, personales o psicosociales, los cuales serán atendidos por un equipo de profesionales (psicólogos, trabajadores sociales, orientadores, etc.) comprometidos con tu bienestar y éxito.
+            </p>
+            <p class="parrafo">
+                Nuestro objetivo es prevenir la deserción, ofreciéndote herramientas, seguimiento y soluciones oportunas para que continúes tu camino formativo con confianza. ¡Tu voz es importante para nosotros! Explora este recurso, comunica tus necesidades y permite que te guiemos. ¡Juntos hacemos posible tu permanencia!
+                El SENA cree en ti. ¡Sé parte de quienes transforman su futuro!
             </p>
         </div>
 
