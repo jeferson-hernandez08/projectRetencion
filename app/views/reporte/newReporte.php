@@ -49,7 +49,7 @@
                                     if (isset($causas) && is_array($causas)) {
                                         foreach ($causas as $causa) {
                                             //echo "<option value='".$causa->idCausa."'>".$causa->causa."</option>";
-                                            echo "<option value='".$causa->idCausa."' data-categoria='".$causa->fkIdCategoria."'>".$causa->causa."</option>";
+                                            echo "<option value='".$causa->idCausa."' data-categoria='".$causa->fkIdCategoria."'>".$causa->causa."</option>";    // Se agrega data-categoria con el ID de su categoría correspondiente, esto es para el filtrado.
                                         }
                                     } else {
                                         echo "<option value=''>No hay causas disponibles</option>";
@@ -146,121 +146,129 @@
 <!-- SE ELIMINA DESDE AQUÍ PARA QUE RENDERIZE CAUSA, REVISAR JS -->
 <!-- JavaScript para manejar las relaciones -->
 <script>
-document.addEventListener('DOMContentLoaded', function() {
-    // Variables globales
-    const relaciones = [];
-    
-    // Filtrar causas según categoría seleccionada
-    document.getElementById('txtFkIdCategoria').addEventListener('change', function() {
-        const categoriaId = this.value;
-        const causasSelect = document.getElementById('txtFkIdCausa');
-        const causasOptions = causasSelect.querySelectorAll('option');
+    document.addEventListener('DOMContentLoaded', function() {
+
+        // Variables globales
+        const relaciones = [];
+        const form = document.querySelector('form');    // Se arreglo esta línea
         
-        // Mostrar todas las opciones primero
-        causasOptions.forEach(option => {
-            option.style.display = '';
-        });
-        
-        if (categoriaId) {
-            // Ocultar causas que no pertenecen a la categoría seleccionada
+        // Filtrar causas según categoría seleccionada
+        document.getElementById('txtFkIdCategoria').addEventListener('change', function() {
+            const categoriaId = this.value;
+            const causasSelect = document.getElementById('txtFkIdCausa');
+            const causasOptions = causasSelect.querySelectorAll('option');
+            
+            // Mostrar todas las opciones primero
             causasOptions.forEach(option => {
-                if (option.value !== '' && option.dataset.categoria !== categoriaId) {
-                    option.style.display = 'none';
-                }
+                option.style.display = '';
+                 
+                 // *** DUDA ***
+                 // Ocultar las que no coinciden excepto la primera opción
+                // if (option.value !== '' && categoriaId !== '') {
+                //     option.style.display = option.dataset.categoria === categoriaId ? '' : 'none';
+                // }
             });
             
-            // Seleccionar la primera opción visible
-            const primeraOpcionVisible = Array.from(causasOptions).find(option => 
-                option.style.display !== 'none' && option.value !== ''
-            );
-            if (primeraOpcionVisible) {
-                causasSelect.value = primeraOpcionVisible.value;
+            if (categoriaId) {
+                // Ocultar causas que no pertenecen a la categoría seleccionada
+                causasOptions.forEach(option => {
+                    if (option.value !== '' && option.dataset.categoria !== categoriaId) {
+                        option.style.display = 'none';
+                    }
+                });
+                
+                // Seleccionar la primera opción visible
+                const primeraOpcionVisible = Array.from(causasOptions).find(option => 
+                    option.style.display !== 'none' && option.value !== ''
+                );
+                if (primeraOpcionVisible) {
+                    causasSelect.value = primeraOpcionVisible.value;
+                }
             }
-        }
-    });
-    
-    // Agregar relación
-    document.getElementById('btnAgregarRelacion').addEventListener('click', function() {
-        const categoriaId = document.getElementById('txtFkIdCategoria').value;
-        const categoriaNombre = document.getElementById('txtFkIdCategoria').options[document.getElementById('txtFkIdCategoria').selectedIndex].text;
-        const causaId = document.getElementById('txtFkIdCausa').value;
-        const causaNombre = document.getElementById('txtFkIdCausa').options[document.getElementById('txtFkIdCausa').selectedIndex].text;
-        
-        if (!categoriaId || !causaId) {
-            alert('Por favor selecciona una categoría y una causa');
-            return;
-        }
-        
-        // Verificar si la relación ya existe
-        const relacionExistente = relaciones.find(r => r.categoriaId === categoriaId && r.causaId === causaId);
-        if (relacionExistente) {
-            alert('Esta relación ya ha sido agregada');
-            return;
-        }
-        
-        // Agregar a la lista de relaciones
-        const relacion = {
-            categoriaId,
-            categoriaNombre,
-            causaId,
-            causaNombre
-        };
-        relaciones.push(relacion);
-        
-        // Actualizar la vista
-        actualizarRelacionesView();
-        
-        // Limpiar selección
-        document.getElementById('txtFkIdCategoria').value = '';
-        document.getElementById('txtFkIdCausa').value = '';
-    });
-    
-    // Actualizar la vista de relaciones
-    function actualizarRelacionesView() {
-        const container = document.getElementById('relacionesContainer');
-        container.innerHTML = '';
-        
-        if (relaciones.length === 0) {
-            container.innerHTML = '<p>No hay relaciones agregadas</p>';
-            return;
-        }
-        
-        relaciones.forEach((relacion, index) => {
-            const card = document.createElement('div');
-            card.className = 'causa-card';
-            card.innerHTML = `
-                <div class="card-content">
-                    <h4>${relacion.categoriaNombre}</h4>
-                    <p>${relacion.causaNombre}</p>
-                </div>
-                <button type="button" class="btn-eliminar" data-index="${index}">
-                    <img src="/img/delete.svg" alt="Eliminar">
-                </button>
-            `;
-            container.appendChild(card);
         });
         
-        // Actualizar el input oculto con las relaciones
-        document.getElementById('relacionesCausaReporte').value = JSON.stringify(relaciones);
-    }
-    
-    // Eliminar relación
-    document.getElementById('relacionesContainer').addEventListener('click', function(e) {
-        if (e.target.closest('.btn-eliminar')) {
-            const index = e.target.closest('.btn-eliminar').dataset.index;
-            relaciones.splice(index, 1);
+        // Agregar relación
+        document.getElementById('btnAgregarRelacion').addEventListener('click', function() {
+            const categoriaId = document.getElementById('txtFkIdCategoria').value;
+            const categoriaNombre = document.getElementById('txtFkIdCategoria').options[document.getElementById('txtFkIdCategoria').selectedIndex].text;
+            const causaId = document.getElementById('txtFkIdCausa').value;
+            const causaNombre = document.getElementById('txtFkIdCausa').options[document.getElementById('txtFkIdCausa').selectedIndex].text;
+            
+            if (!categoriaId || !causaId) {
+                alert('Por favor selecciona una categoría y una causa');
+                return;
+            }
+            
+            // Verificar si la relación ya existe
+            const relacionExistente = relaciones.find(r => r.categoriaId === categoriaId && r.causaId === causaId);
+            if (relacionExistente) {
+                alert('Esta relación ya ha sido agregada');
+                return;
+            }
+            
+            // Agregar a la lista de relaciones
+            const relacion = {
+                categoriaId,
+                categoriaNombre,
+                causaId,
+                causaNombre
+            };
+            relaciones.push(relacion);
+            
+            // Actualizar la vista
             actualizarRelacionesView();
+            
+            // Limpiar selección
+            document.getElementById('txtFkIdCategoria').value = '';
+            document.getElementById('txtFkIdCausa').value = '';
+        });
+        
+        // Actualizar la vista de relaciones
+        function actualizarRelacionesView() {
+            const container = document.getElementById('relacionesContainer');
+            container.innerHTML = '';
+            
+            if (relaciones.length === 0) {
+                container.innerHTML = '<p>No hay relaciones agregadas</p>';
+                return;
+            }
+            
+            relaciones.forEach((relacion, index) => {
+                const card = document.createElement('div');
+                card.className = 'causa-card';
+                card.innerHTML = `
+                    <div class="card-content">
+                        <h4>${relacion.categoriaNombre}</h4>
+                        <p>${relacion.causaNombre}</p>
+                    </div>
+                    <button type="button" class="btn-eliminar" data-index="${index}">
+                        <img src="/img/delete.svg" alt="Eliminar">
+                    </button>
+                `;
+                container.appendChild(card);
+            });
+            
+            // Actualizar el input oculto con las relaciones
+            document.getElementById('relacionesCausaReporte').value = JSON.stringify(relaciones);
         }
+        
+        // Eliminar relación
+        document.getElementById('relacionesContainer').addEventListener('click', function(e) {
+            if (e.target.closest('.btn-eliminar')) {
+                const index = e.target.closest('.btn-eliminar').dataset.index;
+                relaciones.splice(index, 1);
+                actualizarRelacionesView();
+            }
+        });
+        
+        // Validar antes de enviar el formulario
+        form.addEventListener('submit', function(e) {
+            if (relaciones.length === 0) {
+                e.preventDefault();
+                alert('Debes agregar al menos una relación categoría-causa');
+            }
+        });
     });
-    
-    // Validar antes de enviar el formulario
-    document.getElementById('reporteForm').addEventListener('submit', function(e) {
-        if (relaciones.length === 0) {
-            e.preventDefault();
-            alert('Debes agregar al menos una relación categoría-causa');
-        }
-    });
-});
 </script>
 
 <!-- Estilos para las cards -->
