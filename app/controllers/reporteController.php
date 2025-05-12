@@ -113,15 +113,19 @@ class ReporteController extends BaseController {
                 $idReporte = $reporteObj->getLastInsertId();     // Método para obtener el último ID insertado en la tabla reporte  
                 
                 // Guardar las relaciones causa_reporte
-                if (is_array($relacionesCausaReporte) && count($relacionesCausaReporte) > 0) {
-                    foreach ($relacionesCausaReporte as $relacion) {
-                        $sql = "INSERT INTO causa_reporte (fkIdReporte, fkIdCausa) VALUES (:idReporte, :idCausa)";
-                        $statement = $reporteObj->dbConnection->prepare($sql);
-                        $statement->bindParam(':idReporte', $idReporte, PDO::PARAM_INT);
-                        $statement->bindParam(':idCausa', $relacion['causaId'], PDO::PARAM_INT);
-                        $statement->execute();
-                    }
-                }
+                // if (is_array($relacionesCausaReporte) && count($relacionesCausaReporte) > 0) {
+                //     foreach ($relacionesCausaReporte as $relacion) {
+                //         $sql = "INSERT INTO causa_reporte (fkIdReporte, fkIdCausa) VALUES (:idReporte, :idCausa)";
+                //         $statement = $reporteObj->dbConnection->prepare($sql);
+                //         $statement->bindParam(':idReporte', $idReporte, PDO::PARAM_INT);
+                //         $statement->bindParam(':idCausa', $relacion['causaId'], PDO::PARAM_INT);
+                //         $statement->execute();
+                //     }
+                // }
+
+                 // Guardar relaciones usando el método del modelo
+                $relaciones = json_decode($_POST['relacionesCausaReporte'], true);
+                $reporteObj->guardarRelacionesCausa($idReporte, $relaciones);
                 
                 $this->redirectTo("reporte/view");
             } else {

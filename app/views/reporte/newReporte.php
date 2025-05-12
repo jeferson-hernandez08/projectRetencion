@@ -48,7 +48,8 @@
                                 <?php
                                     if (isset($causas) && is_array($causas)) {
                                         foreach ($causas as $causa) {
-                                            echo "<option value='".$causa->idCausa."'>".$causa->causa."</option>";
+                                            //echo "<option value='".$causa->idCausa."'>".$causa->causa."</option>";
+                                            echo "<option value='".$causa->idCausa."' data-categoria='".$causa->fkIdCategoria."'>".$causa->causa."</option>";
                                         }
                                     } else {
                                         echo "<option value=''>No hay causas disponibles</option>";
