@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 30-04-2025 a las 04:23:54
+-- Tiempo de generación: 15-05-2025 a las 04:04:57
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -68,7 +68,9 @@ CREATE TABLE `categoria` (
 INSERT INTO `categoria` (`idCategoria`, `nombre`, `descripcion`, `direccionamiento`) VALUES
 (1, 'Motivos EconÃ³micos', 'El aprendiz posee problemas econÃ³micos', 'Coordinador de formaciÃ³n'),
 (3, 'Motivos Sociales', 'El aprendiz presenta problemas de discriminaciÃ³n en el SENA', 'Coordinador de formaciÃ³n'),
-(8, 'Motivos Familiares ', 'El aprendiz posee tristeza ', 'Coordinador de formación');
+(8, 'Motivos Familiares ', 'El aprendiz posee tristeza ', 'Coordinador de formación'),
+(9, 'Motivos Laborales', 'Afecto de horario por su trabajo', 'Coordinador de formación'),
+(10, 'Prueba', 'Prueba', 'Coordinador académico');
 
 -- --------------------------------------------------------
 
@@ -91,7 +93,8 @@ INSERT INTO `causa` (`idCausa`, `causa`, `variables`, `fkIdCategoria`) VALUES
 (1, 'No cuento con recursos econÃ³micos para estudiar en el SENA', 'Necesidad del auto sostenimiento del aprendiz', 1),
 (2, 'Tuve que dedicarme a trabajar por no contar con apoyo economico para dedicarme a estudiar', 'Necesidad del auto sostenimiento del aprendiz', 1),
 (3, 'Me sentÃ­ discriminado por mis instructores o personal del SENA', 'RelaciÃ³n entre pares', 3),
-(11, 'No cuento con recursos económicos para estudiar en el SENA', 'RelaciÃ³n entre pares', 1);
+(11, 'No cuento con recursos económicos para estudiar en el SENA', 'RelaciÃ³n entre pares', 1),
+(12, 'Mi trabajo no me deja tiempo para estudiar', 'Rol laboral', 9);
 
 -- --------------------------------------------------------
 
@@ -114,7 +117,20 @@ INSERT INTO `causa_reporte` (`fkIdReporte`, `fkIdCausa`) VALUES
 (4, 3),
 (3, 2),
 (4, 1),
-(6, 2);
+(6, 2),
+(16, 1),
+(16, 3),
+(16, 12),
+(16, 2),
+(17, 1),
+(17, 3),
+(18, 1),
+(19, 1),
+(19, 3),
+(20, 2),
+(21, 1),
+(22, 1),
+(22, 3);
 
 -- --------------------------------------------------------
 
@@ -235,7 +251,14 @@ INSERT INTO `reporte` (`idReporte`, `fechaCreacion`, `descripcion`, `direccionam
 (12, '2025-04-28 20:31:00', 'dfdsfdsfdsfddfdsfdsf', 'Coordinador académico', 'Registrado', 3, 3),
 (13, '2025-04-28 21:24:00', 'hghgfhgfhf', 'Coordinador de formación', 'En proceso', 6, 1),
 (14, '2025-04-28 21:25:00', 'hgjghjghjghjhgj', 'Coordinador de formación', 'En proceso', 4, 1),
-(15, '2025-04-28 21:25:00', 'dfgdfgfdgdg', 'Coordinador de formación', 'En proceso', 2, 3);
+(15, '2025-04-28 21:25:00', 'dfgdfgfdgdg', 'Coordinador de formación', 'En proceso', 2, 3),
+(16, '2025-05-12 10:31:00', 'Prueba 1', 'Coordinador académico', 'En proceso', 3, 3),
+(17, '2025-05-12 10:34:00', 'Prueba 2', 'Coordinador académico', 'Registrado', 2, 3),
+(18, '2025-05-12 11:26:00', 'Prueba 3', 'Coordinador de formación', 'En proceso', 2, 4),
+(19, '2025-05-14 19:44:00', 'Prueba 14-05', 'Coordinador académico', 'En proceso', 3, 3),
+(20, '2025-05-14 20:45:00', 'Prueba 14-05 \"2\"', 'Coordinador académico', 'En proceso', 4, 1),
+(21, '2025-05-14 20:47:00', 'Prueba 15-05 \"3\"', 'Coordinador académico', 'En proceso', 3, 1),
+(22, '2025-05-14 20:59:00', 'Ultima prueba 14-05', 'Coordinador académico', 'En proceso', 6, 1);
 
 -- --------------------------------------------------------
 
@@ -380,13 +403,13 @@ ALTER TABLE `aprendiz`
 -- AUTO_INCREMENT de la tabla `categoria`
 --
 ALTER TABLE `categoria`
-  MODIFY `idCategoria` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `idCategoria` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT de la tabla `causa`
 --
 ALTER TABLE `causa`
-  MODIFY `idCausa` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `idCausa` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT de la tabla `estrategias`
@@ -416,7 +439,7 @@ ALTER TABLE `programaformacion`
 -- AUTO_INCREMENT de la tabla `reporte`
 --
 ALTER TABLE `reporte`
-  MODIFY `idReporte` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `idReporte` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT de la tabla `rol`
