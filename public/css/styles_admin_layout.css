@@ -982,6 +982,46 @@ body.dark-mode .back a {
     color: white; /* Cambia el color del texto a blanco si hay alguno */
 }
 
+/*********************** Estilos para cards causa-reporte *****************************/
+/* Estilos para las cards */
+.causa-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+}
+
+.causa-card .card-content {
+    flex: 1;
+}
+
+.causa-card .btn-eliminar {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 5px;
+}
+
+.causa-card > .btn-eliminar > img {
+    width: 30px;
+    height: 30px;
+    transition: all 0.3s ease;
+}
+
+.causa-card .btn-eliminar:hover img {
+    transform: scale(1.2);
+}
+
+
+
+.info-card {
+    margin-top: 20px;
+}
+
 
 
 
