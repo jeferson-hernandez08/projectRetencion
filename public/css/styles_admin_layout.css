@@ -642,6 +642,7 @@ body.dark-mode footer.footer {
     text-decoration: none;
     font-weight: 500;
     cursor: pointer;
+    transition: all 0.3s ease; /* Añadimos transición suave */
 }
 
 .btn-confirm {
@@ -654,17 +655,28 @@ body.dark-mode footer.footer {
     color: white;
 }
 
-/* Estilos para modo oscuro */
-body.dark-mode .confirmation-modal {
-    background-color: #1e1e1e;
+/* Nuevos estilos hover para los botones de confirmación */
+.btn-confirm:hover {
+    background-color: #059669;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
 }
 
-body.dark-mode .confirmation-title {
-    color: #e0e0e0;
+.btn-cancel:hover {
+    background-color: #dc2626;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(239, 68, 68, 0.3);
 }
 
-body.dark-mode .confirmation-message {
-    color: #a0aec0;
+/* Estilos hover para modo oscuro */
+body.dark-mode .btn-confirm:hover {
+    background-color: #047857;
+    box-shadow: 0 4px 12px rgba(16, 185, 129, 0.4);
+}
+
+body.dark-mode .btn-cancel:hover {
+    background-color: #b91c1c;
+    box-shadow: 0 4px 12px rgba(239, 68, 68, 0.4);
 }
 
 /**** Estilos de div.info-card de las tarjetas en newReporte en la relacion de causa-reporte ****/
@@ -1022,6 +1034,23 @@ body.dark-mode .back a {
     margin-top: 20px;
 }
 
+/* Estilos para modo oscuro del modal de confirmación */
+body.dark-mode .confirmation-modal {
+    background-color: #1e1e1e;
+    border-color: #4a5568;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+}
 
+body.dark-mode .confirmation-title {
+    color: #e0e0e0;
+}
 
+body.dark-mode .confirmation-message {
+    color: #a0aec0;
+}
 
+/* Removemos el filter: invert(1) para mantener el color original del ícono */
+body.dark-mode .confirmation-icon {
+    /* filter: invert(1); */ /* Eliminamos esta línea */
+    filter: brightness(0.9); /* Ajustamos solo el brillo para mantener el color rojo */
+}
