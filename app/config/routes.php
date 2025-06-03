@@ -1,5 +1,16 @@
 <?php
 return [         // Prueba cimmit | base contrller , programa formacion controller | genera un código css para un reset | COMMIT
+    //Login
+    '/login/init' => [
+        "controller" => 'App\Controllers\LoginController',
+        "action" => 'initLogin'
+    ],
+    '/login/logout' => [
+        "controller" => 'App\Controllers\LoginController',
+        "action" => 'LogoutLogin'
+    ],
+
+    // Tablas 
     "/" => [
         'controller' => 'App\Controllers\HomeController',
         'action' => 'index'
@@ -431,16 +442,6 @@ return [         // Prueba cimmit | base contrller , programa formacion controll
     "/main" => [
         "controller" => "App\Controllers\MainController",
         "action" => "view"
-    ],
-
-    //Login
-    '/login/init' => [
-        "controller" => 'App\Controllers\LoginController',
-        "action" => 'initLogin'
-    ],
-    '/login/logout' => [
-        "controller" => 'App\Controllers\LoginController',
-        "action" => 'LogoutLogin'
     ],
     
 ];
