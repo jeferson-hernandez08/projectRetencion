@@ -1,6 +1,7 @@
 <?php
 
 require_once '../app/config/global.php';                                // Se crea la ruta para ingresar a la app
+require_once '../app/controllers/loginController.php';
 require_once '../app/controllers/homeController.php';                   // Se crea la ruta para ingresar a la app
 require_once '../app/controllers/rolController.php';                    // Se crea la ruta para ingresar a la app
 require_once '../app/controllers/usuarioController.php';                // Se crea la ruta para ingresar a la app
@@ -14,10 +15,10 @@ require_once '../app/controllers/causaController.php';
 require_once '../app/controllers/intervencionController.php';
 require_once '../app/controllers/causaReporteController.php';
 require_once '../app/controllers/mainController.php'; 
-require_once '../app/controllers/LoginController.php';
 
 
-// require_once '../app/controllers/loginController.php';
+
+
 
 
 $url = $_SERVER['REQUEST_URI'];   // Detecta lo que se ingresa en la url

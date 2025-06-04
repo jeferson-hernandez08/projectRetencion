@@ -2,12 +2,12 @@
 return [         // Prueba cimmit | base contrller , programa formacion controller | genera un código css para un reset | COMMIT
     //Login
     '/login/init' => [
-        "controller" => 'App\Controllers\LoginController',
+        "controller" => 'App\Controllers\loginController',
         "action" => 'initLogin'
     ],
     '/login/logout' => [
-        "controller" => 'App\Controllers\LoginController',
-        "action" => 'LogoutLogin'
+        "controller" => 'App\Controllers\loginController',
+        "action" => 'logoutLogin'
     ],
 
     // Tablas 
