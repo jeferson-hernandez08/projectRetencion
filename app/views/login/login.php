@@ -33,17 +33,17 @@
                     <div class="icon">
                         <i class="fa fa-envelope"></i>
                     </div>
-                    <input type="email" id="email" name="email" placeholder="Correo electronico" required>
+                    <input type="email"  name="txtEmail" id="txtEmail" placeholder="Correo electronico" required>
                 </div>
                 <div class="input-group">
                     <div class="icon">
                         <i class="fas fa-lock"></i>
                     </div>
-                    <input type="password" id="password" name="password" placeholder="Contraseña" required>
+                    <input type="password" name="txtPassword" id="txtPassword" placeholder="Contraseña" required>
                 </div>
                 <a href="/forgot-password" class="forgot-password">
                     <i class="fas fa-key"></i>
-                    olvidé mi contraseña
+                    Olvidé mi contraseña ?
                 </a>
                 <button type="submit" class="login-button">Ingresar</button>
             </form>
