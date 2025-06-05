@@ -22,10 +22,11 @@
                 </div>
                 <nav class="menu">
                     <ul>
-                        <?php if(isset($_SESSION['rol']) && $_SESSION['rol'] == 1): ?>
-                            <li><a href="/centroFormacion/view"><i class="fas fa-building"></i><span class="info-text">Centros</span></a></li>
-                            <li><a href="/programaFormacion/view"><i class="fas fa-dumbbell"></i><span class="info-text">Programas</span></a></li>
-                            <?php endif ?>   
+                        <?php if(isset($_SESSION['rol']) && $_SESSION['rol'] == 4): ?>
+                            <li><a href="/main"><i class="fas fa-home"></i><span class="info-text">Inicio</span></a></li>
+                            <li><a href="/rol/view"><i class="fas fa-users-cog"></i><span class="info-text">Roles</span></a></li>
+                            <li><a href="/usuario/view"><i class="fas fa-users"></i><span class="info-text">Usuarios</span></a></li>
+                        <?php endif ?>   
                         <li><a href="/main"><i class="fas fa-home"></i><span class="info-text">Inicio</span></a></li>
                         <li><a href="/rol/view"><i class="fas fa-users-cog"></i><span class="info-text">Roles</span></a></li>
                         <li><a href="/usuario/view"><i class="fas fa-users"></i><span class="info-text">Usuarios</span></a></li>
@@ -38,11 +39,12 @@
                         <li><a href="/causa/view"><i class="fas fa-question-circle"></i><span class="info-text">Causas</span></a></li>
                         <li><a href="/intervencion/view"><i class="fas fa-hand-holding-heart"></i><span class="info-text">Intervenciones</span></a></li>
                         <?php if(isset($_SESSION['nombre'])) {  ?> 
-                        <li><a href="/login/logout">
-                                <i class="fas fa-sign-in-alt"></i>
-                                <span class="info-text">Cerrar sesión (<?php echo $_SESSION['nombre'] ?? "";?>)</span>
-                            </a>
-                        </li>
+                            <li>
+                                <a href="/login/logout">
+                                    <i class="fas fa-sign-in-alt"></i>
+                                    <span class="info-text">Cerrar sesión (<?php echo $_SESSION['nombre'] ?? "";?>)</span>
+                                </a>
+                            </li>
                         <?php } ?>
                     </ul>
                 </nav>

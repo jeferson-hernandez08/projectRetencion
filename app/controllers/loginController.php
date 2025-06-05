@@ -15,15 +15,14 @@ class LoginController extends BaseController
         $this->layout = "login_layout";
     }
 
-    public function initLogin()
-    {
-        if (isset($_POST['email']) && isset($_POST['password'])) {
-            $user = trim($_POST['email']) ?? null;
-            $password = trim($_POST['password']) ?? null;
+    public function initLogin() {
+        if (isset($_POST['txtEmailUser']) && isset($_POST['txtPasswordUser'])) {
+            $user = trim($_POST['txtEmailUser']) ?? null;
+            $password = trim($_POST['txtPasswordUser']) ?? null;
             if ($user != "" && $password != "") {
                 // Se valida la existencia del usuario y constraseña en al BD
                 $loginObj = new UsuarioModel();
-                $resp = $loginObj->validarLogin($user, $password);
+                $resp = $loginObj->validarLogin($user, $password);      // Llamamos al método validarLogin del modelo UsuarioModel
                 if ($resp) {
                     $_SESSION['timeout'] = time(); // Añadir esta línea
                     $this->redirectTo('main');
@@ -41,9 +40,10 @@ class LoginController extends BaseController
             $this->render('login/login.php');
         }
     }
-    public function logoutLogin()
-    {
+
+    public function logoutLogin(){
         session_destroy();
         header('Location: /login/init');
     }
+    
 }

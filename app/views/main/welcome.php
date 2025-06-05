@@ -16,7 +16,7 @@
         <!-- Elementos decorativos -->
         <div class="circulo verde1"></div>
         <div class="circulo verde2">
-            <img src="/img/logoSena.png" alt="Logo Sena" class="logo">
+            <img src="/img/logoSenaWhite.png" alt="Logo Sena" class="logo">
         </div>
         <div class="circulo verde3"></div>
     </div>

@@ -17,13 +17,8 @@ require_once '../app/controllers/causaReporteController.php';
 require_once '../app/controllers/mainController.php'; 
 
 
-
-
-
-
 $url = $_SERVER['REQUEST_URI'];   // Detecta lo que se ingresa en la url
 //echo $url;
-
 $routes = include_once '../app/config/routes.php';
 
 $matchedRoute = null;
@@ -47,6 +42,8 @@ if($matchedRoute) {
     }
 
 }
+
+header('Location: /login/init'); 
 
 
 if(array_key_exists($url, $routes)) {

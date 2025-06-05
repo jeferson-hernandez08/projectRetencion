@@ -109,6 +109,7 @@ class UsuarioModel extends BaseModel {
         }
     }
 
+    // Función para validar el login del usuario
     public function validarLogin($email, $password){  // Contraseñaque llega del formulario
         $sql = "SELECT * FROM $this->table WHERE email=:email";
         $statement = $this->dbConnection->prepare($sql);
@@ -121,9 +122,9 @@ class UsuarioModel extends BaseModel {
         if(count($resultSet) > 0){
             $hash = $resultSet[0]->password; // Hash guardado en la base de datos
             if(password_verify($password, $hash)){
-                $_SESSION['id'] = $resultSet[0]->id;
+                $_SESSION['id'] = $resultSet[0]->idUsuario;
                 $_SESSION['nombre'] = $resultSet[0]->nombre;
-                $_SESSION['fkIdRol'] = $resultSet[0]->rol;
+                $_SESSION['rol'] = $resultSet[0]->fkIdRol;       // REVISAR ESTO COMO CAPRTURAR EL ROL PARA USAR EN USUARIO
                 $_SESSION['timeout'] = time();
                 session_regenerate_id();
                 return true;
