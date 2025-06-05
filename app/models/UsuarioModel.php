@@ -108,4 +108,28 @@ class UsuarioModel extends BaseModel {
             echo "No se pudo eliminar el usuario".$ex->getMessage();
         }
     }
+
+    public function validarLogin($email, $password){  // Contraseñaque llega del formulario
+        $sql = "SELECT * FROM $this->table WHERE email=:email";
+        $statement = $this->dbConnection->prepare($sql);
+        $statement->bindParam(':email', $email);
+        $statement->execute();
+        $resultSet = [];
+        while($row = $statement->fetch(PDO::FETCH_OBJ)){
+            $resultSet [] = $row;
+        }
+        if(count($resultSet) > 0){
+            $hash = $resultSet[0]->password; // Hash guardado en la base de datos
+            if(password_verify($password, $hash)){
+                $_SESSION['id'] = $resultSet[0]->id;
+                $_SESSION['nombre'] = $resultSet[0]->nombre;
+                $_SESSION['fkIdRol'] = $resultSet[0]->rol;
+                $_SESSION['timeout'] = time();
+                session_regenerate_id();
+                return true;
+            }
+        }
+        return false;
+    }
+
 }

@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title> <?php echo $title ?> </title>
+    <link rel="shortcut icon" href="/img/logoSenaGreen.png" type="image/x-icon"> <!-- Icono de la pestaña del navegador -->
     <link rel="stylesheet" href="/css/reset.css">
     <link rel="stylesheet" href="/css/styles_admin_layout.css">
     <!-- Añadiendo Font Awesome para los iconos -->
@@ -16,7 +17,7 @@
         <aside class="sidebar" id="sidebar">
             <div class="sidebar-content">
                 <div class="logo">
-                    <img src="/img/retencion-logo.png" alt="logoImg">   <!--  ../../../public -->
+                    <img src="/img/retencionLogo.png" alt="logoImg">  <!--  ../../../public -->
                     <span class="logo-text">RetencionCPIC</span>
                 </div>
                 <nav class="menu">
