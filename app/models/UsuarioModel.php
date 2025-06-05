@@ -24,6 +24,7 @@ class UsuarioModel extends BaseModel {
 
     public function saveUsuario($nombre, $email, $password, $telefono, $tipoCoordinador, $gestor, $fkIdRol) {
         try {
+            $hashedPassword = password_hash($password, PASSWORD_DEFAULT);   // Hash de la contraseña
             $sql = "INSERT INTO $this->table (nombre, email, password, telefono, tipoCoordinador, gestor, fkIdRol) 
                     VALUES (:nombre, :email, :password, :telefono, :tipoCoordinador, :gestor, :fkIdRol)";
             // 1. Se prepara la consulta
@@ -39,7 +40,7 @@ class UsuarioModel extends BaseModel {
             // 2. BindParam para sanitizar los datos de entrada
             $statement->bindParam('nombre', $nombre, PDO::PARAM_STR);
             $statement->bindParam('email', $email, PDO::PARAM_STR);
-            $statement->bindParam('password', $password, PDO::PARAM_STR);
+            $statement->bindParam('password', $hashedPassword, PDO::PARAM_STR);   // Guardar el hash
             $statement->bindParam('telefono', $telefono, PDO::PARAM_STR);
             $statement->bindParam('tipoCoordinador', $tipoCoordinador, PDO::PARAM_STR);
             $statement->bindParam('gestor', $gestor, PDO::PARAM_STR);
