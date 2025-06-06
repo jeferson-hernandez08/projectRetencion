@@ -73,6 +73,9 @@ class UsuarioModel extends BaseModel {
 
     public function editUsuario($id, $nombre, $email, $password, $telefono, $tipoCoordinador, $gestor, $fkIdRol) {
         try {
+            // Añadimos hashing de contraseña para editar contraseña
+            $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+
             $sql = "UPDATE $this->table SET 
                         nombre=:nombre, 
                         email=:email, 
@@ -86,7 +89,7 @@ class UsuarioModel extends BaseModel {
             $statement->bindParam(":id", $id, PDO::PARAM_INT);
             $statement->bindParam(":nombre", $nombre, PDO::PARAM_STR);
             $statement->bindParam(":email", $email, PDO::PARAM_STR);
-            $statement->bindParam(":password", $password, PDO::PARAM_STR);
+            $statement->bindParam(":password", $hashedPassword, PDO::PARAM_STR);    // Para editar el hash de la contraseña
             $statement->bindParam(":telefono", $telefono, PDO::PARAM_STR);
             $statement->bindParam(":tipoCoordinador", $tipoCoordinador, PDO::PARAM_STR);
             $statement->bindParam(":gestor", $gestor, PDO::PARAM_STR);
@@ -120,10 +123,11 @@ class UsuarioModel extends BaseModel {
         while($row = $statement->fetch(PDO::FETCH_OBJ)){
             $resultSet [] = $row;
         }
+
         if(count($resultSet) > 0){
             $hash = $resultSet[0]->password; // Hash guardado en la base de datos
             // Verificar contraseña con hash almacenado
-            if(password_verify($password, $hash)){            // password_verify verifica las contraseñas hasheadas.
+            if(password_verify($password, $hash)){            // password_verify verifica las contraseñas hasheadas y no textto plano 123.
                 $_SESSION['id'] = $resultSet[0]->idUsuario;     // ***Veridficar si los datos aqui son exactamente de los de la BD
                 $_SESSION['nombre'] = $resultSet[0]->nombre;
                 $_SESSION['rol'] = $resultSet[0]->fkIdRol;       // REVISAR ESTO COMO CAPRTURAR EL ROL PARA USAR EN USUARIO
