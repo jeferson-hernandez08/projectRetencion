@@ -28,6 +28,7 @@ foreach ($routes as $route => $routeConfig) {
         break;
     }
 }
+
 if($matchedRoute) {
     $controllerName = $matchedRoute['controller'];
     $actionName = $matchedRoute['action'];
@@ -43,19 +44,5 @@ if($matchedRoute) {
 
 }
 
-header('Location: /login/init'); 
-
-
-if(array_key_exists($url, $routes)) {
-    // $controller = new HomeController();            // Creamos un objeto de la clase  HomeController
-    // $controller->saludar(); 
-    $controllerName = $routes[$url]['controller'];
-    $actionName = $routes[$url]['action'];
-    $controller = new $controllerName();      //App/Controller/HomeController
-    $controller -> $actionName();     //index()
-} else {
-    http_response_code(404);
-    echo "Página no encontrada";
-    exit();
-}
+header('Location: /login/init');  // Si no se encuentra la ruta redirige al login
 

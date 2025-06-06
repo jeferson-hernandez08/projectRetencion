@@ -8,11 +8,13 @@ use App\Models\UsuarioModel;
 require_once MAIN_APP_ROUTE . '../controllers/BaseController.php';
 require_once MAIN_APP_ROUTE . '../models/UsuarioModel.php';
 
-class LoginController extends BaseController
-{
-    public function __construct()
-    {
+class LoginController extends BaseController {
+    
+    public function __construct() {
+        // Se define la plantilla para este controlador
         $this->layout = "login_layout";
+        // Llamamos al constructor del padre
+        parent::__construct();
     }
 
     public function initLogin() {

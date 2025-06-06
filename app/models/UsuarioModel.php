@@ -110,7 +110,7 @@ class UsuarioModel extends BaseModel {
         }
     }
 
-    // Función para validar el login del usuario
+    // Función para validar el login del usuario | Para usar o heredar funcion en el controlador de loginController
     public function validarLogin($email, $password){  // Contraseñaque llega del formulario
         $sql = "SELECT * FROM $this->table WHERE email=:email";
         $statement = $this->dbConnection->prepare($sql);
@@ -122,8 +122,9 @@ class UsuarioModel extends BaseModel {
         }
         if(count($resultSet) > 0){
             $hash = $resultSet[0]->password; // Hash guardado en la base de datos
-            if(password_verify($password, $hash)){
-                $_SESSION['id'] = $resultSet[0]->idUsuario;
+            // Verificar contraseña con hash almacenado
+            if(password_verify($password, $hash)){            // password_verify verifica las contraseñas hasheadas.
+                $_SESSION['id'] = $resultSet[0]->idUsuario;     // ***Veridficar si los datos aqui son exactamente de los de la BD
                 $_SESSION['nombre'] = $resultSet[0]->nombre;
                 $_SESSION['rol'] = $resultSet[0]->fkIdRol;       // REVISAR ESTO COMO CAPRTURAR EL ROL PARA USAR EN USUARIO
                 $_SESSION['timeout'] = time();
