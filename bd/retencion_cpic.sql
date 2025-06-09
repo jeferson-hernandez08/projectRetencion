@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 08-06-2025 a las 18:37:07
+-- Tiempo de generación: 09-06-2025 a las 04:33:09
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -279,7 +279,8 @@ INSERT INTO `rol` (`idRol`, `nombre`) VALUES
 (4, 'Instructor'),
 (5, 'Coordinador'),
 (6, 'Profesional Bienestar'),
-(9, 'Vocero');
+(9, 'Vocero'),
+(18, 'Administrador');
 
 -- --------------------------------------------------------
 
@@ -305,10 +306,12 @@ CREATE TABLE `usuario` (
 INSERT INTO `usuario` (`idUsuario`, `nombre`, `email`, `password`, `telefono`, `tipoCoordinador`, `gestor`, `fkIdRol`) VALUES
 (1, 'Julian Salazar', 'julian@gmail.com', '$2y$10$w6K3VVm2g04kjaBixy7sz.x1hZxiOpBlrQTCk/G.EMOWwQ36CCHSW', '3245678978', 'No es coordinador', 1, 4),
 (3, 'Oscar Aristizabal (Ofac)', 'ofac@gmail.com', '$2y$10$7SU075MUw2xCKHirUYl.DOutJNXTRPgzE/sfRCjO.fH5zvZnbsLva', '3127827845', 'No es coordinador', 0, 4),
-(4, 'Santiago Becerra', 'santiago@gmail.com', '$2y$10$WtoD6YIGyaq0olC4nTYexOo2MeRz39Q86rm4q9XMhUQiWIlCc0teS', '3127827845', 'No es coordinador', 0, 5),
+(4, 'Santiago Becerra', 'santiago@gmail.com', '$2y$10$oPu/Pp7A6Q1dRycMA1S2yutr5vDrnb8TnykdSLG7MPRDgbPutK6Yi', '3127827845', 'Coordinador académico', 0, 5),
 (13, 'German Estrada', 'german@gmail.com', '$2y$10$ADHhAHdLpPrvqnLs.1sdPe.a73J9O.0YnHKaEp2PParaaFe94jaSy', '3245678978', 'No es coordinador', 0, 4),
 (17, 'Daniela Isaza ', 'daniela@gmail.com', '$2y$10$0/MtpfaRbooSN0QXBaHfmOp9qJnTxv5eOujHgK0FxxzSqiNJeVeS2', '3127827845', 'No es coordinador', 0, 4),
-(18, 'Esteban Reyes', 'reyes@gmail.com', '$2y$10$R8JK3N2RYhKpsDMyPvKFfuh5iXvM8zdtmf71X6Qs/HkL1JUt.mTei', '3124567867', 'No es coordinador', 0, 9);
+(18, 'Esteban Reyes', 'reyes@gmail.com', '$2y$10$R8JK3N2RYhKpsDMyPvKFfuh5iXvM8zdtmf71X6Qs/HkL1JUt.mTei', '3124567867', 'No es coordinador', 0, 9),
+(19, 'Mariana Carvajal ', 'mariana@gmail.com', '$2y$10$EIZaWwEWbDEnRn1ebIs6NeoP5/CbwtaqmWZiK7NC3SK3qrbxHIPKq', '3245678976', 'Coordinador de formación', 0, 6),
+(20, 'Jeferson Hernandez', 'admin@gmail.com', '$2y$10$z8fF2TvCCWaZgcpdyWUqR.WvwOAcPINb1yQBCfAiTg1ypW6Ud78Ei', '3113975576', 'No es coordinador', 0, 18);
 
 --
 -- Índices para tablas volcadas
@@ -447,13 +450,13 @@ ALTER TABLE `reporte`
 -- AUTO_INCREMENT de la tabla `rol`
 --
 ALTER TABLE `rol`
-  MODIFY `idRol` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `idRol` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT de la tabla `usuario`
 --
 ALTER TABLE `usuario`
-  MODIFY `idUsuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `idUsuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- Restricciones para tablas volcadas
