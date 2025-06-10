@@ -129,7 +129,7 @@
                 <h3>Contacto</h3>
                 <div class="footer-contact">
                     <p><i class="fas fa-map-marker-alt"></i> Kilometro 10 vía al magdalena, Centro de Procesos Industriales y Construcción, SENA Regional Caldas</p>
-                    <p><i class="fas fa-phone"></i> +57 (4) 123 4567</p>
+                    <p><i class="fas fa-phone"></i> (606) 8748444 </p>
                     <p><i class="fas fa-envelope"></i> soporte@retencioncpic.edu.co</p>
                     <p><i class="fas fa-clock"></i> Lunes a Viernes: 7:00 AM - 6:00 PM</p>
                 </div>

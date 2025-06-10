@@ -18,9 +18,10 @@ html, body {
     /*overflow: auto;         Evita el scroll en el container */
 }
 
-.sidebar{
+.sidebar {
     width: 225px;
-    background-color: #3f4149;
+    background-color: #1a3c40; 
+    /* background: linear-gradient(135deg, #1a3c40 0%, #0d4d0d 100%); */
     color: white;
     height: 95vh;
     transition: all 0.3s ease;
@@ -59,7 +60,11 @@ html, body {
 
 /* Estilo para el texto del logo */
 .logo-text {
-    color: #00ff00;
+    font-size: 1.8rem;
+    font-weight: 700;
+    background: linear-gradient(to right, #8bc34a, #4CAF50);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
 
 /* Si deseas cambiar el color cuando está activado el modo oscuro */
@@ -398,14 +403,14 @@ i.fas {
     color: #212529;
 }
 
-/* Estilos para el modo oscuro */
+/***** Estilos para el modo oscuro ******/
 body.dark-mode {
     background-color: #121212;
     color: #e0e0e0;
 }
 
 body.dark-mode .sidebar {
-    background-color: #2d3748;
+    background-color: #0d1b2a;
 }
 
 body.dark-mode .header {
@@ -1049,7 +1054,7 @@ body.dark-mode .confirmation-icon {
     padding: 4rem 0 2rem;
     position: relative;
     /* overflow: hidden; */
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    border-top: 5px solid rgba(255, 255, 255, 0.1);
 }
 
 body.dark-mode .footer {
