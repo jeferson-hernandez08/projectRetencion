@@ -97,11 +97,57 @@
             </div>
         </main>
     </div>
+    
     <footer class="footer">
         <div class="footer-container">
-            <p>&copy; <?php echo date('Y'); ?> RetencionCPIC. Todos los derechos reservados.</p>
+            <div class="footer-section">
+                <div class="footer-logo">
+                    <img src="/img/logoSenaProyect.png" alt="Logo RetencionCPIC">
+                    <div class="footer-logo-text">RetencionCPIC</div>
+                </div>
+                <p>Sistema integral para mejorar la retención de aprendices en el Centro de Procesos Industriales y Construcción (CPIC) del SENA.</p>
+                <div class="footer-social">
+                    <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Enlaces Rápidos</h3>
+                <ul class="footer-links">
+                    <li><a href="/main"><i class="fas fa-home"></i> Inicio</a></li>
+                    <li><a href="/reporte/view"><i class="fas fa-chart-line"></i> Reportes</a></li>
+                    <li><a href="/intervencion/view"><i class="fas fa-hand-holding-heart"></i> Intervenciones</a></li>
+                    <li><a href="/aprendiz/view"><i class="fas fa-user-graduate"></i> Aprendices</a></li>
+                    <li><a href="/grupo/view"><i class="fas fa-graduation-cap"></i> Grupos</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Contacto</h3>
+                <div class="footer-contact">
+                    <p><i class="fas fa-map-marker-alt"></i> Kilometro 10 vía al magdalena, Centro de Procesos Industriales y Construcción, SENA Regional Caldas</p>
+                    <p><i class="fas fa-phone"></i> +57 (4) 123 4567</p>
+                    <p><i class="fas fa-envelope"></i> soporte@retencioncpic.edu.co</p>
+                    <p><i class="fas fa-clock"></i> Lunes a Viernes: 7:00 AM - 6:00 PM</p>
+                </div>
+            </div>
         </div>
+        
+        <div class="footer-bottom">
+            <p>&copy; <?php echo date('Y'); ?> RetencionCPIC. Todos los derechos reservados.</p>
+            <p>Desarrollado por ADSO 28873711 para el SENA</p>
+
+            <div class="theme-toggle" id="theme-toggle">
+                <i class="fas fa-moon"></i>
+            </div>
+        </div>
+        
     </footer>
+    
+
     <script>
         // Función para cambiar el icono
         function updateThemeIcon(isDark) {
@@ -135,6 +181,40 @@
         document.querySelector('#menu-toggle').addEventListener('click', function() {
             const sidebar = document.getElementById('sidebar');
             sidebar.classList.toggle('sidebar-hidden');
+        });
+
+
+        // ***************** Footer y Modo Oscuro ******************
+         // Función para cambiar el modo oscuro/claro
+        function toggleDarkMode() {
+            const body = document.body;
+            body.classList.toggle('dark-mode');
+            
+            // Actualizar icono
+            const themeIcon = document.querySelector('#theme-toggle i');
+            if (body.classList.contains('dark-mode')) {
+                themeIcon.classList.remove('fa-moon');
+                themeIcon.classList.add('fa-sun');
+                localStorage.setItem('darkMode', 'true');
+            } else {
+                themeIcon.classList.remove('fa-sun');
+                themeIcon.classList.add('fa-moon');
+                localStorage.setItem('darkMode', 'false');
+            }
+        }
+        
+        // Aplicar el tema guardado al cargar la página
+        document.addEventListener('DOMContentLoaded', function() {
+            const isDarkMode = localStorage.getItem('darkMode') === 'true';
+            if (isDarkMode) {
+                document.body.classList.add('dark-mode');
+                const themeIcon = document.querySelector('#theme-toggle i');
+                themeIcon.classList.remove('fa-moon');
+                themeIcon.classList.add('fa-sun');
+            }
+            
+            // Evento para el botón de cambio de tema
+            document.getElementById('theme-toggle').addEventListener('click', toggleDarkMode);
         });
     </script>
 </body>
