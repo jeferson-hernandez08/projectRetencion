@@ -55,7 +55,7 @@ html, body {
 
 /* Cambiar el logo */
 .logo img {
-    width: 100px;
+    width: 190px;
 }
 
 /* Estilo para el texto del logo */
@@ -356,7 +356,7 @@ i.fas {
 /* Estilos para los iconos del sidebar */
 .sidebar .menu a i {
     font-size: 18px;
-    color: #008000; /* Verde */
+    color: #8bc34a; /* Verde */
 }
 
 /* Estilos para los iconos del header */

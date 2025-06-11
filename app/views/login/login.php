@@ -11,7 +11,7 @@
         <div class="formulario">
             <div class="form-inner">
                 <div class="logo">
-                    <img src="/img/logoSenaGreen.png" alt="Logo SENA">
+                    <img src="/img/logoSenaProyect.png" alt="Logo SENA">
                 </div>
                 <div class="system-title">
                     <h2>Sistema de prevención<br><span class="subtitle-green">de la deserción</span></h2>
