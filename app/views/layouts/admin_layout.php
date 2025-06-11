@@ -17,7 +17,7 @@
         <aside class="sidebar" id="sidebar">
             <div class="sidebar-content">
                 <div class="logo">
-                    <img src="/img/logoSenaProyect3.png" alt="logoImg">  <!--  ../../../public -->
+                    <img src="/img/logoSenaProyect7.png" alt="logoImg">  <!--  ../../../public -->
                     <span class="logo-text">RetencionCPIC</span>
                 </div>
                 <nav class="menu">
