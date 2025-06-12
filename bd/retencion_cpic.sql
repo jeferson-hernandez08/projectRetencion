@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 09-06-2025 a las 04:33:09
+-- Tiempo de generación: 12-06-2025 a las 04:07:53
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -59,15 +59,15 @@ CREATE TABLE `categoria` (
   `nombre` varchar(80) NOT NULL,
   `descripcion` varchar(255) NOT NULL,
   `direccionamiento` varchar(60) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Volcado de datos para la tabla `categoria`
 --
 
 INSERT INTO `categoria` (`idCategoria`, `nombre`, `descripcion`, `direccionamiento`) VALUES
-(1, 'Motivos EconÃ³micos', 'El aprendiz posee problemas econÃ³micos', 'Coordinador de formaciÃ³n'),
-(3, 'Motivos Sociales', 'El aprendiz presenta problemas de discriminaciÃ³n en el SENA', 'Coordinador de formaciÃ³n'),
+(1, 'Motivos Económicos', 'El aprendiz posee problemas económicos', 'Coordinador académico'),
+(3, 'Motivos Sociales', 'El aprendiz presenta problemas de discriminación en el SENA', 'Coordinador académico'),
 (8, 'Motivos Familiares ', 'El aprendiz posee tristeza ', 'Coordinador de formación'),
 (9, 'Motivos Laborales', 'Afecto de horario por su trabajo', 'Coordinador de formación'),
 (10, 'Prueba', 'Prueba', 'Coordinador académico');
@@ -90,10 +90,10 @@ CREATE TABLE `causa` (
 --
 
 INSERT INTO `causa` (`idCausa`, `causa`, `variables`, `fkIdCategoria`) VALUES
-(1, 'No cuento con recursos econÃ³micos para estudiar en el SENA', 'Necesidad del auto sostenimiento del aprendiz', 1),
+(1, 'No cuento con recursos económicos para estudiar en el SENA', 'Necesidad del auto sostenimiento del aprendiz', 1),
 (2, 'Tuve que dedicarme a trabajar por no contar con apoyo economico para dedicarme a estudiar', 'Necesidad del auto sostenimiento del aprendiz', 1),
-(3, 'Me sentÃ­ discriminado por mis instructores o personal del SENA', 'RelaciÃ³n entre pares', 3),
-(11, 'No cuento con recursos económicos para estudiar en el SENA', 'RelaciÃ³n entre pares', 1),
+(3, 'Me sentí discriminado por mis instructores o personal del SENA', 'Relación entre pares', 3),
+(11, 'No cuento con recursos económicos para estudiar en el SENA', 'Relación entre pares', 1),
 (12, 'Mi trabajo no me deja tiempo para estudiar', 'Rol laboral', 9);
 
 -- --------------------------------------------------------
@@ -149,8 +149,8 @@ CREATE TABLE `estrategias` (
 --
 
 INSERT INTO `estrategias` (`idEstrategias`, `estrategia`, `fkIdCategoria`) VALUES
-(2, 'Orientar al aprendiz sobre las oportunidades a aplicar a apoyos socioeconÃ³micos.', 1),
-(3, 'OrganizaciÃ³n de grupos focales o campaÃ±as con aprendices para orientaciÃ³n de herramientas o habilidades sociales y sana convivencia entre pares.', 3),
+(2, 'Orientar al aprendiz sobre las oportunidades a aplicar a apoyos socioeconómicos.', 1),
+(3, 'Organización de grupos focales o campañas con aprendices para orientación de herramientas o habilidades sociales y sana convivencia entre pares.', 3),
 (6, 'Organización de grupos focales o campañas con aprendices para orientación de herramientas o habilidades sociales y sana convivencia entre pares ', 3);
 
 -- --------------------------------------------------------
@@ -197,8 +197,8 @@ CREATE TABLE `intervencion` (
 --
 
 INSERT INTO `intervencion` (`idIntervencion`, `fechaCreacion`, `descripcion`, `fkIdEstrategias`, `fkIdReporte`, `fkIdUsuario`) VALUES
-(1, '2025-04-16 07:09:00', 'Se habla con el aprendiz sobre el cas de ls problemas econÃ³micos que tiene y tanto familiares sdd', 2, 4, 3),
-(2, '2025-04-09 20:37:00', 'Se realiza atenciÃ³n psicolÃ³gica a aprendiz por comportamientos de rabia y problemas mentales', 3, 6, 4);
+(1, '2025-04-16 07:09:00', 'Se habla con el aprendiz sobre el caso de los problemas económicos que tiene y tanto familiares.', 2, 4, 3),
+(2, '2025-04-09 20:37:00', 'Se realiza atención psicológica al aprendiz por comportamientos de rabia y problemas mentales', 3, 6, 4);
 
 -- --------------------------------------------------------
 
@@ -216,12 +216,13 @@ CREATE TABLE `programaformacion` (
 --
 
 INSERT INTO `programaformacion` (`idProgramaFormacion`, `nombre`) VALUES
-(1, 'AnÃ¡lisis y Desarrollo de Software'),
-(2, 'ElectrÃ³nica'),
-(3, 'AutomatizaciÃ³n Industrial'),
+(1, 'Análisis y Desarrollo de Software'),
+(2, 'Electrónica'),
+(3, 'Automatización Industrial'),
 (5, 'Mantenimiento de Equipos Biomédicos'),
 (6, 'Mecánica Industrial'),
-(8, 'Motores Diesel');
+(8, 'Motores Diesel'),
+(9, 'Computación CNC');
 
 -- --------------------------------------------------------
 
@@ -244,9 +245,9 @@ CREATE TABLE `reporte` (
 --
 
 INSERT INTO `reporte` (`idReporte`, `fechaCreacion`, `descripcion`, `direccionamiento`, `estado`, `fkIdAprendiz`, `fkIdUsuario`) VALUES
-(3, '2025-03-30 09:30:00', 'Aprendiz con problemas actitudinales', 'Coordinador de formaciÃ³n', 'En proceso', 2, 3),
-(4, '2025-03-31 10:45:00', 'Aprendiz con problemas acadÃ©micos', 'Coordinador acadÃ©mico', 'Registrado', 2, 1),
-(6, '2025-03-20 09:05:00', 'Aprendiz es insoportable en clase', 'Coordinador acadÃ©mico', 'En proceso', 3, 1),
+(3, '2025-03-30 09:30:00', 'Aprendiz con problemas actitudinales', 'Coordinador de formación', 'En proceso', 2, 3),
+(4, '2025-03-31 10:45:00', 'Aprendiz con problemas académicos', 'Coordinador académico', 'Registrado', 2, 1),
+(6, '2025-03-20 09:05:00', 'Aprendiz es insoportable en clase', 'Coordinador académico', 'En proceso', 3, 1),
 (11, '2025-04-23 11:19:00', ' Aprendiz agrede físicamente a otro aprendiz dentro el ambiente de formación', 'Coordinador académico', 'En proceso', 7, 1),
 (12, '2025-04-28 20:31:00', 'dfdsfdsfdsfddfdsfdsf', 'Coordinador académico', 'Registrado', 3, 3),
 (13, '2025-04-28 21:24:00', 'hghgfhgfhf', 'Coordinador de formación', 'En proceso', 6, 1),
@@ -408,7 +409,7 @@ ALTER TABLE `aprendiz`
 -- AUTO_INCREMENT de la tabla `categoria`
 --
 ALTER TABLE `categoria`
-  MODIFY `idCategoria` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `idCategoria` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT de la tabla `causa`
@@ -438,7 +439,7 @@ ALTER TABLE `intervencion`
 -- AUTO_INCREMENT de la tabla `programaformacion`
 --
 ALTER TABLE `programaformacion`
-  MODIFY `idProgramaFormacion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `idProgramaFormacion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT de la tabla `reporte`
