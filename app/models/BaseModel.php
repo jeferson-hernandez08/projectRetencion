@@ -14,8 +14,11 @@ abstract class BaseModel {     // Base model es el papa de todos los modelos
         try {
             $options = [
                 PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+                // Agregamos esta línea para forzar UTF-8: | Para que la base de datos se conecte con el charset utf8mb4
+                PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES 'utf8mb4'"
             ];
-            $dsn = DRIVER.':host='.HOST.';dbname='.DATABASE;
+            // Agregamos charset aquí charset=utf8mb4 | Soporta caracteres especiales y emojis      
+            $dsn = DRIVER.':host='.HOST.';dbname='.DATABASE.';charset=utf8mb4';    //  utf8mb4: Soporta el 100% de caracteres Unicode.
             $this->dbConnection = new PDO($dsn, USERNAME_DB, PASSWORD_DB, $options);
         } catch (PDOException $ex) {
             echo "Error> ".$ex->getMessage();
