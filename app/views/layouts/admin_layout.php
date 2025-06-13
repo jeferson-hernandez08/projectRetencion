@@ -118,10 +118,34 @@
                 <h3>Enlaces Rápidos</h3>
                 <ul class="footer-links">
                     <li><a href="/main"><i class="fas fa-home"></i> Inicio</a></li>
-                    <li><a href="/reporte/view"><i class="fas fa-chart-line"></i> Reportes</a></li>
-                    <li><a href="/intervencion/view"><i class="fas fa-hand-holding-heart"></i> Intervenciones</a></li>
-                    <li><a href="/aprendiz/view"><i class="fas fa-user-graduate"></i> Aprendices</a></li>
-                    <li><a href="/grupo/view"><i class="fas fa-graduation-cap"></i> Grupos</a></li>
+                    <?php if(isset($_SESSION['rol']) && $_SESSION['rol'] == 4): ?>   <!-- Instructor -->
+                        <li><a href="/reporte/view"><i class="fas fa-chart-line"></i> Reportes</a></li>
+                        <li><a href="/intervencion/view"><i class="fas fa-hand-holding-heart"></i> Intervenciones</a></li>
+                        <li><a href="/aprendiz/view"><i class="fas fa-user-graduate"></i> Aprendices</a></li>
+                        <li><a href="/grupo/view"><i class="fas fa-graduation-cap"></i> Grupos</a></li>        
+                    <?php endif ?>
+                    <?php if(isset($_SESSION['rol']) && $_SESSION['rol'] == 5): ?>   <!-- Coordinador Academico  -->
+                        <li><a href="/programaFormacion/view"><i class="fas fa-chalkboard-teacher"></i> Programas</a></li>
+                        <li><a href="/grupo/view"><i class="fas fa-graduation-cap"></i> Grupos</a></li>
+                        <li><a href="/aprendiz/view"><i class="fas fa-user-graduate"></i> Aprendices</a></li>
+                        <li><a href="/reporte/view"><i class="fas fa-chart-line"></i> Reportes</a></li>
+                        <li><a href="/usuario/view"><i class="fas fa-users"></i> Usuarios</a></li> 
+                    <?php endif ?>
+                    <?php if(isset($_SESSION['rol']) && $_SESSION['rol'] == 6): ?>   <!-- Coordinador de Formacion (Profesional de Bienestar) -->
+                        <li><a href="/categoria/view"><i class="fas fa-tags"></i> Categorias</a></li>
+                        <li><a href="/causa/view"><i class="fas fa-question-circle"></i> Causas</a></li>
+                        <li><a href="/estrategias/view"><i class="fas fa-lightbulb"></i> Estrategias</a></li>
+                        <li><a href="/intervencion/view"><i class="fas fa-hand-holding-heart"></i> Intervenciones</a></li>
+                        <li><a href="/reporte/view"><i class="fas fa-chart-line"></i> Reportes</a></li>
+                        <li><a href="/aprendiz/view"><i class="fas fa-user-graduate"></i> Aprendices</a></li>
+                    <?php endif ?>
+                    <?php if(isset($_SESSION['rol']) && $_SESSION['rol'] == 9): ?>   <!-- Vocero -->
+                        <li><a href="/reporte/view"><i class="fas fa-chart-line"></i> Reportes</a></li>
+                        <li><a href="/aprendiz/view"><i class="fas fa-user-graduate"></i> Aprendices</a></li>
+                    <?php endif ?>
+                    <?php if(isset($_SESSION['rol']) && $_SESSION['rol'] == 18): ?>   <!-- Administrador -->
+                        <li><a href="/rol/view"><i class="fas fa-users-cog"></i> Roles</a></li>
+                    <?php endif ?>
                 </ul>
             </div>
             
@@ -140,7 +164,7 @@
             <p>&copy; <?php echo date('Y'); ?> RetencionCPIC. Todos los derechos reservados.</p>
             <p>Desarrollado por ADSO 28873711 para el SENA</p>
 
-            <div class="theme-toggle" id="theme-toggle">
+            <div class="theme-toggle" id="theme-toggle">   <!-- Boton Footer Light y Night -->
                 <i class="fas fa-moon"></i>
             </div>
         </div>
