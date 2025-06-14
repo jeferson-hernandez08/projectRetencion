@@ -1020,10 +1020,14 @@ body.dark-mode .back a {
     transform: scale(1.2);
 }
 
-
-
 .info-card {
     margin-top: 20px;
+}
+
+/* Estilos para modo oscuro del causa-reporte cards */
+.causa-card {
+  background-color: var(--vscode-editor-background);
+  color: var(--vscode-editor-foreground);
 }
 
 /* Estilos para modo oscuro del modal de confirmación */
