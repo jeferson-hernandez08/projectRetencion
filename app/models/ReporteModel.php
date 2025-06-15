@@ -21,8 +21,12 @@ class ReporteModel extends BaseModel {
         parent::__construct();
     }
 
-    public function saveReporte($fechaCreacion, $descripcion, $direccionamiento, $estado, $fkIdAprendiz, $fkIdUsuario) {
+    public function saveReporte($descripcion, $direccionamiento, $estado, $fkIdAprendiz, $fkIdUsuario) {   // Eliminamos la variable $fechaCreacion,
         try {
+            // Generar fecha automática | Colombia
+            date_default_timezone_set('America/Bogota');
+            $fechaCreacion = date('Y-m-d H:i:s');
+
             $sql = "INSERT INTO $this->table (fechaCreacion, descripcion, direccionamiento, estado, fkIdAprendiz, fkIdUsuario) 
                     VALUES (:fechaCreacion, :descripcion, :direccionamiento, :estado, :fkIdAprendiz, :fkIdUsuario)";
             // 1. Se prepara la consulta
@@ -45,7 +49,7 @@ class ReporteModel extends BaseModel {
             // 3. Ejecutar la consulta
             // $result = $statement->execute();
             // return $result;
-            return $statement->execute();    // SE CAMBIA ESTO
+            return $statement->execute();    // SE CAMBIA ESTO  
         } catch (PDOException $ex) {
             echo "Error al guardar el reporte> ".$ex->getMessage();
         }
@@ -70,19 +74,18 @@ class ReporteModel extends BaseModel {
         }
     }
 
-    public function editReporte($id, $fechaCreacion, $descripcion, $direccionamiento, $estado, $fkIdAprendiz, $fkIdUsuario) {
+    public function editReporte($id, $descripcion, $direccionamiento, $estado, $fkIdAprendiz, $fkIdUsuario) {  // Se elimina $fechaCreacion, fecha automática.
         try {
             $sql = "UPDATE $this->table SET 
-                        fechaCreacion=:fechaCreacion, 
                         descripcion=:descripcion, 
                         direccionamiento=:direccionamiento, 
                         estado=:estado, 
                         fkIdAprendiz=:fkIdAprendiz, 
                         fkIdUsuario=:fkIdUsuario 
-                    WHERE idReporte=:id";
+                    WHERE idReporte=:id";       // Se elimina fechaCreacion=:fechaCreacion, para fecha automática.
             $statement = $this->dbConnection->prepare($sql);
             $statement->bindParam(":id", $id, PDO::PARAM_INT);
-            $statement->bindParam(":fechaCreacion", $fechaCreacion, PDO::PARAM_STR);
+            //$statement->bindParam(":fechaCreacion", $fechaCreacion, PDO::PARAM_STR);
             $statement->bindParam(":descripcion", $descripcion, PDO::PARAM_STR);
             $statement->bindParam(":direccionamiento", $direccionamiento, PDO::PARAM_STR);
             $statement->bindParam(":estado", $estado, PDO::PARAM_STR);

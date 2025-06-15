@@ -7,10 +7,10 @@
     <div class="info">
         <form action="/reporte/create" method="post">
             <!-- Campo Fecha de Creación -->
-            <div class="form-group">
+            <!-- <div class="form-group">
                 <label for="txtFechaCreacion">Fecha de Creación</label>
                 <input type="datetime-local" name="txtFechaCreacion" id="txtFechaCreacion" class="form-control" required >
-            </div>
+            </div> -->
             
             <!-- Campo Descripción -->
             <div class="form-group">

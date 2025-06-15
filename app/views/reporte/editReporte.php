@@ -13,10 +13,10 @@
             </div>
 
             <!-- Campo Fecha de Creación -->
-            <div class="form-group">
+            <!-- <div class="form-group">
                 <label for="txtFechaCreacion">Fecha de Creación</label>
-                <input type="datetime-local" value="<?php echo date('Y-m-d\TH:i', strtotime($reporte->fechaCreacion)); ?>" name="txtFechaCreacion" id="txtFechaCreacion" class="form-control" required>
-            </div>
+                <input type="datetime-local" value="<?php // echo date('Y-m-d\TH:i', strtotime($reporte->fechaCreacion)); ?>" name="txtFechaCreacion" id="txtFechaCreacion" class="form-control" required>
+            </div> -->
             
             <!-- Campo Descripción -->
             <div class="form-group">

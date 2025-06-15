@@ -86,12 +86,12 @@ class ReporteController extends BaseController {
     }
 
     public function createReporte() {
-        if (isset($_POST['txtFechaCreacion']) && isset($_POST['txtDescripcion']) && isset($_POST['txtDireccionamiento']) && 
+        if (isset($_POST['txtDescripcion']) && isset($_POST['txtDireccionamiento']) && 
             isset($_POST['txtEstado']) && isset($_POST['txtFkIdAprendiz']) && isset($_POST['txtFkIdUsuario']) &&
             isset($_POST['relacionesCausaReporte'])) { // Capturamos el valor de la relación causa_reporte
-                // SE CAMBIA ESTO
+                // SE CAMBIA ESTO                      // Se quita campo isset($_POST['txtFechaCreacion']) para que genere automaticamente la fecha de creación
             
-            $fechaCreacion = date('Y-m-d H:i:s', strtotime($_POST['txtFechaCreacion']));      // Convertir el valor recibido al formato DATETIME de MySQL (Y-m-d H:i:s) y usé strtotime() para parsear correctamente la fecha+hora 
+            //$fechaCreacion = date('Y-m-d H:i:s', strtotime($_POST['txtFechaCreacion']));      // Convertir el valor recibido al formato DATETIME de MySQL (Y-m-d H:i:s) y usé strtotime() para parsear correctamente la fecha+hora  |  // Eliminado txtFechaCreacion
             $descripcion = $_POST['txtDescripcion'] ?? null;                                  // Convierte el valor recibido del formulario (datetime-local) al formato DATETIME de MySQL.
             $direccionamiento = $_POST['txtDireccionamiento'] ?? null;
             $estado = $_POST['txtEstado'] ?? null;
@@ -104,25 +104,13 @@ class ReporteController extends BaseController {
             // Creamos instancia del Modelo Reporte
             $reporteObj = new ReporteModel();
             
-            // Se llama al método que guarda en la base de datos
-            $result = $reporteObj->saveReporte($fechaCreacion, $descripcion, $direccionamiento, $estado, $fkIdAprendiz, $fkIdUsuario);
+            // Se llama al método que guarda en la base de datos | Sin $fechaCreacion,
+            $result = $reporteObj->saveReporte($descripcion, $direccionamiento, $estado, $fkIdAprendiz, $fkIdUsuario);
             
             // SE CAMBIA ESTO
             if ($result) {
                 // Obtenemos el ID del reporte recién creado
                 $idReporte = $reporteObj->getLastInsertId();     // Método para obtener el último ID insertado en la tabla reporte  
-                
-                // Guardar las relaciones causa_reporte
-                // if (is_array($relacionesCausaReporte) && count($relacionesCausaReporte) > 0) {
-                //     foreach ($relacionesCausaReporte as $relacion) {
-                //         $sql = "INSERT INTO causa_reporte (fkIdReporte, fkIdCausa) VALUES (:idReporte, :idCausa)";
-                //         $statement = $reporteObj->dbConnection->prepare($sql);
-                //         $statement->bindParam(':idReporte', $idReporte, PDO::PARAM_INT);
-                //         $statement->bindParam(':idCausa', $relacion['causaId'], PDO::PARAM_INT);
-                //         $statement->execute();
-                //     }
-                // }
-
                  // Guardar relaciones usando el método del modelo
                 $relaciones = json_decode($_POST['relacionesCausaReporte'], true);
                 $reporteObj->guardarRelacionesCausa($idReporte, $relaciones);
@@ -169,12 +157,12 @@ class ReporteController extends BaseController {
     }
 
     public function updateReporte() {
-        if (isset($_POST['txtId']) && isset($_POST['txtFechaCreacion']) && isset($_POST['txtDescripcion']) && 
+        if (isset($_POST['txtId']) && isset($_POST['txtDescripcion']) && 
             isset($_POST['txtDireccionamiento']) && isset($_POST['txtEstado']) && isset($_POST['txtFkIdAprendiz']) && 
-            isset($_POST['txtFkIdUsuario'])) {
+            isset($_POST['txtFkIdUsuario'])) {    // Se elimina isset($_POST['txtFechaCreacion']) por que se genera automaticamente la fecha de creación
             
             $id = $_POST['txtId'] ?? null;
-            $fechaCreacion = $_POST['txtFechaCreacion'] ?? null;
+            //$fechaCreacion = $_POST['txtFechaCreacion'] ?? null;
             $descripcion = $_POST['txtDescripcion'] ?? null;
             $direccionamiento = $_POST['txtDireccionamiento'] ?? null;
             $estado = $_POST['txtEstado'] ?? null;
@@ -182,7 +170,7 @@ class ReporteController extends BaseController {
             $fkIdUsuario = $_POST['txtFkIdUsuario'] ?? null;
 
             $reporteObj = new ReporteModel();
-            $respuesta = $reporteObj->editReporte($id, $fechaCreacion, $descripcion, $direccionamiento, $estado, $fkIdAprendiz, $fkIdUsuario);
+            $respuesta = $reporteObj->editReporte($id, $descripcion, $direccionamiento, $estado, $fkIdAprendiz, $fkIdUsuario);   // Quitamos $fechaCreacion, por generacion automatica.
         }
         header("location: /reporte/view");
     }
@@ -207,10 +195,4 @@ class ReporteController extends BaseController {
         }
     }
 
-
-
-
-
-
-    
 }
