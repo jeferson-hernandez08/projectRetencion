@@ -21,7 +21,7 @@ class ReporteModel extends BaseModel {
         parent::__construct();
     }
 
-    public function saveReporte($descripcion, $direccionamiento, $estado, $fkIdAprendiz, $fkIdUsuario) {   // Eliminamos la variable $fechaCreacion,
+    public function saveReporte($descripcion, $direccionamiento, $estado, $fkIdAprendiz, $fkIdUsuario) {   // Eliminamos la variable $fechaCreacion, para generacion automatica
         try {
             // Generar fecha automática | Colombia
             date_default_timezone_set('America/Bogota');

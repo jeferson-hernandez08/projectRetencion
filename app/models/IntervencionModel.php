@@ -20,8 +20,12 @@ class IntervencionModel extends BaseModel {
         parent::__construct();
     }
 
-    public function saveIntervencion($fechaCreacion, $descripcion, $fkIdEstrategias, $fkIdReporte, $fkIdUsuario) {
+    public function saveIntervencion( $descripcion, $fkIdEstrategias, $fkIdReporte, $fkIdUsuario) {   // Eliminamos la variable $fechaCreacion, para generacion automatica
         try {
+            // Generar fecha automática | Colombia
+            date_default_timezone_set('America/Bogota');
+            $fechaCreacion = date('Y-m-d H:i:s');
+
             $sql = "INSERT INTO $this->table (fechaCreacion, descripcion, fkIdEstrategias, fkIdReporte, fkIdUsuario) 
                     VALUES (:fechaCreacion, :descripcion, :fkIdEstrategias, :fkIdReporte, :fkIdUsuario)";
             // 1. Se prepara la consulta
@@ -66,18 +70,17 @@ class IntervencionModel extends BaseModel {
         }
     }
 
-    public function editIntervencion($id, $fechaCreacion, $descripcion, $fkIdEstrategias, $fkIdReporte, $fkIdUsuario) {
+    public function editIntervencion($id, $descripcion, $fkIdEstrategias, $fkIdReporte, $fkIdUsuario) {  // Se elimina $fechaCreacion, fecha automática.
         try {
-            $sql = "UPDATE $this->table SET 
-                        fechaCreacion=:fechaCreacion, 
+            $sql = "UPDATE $this->table SET  
                         descripcion=:descripcion, 
                         fkIdEstrategias=:fkIdEstrategias, 
                         fkIdReporte=:fkIdReporte, 
                         fkIdUsuario=:fkIdUsuario 
-                    WHERE idIntervencion=:id";
+                    WHERE idIntervencion=:id";       // Se elimina fechaCreacion=:fechaCreacion, para fecha automática.
             $statement = $this->dbConnection->prepare($sql);
             $statement->bindParam(":id", $id, PDO::PARAM_INT);
-            $statement->bindParam(":fechaCreacion", $fechaCreacion, PDO::PARAM_STR);
+            //$statement->bindParam(":fechaCreacion", $fechaCreacion, PDO::PARAM_STR);
             $statement->bindParam(":descripcion", $descripcion, PDO::PARAM_STR);
             $statement->bindParam(":fkIdEstrategias", $fkIdEstrategias, PDO::PARAM_INT);
             $statement->bindParam(":fkIdReporte", $fkIdReporte, PDO::PARAM_INT);

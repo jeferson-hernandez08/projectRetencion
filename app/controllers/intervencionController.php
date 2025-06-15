@@ -60,11 +60,11 @@ class IntervencionController extends BaseController {
     }
 
     public function createIntervencion() {
-        if (isset($_POST['txtFechaCreacion']) && isset($_POST['txtDescripcion']) && 
+        if (isset($_POST['txtDescripcion']) && 
             isset($_POST['txtFkIdEstrategias']) && isset($_POST['txtFkIdReporte']) && 
-            isset($_POST['txtFkIdUsuario'])) {
+            isset($_POST['txtFkIdUsuario'])) {     // Se quita campo isset($_POST['txtFechaCreacion']) por que la fecha de creacion se geneara atomaticamente.
             
-            $fechaCreacion = $_POST['txtFechaCreacion'] ?? null;
+            //$fechaCreacion = $_POST['txtFechaCreacion'] ?? null;
             $descripcion = $_POST['txtDescripcion'] ?? null;
             $fkIdEstrategias = $_POST['txtFkIdEstrategias'] ?? null;
             $fkIdReporte = $_POST['txtFkIdReporte'] ?? null;
@@ -73,8 +73,8 @@ class IntervencionController extends BaseController {
             // Creamos instancia del Modelo Intervencion
             $intervencionObj = new IntervencionModel();
             
-            // Se llama al método que guarda en la base de datos
-            $intervencionObj->saveIntervencion($fechaCreacion, $descripcion, $fkIdEstrategias, $fkIdReporte, $fkIdUsuario);
+            // Se llama al método que guarda en la base de datos | Sin $fechaCreacion, ya que se genera automáticamente
+            $intervencionObj->saveIntervencion($descripcion, $fkIdEstrategias, $fkIdReporte, $fkIdUsuario); 
             $this->redirectTo("intervencion/view");
         } else {
             echo "No se capturaron todos los datos de la intervención";
@@ -114,19 +114,19 @@ class IntervencionController extends BaseController {
     }
 
     public function updateIntervencion() {
-        if (isset($_POST['txtId']) && isset($_POST['txtFechaCreacion']) && 
+        if (isset($_POST['txtId']) && 
             isset($_POST['txtDescripcion']) && isset($_POST['txtFkIdEstrategias']) && 
-            isset($_POST['txtFkIdReporte']) && isset($_POST['txtFkIdUsuario'])) {
+            isset($_POST['txtFkIdReporte']) && isset($_POST['txtFkIdUsuario'])) {  // Se elimina isset($_POST['txtFechaCreacion']) por que se genera automaticamente la fecha de creación
             
             $id = $_POST['txtId'] ?? null;
-            $fechaCreacion = $_POST['txtFechaCreacion'] ?? null;
+            //$fechaCreacion = $_POST['txtFechaCreacion'] ?? null;
             $descripcion = $_POST['txtDescripcion'] ?? null;
             $fkIdEstrategias = $_POST['txtFkIdEstrategias'] ?? null;
             $fkIdReporte = $_POST['txtFkIdReporte'] ?? null;
             $fkIdUsuario = $_POST['txtFkIdUsuario'] ?? null;
 
             $intervencionObj = new IntervencionModel();
-            $respuesta = $intervencionObj->editIntervencion($id, $fechaCreacion, $descripcion, $fkIdEstrategias, $fkIdReporte, $fkIdUsuario);
+            $respuesta = $intervencionObj->editIntervencion($id, $descripcion, $fkIdEstrategias, $fkIdReporte, $fkIdUsuario);   // // Quitamos $fechaCreacion, por generacion automatica.
         }
         header("location: /intervencion/view");
     }
