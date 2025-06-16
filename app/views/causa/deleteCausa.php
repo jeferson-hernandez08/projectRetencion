@@ -20,7 +20,10 @@
     <div class="confirmation-modal">
         <img src="/img/warning.svg" alt="Advertencia" class="confirmation-icon">
         <h2 class="confirmation-title">¿Está seguro de realizar esta acción?</h2>
-        <p class="confirmation-message">Se eliminará esta causa y sus relaciones con otros registros</p>
+        <p class="confirmation-message">
+            Se eliminará permanentemente esta causa # <?php echo $causa->idCausa ?>,
+            causa <?php echo $causa->causa ?>
+        </p>
         
         <form action="/causa/remove" method="post">
             <input type="hidden" value="<?php echo $causa->idCausa ?>" name="txtId">

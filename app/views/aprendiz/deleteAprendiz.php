@@ -19,7 +19,10 @@
     <div class="confirmation-modal">
         <img src="/img/warning.svg" alt="Advertencia" class="confirmation-icon">
         <h2 class="confirmation-title">¿Está seguro de realizar esta acción?</h2>
-        <p class="confirmation-message">Se eliminarán todos los datos del aprendiz y su historial</p>
+        <p class="confirmation-message">
+            Se eliminará permanentemente el aprendiz #<?php echo $aprendiz->idAprendiz ?>,
+            aprendiz <?php echo $aprendiz->nombre ?>
+        </p>
         
         <form action="/aprendiz/remove" method="post">
             <input type="hidden" value="<?php echo $aprendiz->idAprendiz ?>" name="txtId">

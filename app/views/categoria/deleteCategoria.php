@@ -20,7 +20,10 @@
     <div class="confirmation-modal">
         <img src="/img/warning.svg" alt="Advertencia" class="confirmation-icon">
         <h2 class="confirmation-title">¿Está seguro de realizar esta acción?</h2>
-        <p class="confirmation-message">Se eliminará esta categoría y todas las causas asociadas</p>
+        <p class="confirmation-message">
+            Se eliminará permanentemente esta categoría # <?php echo $categoria->idCategoria ?>,
+            categoría <?php echo $categoria->nombre ?>
+        </p>
         
         <form action="/categoria/remove" method="post">
             <input type="hidden" value="<?php echo $categoria->idCategoria ?>" name="txtId">

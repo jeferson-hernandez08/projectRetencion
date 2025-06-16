@@ -20,7 +20,10 @@
     <div class="confirmation-modal">
         <img src="/img/warning.svg" alt="Advertencia" class="confirmation-icon">
         <h2 class="confirmation-title">¿Está seguro de realizar esta acción?</h2>
-        <p class="confirmation-message">Se eliminará este programa de formación y todos sus grupos asociados</p>
+        <p class="confirmation-message">
+            Se eliminará permanentemente este programa de formación #<?php echo $programaFormacion->idProgramaFormacion ?>,
+            programa de formación <?php echo $programaFormacion->nombre ?>
+        </p>
         
         <form action="/programaFormacion/remove" method="post">
             <input type="hidden" value="<?php echo $programaFormacion->idProgramaFormacion ?>" name="txtId">

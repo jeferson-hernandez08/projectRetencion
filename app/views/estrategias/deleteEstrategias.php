@@ -20,7 +20,10 @@
     <div class="confirmation-modal">
         <img src="/img/warning.svg" alt="Advertencia" class="confirmation-icon">
         <h2 class="confirmation-title">¿Está seguro de realizar esta acción?</h2>
-        <p class="confirmation-message">Se eliminará esta estrategia y todas sus intervenciones asociadas</p>
+        <p class="confirmation-message">
+            Se eliminará permanentemente esta estrategia # <?php echo $estrategias->idEstrategias ?>,
+            estrategia <?php echo $estrategias->estrategia ?>
+        </p>
         
         <form action="/estrategias/remove" method="post">
             <input type="hidden" value="<?php echo $estrategias->idEstrategias ?>" name="txtId">

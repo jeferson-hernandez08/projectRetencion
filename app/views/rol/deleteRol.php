@@ -20,7 +20,10 @@
     <div class="confirmation-modal">
         <img src="/img/warning.svg" alt="Advertencia" class="confirmation-icon">
         <h2 class="confirmation-title">¿Está seguro de realizar esta acción?</h2>
-        <p class="confirmation-message">Se eliminará este rol y los permisos asociados</p>
+        <p class="confirmation-message">
+            Se eliminará permanentemente este rol # <?php echo $rol->idRol ?>,
+            rol <?php echo $rol->nombre ?>
+        </p>
         
         <form action="/rol/remove" method="post">
             <input type="hidden" value="<?php echo $rol->idRol ?>" name="txtId">

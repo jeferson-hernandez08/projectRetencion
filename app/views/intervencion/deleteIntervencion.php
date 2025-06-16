@@ -20,7 +20,10 @@
     <div class="confirmation-modal">
         <img src="/img/warning.svg" alt="Advertencia" class="confirmation-icon">
         <h2 class="confirmation-title">¿Está seguro de realizar esta acción?</h2>
-        <p class="confirmation-message">Se eliminará esta intervención y su registro</p>
+        <p class="confirmation-message">
+            Se eliminará permanentemente la intervención #<?php echo $intervencion->idIntervencion ?> 
+            creado el <?php echo date('d/m/Y', strtotime($intervencion->fechaCreacion)) ?>
+        </p>
         
         <form action="/intervencion/remove" method="post">
             <input type="hidden" value="<?php echo $intervencion->idIntervencion ?>" name="txtId">
