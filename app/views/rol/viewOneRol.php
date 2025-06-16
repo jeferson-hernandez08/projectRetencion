@@ -7,12 +7,21 @@
     <div class="info">
         <?php
             if($rol && is_object($rol)) {
-                // echo "<pre>";
-                // print_r($rol);
-                // echo "<pre>";
                 echo "<div class='record-one'>
-                        <span>ID: $rol->idRol</span>
-                        <span>Nombre: $rol->nombre</span>
+                        <div class='record-one__header'>
+                            <div class='record-one__icon'>📝</div>
+                            <div class='record-one__title'>Detalle del Rol</div>
+                        </div>
+                        <div class='record-one__details'>
+                            <div class='record-one__row'>
+                                <span class='record-one__label'>ID:</span>
+                                <span class='record-one__value'>{$rol->idRol}</span>
+                            </div>
+                            <div class='record-one__row'>
+                                <span class='record-one__label'>Nombre:</span>
+                                <span class='record-one__value'>{$rol->nombre}</span>
+                            </div>
+                        </div>
                       </div>";
             }
         ?>

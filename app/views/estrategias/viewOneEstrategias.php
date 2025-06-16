@@ -7,13 +7,25 @@
     <div class="info">
         <?php
             if($estrategia && is_object($estrategia)) {
-                // echo "<pre>";
-                // print_r($estrategia);
-                // echo "<pre>";
                 echo "<div class='record-one'>
-                        <span>ID: $estrategia->idEstrategias</span>
-                        <span>Estrategia: $estrategia->estrategia</span>
-                        <span>Categoría: $estrategia->nombreCategoria</span>
+                        <div class='record-one__header'>
+                            <div class='record-one__icon'>📝</div>
+                            <div class='record-one__title'>Detalle de la Estrategia</div>
+                        </div>
+                        <div class='record-one__details'>
+                            <div class='record-one__row'>
+                                <span class='record-one__label'>ID:</span>
+                                <span class='record-one__value'>{$estrategia->idEstrategias}</span>
+                            </div>
+                            <div class='record-one__row'>
+                                <span class='record-one__label'>Estrategia:</span>
+                                <span class='record-one__value'>{$estrategia->estrategia}</span>
+                            </div>
+                            <div class='record-one__row'>
+                                <span class='record-one__label'>Categoría:</span>
+                                <span class='record-one__value'>{$estrategia->nombreCategoria}</span>
+                            </div>
+                        </div>
                       </div>";
             }
         ?>

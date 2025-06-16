@@ -7,16 +7,37 @@
     <div class="info">
         <?php
             if($intervencion && is_object($intervencion)) {
-                // echo "<pre>";
-                // print_r($intervencion);
-                // echo "<pre>";
                 echo "<div class='record-one'>
-                        <span>ID: $intervencion->idIntervencion</span>
-                        <span>Fecha Creación: ".date('d/m/Y H:i', strtotime($intervencion->fechaCreacion))."</span>
-                        <span>Descripción: $intervencion->descripcion</span>
-                        <span>Estrategia: $intervencion->nombreEstrategia</span>
-                        <span>Reporte Relacionado: $intervencion->descripcionReporte</span>
-                        <span>Usuario Responsable: $intervencion->nombreUsuario</span>
+                        <div class='record-one__header'>
+                            <div class='record-one__icon'>📝</div>
+                            <div class='record-one__title'>Detalle de la Intervención</div>
+                        </div>
+                        <div class='record-one__details'>
+                            <div class='record-one__row'>
+                                <span class='record-one__label'>ID:</span>
+                                <span class='record-one__value'>{$intervencion->idIntervencion}</span>
+                            </div>
+                            <div class='record-one__row'>
+                                <span class='record-one__label'>Fecha Creación:</span>
+                                <span class='record-one__value'>".date('d/m/Y H:i', strtotime($intervencion->fechaCreacion))."</span>
+                            </div>
+                            <div class='record-one__row'>
+                                <span class='record-one__label'>Descripción:</span>
+                                <span class='record-one__value'>{$intervencion->descripcion}</span>
+                            </div>
+                            <div class='record-one__row'>
+                                <span class='record-one__label'>Estrategia:</span>
+                                <span class='record-one__value'>{$intervencion->nombreEstrategia}</span>
+                            </div>
+                            <div class='record-one__row'>
+                                <span class='record-one__label'>Reporte Relacionado:</span>
+                                <span class='record-one__value'>{$intervencion->descripcionReporte}</span>
+                            </div>
+                            <div class='record-one__row'>
+                                <span class='record-one__label'>Usuario Responsable:</span>
+                                <span class='record-one__value'>{$intervencion->nombreUsuario}</span>
+                            </div>
+                        </div>
                       </div>";
             }
         ?>

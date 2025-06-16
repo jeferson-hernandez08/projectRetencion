@@ -8,12 +8,29 @@
         <?php
             // Verificamos si la categoría es válida y es un objeto
             if($categoria && is_object($categoria)) {
-                // Mostramos la información de la categoría
                 echo "<div class='record-one'>
-                        <span>ID: $categoria->idCategoria</span>
-                        <span>Nombre: $categoria->nombre</span>
-                        <span>Descripción: $categoria->descripcion</span>
-                        <span>Direccionamiento: $categoria->direccionamiento</span>
+                        <div class='record-one__header'>
+                            <div class='record-one__icon'>📝</div>
+                            <div class='record-one__title'>Detalle de la categoría</div>
+                        </div>
+                        <div class='record-one__details'>
+                            <div class='record-one__row'>
+                                <span class='record-one__label'>ID:</span>
+                                <span class='record-one__value'>{$categoria->idCategoria}</span>
+                            </div>
+                            <div class='record-one__row'>
+                                <span class='record-one__label'>Nombre:</span>
+                                <span class='record-one__value'>{$categoria->nombre}</span>
+                            </div>
+                            <div class='record-one__row'>
+                                <span class='record-one__label'>Descripción:</span>
+                                <span class='record-one__value'>{$categoria->descripcion}</span>
+                            </div>
+                            <div class='record-one__row'>
+                                <span class='record-one__label'>Direccionamiento:</span>
+                                <span class='record-one__value'>{$categoria->direccionamiento}</span>
+                            </div>
+                        </div>
                       </div>";
             }
         ?>

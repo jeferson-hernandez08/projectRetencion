@@ -181,13 +181,6 @@ div.record {
     transition: all 0.3s ease;
 }
 
-div.record-one{
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    gap: 1rem;
-    padding: 1rem;
-}
 
 .buttons {
     display: flex;
@@ -1240,29 +1233,102 @@ body.dark-mode .theme-toggle {
     background: linear-gradient(135deg, #1a2a3a 0%, #0d1b2a 100%);
 }
 
-@media (max-width: 768px) {
-    .footer-container {
-        grid-template-columns: 1fr;
-        gap: 2rem;
-    }
-
-    .footer-section {
-        text-align: center;
-    }
-
-    .footer-logo {
-        justify-content: center;
-    }
-
-    .footer-section h3::after {
-        left: 50%;
-        transform: translateX(-50%);
-    }
-
-    .footer-social {
-        justify-content: center;
-    }
+/* ...existing code... */
+.record-one {
+  background: linear-gradient(135deg, #f8fafc 0%, #e0e7ef 100%);
+  border-radius: 18px;
+  box-shadow: 0 4px 24px rgba(60, 72, 88, 0.12), 0 1.5px 6px rgba(60, 72, 88, 0.08);
+  padding: 2rem 2.5rem;
+  margin: 2rem auto;
+  max-width: 680px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  font-family: 'Segoe UI', 'Roboto', Arial, sans-serif;
+  color: #22223b;
+  position: relative;
+  overflow: hidden;
 }
 
+.record-one::before {
+  content: '';
+  position: absolute;
+  top: -40px;
+  right: -40px;
+  width: 120px;
+  height: 120px;
+  background: radial-gradient(circle, #a3cef1 0%, transparent 70%);
+  z-index: 0;
+}
 
+.record-one__header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  z-index: 1;
+}
 
+.record-one__icon {
+  width: 48px;
+  height: 48px;
+  background: #4361ee;
+  color: #fff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  margin-right: 1rem;
+  box-shadow: 0 2px 8px rgba(67, 97, 238, 0.15);
+}
+
+.record-one__title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+.record-one__details {
+  width: 100%;
+  z-index: 1;
+}
+
+.record-one__row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.75rem 0;
+  border-bottom: 1px solid #616161;
+}
+
+.record-one__row:last-child {
+  border-bottom: none;
+}
+
+.record-one__label {
+  font-weight: 500;
+  color: #495057;
+  font-size: 1rem;
+}
+
+.record-one__value {
+  font-weight: 600;
+  color: #22223b;
+  font-size: 1.05rem;
+  text-align: right;
+}
+
+@media (max-width: 600px) {
+  .record-one {
+    padding: 1.2rem 1rem;
+    max-width: 98vw;
+  }
+  .record-one__header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .record-one__icon {
+    margin-bottom: 0.5rem;
+    margin-right: 0;
+  }
+}

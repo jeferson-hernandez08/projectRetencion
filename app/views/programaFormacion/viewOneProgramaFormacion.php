@@ -7,12 +7,21 @@
     <div class="info">
         <?php
             if($programa && is_object($programa)) {
-                // echo "<pre>";
-                // print_r($programa);
-                // echo "<pre>";
                 echo "<div class='record-one'>
-                        <span>ID: $programa->idProgramaFormacion</span>
-                        <span>Nombre: $programa->nombre</span>
+                        <div class='record-one__header'>
+                            <div class='record-one__icon'>📝</div>
+                            <div class='record-one__title'>Detalle del Programa de Formación</div>
+                        </div>
+                        <div class='record-one__details'>
+                            <div class='record-one__row'>
+                                <span class='record-one__label'>ID:</span>
+                                <span class='record-one__value'>{$programa->idProgramaFormacion}</span>
+                            </div>
+                            <div class='record-one__row'>
+                                <span class='record-one__label'>Nombre:</span>
+                                <span class='record-one__value'>{$programa->nombre}</span>
+                            </div>
+                        </div>
                       </div>";
             }
         ?>

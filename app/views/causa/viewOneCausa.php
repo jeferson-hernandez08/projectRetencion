@@ -11,10 +11,28 @@
                 // print_r($causa);
                 // echo "<pre>";
                 echo "<div class='record-one'>
-                        <span>ID: $causa->idCausa</span>
-                        <span>Causa: $causa->causa</span>
-                        <span>Variables: $causa->variables</span>
-                        <span>Categoría: $causa->nombreCategoria</span>
+                        <div class='record-one__header'>
+                            <div class='record-one__icon'>📝</div>
+                            <div class='record-one__title'>Detalle de la Causa</div>
+                        </div>
+                        <div class='record-one__details'>
+                            <div class='record-one__row'>
+                                <span class='record-one__label'>ID:</span>
+                                <span class='record-one__value'>$causa->idCausa</span>
+                            </div>
+                            <div class='record-one__row'>
+                                <span class='record-one__label'>Causa:</span>
+                                <span class='record-one__value'>$causa->causa</span>
+                            </div>
+                            <div class='record-one__row'>
+                                <span class='record-one__label'>Variables:</span>
+                                <span class='record-one__value'>$causa->variables</span>
+                            </div>
+                            <div class='record-one__row'>
+                                <span class='record-one__label'>Categoría:</span>
+                                <span class='record-one__value'>$causa->nombreCategoria</span>
+                            </div>
+                        </div>
                       </div>";
             }
         ?>
