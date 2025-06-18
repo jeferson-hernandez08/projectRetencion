@@ -24,7 +24,7 @@
                 <?php elseif($rolUsuario == 'Vocero'): ?>
                     <p>Como <strong>Vocero</strong>, puedes reportar situaciones y hacer seguimiento a casos de aprendices.</p>
                 <?php else: ?>
-                    <p>Tu rol te permite acceder a funciones específicas del sistema de retención.</p>
+                    <p>Como <strong><?php echo $rolUsuario; ?></strong>, tienes acceso a funciones específicas del sistema de retención estudiantil.</p>
                 <?php endif; ?>
             </div>
             
@@ -65,11 +65,25 @@
         
         <!-- Animación de bienvenida -->
         <div class="animacion-bienvenida">
-            <div class="confeti"></div>
-            <div class="confeti"></div>
-            <div class="confeti"></div>
-            <div class="confeti"></div>
-            <div class="confeti"></div>
+            <!-- Los confetis se generan dinámicamente con JS -->
         </div>
     </div>
 </div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const animacion = document.querySelector('.animacion-bienvenida');
+        const colores = ['#ff9aa2', '#ffb7b2', '#ffdac1', '#e2f0cb', '#b5ead7'];
+        
+        // Crear 15 confetis
+        for (let i = 0; i < 15; i++) {
+            const confeti = document.createElement('div');
+            confeti.classList.add('confeti');
+            confeti.style.left = Math.random() * 100 + '%';
+            confeti.style.background = colores[Math.floor(Math.random() * colores.length)];
+            confeti.style.animationDelay = Math.random() * 5 + 's';
+            confeti.style.animationDuration = (Math.random() * 5 + 5) + 's';
+            animacion.appendChild(confeti);
+        }
+    });
+</script>

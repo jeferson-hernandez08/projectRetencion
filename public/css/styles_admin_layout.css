@@ -23,7 +23,7 @@ html, body {
     background-color: #1a3c40; 
     /* background: linear-gradient(135deg, #1a3c40 0%, #0d4d0d 100%); */
     color: white;
-    height: 95vh;
+    /* height: 95vh; */
     transition: all 0.3s ease;
     overflow-y: auto;
     overflow-x: hidden;
@@ -127,12 +127,13 @@ body.dark-mode .logo-text {
 }
 
 .content {
+    /* border: red solid 3px; */
     padding: 20px;
     display: flex;
     justify-content: flex-start; /* Alinea al inicio en lugar de center */
     flex-grow: 1;
     background-color: #aaaaaab4; /* Gris claro para el modo claro */
-    height: calc(95vh - 91px); /* Ajusta la altura para que no cubra el header y el footer */
+    /* height: calc(95vh - 91px);  Ajusta la altura para que no cubra el header y el footer */
     overflow-y: auto;     /* Permite scroll si el contenido es muy largo */
     position: relative;   /* Para posicionamiento relativo */
 }
