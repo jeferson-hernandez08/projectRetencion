@@ -59,7 +59,7 @@
         <!-- Elementos decorativos -->
         <div class="circulo verde1"></div>
         <div class="circulo verde2">
-            <img src="/img/logoSenaWhite.png" alt="Logo Sena" class="logo">
+            <img src="/img/logoSenaWhite.png" alt="Logo Sena" class="logo-sena-bienvenida">
         </div>
         <div class="circulo verde3"></div>
         
