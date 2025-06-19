@@ -210,25 +210,7 @@
         });
 
 
-        // ***************** Footer y Modo Oscuro ******************
-         // Función para cambiar el modo oscuro/claro  | ERROR AQUI
-        // function toggleDarkMode() {
-        //     const body = document.body;
-        //     body.classList.toggle('dark-mode');
-            
-        //     // Actualizar icono
-        //     const themeIcon = document.querySelector('#theme-toggle i');
-        //     if (body.classList.contains('dark-mode')) {
-        //         themeIcon.classList.remove('fa-moon');
-        //         themeIcon.classList.add('fa-sun');
-        //         localStorage.setItem('darkMode', 'true');
-        //     } else {
-        //         themeIcon.classList.remove('fa-sun');
-        //         themeIcon.classList.add('fa-moon');
-        //         localStorage.setItem('darkMode', 'false');
-        //     }
-        // }
-
+        // ***************** Header y Footer Modo Oscuro ******************
         function toggleDarkMode() {
             const body = document.body;
             const isDark = body.classList.toggle('dark-mode');
