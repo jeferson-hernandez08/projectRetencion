@@ -211,21 +211,41 @@
 
 
         // ***************** Footer y Modo Oscuro ******************
-         // Función para cambiar el modo oscuro/claro
+         // Función para cambiar el modo oscuro/claro  | ERROR AQUI
+        // function toggleDarkMode() {
+        //     const body = document.body;
+        //     body.classList.toggle('dark-mode');
+            
+        //     // Actualizar icono
+        //     const themeIcon = document.querySelector('#theme-toggle i');
+        //     if (body.classList.contains('dark-mode')) {
+        //         themeIcon.classList.remove('fa-moon');
+        //         themeIcon.classList.add('fa-sun');
+        //         localStorage.setItem('darkMode', 'true');
+        //     } else {
+        //         themeIcon.classList.remove('fa-sun');
+        //         themeIcon.classList.add('fa-moon');
+        //         localStorage.setItem('darkMode', 'false');
+        //     }
+        // }
+
         function toggleDarkMode() {
             const body = document.body;
-            body.classList.toggle('dark-mode');
-            
-            // Actualizar icono
-            const themeIcon = document.querySelector('#theme-toggle i');
-            if (body.classList.contains('dark-mode')) {
-                themeIcon.classList.remove('fa-moon');
-                themeIcon.classList.add('fa-sun');
-                localStorage.setItem('darkMode', 'true');
-            } else {
-                themeIcon.classList.remove('fa-sun');
-                themeIcon.classList.add('fa-moon');
-                localStorage.setItem('darkMode', 'false');
+            const isDark = body.classList.toggle('dark-mode');
+            localStorage.setItem('darkMode', isDark);
+
+            // Icono del header
+            const headerIcon = document.querySelector('#theme-toggle-link i');
+            if (headerIcon) {
+                headerIcon.classList.toggle('fa-moon', !isDark);
+                headerIcon.classList.toggle('fa-sun', isDark);
+            }
+
+            // Icono del footer
+            const footerIcon = document.querySelector('#theme-toggle i');
+            if (footerIcon) {
+                footerIcon.classList.toggle('fa-moon', !isDark);
+                footerIcon.classList.toggle('fa-sun', isDark);
             }
         }
         
