@@ -100,7 +100,7 @@
     
     <footer class="footer">
         <div class="footer-container">
-            <div class="footer-section">
+            <div class="footer-section footer-logo-container">
                 <div class="footer-logo">
                     <img src="/img/logoProyect.png" alt="Logo RetencionCPIC">
                     <div class="footer-logo-text">RetencionCPIC</div>
