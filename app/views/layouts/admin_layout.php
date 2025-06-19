@@ -50,6 +50,7 @@
                         <?php endif ?>
                         <?php if(isset($_SESSION['rol']) && $_SESSION['rol'] == 18): ?>   <!-- Administrador -->
                             <li><a href="/rol/view"><i class="fas fa-users-cog"></i><span class="info-text">Roles</span></a></li>
+                            <li><a href="/usuario/view"><i class="fas fa-users"></i><span class="info-text">Usuarios</span></a></li>    <!-- Permitimos que el administrador cree usuarios tambien -->
                         <?php endif ?>
                         <!-- <li><a href="/main"><i class="fas fa-home"></i><span class="info-text">Inicio</span></a></li>
                         <li><a href="/rol/view"><i class="fas fa-users-cog"></i><span class="info-text">Roles</span></a></li>
@@ -145,6 +146,7 @@
                     <?php endif ?>
                     <?php if(isset($_SESSION['rol']) && $_SESSION['rol'] == 18): ?>   <!-- Administrador -->
                         <li><a href="/rol/view"><i class="fas fa-users-cog"></i> Roles</a></li>
+                        <li><a href="/usuario/view"><i class="fas fa-users"></i><span class="info-text">Usuarios</span></a></li>    <!-- Permitimos que el administrador cree usuarios tambien -->
                     <?php endif ?>
                 </ul>
             </div>
