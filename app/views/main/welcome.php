@@ -62,6 +62,10 @@
             <img src="/img/logoSenaWhite.png" alt="Logo Sena" class="logo-sena-bienvenida">
         </div>
         <div class="circulo verde3"></div>
+        <div class="circulo verde4"></div>
+        <div class="circulo verde5"></div>
+        <div class="circulo verde6"></div>
+        <div class="circulo verde7"></div>
         
         <!-- Animación de bienvenida -->
         <div class="animacion-bienvenida">
@@ -73,16 +77,32 @@
 <script>
     document.addEventListener('DOMContentLoaded', function() {
         const animacion = document.querySelector('.animacion-bienvenida');
-        const colores = ['#ff9aa2', '#ffb7b2', '#ffdac1', '#e2f0cb', '#b5ead7'];
+        
+        // Paleta de colores vibrantes
+            const colores = [
+                '#FF5252', // Rojo vibrante
+                '#4CAF50', // Verde SENA
+                '#2196F3', // Azul brillante
+                '#FFD600', // Amarillo vibrante
+                '#9C27B0', // Morado
+                '#FF9800', // Naranja
+                '#00BCD4', // Turquesa
+                '#E91E63'  // Rosa
+            ];
         
         // Crear 15 confetis
-        for (let i = 0; i < 15; i++) {
+        for (let i = 0; i < 25; i++) {
             const confeti = document.createElement('div');
+
             confeti.classList.add('confeti');
             confeti.style.left = Math.random() * 100 + '%';
             confeti.style.background = colores[Math.floor(Math.random() * colores.length)];
             confeti.style.animationDelay = Math.random() * 5 + 's';
             confeti.style.animationDuration = (Math.random() * 5 + 5) + 's';
+
+            // Rotación aleatoria inicial efecto de confetis arriba
+            confeti.style.transform = `rotate(${Math.random() * 360}deg)`;
+
             animacion.appendChild(confeti);
         }
     });

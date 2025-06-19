@@ -11,10 +11,14 @@
     background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
     box-sizing: border-box;
     overflow: hidden; /* Prevenir desbordamiento */
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15), 
+                0 8px 16px rgba(0, 0, 0, 0.1);
 }
 
 .dark-mode .contenedor-principal {
     background: linear-gradient(135deg, #2d3748 0%, #1a202c 100%);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.35), 
+                0 8px 16px rgba(0, 0, 0, 0.25);
 }
 
 .contenido-caja {
@@ -32,11 +36,17 @@
     box-sizing: border-box; /* Añadido */
     max-height: 90vh; /* Limitar altura máxima */
     overflow-y: auto; /* Permitir scroll interno si es necesario */
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2), 
+                0 5px 15px rgba(0, 0, 0, 0.15),
+                inset 0 -3px 10px rgba(0, 0, 0, 0.05);
 }
 
 .dark-mode .contenido-caja {
     background: #2d3748;
     color: #e2e8f0;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3), 
+                0 5px 15px rgba(0, 0, 0, 0.25),
+                inset 0 -3px 10px rgba(255, 255, 255, 0.05);
 }
 
 .contenido-texto {
@@ -123,7 +133,7 @@
 }
 
 .dark-mode .mensaje-rol {
-    background: rgba(129, 199, 132, 0.1);
+    background: rgba(0, 0, 0, 0.671);
     border-left-color: #4caf50;
     color: #e2e8f0;
 }
@@ -219,50 +229,122 @@
     position: absolute;
     border-radius: 50%;
     z-index: 1;
+    opacity: 0.8;
+    animation: flotar 10s infinite ease-in-out;
+}
+
+@keyframes flotar {
+    0%, 100% { transform: translateY(0) scale(1); }
+    50% { transform: translateY(-15px) scale(1.05); }
 }
 
 .verde1 {
-    width: 200px;
-    height: 200px;
-    background: #e8f5e9;
+    width: 220px;
+    height: 220px;
+    background: linear-gradient(135deg, #4CAF50, #2E7D32);
     top: -50px;
     left: -50px;
+    animation-delay: 0s;
 }
 
 .dark-mode .verde1 {
-    background: rgba(129, 199, 132, 0.2);
+    background: linear-gradient(135deg, #66BB6A, #388E3C);
 }
 
 .verde2 {
-    width: 150px;
-    height: 150px;
-    background: #2e7d32;
-    bottom: -50px;
-    right: -50px;
+    width: 160px;
+    height: 160px;
+    background: linear-gradient(135deg, #81C784, #4CAF50);
+    top: 30px; /* Movido a la parte superior */
+    right: 30px; /* Posición superior derecha */
     display: flex;
     justify-content: center;
     align-items: center;
+    animation-delay: 0.5s;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
 }
 
 .dark-mode .verde2 {
-    background: #1b5e20;
+    background: linear-gradient(135deg, #A5D6A7, #66BB6A);
 }
 
 .verde3 {
-    width: 100px;
-    height: 100px;
-    background: #a5d6a7;
-    top: 100px;
-    right: 100px;
+    width: 120px;
+    height: 120px;
+    background: linear-gradient(135deg, #C8E6C9, #A5D6A7);
+    bottom: 100px;
+    left: 100px;
+    animation-delay: 1s;
 }
 
 .dark-mode .verde3 {
-    background: rgba(165, 214, 167, 0.3);
+    background: linear-gradient(135deg, #2E7D32, #1B5E20);
+}
+
+/* Nuevos círculos decorativos */
+.verde4 {
+    width: 180px;
+    height: 180px;
+    background: linear-gradient(135deg, #A5D6A7, #81C784);
+    bottom: -50px;
+    right: 100px;
+    animation-delay: 1.5s;
+}
+
+.dark-mode .verde4 {
+    background: linear-gradient(135deg, #A5D6A7, #66BB6A);
+    /* background: linear-gradient(135deg, #388E3C, #2E7D32); */
+}
+
+.verde5 {
+    width: 140px;
+    height: 140px;
+    background: linear-gradient(135deg, #66BB6A, #4CAF50);
+    top: 200px;
+    left: 50px;
+    animation-delay: 2s;
+}
+
+.dark-mode .verde5 {
+    background: linear-gradient(135deg, #43A047, #388E3C);
+}
+
+.verde6 {
+    width: 100px;
+    height: 100px;
+    background: linear-gradient(135deg, #4CAF50, #2E7D32);
+    bottom: 200px;
+    right: 200px;
+    animation-delay: 2.5s;
+}
+
+.dark-mode .verde6 {
+    background: linear-gradient(135deg, #1B5E20, #0D4712);
+}
+
+.verde7 {
+    width: 80px;
+    height: 80px;
+    background: linear-gradient(135deg, #81C784, #4CAF50);
+    top: 150px;
+    right: 200px;
+    animation-delay: 3s;
+}
+
+.dark-mode .verde7 {
+    background: linear-gradient(135deg, #66BB6A, #43A047);
 }
 
 .logo-sena-bienvenida {
     width: 80px;
     height: 80px;
+    filter: drop-shadow(0 2px 5px rgba(0,0,0,0.2));
+    animation: rotar 15s infinite linear;    /* Para que el logo se mueva 360 grados en 15 segundos */
+}
+
+@keyframes rotar {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
 }
 
 /* Animación de confeti */
