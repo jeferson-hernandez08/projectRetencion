@@ -16,11 +16,11 @@
                 <?php if($rolUsuario == 'Administrador'): ?>
                     <p>Como <strong>Administrador</strong>, tienes acceso completo al sistema para gestionar usuarios, roles y configuraciones.</p>
                 <?php elseif($rolUsuario == 'Instructor'): ?>
-                    <p>Como <strong>Instructor</strong>, puedes gestionar reportes, intervenciones y seguimiento de aprendices.</p>
+                    <p>Como <strong>Instructor</strong>, puedes gestionar los aprendices, reportes, intervenciones, y grupos.</p>
                 <?php elseif($rolUsuario == 'Coordinador'): ?>
                     <p>Como <strong>Coordinador</strong>, puedes administrar programas, grupos y seguimiento institucional.</p>
                 <?php elseif($rolUsuario == 'Profesional Bienestar'): ?>
-                    <p>Como <strong>Profesional de Bienestar</strong>, puedes gestionar categorías, causas y estrategias de intervención.</p>
+                    <p>Como <strong>Profesional de Bienestar</strong>, puedes gestionar categorías, causas, estrategias de intervención, intervenciones, reportes y seguimiento de aprendices.</p>
                 <?php elseif($rolUsuario == 'Vocero'): ?>
                     <p>Como <strong>Vocero</strong>, puedes reportar situaciones y hacer seguimiento a casos de aprendices.</p>
                 <?php else: ?>
@@ -39,19 +39,25 @@
                         <a href="/usuario/view" class="btn-accion"><i class="fas fa-users"></i> Gestionar Usuarios</a>
                         <a href="/rol/view" class="btn-accion"><i class="fas fa-user-cog"></i> Administrar Roles</a>
                     <?php elseif($rolUsuario == 'Instructor'): ?>
-                        <a href="/reporte/new" class="btn-accion"><i class="fas fa-flag"></i> Nuevo Reporte</a>
                         <a href="/aprendiz/view" class="btn-accion"><i class="fas fa-user-graduate"></i> Ver Aprendices</a>
+                        <a href="/reporte/new" class="btn-accion"><i class="fas fa-chart-line"></i> Nuevo Reporte</a>
+                        <a href="/intervencion/new" class="btn-accion"><i class="fas fa-hand-holding-heart"></i> Nueva Intervercion</a>
+                        <a href="/grupo/view" class="btn-accion"><i class="fas fa-graduation-cap"></i> Ver Grupos</a>
                     <?php elseif($rolUsuario == 'Coordinador'): ?>
                         <a href="/programaFormacion/view" class="btn-accion"><i class="fas fa-chalkboard-teacher"></i> Programas</a>
                         <a href="/grupo/view" class="btn-accion"><i class="fas fa-graduation-cap"></i> Grupos</a>
                     <?php elseif($rolUsuario == 'Profesional Bienestar'): ?>
-                        <a href="/causa/view" class="btn-accion"><i class="fas fa-question-circle"></i> Causas</a>
-                        <a href="/estrategias/view" class="btn-accion"><i class="fas fa-lightbulb"></i> Estrategias</a>
+                        <a href="/categoria/new" class="btn-accion"><i class="fas fa-tags"></i> Nueva Categoria</a>
+                        <a href="/causa/new" class="btn-accion"><i class="fas fa-question-circle"></i> Nueva Causa</a>
+                        <a href="/estrategias/new" class="btn-accion"><i class="fas fa-lightbulb"></i> Nueva Estrategia</a>
+                        <a href="/intervencion/new" class="btn-accion"><i class="fas fa-hand-holding-heart"></i> Nueva Intervenciones</a>
+                        <a href="/reporte/view" class="btn-accion"><i class="fas fa-chart-line"></i> Ver Reportes</a>
+                        <a href="/aprendiz/view" class="btn-accion"><i class="fas fa-user-graduate"></i> Ver Aprendices</a>
                     <?php elseif($rolUsuario == 'Vocero'): ?>
                         <a href="/reporte/new" class="btn-accion"><i class="fas fa-flag"></i> Nuevo Reporte</a>
                         <a href="/aprendiz/view" class="btn-accion"><i class="fas fa-user-graduate"></i> Aprendices</a>
                     <?php endif; ?>
-                    <a href="/reporte/view" class="btn-accion"><i class="fas fa-list"></i> Ver Reportes</a>
+                    <!-- <a href="/reporte/view" class="btn-accion"><i class="fas fa-list"></i> Ver Reportes</a> -->
                 </div>
             </div>
         </div>

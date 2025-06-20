@@ -1268,11 +1268,11 @@ body.dark-mode .footer {
     transform: scale(1.1) rotate(20deg);
 }
 
-/*
-body.dark-mode .theme-toggle {
+/* body.dark-mode .theme-toggle {
     background: linear-gradient(135deg, #1a2a3a 0%, #0d1b2a 100%);
-}
+} */
 
+/**************************...Estilos para el viewOne o Consultar de cada tabla...************************/
 .record-one {
   background: linear-gradient(135deg, #f8fafc 0%, #e0e7ef 100%);
   border-radius: 18px;
@@ -1370,4 +1370,4 @@ body.dark-mode .theme-toggle {
     margin-bottom: 0.5rem;
     margin-right: 0;
   }
-} */
+}
