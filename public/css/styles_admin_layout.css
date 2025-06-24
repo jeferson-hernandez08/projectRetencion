@@ -37,6 +37,7 @@ html, body {
     align-items: center;
 }
 
+/* Oculta o comprime el sidebar */
 .sidebar.sidebar-hidden {
     width: 60px; /* o display: none; según tu diseño */
 }
