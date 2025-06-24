@@ -213,13 +213,32 @@
             }
         });
 
-        // Event listeners
-        document.querySelector('#menu-toggle').addEventListener('click', function() {
+        // --- Sidebar: Mantener estado comprimido/expandido ---
+        function setSidebarState(isHidden) {
+            localStorage.setItem('sidebarHidden', isHidden ? '1' : '0');
+        }
+        function getSidebarState() {
+            return localStorage.getItem('sidebarHidden') === '1';
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            // Restaurar estado del sidebar
             const sidebar = document.getElementById('sidebar');
-            sidebar.classList.toggle('sidebar-hidden');
+            if (getSidebarState()) {
+                sidebar.classList.add('sidebar-hidden');
+            } else {
+                sidebar.classList.remove('sidebar-hidden');
+            }
+
+            // Botón hamburguesa
+            document.querySelector('#menu-toggle').addEventListener('click', function() {
+                sidebar.classList.toggle('sidebar-hidden');
+                setSidebarState(sidebar.classList.contains('sidebar-hidden'));
+            });
+
+            // Si haces clic en un enlace del menú, NO cambies el estado
+            // Así el sidebar se mantiene comprimido si estaba comprimido
         });
-
-
         // ***************** Header y Footer Modo Oscuro ******************
         function toggleDarkMode() {
             const body = document.body;
