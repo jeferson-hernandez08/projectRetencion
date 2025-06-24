@@ -14,11 +14,11 @@
             
             <div class="mensaje-rol">
                 <?php if($rolUsuario == 'Administrador'): ?>
-                    <p>Como <strong>Administrador</strong>, tienes acceso completo al sistema para gestionar usuarios, roles y configuraciones.</p>
+                    <p>Como <strong>Administrador</strong>, tienes acceso completo al sistema para gestionar roles y usuarios.</p>
                 <?php elseif($rolUsuario == 'Instructor'): ?>
                     <p>Como <strong>Instructor</strong>, puedes gestionar los aprendices, reportes, intervenciones, y grupos.</p>
                 <?php elseif($rolUsuario == 'Coordinador'): ?>
-                    <p>Como <strong>Coordinador</strong>, puedes administrar programas, grupos y seguimiento institucional.</p>
+                    <p>Como <strong>Coordinador</strong>, puedes administrar programas, grupos, aprendices, reportes, usuarios y seguimiento institucional.</p>
                 <?php elseif($rolUsuario == 'Profesional Bienestar'): ?>
                     <p>Como <strong>Profesional de Bienestar</strong>, puedes gestionar categorías, causas, estrategias de intervención, intervenciones, reportes y seguimiento de aprendices.</p>
                 <?php elseif($rolUsuario == 'Vocero'): ?>
@@ -36,8 +36,8 @@
                 <h3>Acciones rápidas:</h3>
                 <div class="botones">
                     <?php if($rolUsuario == 'Administrador'): ?>
-                        <a href="/usuario/view" class="btn-accion"><i class="fas fa-users"></i> Gestionar Usuarios</a>
                         <a href="/rol/view" class="btn-accion"><i class="fas fa-user-cog"></i> Administrar Roles</a>
+                        <a href="/usuario/view" class="btn-accion"><i class="fas fa-users"></i> Gestionar Usuarios</a>
                     <?php elseif($rolUsuario == 'Instructor'): ?>
                         <a href="/aprendiz/view" class="btn-accion"><i class="fas fa-user-graduate"></i> Ver Aprendices</a>
                         <a href="/reporte/new" class="btn-accion"><i class="fas fa-chart-line"></i> Nuevo Reporte</a>
@@ -46,6 +46,9 @@
                     <?php elseif($rolUsuario == 'Coordinador'): ?>
                         <a href="/programaFormacion/view" class="btn-accion"><i class="fas fa-chalkboard-teacher"></i> Programas</a>
                         <a href="/grupo/view" class="btn-accion"><i class="fas fa-graduation-cap"></i> Grupos</a>
+                        <a href="/aprendiz/view" class="btn-accion"><i class="fas fa-user-graduate"></i> Ver Aprendices</a>
+                        <a href="/reporte/view" class="btn-accion"><i class="fas fa-chart-line"></i> Ver Reportes</a>
+                        <a href="/usuario/view" class="btn-accion"><i class="fas fa-users"></i> Gestionar Usuarios</a>
                     <?php elseif($rolUsuario == 'Profesional Bienestar'): ?>
                         <a href="/categoria/new" class="btn-accion"><i class="fas fa-tags"></i> Nueva Categoria</a>
                         <a href="/causa/new" class="btn-accion"><i class="fas fa-question-circle"></i> Nueva Causa</a>
