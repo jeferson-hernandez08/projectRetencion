@@ -34,7 +34,7 @@
     opacity: 0;
     transform: translateY(20px);
     box-sizing: border-box; /* Añadido */
-    max-height: 90vh; /* Limitar altura máxima */
+    max-height: 130vh; /* Limitar altura máxima */
     overflow-y: auto; /* Permitir scroll interno si es necesario */
     box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2), 
                 0 5px 15px rgba(0, 0, 0, 0.15),
@@ -401,7 +401,7 @@
     .contenido-caja {
         padding: 20px;
         margin: 10px;
-        max-height: 85vh;
+        max-height: 130vh;
     }
     
     .titulo-principal {
@@ -451,6 +451,7 @@
 @media (max-width: 480px) {
     .contenido-caja {
         padding: 15px;
+        max-height: 130vh;
     }
     
     .titulo-principal {
