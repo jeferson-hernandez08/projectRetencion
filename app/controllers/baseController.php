@@ -14,7 +14,7 @@ class BaseController {
         if(isset($_SESSION['timeout'])) {
             # Se calcula tiempo de sesión transcurrido
             $tiempoSesion = time() - $_SESSION['timeout'];      // REcORDEDEMOS EL TIME STAND QUE ESTA EN SEGUNDOS DESDE 1960
-            if($tiempoSesion > INACTIVE_TIME*60) {           // 1 * 60 PARA SACAR LOS SEGUNDOS el tiempo es en segundos
+            if($tiempoSesion > INACTIVE_TIME*300) {           // 1 * 60 PARA SACAR LOS SEGUNDOS el tiempo es en segundos
                 // Se destruye la sesión por inactividad.
                 session_destroy();
                 header('Location: /login/init');
