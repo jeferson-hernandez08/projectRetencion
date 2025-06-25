@@ -92,7 +92,35 @@
                         <input type="text" placeholder="Buscar...">
                     </div>
                     <div class="header-icons">
-                        <a href="#" class="icon-link"><i class="fas fa-user-circle"></i></a>
+                        <div class="user-dropdown">
+                            <a href="#" class="icon-link" id="user-menu-toggle">
+                                <i class="fas fa-user-circle"></i>
+                            </a>
+                            <div class="dropdown-content" id="user-dropdown-content">
+                                <div class="dropdown-header">
+                                    <i class="fas user-card fa-user-circle"></i>
+                                    <h3><?php echo $rolUsuario; ?></h3>
+                                    <p><?php echo $nombreUsuario; ?></p>
+                                </div>
+                                <div class="dropdown-body">
+                                    <a href="#" class="dropdown-item">
+                                        <i class="fas fa-user"></i> Mi Perfil
+                                    </a>
+                                    <a href="#" class="dropdown-item">
+                                        <i class="fas fa-cog"></i> Configuración
+                                    </a>
+                                    <a href="#" class="dropdown-item">
+                                        <i class="fas fa-question-circle"></i> Ayuda
+                                    </a>
+                                </div>
+                                <div class="dropdown-footer">
+                                    <a href="/login/logout" class="logout-btn">
+                                        <span class="info-text">Cerrar sesión (<?php echo $_SESSION['nombre'] ?? "";?>)</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- <a href="#" class="icon-link"><i class="fas fa-user-circle"></i></a> -->
                         <a href="#" class="icon-link"><i class="fas fa-bell"></i></a>
                         <a href="#" class="icon-link" id="theme-toggle-link" onclick="toggleDarkMode(); return false;"><i class="fas fa-moon"></i></a>
                     </div>
@@ -273,6 +301,31 @@
             // Evento para el botón de cambio de tema
             document.getElementById('theme-toggle').addEventListener('click', toggleDarkMode);
         });
+
+        // ******************** User Dropdown Menu ***************
+        // Menú desplegable de usuario
+        const userMenuToggle = document.getElementById('user-menu-toggle');
+        const userDropdownContent = document.getElementById('user-dropdown-content');
+        
+        userMenuToggle.addEventListener('click', function(e) {
+            e.preventDefault();
+            userDropdownContent.style.display = userDropdownContent.style.display === 'block' ? 'none' : 'block';
+        });
+        
+        // Cerrar menú al hacer clic fuera
+        document.addEventListener('click', function(event) {
+            if (!event.target.closest('.user-dropdown')) {
+                userDropdownContent.style.display = 'none';
+            }
+        });
+        
+        // Función para simular cierre de sesión
+        // document.getElementById('logout-btn').addEventListener('click', function() {
+        //     // Aquí normalmente iría la lógica de cierre de sesión
+        //     // Simulamos con un mensaje
+        //     alert('Sesión cerrada correctamente. Redirigiendo al inicio de sesión...');
+        //     window.location.href = '/login';
+        // });
     </script>
 </body>
 
