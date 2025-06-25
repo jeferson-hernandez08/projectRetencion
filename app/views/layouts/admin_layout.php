@@ -115,7 +115,7 @@
                                 </div>
                                 <div class="dropdown-footer">
                                     <a href="/login/logout" class="logout-btn">
-                                        <span class="info-text">Cerrar sesión (<?php echo $_SESSION['nombre'] ?? "";?>)</span>
+                                        <span class="info-text">Cerrar sesión</span>
                                     </a>
                                 </div>
                             </div>

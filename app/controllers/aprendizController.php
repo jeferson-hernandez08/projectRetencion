@@ -3,9 +3,14 @@ namespace App\Controllers;
 use App\Models\AprendizModel;
 use App\Models\GrupoModel;        // Importar la clase GrupoModel
 
+use App\Models\RolModel;         // Importar la clase RolModel para el card icon user cerrar sesion
+use App\Models\UsuarioModel;
+
 require_once 'baseController.php';
 require_once MAIN_APP_ROUTE."../models/AprendizModel.php";
 require_once MAIN_APP_ROUTE."../models/GrupoModel.php";
+require_once MAIN_APP_ROUTE . "../models/RolModel.php";
+require_once MAIN_APP_ROUTE . "../models/UsuarioModel.php";
 
 class AprendizController extends BaseController {
     
@@ -26,11 +31,28 @@ class AprendizController extends BaseController {
         // Llamamos al modelo de Aprendiz
         $aprendizObj = new AprendizModel();
         $aprendices = $aprendizObj->getAll();
+
+        // Obtener información del usuario y rol para el card icon user cerrar sesion
+        $rolNombre = "Usuario";
+        $nombreUsuario = $_SESSION['nombre'] ?? "Usuario";
+
+        if (isset($_SESSION['id'])) {
+            // Obtener detalles del usuario
+            $usuarioModel = new UsuarioModel();
+            $usuario = $usuarioModel->getUsuario($_SESSION['id']);
+            
+            // Obtener nombre del rol
+            $rolModel = new RolModel();
+            $rol = $rolModel->getRol($usuario->fkIdRol);
+            $rolNombre = $rol->nombre ?? "Usuario";
+        }
         
         // Llamamos a la vista
         $data = [
             "title"     => "Aprendices",
-            "aprendices" => $aprendices
+            "aprendices" => $aprendices,
+            "nombreUsuario" => $nombreUsuario,   // Enviamos datos para el card icon user cerrar sesion
+            "rolUsuario" => $rolNombre
         ];
         $this->render('aprendiz/viewAprendiz.php', $data);
     }
@@ -39,11 +61,28 @@ class AprendizController extends BaseController {
         // Lógica para capturar grupos
         $grupoObj = new GrupoModel();
         $grupos = $grupoObj->getAll();
+
+        // Obtener información del usuario y rol para el card icon user cerrar sesion
+        $rolNombre = "Usuario";
+        $nombreUsuario = $_SESSION['nombre'] ?? "Usuario";
+
+        if (isset($_SESSION['id'])) {
+            // Obtener detalles del usuario
+            $usuarioModel = new UsuarioModel();
+            $usuario = $usuarioModel->getUsuario($_SESSION['id']);
+            
+            // Obtener nombre del rol
+            $rolModel = new RolModel();
+            $rol = $rolModel->getRol($usuario->fkIdRol);
+            $rolNombre = $rol->nombre ?? "Usuario";
+        }
         
         // Llamamos a la vista
         $data = [
             "title" => "Aprendices",
-            "grupos" => $grupos
+            "grupos" => $grupos,
+            "nombreUsuario" => $nombreUsuario,   // Enviamos datos para el card icon user cerrar sesion
+            "rolUsuario" => $rolNombre
         ];
         $this->render('aprendiz/newAprendiz.php', $data);
     }
@@ -72,9 +111,27 @@ class AprendizController extends BaseController {
     public function viewAprendiz($id) {
         $aprendizObj = new AprendizModel();
         $aprendizInfo = $aprendizObj->getAprendiz($id);
+
+        // Obtener información del usuario y rol para el card icon user cerrar sesion
+        $rolNombre = "Usuario";
+        $nombreUsuario = $_SESSION['nombre'] ?? "Usuario";
+
+        if (isset($_SESSION['id'])) {
+            // Obtener detalles del usuario
+            $usuarioModel = new UsuarioModel();
+            $usuario = $usuarioModel->getUsuario($_SESSION['id']);
+            
+            // Obtener nombre del rol
+            $rolModel = new RolModel();
+            $rol = $rolModel->getRol($usuario->fkIdRol);
+            $rolNombre = $rol->nombre ?? "Usuario";
+        }
+
         $data = [
             "title" => "Aprendices",
-            'aprendiz' => $aprendizInfo
+            'aprendiz' => $aprendizInfo,
+            "nombreUsuario" => $nombreUsuario,   // Enviamos datos para el card icon user cerrar sesion
+            "rolUsuario" => $rolNombre
         ];
         $this->render('aprendiz/viewOneAprendiz.php', $data);
     }
@@ -84,10 +141,28 @@ class AprendizController extends BaseController {
         $aprendizInfo = $aprendizObj->getAprendiz($id);
         $grupoObj = new GrupoModel();
         $gruposInfo = $grupoObj->getAll();
+
+        // Obtener información del usuario y rol para el card icon user cerrar sesion
+        $rolNombre = "Usuario";
+        $nombreUsuario = $_SESSION['nombre'] ?? "Usuario";
+
+        if (isset($_SESSION['id'])) {
+            // Obtener detalles del usuario
+            $usuarioModel = new UsuarioModel();
+            $usuario = $usuarioModel->getUsuario($_SESSION['id']);
+            
+            // Obtener nombre del rol
+            $rolModel = new RolModel();
+            $rol = $rolModel->getRol($usuario->fkIdRol);
+            $rolNombre = $rol->nombre ?? "Usuario";
+        }
+
         $data = [
             "title" => "Aprendices",
             "aprendiz" => $aprendizInfo,
-            "grupos" => $gruposInfo
+            "grupos" => $gruposInfo,
+            "nombreUsuario" => $nombreUsuario,   // Enviamos datos para el card icon user cerrar sesion
+            "rolUsuario" => $rolNombre
         ];
         $this->render('aprendiz/editAprendiz.php', $data);
     }
@@ -112,9 +187,27 @@ class AprendizController extends BaseController {
     public function deleteAprendiz($id) {
         $aprendizObj = new AprendizModel();
         $aprendiz = $aprendizObj->getAprendiz($id);
+
+        // Obtener información del usuario y rol para el card icon user cerrar sesion
+        $rolNombre = "Usuario";
+        $nombreUsuario = $_SESSION['nombre'] ?? "Usuario";
+
+        if (isset($_SESSION['id'])) {
+            // Obtener detalles del usuario
+            $usuarioModel = new UsuarioModel();
+            $usuario = $usuarioModel->getUsuario($_SESSION['id']);
+            
+            // Obtener nombre del rol
+            $rolModel = new RolModel();
+            $rol = $rolModel->getRol($usuario->fkIdRol);
+            $rolNombre = $rol->nombre ?? "Usuario";
+        }
+
         $data = [
             "title" => "Eliminar Aprendiz",
             "aprendiz" => $aprendiz,
+            "nombreUsuario" => $nombreUsuario,   // Enviamos datos para el card icon user viewAprendiz
+            "rolUsuario" => $rolNombre
         ];
         $this->render('aprendiz/deleteAprendiz.php', $data);
     }

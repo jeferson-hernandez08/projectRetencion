@@ -5,11 +5,14 @@ use App\Models\EstrategiasModel;
 use App\Models\ReporteModel;
 use App\Models\UsuarioModel;
 
+use App\Models\RolModel;         // Importar la clase RolModel para el card icon user cerrar sesion
+
 require_once 'baseController.php';
 require_once MAIN_APP_ROUTE."../models/IntervencionModel.php";
 require_once MAIN_APP_ROUTE."../models/EstrategiasModel.php";
 require_once MAIN_APP_ROUTE."../models/ReporteModel.php";
 require_once MAIN_APP_ROUTE."../models/UsuarioModel.php";
+require_once MAIN_APP_ROUTE . "../models/RolModel.php";
 
 class IntervencionController extends BaseController {
     
@@ -30,11 +33,28 @@ class IntervencionController extends BaseController {
         // Llamamos al modelo de Intervencion
         $intervencionObj = new IntervencionModel();
         $intervenciones = $intervencionObj->getAll();
+
+        // Obtener información del usuario y rol para el card icon user cerrar sesion
+        $rolNombre = "Usuario";
+        $nombreUsuario = $_SESSION['nombre'] ?? "Usuario";
+
+        if (isset($_SESSION['id'])) {
+            // Obtener detalles del usuario
+            $usuarioModel = new UsuarioModel();
+            $usuario = $usuarioModel->getUsuario($_SESSION['id']);
+            
+            // Obtener nombre del rol
+            $rolModel = new RolModel();
+            $rol = $rolModel->getRol($usuario->fkIdRol);
+            $rolNombre = $rol->nombre ?? "Usuario";
+        }
         
         // Llamamos a la vista
         $data = [
             "title" => "Intervenciones",
-            "intervenciones" => $intervenciones
+            "intervenciones" => $intervenciones,
+            "nombreUsuario" => $nombreUsuario,   // Enviamos datos para el card icon user cerrar sesion
+            "rolUsuario" => $rolNombre
         ];
         $this->render('intervencion/viewIntervencion.php', $data);
     }
@@ -48,13 +68,30 @@ class IntervencionController extends BaseController {
         $estrategias = $estrategiaObj->getAll();
         $reportes = $reporteObj->getAll();
         $usuarios = $usuarioObj->getAll();
+
+        // Obtener información del usuario y rol para el card icon user cerrar sesion
+        $rolNombre = "Usuario";
+        $nombreUsuario = $_SESSION['nombre'] ?? "Usuario";
+
+        if (isset($_SESSION['id'])) {
+            // Obtener detalles del usuario
+            $usuarioModel = new UsuarioModel();
+            $usuario = $usuarioModel->getUsuario($_SESSION['id']);
+            
+            // Obtener nombre del rol
+            $rolModel = new RolModel();
+            $rol = $rolModel->getRol($usuario->fkIdRol);
+            $rolNombre = $rol->nombre ?? "Usuario";
+        }
         
         // Llamamos a la vista
         $data = [
             "title" => "Intervenciones",
             "estrategias" => $estrategias,
             "reportes" => $reportes,
-            "usuarios" => $usuarios
+            "usuarios" => $usuarios,
+            "nombreUsuario" => $nombreUsuario,   // Enviamos datos para el card icon user cerrar sesion
+            "rolUsuario" => $rolNombre
         ];
         $this->render('intervencion/newIntervencion.php', $data);
     }
@@ -84,9 +121,27 @@ class IntervencionController extends BaseController {
     public function viewIntervencion($id) {
         $intervencionObj = new IntervencionModel();
         $intervencionInfo = $intervencionObj->getIntervencion($id);
+
+        // Obtener información del usuario y rol para el card icon user cerrar sesion
+        $rolNombre = "Usuario";
+        $nombreUsuario = $_SESSION['nombre'] ?? "Usuario";
+
+        if (isset($_SESSION['id'])) {
+            // Obtener detalles del usuario
+            $usuarioModel = new UsuarioModel();
+            $usuario = $usuarioModel->getUsuario($_SESSION['id']);
+            
+            // Obtener nombre del rol
+            $rolModel = new RolModel();
+            $rol = $rolModel->getRol($usuario->fkIdRol);
+            $rolNombre = $rol->nombre ?? "Usuario";
+        }
+
         $data = [
             "title" => "Intervenciones",
-            'intervencion' => $intervencionInfo
+            'intervencion' => $intervencionInfo,
+            "nombreUsuario" => $nombreUsuario,   // Enviamos datos para el card icon user cerrar sesion
+            "rolUsuario" => $rolNombre
         ];
         $this->render('intervencion/viewOneIntervencion.php', $data);
     }
@@ -102,13 +157,30 @@ class IntervencionController extends BaseController {
         $estrategias = $estrategiaObj->getAll();
         $reportes = $reporteObj->getAll();
         $usuarios = $usuarioObj->getAll();
+
+        // Obtener información del usuario y rol para el card icon user cerrar sesion
+        $rolNombre = "Usuario";
+        $nombreUsuario = $_SESSION['nombre'] ?? "Usuario";
+
+        if (isset($_SESSION['id'])) {
+            // Obtener detalles del usuario
+            $usuarioModel = new UsuarioModel();
+            $usuario = $usuarioModel->getUsuario($_SESSION['id']);
+            
+            // Obtener nombre del rol
+            $rolModel = new RolModel();
+            $rol = $rolModel->getRol($usuario->fkIdRol);
+            $rolNombre = $rol->nombre ?? "Usuario";
+        }
         
         $data = [
             "title" => "Intervenciones",
             "intervencion" => $intervencionInfo,
             "estrategias" => $estrategias,
             "reportes" => $reportes,
-            "usuarios" => $usuarios
+            "usuarios" => $usuarios,
+            "nombreUsuario" => $nombreUsuario,   // Enviamos datos para el card icon user cerrar sesion
+            "rolUsuario" => $rolNombre
         ];
         $this->render('intervencion/editIntervencion.php', $data);
     }
@@ -134,9 +206,27 @@ class IntervencionController extends BaseController {
     public function deleteIntervencion($id) {
         $intervencionObj = new IntervencionModel();
         $intervencion = $intervencionObj->getIntervencion($id);
+
+        // Obtener información del usuario y rol para el card icon user cerrar sesion
+        $rolNombre = "Usuario";
+        $nombreUsuario = $_SESSION['nombre'] ?? "Usuario";
+
+        if (isset($_SESSION['id'])) {
+            // Obtener detalles del usuario
+            $usuarioModel = new UsuarioModel();
+            $usuario = $usuarioModel->getUsuario($_SESSION['id']);
+            
+            // Obtener nombre del rol
+            $rolModel = new RolModel();
+            $rol = $rolModel->getRol($usuario->fkIdRol);
+            $rolNombre = $rol->nombre ?? "Usuario";
+        }
+        
         $data = [
             "title" => "Eliminar Intervencion",
             "intervencion" => $intervencion,
+            "nombreUsuario" => $nombreUsuario,   // Enviamos datos para el card icon user cerrar sesion
+            "rolUsuario" => $rolNombre
         ];
         $this->render('intervencion/deleteIntervencion.php', $data);
     }

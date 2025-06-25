@@ -1,9 +1,12 @@
 <?php
 namespace App\Controllers;
 use App\Models\RolModel;
+       
+use App\Models\UsuarioModel;      // Importar la clase RolModel para el card icon user cerrar sesion
 
 require_once 'baseController.php';
 require_once MAIN_APP_ROUTE."../models/RolModel.php";
+require_once MAIN_APP_ROUTE . "../models/UsuarioModel.php";
 
 class RolController extends BaseController {
     
@@ -25,20 +28,54 @@ class RolController extends BaseController {
         // Llamamos al modelo de Rol
         $rolObj = new RolModel();
         $roles = $rolObj->getAll();
+
+        // Obtener información del usuario y rol para el card icon user cerrar sesion
+        $rolNombre = "Usuario";
+        $nombreUsuario = $_SESSION['nombre'] ?? "Usuario";
+
+        if (isset($_SESSION['id'])) {
+            // Obtener detalles del usuario
+            $usuarioModel = new UsuarioModel();
+            $usuario = $usuarioModel->getUsuario($_SESSION['id']);
+            
+            // Obtener nombre del rol
+            $rolModel = new RolModel();
+            $rol = $rolModel->getRol($usuario->fkIdRol);
+            $rolNombre = $rol->nombre ?? "Usuario";
+        }
         
         // Llamamos a la vista
         $data = [
             "title" => "Roles",
-            "roles" => $roles
+            "roles" => $roles,
+            "nombreUsuario" => $nombreUsuario,   // Enviamos datos para el card icon user cerrar sesion
+            "rolUsuario" => $rolNombre
+
         ];
         $this->render('rol/viewRol.php', $data);
     }
 
     public function newRol() {
+        // Obtener información del usuario y rol para el card icon user cerrar sesion
+        $rolNombre = "Usuario";
+        $nombreUsuario = $_SESSION['nombre'] ?? "Usuario";
+
+        if (isset($_SESSION['id'])) {
+            // Obtener detalles del usuario
+            $usuarioModel = new UsuarioModel();
+            $usuario = $usuarioModel->getUsuario($_SESSION['id']);
+            
+            // Obtener nombre del rol
+            $rolModel = new RolModel();
+            $rol = $rolModel->getRol($usuario->fkIdRol);
+            $rolNombre = $rol->nombre ?? "Usuario";
+        }
         
         // Llamamos a la vista
         $data = [
-            "title" => "Roles"
+            "title" => "Roles",
+            "nombreUsuario" => $nombreUsuario,   // Enviamos datos para el card icon user cerrar sesion
+            "rolUsuario" => $rolNombre
         ];
         $this->render('rol/newRol.php', $data);     // Renderiza o muestra el formulario
     }
@@ -61,10 +98,27 @@ class RolController extends BaseController {
     public function viewRol($id) {
         $rolObj = new RolModel();
         $rolInfo = $rolObj->getRol($id);
+
+        // Obtener información del usuario y rol para el card icon user cerrar sesion
+        $rolNombre = "Usuario";
+        $nombreUsuario = $_SESSION['nombre'] ?? "Usuario";
+
+        if (isset($_SESSION['id'])) {
+            // Obtener detalles del usuario
+            $usuarioModel = new UsuarioModel();
+            $usuario = $usuarioModel->getUsuario($_SESSION['id']);
+            
+            // Obtener nombre del rol
+            $rolModel = new RolModel();
+            $rol = $rolModel->getRol($usuario->fkIdRol);
+            $rolNombre = $rol->nombre ?? "Usuario";
+        }
         
         $data = [
             "title" => "Roles",
-            'rol' => $rolInfo
+            'rol' => $rolInfo,
+            "nombreUsuario" => $nombreUsuario,   // Enviamos datos para el card icon user cerrar sesion
+            "rolUsuario" => $rolNombre
         ];
         $this->render('rol/viewOneRol.php', $data);    // Llamamos a la vista, renderizamos la vista y enviamos los datos. 
     }
@@ -72,10 +126,27 @@ class RolController extends BaseController {
     public function editRol($id) {
         $rolObj = new RolModel();
         $rolInfo = $rolObj->getRol($id);
+
+        // Obtener información del usuario y rol para el card icon user cerrar sesion
+        $rolNombre = "Usuario";
+        $nombreUsuario = $_SESSION['nombre'] ?? "Usuario";
+
+        if (isset($_SESSION['id'])) {
+            // Obtener detalles del usuario
+            $usuarioModel = new UsuarioModel();
+            $usuario = $usuarioModel->getUsuario($_SESSION['id']);
+            
+            // Obtener nombre del rol
+            $rolModel = new RolModel();
+            $rol = $rolModel->getRol($usuario->fkIdRol);
+            $rolNombre = $rol->nombre ?? "Usuario";
+        }
         
         $data = [
             "title" => "Roles",
-            "rol" => $rolInfo
+            "rol" => $rolInfo,
+            "nombreUsuario" => $nombreUsuario,   // Enviamos datos para el card icon user cerrar sesion
+            "rolUsuario" => $rolNombre
         ];
         $this->render('rol/editRol.php', $data);
     }
@@ -94,9 +165,27 @@ class RolController extends BaseController {
     public function deleteRol($id) {   // Render Vista deleteRol.php
         $rolObj = new RolModel();
         $rol = $rolObj->getRol($id);
+
+        // Obtener información del usuario y rol para el card icon user cerrar sesion
+        $rolNombre = "Usuario";
+        $nombreUsuario = $_SESSION['nombre'] ?? "Usuario";
+
+        if (isset($_SESSION['id'])) {
+            // Obtener detalles del usuario
+            $usuarioModel = new UsuarioModel();
+            $usuario = $usuarioModel->getUsuario($_SESSION['id']);
+            
+            // Obtener nombre del rol
+            $rolModel = new RolModel();
+            $rol = $rolModel->getRol($usuario->fkIdRol);
+            $rolNombre = $rol->nombre ?? "Usuario";
+        }
+
         $data = [
             "title" => "Eliminar Rol",
             "rol" => $rol,
+            "nombreUsuario" => $nombreUsuario,   // Enviamos datos para el card icon user cerrar sesion
+            "rolUsuario" => $rolNombre
         ];
         $this->render('rol/deleteRol.php', $data);
     }

@@ -7,6 +7,8 @@ use App\Models\AprendizModel;       // Importar la clase AprendizModel
 use App\Models\CategoriaModel;       // Importar la clase CategoriaModel  | Capturas datos para tabla causa_reporte
 use App\Models\CausaModel;           // Importar la clase CausaModel
 
+use App\Models\RolModel;         // Importar la clase RolModel para el card icon user cerrar sesion
+
 require_once 'baseController.php';
 require_once MAIN_APP_ROUTE."../models/ReporteModel.php";
 require_once MAIN_APP_ROUTE."../models/UsuarioModel.php";
@@ -14,6 +16,7 @@ require_once MAIN_APP_ROUTE."../models/AprendizModel.php";
 
 require_once MAIN_APP_ROUTE."../models/CategoriaModel.php";    // Impoprtar para relacion tabla causa_reporte
 require_once MAIN_APP_ROUTE."../models/CausaModel.php";
+require_once MAIN_APP_ROUTE . "../models/RolModel.php";
 
 class ReporteController extends BaseController {
     
@@ -35,16 +38,27 @@ class ReporteController extends BaseController {
         $reporteObj = new ReporteModel();
         $reportes = $reporteObj->getAll();
 
-        // Llamamos al modelo de CausaReporte
-        //$causaReporteObj = new CategoriaModel();
-        //$causasReportes = $causaReporteObj->getAll();    // Comentado no sirve
+        // Obtener información del usuario y rol para el card icon user cerrar sesion
+        $rolNombre = "Usuario";
+        $nombreUsuario = $_SESSION['nombre'] ?? "Usuario";
+
+        if (isset($_SESSION['id'])) {
+            // Obtener detalles del usuario
+            $usuarioModel = new UsuarioModel();
+            $usuario = $usuarioModel->getUsuario($_SESSION['id']);
+            
+            // Obtener nombre del rol
+            $rolModel = new RolModel();
+            $rol = $rolModel->getRol($usuario->fkIdRol);
+            $rolNombre = $rol->nombre ?? "Usuario";
+        }
         
         // Llamamos a la vista
         $data = [
             "title"     => "Reportes",
             "reportes" => $reportes,
-
-            //"causasReportes" => $causasReportes           // Capturamos los datos de CausaReporteModel para rendenrizar y relacionar datos en newReporte.php
+            "nombreUsuario" => $nombreUsuario,   // Enviamos datos para el card icon user cerrar sesion
+            "rolUsuario" => $rolNombre  
         ];
         $this->render('reporte/viewReporte.php', $data);
     }
@@ -70,6 +84,21 @@ class ReporteController extends BaseController {
         // Llamamos al modelo de CausaReporte  | Aqui el view tiene que venir en newReporte.php
         //$causaReporteObj = new CausaReporteModel();
         //$causasReportes = $causaReporteObj->getAllRelaciones();
+
+        // Obtener información del usuario y rol para el card icon user cerrar sesion
+        $rolNombre = "Usuario";
+        $nombreUsuario = $_SESSION['nombre'] ?? "Usuario";
+
+        if (isset($_SESSION['id'])) {
+            // Obtener detalles del usuario
+            $usuarioModel = new UsuarioModel();
+            $usuario = $usuarioModel->getUsuario($_SESSION['id']);
+            
+            // Obtener nombre del rol
+            $rolModel = new RolModel();
+            $rol = $rolModel->getRol($usuario->fkIdRol);
+            $rolNombre = $rol->nombre ?? "Usuario";
+        }
         
         // Llamamos a la vista
         $data = [
@@ -78,7 +107,10 @@ class ReporteController extends BaseController {
             "aprendices" => $aprendices,
 
             "categorias" => $categorias,     // Capturamos los datos de CategoriaModel y CausaModel para rendenrizar y relacionar datos en newReporte.php
-            "causas" => $causas             // QUEDE AQUI ******   
+            "causas" => $causas,             // QUEDE AQUI ******   
+
+            "nombreUsuario" => $nombreUsuario,   // Enviamos datos para el card icon user cerrar sesion
+            "rolUsuario" => $rolNombre
 
             //"causasReportes" => $causasReportes    // Capturamos los datos de CausaReporteModel para mostrar el viewCausaReporte
         ];
@@ -130,9 +162,27 @@ class ReporteController extends BaseController {
     public function viewReporte($id) {
         $reporteObj = new ReporteModel();
         $reporteInfo = $reporteObj->getReporte($id);
+
+        // Obtener información del usuario y rol para el card icon user cerrar sesion
+        $rolNombre = "Usuario";
+        $nombreUsuario = $_SESSION['nombre'] ?? "Usuario";
+
+        if (isset($_SESSION['id'])) {
+            // Obtener detalles del usuario
+            $usuarioModel = new UsuarioModel();
+            $usuario = $usuarioModel->getUsuario($_SESSION['id']);
+            
+            // Obtener nombre del rol
+            $rolModel = new RolModel();
+            $rol = $rolModel->getRol($usuario->fkIdRol);
+            $rolNombre = $rol->nombre ?? "Usuario";
+        }
+
         $data = [
             "title" => "Reportes",
-            'reporte' => $reporteInfo
+            'reporte' => $reporteInfo,
+            "nombreUsuario" => $nombreUsuario,   // Enviamos datos para el card icon user cerrar sesion
+            "rolUsuario" => $rolNombre
         ];
         $this->render('reporte/viewOneReporte.php', $data);
     }
@@ -146,12 +196,30 @@ class ReporteController extends BaseController {
         
         $aprendizObj = new AprendizModel();
         $aprendicesInfo = $aprendizObj->getAll();
+
+        // Obtener información del usuario y rol para el card icon user cerrar sesion
+        $rolNombre = "Usuario";
+        $nombreUsuario = $_SESSION['nombre'] ?? "Usuario";
+
+        if (isset($_SESSION['id'])) {
+            // Obtener detalles del usuario
+            $usuarioModel = new UsuarioModel();
+            $usuario = $usuarioModel->getUsuario($_SESSION['id']);
+            
+            // Obtener nombre del rol
+            $rolModel = new RolModel();
+            $rol = $rolModel->getRol($usuario->fkIdRol);
+            $rolNombre = $rol->nombre ?? "Usuario";
+        }
         
         $data = [
             "title" => "Reportes",
             "reporte" => $reporteInfo,
             "usuarios" => $usuariosInfo,
-            "aprendices" => $aprendicesInfo
+            "aprendices" => $aprendicesInfo,
+            "nombreUsuario" => $nombreUsuario,   // Enviamos datos para el card icon user cerrar sesion
+            "rolUsuario" => $rolNombre
+
         ];
         $this->render('reporte/editReporte.php', $data);
     }
@@ -178,9 +246,27 @@ class ReporteController extends BaseController {
     public function deleteReporte($id) {
         $reporteObj = new ReporteModel();
         $reporte = $reporteObj->getReporte($id);
+
+        // Obtener información del usuario y rol para el card icon user cerrar sesion
+        $rolNombre = "Usuario";
+        $nombreUsuario = $_SESSION['nombre'] ?? "Usuario";
+
+        if (isset($_SESSION['id'])) {
+            // Obtener detalles del usuario
+            $usuarioModel = new UsuarioModel();
+            $usuario = $usuarioModel->getUsuario($_SESSION['id']);
+            
+            // Obtener nombre del rol
+            $rolModel = new RolModel();
+            $rol = $rolModel->getRol($usuario->fkIdRol);
+            $rolNombre = $rol->nombre ?? "Usuario";
+        }
+        
         $data = [
             "title" => "Eliminar Reporte",
             "reporte" => $reporte,
+            "nombreUsuario" => $nombreUsuario,   // Enviamos datos para el card icon user cerrar sesion
+            "rolUsuario" => $rolNombre
         ];
         $this->render('reporte/deleteReporte.php', $data);
     }

@@ -3,9 +3,14 @@ namespace App\Controllers;
 use App\Models\GrupoModel;
 use App\Models\ProgramaFormacionModel;     // Importar la clase ProgramaFormacionModel
 
+use App\Models\RolModel;         // Importar la clase RolModel para el card icon user cerrar sesion
+use App\Models\UsuarioModel;
+
 require_once 'baseController.php';
 require_once MAIN_APP_ROUTE."../models/GrupoModel.php";
 require_once MAIN_APP_ROUTE."../models/ProgramaFormacionModel.php";
+require_once MAIN_APP_ROUTE . "../models/RolModel.php";
+require_once MAIN_APP_ROUTE . "../models/UsuarioModel.php";
 
 class GrupoController extends BaseController {
     
@@ -26,11 +31,28 @@ class GrupoController extends BaseController {
         // Llamamos al modelo de Grupo
         $grupoObj = new GrupoModel();
         $grupos = $grupoObj->getAll();
+
+        // Obtener información del usuario y rol para el card icon user cerrar sesion
+        $rolNombre = "Usuario";
+        $nombreUsuario = $_SESSION['nombre'] ?? "Usuario";
+
+        if (isset($_SESSION['id'])) {
+            // Obtener detalles del usuario
+            $usuarioModel = new UsuarioModel();
+            $usuario = $usuarioModel->getUsuario($_SESSION['id']);
+            
+            // Obtener nombre del rol
+            $rolModel = new RolModel();
+            $rol = $rolModel->getRol($usuario->fkIdRol);
+            $rolNombre = $rol->nombre ?? "Usuario";
+        }
         
         // Llamamos a la vista
         $data = [
             "title"     => "Grupos",
-            "grupos"    => $grupos
+            "grupos"    => $grupos,
+            "nombreUsuario" => $nombreUsuario,   // Enviamos datos para el card icon user cerrar sesion
+            "rolUsuario" => $rolNombre
         ];
         $this->render('grupo/viewGrupo.php', $data);
     }
@@ -39,11 +61,28 @@ class GrupoController extends BaseController {
         // Lógica para capturar programas de formación
         $programaObj = new ProgramaFormacionModel();
         $programas = $programaObj->getAll();
+
+        // Obtener información del usuario y rol para el card icon user cerrar sesion
+        $rolNombre = "Usuario";
+        $nombreUsuario = $_SESSION['nombre'] ?? "Usuario";
+
+        if (isset($_SESSION['id'])) {
+            // Obtener detalles del usuario
+            $usuarioModel = new UsuarioModel();
+            $usuario = $usuarioModel->getUsuario($_SESSION['id']);
+            
+            // Obtener nombre del rol
+            $rolModel = new RolModel();
+            $rol = $rolModel->getRol($usuario->fkIdRol);
+            $rolNombre = $rol->nombre ?? "Usuario";
+        }
         
         // Llamamos a la vista
         $data = [
             "title"         => "Grupos",
-            "programas"     => $programas
+            "programas"     => $programas,
+            "nombreUsuario" => $nombreUsuario,   // Enviamos datos para el card icon user cerrar sesion
+            "rolUsuario"    => $rolNombre
         ];
         $this->render('grupo/newGrupo.php', $data);
     }
@@ -71,9 +110,27 @@ class GrupoController extends BaseController {
     public function viewGrupo($id) {
         $grupoObj = new GrupoModel();
         $grupoInfo = $grupoObj->getGrupo($id);
+
+        // Obtener información del usuario y rol para el card icon user cerrar sesion
+        $rolNombre = "Usuario";
+        $nombreUsuario = $_SESSION['nombre'] ?? "Usuario";
+
+        if (isset($_SESSION['id'])) {
+            // Obtener detalles del usuario
+            $usuarioModel = new UsuarioModel();
+            $usuario = $usuarioModel->getUsuario($_SESSION['id']);
+            
+            // Obtener nombre del rol
+            $rolModel = new RolModel();
+            $rol = $rolModel->getRol($usuario->fkIdRol);
+            $rolNombre = $rol->nombre ?? "Usuario";
+        }
+
         $data = [
             "title"     => "Grupos",
-            'grupo'     => $grupoInfo
+            'grupo'     => $grupoInfo,
+            "nombreUsuario" => $nombreUsuario,   // Enviamos datos para el card icon user cerrar sesion
+            "rolUsuario"    => $rolNombre
         ];
         $this->render('grupo/viewOneGrupo.php', $data);
     }
@@ -83,10 +140,28 @@ class GrupoController extends BaseController {
         $grupoInfo = $grupoObj->getGrupo($id);
         $programaObj = new ProgramaFormacionModel();
         $programasInfo = $programaObj->getAll();
+
+        // Obtener información del usuario y rol para el card icon user cerrar sesion
+        $rolNombre = "Usuario";
+        $nombreUsuario = $_SESSION['nombre'] ?? "Usuario";
+
+        if (isset($_SESSION['id'])) {
+            // Obtener detalles del usuario
+            $usuarioModel = new UsuarioModel();
+            $usuario = $usuarioModel->getUsuario($_SESSION['id']);
+            
+            // Obtener nombre del rol
+            $rolModel = new RolModel();
+            $rol = $rolModel->getRol($usuario->fkIdRol);
+            $rolNombre = $rol->nombre ?? "Usuario";
+        }
+
         $data = [
             "title"     => "Grupos",
             "grupo"     => $grupoInfo,
-            "programas" => $programasInfo
+            "programas" => $programasInfo,
+            "nombreUsuario" => $nombreUsuario,   // Enviamos datos para el card icon user cerrar sesion
+            "rolUsuario"    => $rolNombre
         ];
         $this->render('grupo/editGrupo.php', $data);
     }
@@ -110,9 +185,27 @@ class GrupoController extends BaseController {
     public function deleteGrupo($id) {
         $grupoObj = new GrupoModel();
         $grupo = $grupoObj->getGrupo($id);
+
+         // Obtener información del usuario y rol para el card icon user cerrar sesion
+        $rolNombre = "Usuario";
+        $nombreUsuario = $_SESSION['nombre'] ?? "Usuario";
+
+        if (isset($_SESSION['id'])) {
+            // Obtener detalles del usuario
+            $usuarioModel = new UsuarioModel();
+            $usuario = $usuarioModel->getUsuario($_SESSION['id']);
+            
+            // Obtener nombre del rol
+            $rolModel = new RolModel();
+            $rol = $rolModel->getRol($usuario->fkIdRol);
+            $rolNombre = $rol->nombre ?? "Usuario";
+        }
+
         $data = [
             "title" => "Eliminar Grupo",
             "grupo" => $grupo,
+            "nombreUsuario" => $nombreUsuario,   // Enviamos datos para el card icon user cerrar sesion
+            "rolUsuario"    => $rolNombre
         ];
         $this->render('grupo/deleteGrupo.php', $data);
     }

@@ -3,9 +3,14 @@ namespace App\Controllers;
 use App\Models\CausaModel;
 use App\Models\CategoriaModel;     // Importar la clase CategoriaModel
 
+use App\Models\RolModel;         // Importar la clase RolModel para el card icon user cerrar sesion
+use App\Models\UsuarioModel;
+
 require_once 'baseController.php';
 require_once MAIN_APP_ROUTE."../models/CausaModel.php";
 require_once MAIN_APP_ROUTE."../models/CategoriaModel.php";
+require_once MAIN_APP_ROUTE . "../models/RolModel.php";
+require_once MAIN_APP_ROUTE . "../models/UsuarioModel.php";
 
 class CausaController extends BaseController {
     
@@ -26,11 +31,28 @@ class CausaController extends BaseController {
         // Llamamos al modelo de Causa
         $causaObj = new CausaModel();
         $causas = $causaObj->getAll();
+
+        // Obtener información del usuario y rol para el card icon user cerrar sesion
+        $rolNombre = "Usuario";
+        $nombreUsuario = $_SESSION['nombre'] ?? "Usuario";
+
+        if (isset($_SESSION['id'])) {
+            // Obtener detalles del usuario
+            $usuarioModel = new UsuarioModel();
+            $usuario = $usuarioModel->getUsuario($_SESSION['id']);
+            
+            // Obtener nombre del rol
+            $rolModel = new RolModel();
+            $rol = $rolModel->getRol($usuario->fkIdRol);
+            $rolNombre = $rol->nombre ?? "Usuario";
+        }
         
         // Llamamos a la vista
         $data = [
             "title"     => "Causas",
-            "causas"    => $causas
+            "causas"    => $causas,
+            "nombreUsuario" => $nombreUsuario,   // Enviamos datos para el card icon user cerrar sesion
+            "rolUsuario" => $rolNombre
         ];
         $this->render('causa/viewCausa.php', $data);
     }
@@ -39,11 +61,28 @@ class CausaController extends BaseController {
         // Lógica para capturar categorías
         $categoriaObj = new CategoriaModel();
         $categorias = $categoriaObj->getAll();
+
+        // Obtener información del usuario y rol para el card icon user cerrar sesion
+        $rolNombre = "Usuario";
+        $nombreUsuario = $_SESSION['nombre'] ?? "Usuario";
+
+        if (isset($_SESSION['id'])) {
+            // Obtener detalles del usuario
+            $usuarioModel = new UsuarioModel();
+            $usuario = $usuarioModel->getUsuario($_SESSION['id']);
+            
+            // Obtener nombre del rol
+            $rolModel = new RolModel();
+            $rol = $rolModel->getRol($usuario->fkIdRol);
+            $rolNombre = $rol->nombre ?? "Usuario";
+        }
         
         // Llamamos a la vista
         $data = [
             "title"         => "Causas",
-            "categorias"   => $categorias
+            "categorias"   => $categorias,
+            "nombreUsuario" => $nombreUsuario,   // Enviamos datos para el card icon user cerrar sesion
+            "rolUsuario" => $rolNombre
         ];
         $this->render('causa/newCausa.php', $data);
     }
@@ -69,10 +108,27 @@ class CausaController extends BaseController {
     public function viewCausa($id) {
         $causaObj = new CausaModel();
         $causaInfo = $causaObj->getCausa($id);
+
+        // Obtener información del usuario y rol para el card icon user cerrar sesion
+        $rolNombre = "Usuario";
+        $nombreUsuario = $_SESSION['nombre'] ?? "Usuario";
+
+        if (isset($_SESSION['id'])) {
+            // Obtener detalles del usuario
+            $usuarioModel = new UsuarioModel();
+            $usuario = $usuarioModel->getUsuario($_SESSION['id']);
+            
+            // Obtener nombre del rol
+            $rolModel = new RolModel();
+            $rol = $rolModel->getRol($usuario->fkIdRol);
+            $rolNombre = $rol->nombre ?? "Usuario";
+        }
         
         $data = [
             "title"     => "Causas",
-            'causa'     => $causaInfo
+            'causa'     => $causaInfo,
+            "nombreUsuario" => $nombreUsuario,   // Enviamos datos para el card icon user cerrar sesion
+            "rolUsuario" => $rolNombre
         ];
         $this->render('causa/viewOneCausa.php', $data);
     }
@@ -82,11 +138,28 @@ class CausaController extends BaseController {
         $causaInfo = $causaObj->getCausa($id);
         $categoriaObj = new CategoriaModel();
         $categorias = $categoriaObj->getAll();
+
+        // Obtener información del usuario y rol para el card icon user cerrar sesion
+        $rolNombre = "Usuario";
+        $nombreUsuario = $_SESSION['nombre'] ?? "Usuario";
+
+        if (isset($_SESSION['id'])) {
+            // Obtener detalles del usuario
+            $usuarioModel = new UsuarioModel();
+            $usuario = $usuarioModel->getUsuario($_SESSION['id']);
+            
+            // Obtener nombre del rol
+            $rolModel = new RolModel();
+            $rol = $rolModel->getRol($usuario->fkIdRol);
+            $rolNombre = $rol->nombre ?? "Usuario";
+        }
         
         $data = [
             "title"       => "Causas",
             "causa"      => $causaInfo,
-            "categorias" => $categorias
+            "categorias" => $categorias,
+            "nombreUsuario" => $nombreUsuario,   // Enviamos datos para el card icon user cerrar sesion
+            "rolUsuario" => $rolNombre
         ];
         $this->render('causa/editCausa.php', $data);
     }
@@ -108,10 +181,27 @@ class CausaController extends BaseController {
     public function deleteCausa($id) {
         $causaObj = new CausaModel();
         $causa = $causaObj->getCausa($id);
+
+        // Obtener información del usuario y rol para el card icon user cerrar sesion
+        $rolNombre = "Usuario";
+        $nombreUsuario = $_SESSION['nombre'] ?? "Usuario";
+
+        if (isset($_SESSION['id'])) {
+            // Obtener detalles del usuario
+            $usuarioModel = new UsuarioModel();
+            $usuario = $usuarioModel->getUsuario($_SESSION['id']);
+            
+            // Obtener nombre del rol
+            $rolModel = new RolModel();
+            $rol = $rolModel->getRol($usuario->fkIdRol);
+            $rolNombre = $rol->nombre ?? "Usuario";
+        }
         
         $data = [
             "title" => "Eliminar Causa",
             "causa" => $causa,
+            "nombreUsuario" => $nombreUsuario,   // Enviamos datos para el card icon user cerrar sesion
+            "rolUsuario" => $rolNombre
         ];
         $this->render('causa/deleteCausa.php', $data);
     }

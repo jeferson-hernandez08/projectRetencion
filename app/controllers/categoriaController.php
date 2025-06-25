@@ -2,8 +2,13 @@
 namespace App\Controllers;
 use App\Models\CategoriaModel;
 
+use App\Models\RolModel;         // Importar la clase RolModel para el card icon user cerrar sesion
+use App\Models\UsuarioModel;
+
 require_once 'baseController.php';
 require_once MAIN_APP_ROUTE."../models/CategoriaModel.php";
+require_once MAIN_APP_ROUTE . "../models/RolModel.php";
+require_once MAIN_APP_ROUTE . "../models/UsuarioModel.php";
 
 class CategoriaController extends BaseController {
     
@@ -24,19 +29,54 @@ class CategoriaController extends BaseController {
         // Llamamos al modelo de Categoria
         $categoriaObj = new CategoriaModel();
         $categorias = $categoriaObj->getAll();
+
+        // Obtener información del usuario y rol para el card icon user cerrar sesion
+        $rolNombre = "Usuario";
+        $nombreUsuario = $_SESSION['nombre'] ?? "Usuario";
+
+        if (isset($_SESSION['id'])) {
+            // Obtener detalles del usuario
+            $usuarioModel = new UsuarioModel();
+            $usuario = $usuarioModel->getUsuario($_SESSION['id']);
+            
+            // Obtener nombre del rol
+            $rolModel = new RolModel();
+            $rol = $rolModel->getRol($usuario->fkIdRol);
+            $rolNombre = $rol->nombre ?? "Usuario";
+        }
         
         // Llamamos a la vista
         $data = [
             "title" => "Categorías",
-            "categorias" => $categorias
+            "categorias" => $categorias,
+            "nombreUsuario" => $nombreUsuario,   // Enviamos datos para el card icon user cerrar sesion
+            "rolUsuario" => $rolNombre
+
         ];
         $this->render('categoria/viewCategoria.php', $data);
     }
 
     public function newCategoria() {
+        // Obtener información del usuario y rol para el card icon user cerrar sesion
+        $rolNombre = "Usuario";
+        $nombreUsuario = $_SESSION['nombre'] ?? "Usuario";
+
+        if (isset($_SESSION['id'])) {
+            // Obtener detalles del usuario
+            $usuarioModel = new UsuarioModel();
+            $usuario = $usuarioModel->getUsuario($_SESSION['id']);
+            
+            // Obtener nombre del rol
+            $rolModel = new RolModel();
+            $rol = $rolModel->getRol($usuario->fkIdRol);
+            $rolNombre = $rol->nombre ?? "Usuario";
+        }
+
         // Llamamos a la vista
         $data = [
-            "title" => "Nueva Categoría"
+            "title" => "Nueva Categoría",
+            "nombreUsuario" => $nombreUsuario,   // Enviamos datos para el card icon user cerrar sesion
+            "rolUsuario" => $rolNombre
         ];
         $this->render('categoria/newCategoria.php', $data);     // Renderiza o muestra el formulario
     }
@@ -61,10 +101,28 @@ class CategoriaController extends BaseController {
     public function viewCategoria($id) {
         $categoriaObj = new CategoriaModel();
         $categoriaInfo = $categoriaObj->getCategoria($id);
+
+        // Obtener información del usuario y rol para el card icon user cerrar sesion
+        $rolNombre = "Usuario";
+        $nombreUsuario = $_SESSION['nombre'] ?? "Usuario";
+
+        if (isset($_SESSION['id'])) {
+            // Obtener detalles del usuario
+            $usuarioModel = new UsuarioModel();
+            $usuario = $usuarioModel->getUsuario($_SESSION['id']);
+            
+            // Obtener nombre del rol
+            $rolModel = new RolModel();
+            $rol = $rolModel->getRol($usuario->fkIdRol);
+            $rolNombre = $rol->nombre ?? "Usuario";
+        }
         
         $data = [
             "title" => "Detalle Categoría",
-            'categoria' => $categoriaInfo
+            'categoria' => $categoriaInfo,
+            "nombreUsuario" => $nombreUsuario,   // Enviamos datos para el card icon user cerrar sesion
+            "rolUsuario" => $rolNombre
+
         ];
         $this->render('categoria/viewOneCategoria.php', $data);    // Llamamos a la vista, renderizamos la vista y enviamos los datos. 
     }
@@ -72,10 +130,27 @@ class CategoriaController extends BaseController {
     public function editCategoria($id) {
         $categoriaObj = new CategoriaModel();
         $categoriaInfo = $categoriaObj->getCategoria($id);
+
+        // Obtener información del usuario y rol para el card icon user cerrar sesion
+        $rolNombre = "Usuario";
+        $nombreUsuario = $_SESSION['nombre'] ?? "Usuario";
+
+        if (isset($_SESSION['id'])) {
+            // Obtener detalles del usuario
+            $usuarioModel = new UsuarioModel();
+            $usuario = $usuarioModel->getUsuario($_SESSION['id']);
+            
+            // Obtener nombre del rol
+            $rolModel = new RolModel();
+            $rol = $rolModel->getRol($usuario->fkIdRol);
+            $rolNombre = $rol->nombre ?? "Usuario";
+        }
         
         $data = [
             "title" => "Editar Categoría",
-            "categoria" => $categoriaInfo
+            "categoria" => $categoriaInfo,
+            "nombreUsuario" => $nombreUsuario,   // Enviamos datos para el card icon user cerrar sesion
+            "rolUsuario" => $rolNombre
         ];
         $this->render('categoria/editCategoria.php', $data);
     }
@@ -96,9 +171,27 @@ class CategoriaController extends BaseController {
     public function deleteCategoria($id) {
         $categoriaObj = new CategoriaModel();
         $categoria = $categoriaObj->getCategoria($id);
+
+        // Obtener información del usuario y rol para el card icon user cerrar sesion
+        $rolNombre = "Usuario";
+        $nombreUsuario = $_SESSION['nombre'] ?? "Usuario";
+
+        if (isset($_SESSION['id'])) {
+            // Obtener detalles del usuario
+            $usuarioModel = new UsuarioModel();
+            $usuario = $usuarioModel->getUsuario($_SESSION['id']);
+            
+            // Obtener nombre del rol
+            $rolModel = new RolModel();
+            $rol = $rolModel->getRol($usuario->fkIdRol);
+            $rolNombre = $rol->nombre ?? "Usuario";
+        }
+
         $data = [
             "title" => "Eliminar Categoría",
             "categoria" => $categoria,
+            "nombreUsuario" => $nombreUsuario,   // Enviamos datos para el card icon user cerrar sesion
+            "rolUsuario" => $rolNombre
         ];
         $this->render('categoria/deleteCategoria.php', $data);
     }
