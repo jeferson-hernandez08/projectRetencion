@@ -26,7 +26,7 @@
                         <!-- Campo Categoria -->
                         <div class="form-group">
                             <label for="txtFkIdCategoria">Categoria</label>
-                            <select name="txtFkIdCategoria" id="txtFkIdCategoria" class="form-control" required>
+                            <select name="txtFkIdCategoria" id="txtFkIdCategoria" class="form-control">
                                 <option value="">Selecciona una categoria</option>
                                 <?php
                                     if (isset($categorias) && is_array($categorias)) {
@@ -43,7 +43,7 @@
                         <!-- Campo Causa -->
                         <div class="form-group">
                             <label for="txtFkIdCausa">Causa</label>
-                            <select name="txtFkIdCausa" id="txtFkIdCausa" class="form-control" required>
+                            <select name="txtFkIdCausa" id="txtFkIdCausa" class="form-control">
                                 <option value="">Selecciona una causa</option>
                                 <?php
                                     if (isset($causas) && is_array($causas)) {
