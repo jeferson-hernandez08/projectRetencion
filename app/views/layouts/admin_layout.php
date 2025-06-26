@@ -18,7 +18,7 @@
             <div class="sidebar-content">
                 <div class="logo">
                     <img src="/img/logoSenaProyect7.png" alt="logoImg">  <!--  ../../../public -->
-                    <span class="logo-text">RetencionCPIC</span>
+                    <!-- <span class="logo-text">RetencionCPIC</span> -->
                 </div>
                 <nav class="menu">
                     <ul>
@@ -125,8 +125,8 @@
         <div class="footer-container">
             <div class="footer-section footer-logo-container">
                 <div class="footer-logo">
-                    <img src="/img/logoProyect.png" alt="Logo RetencionCPIC">
-                    <div class="footer-logo-text">RetencionCPIC</div>
+                    <img src="/img/logoProyect2.png" alt="Logo RetencionCPIC">
+                    <!-- <div class="footer-logo-text">RetencionCPIC</div> -->
                 </div>
                 <p>Sistema integral para mejorar la retención de aprendices en el Centro de Procesos Industriales y Construcción (CPIC) del SENA.</p>
                 <div class="footer-social">

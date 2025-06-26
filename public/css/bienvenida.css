@@ -346,7 +346,7 @@
     width: 80px;
     height: 80px;
     filter: drop-shadow(0 2px 5px rgba(0,0,0,0.2));
-    animation: rotar 15s infinite linear;    /* Para que el logo se mueva 360 grados en 15 segundos */
+    /* animation: rotar 15s infinite linear;     Para que el logo se mueva 360 grados en 15 segundos */
 }
 
 @keyframes rotar {

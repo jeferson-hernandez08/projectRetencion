@@ -1264,8 +1264,8 @@ body.dark-mode .confirmation-icon {
 }
 
 .footer-logo img {
-    width: 50px;
-    height: 50px;
+    width: 90px;
+    height: 90px;
     margin-right: 12px;
     filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));
 }
