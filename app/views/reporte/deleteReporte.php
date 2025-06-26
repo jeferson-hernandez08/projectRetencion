@@ -19,7 +19,7 @@
 
     <div class="confirmation-modal">
         <img src="/img/warning.svg" alt="Advertencia" class="confirmation-icon">
-        <h2 class="confirmation-title">¿Está seguro de realizar esta acción?</h2>
+        <h2 class="confirmation-title">¿Está seguro de eliminar este reporte?</h2>
         <p class="confirmation-message">
              Se eliminará permanentemente el reporte #<?php echo $reporte->idReporte ?> 
              creado el <?php echo date('d/m/Y', strtotime($reporte->fechaCreacion)) ?>
@@ -27,7 +27,7 @@
         <form action="/reporte/remove" method="post">
             <input type="hidden" value="<?php echo $reporte->idReporte ?>" name="txtId">
             <div class="confirmation-buttons">
-                <button type="submit" class="btn-confirm">Confirmar</button>
+                <button type="submit" class="btn-confirm">Confirmar eliminación</button>
                 <a href="/reporte/view" class="btn-cancel">Cancelar</a>
             </div>
         </form>

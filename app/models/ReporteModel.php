@@ -100,13 +100,29 @@ class ReporteModel extends BaseModel {
 
     public function removeReporte($id) {
         try {
+            // Iniciar transacción | Para asegurar que ambas eliminaciones (reporte y relaciones) se completen con éxito. Si falla alguna operación, se revierten todos los cambios
+            $this->dbConnection->beginTransaction();
+
+            // 1. Eliminar relaciones en causa_reporte
+            $sqlRelaciones = "DELETE FROM causa_reporte WHERE fkIdReporte = :id";
+            $stmtRelaciones = $this->dbConnection->prepare($sqlRelaciones);
+            $stmtRelaciones->bindParam(":id", $id, PDO::PARAM_INT);
+            $stmtRelaciones->execute();
+
+            // 2. Eliminar el reporte
             $sql = "DELETE FROM $this->table WHERE idReporte=:id";
             $statement = $this->dbConnection->prepare($sql);
             $statement->bindParam(":id", $id, PDO::PARAM_INT);
             $result = $statement->execute();
+
+            // Confirmar transacción
+            $this->dbConnection->commit();
             return $result;
         } catch (PDOException $ex) {
+            // Revertir cambios en caso de error
+            $this->dbConnection->rollBack();
             echo "No se pudo eliminar el reporte".$ex->getMessage();
+            return false;
         }
     }
 
@@ -118,10 +134,13 @@ class ReporteModel extends BaseModel {
     public function guardarRelacionesCausa($idReporte, $causas) {
         try {
             foreach ($causas as $causa) {
+                // Acceder correctamente al valor de causaId
+                $idCausa = $causa['causaId'];
+
                 $sql = "INSERT INTO causa_reporte (fkIdReporte, fkIdCausa) VALUES (:idReporte, :idCausa)";
                 $statement = $this->dbConnection->prepare($sql);
                 $statement->bindParam(':idReporte', $idReporte, PDO::PARAM_INT);
-                $statement->bindParam(':idCausa', $causa['causaId'], PDO::PARAM_INT);
+                $statement->bindParam(':idCausa', $idCausa, PDO::PARAM_INT);
                 $statement->execute();
             }
             return true;

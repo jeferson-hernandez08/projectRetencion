@@ -143,8 +143,8 @@
 </div>
 
 <!-- JavaScript para manejar las relaciones Tabla Causa-Reporte -->
-<script src="../js/relacionCausaReporte.js"></script>    <!-- Es con uno solo ../ ENSAYAR COMO EL IMG BORRAR-->
+<script src="../js/relacionCausaReporte.js"></script>    <!--  Es con uno solo ../ ENSAYAR COMO EL IMG BORRAR-->
 <script>  
-    // Script para relaizar pruebas (Temporal)
+    // Pegar aquí para realizar pruebas
     
 </script>

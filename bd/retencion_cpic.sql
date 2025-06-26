@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 12-06-2025 a las 04:07:53
+-- Tiempo de generación: 26-06-2025 a las 03:46:30
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -46,7 +46,7 @@ INSERT INTO `aprendiz` (`idAprendiz`, `nombre`, `email`, `telefono`, `trimestre`
 (4, 'Daniel Duque', 'dani@gmail.com', '3127827845', '6', 11),
 (6, 'Angie Rios', 'angie@gmail.com', '3245678978', '5', 11),
 (7, 'Daniel Gallego', 'daniel@gmail.com', '3245678978', '8', 13),
-(9, 'David Gonzales', 'david@gmail.com', '3245678978', '5', 11);
+(10, 'David Gonzales', 'david@gmail.com', '3148761938', '4', 11);
 
 -- --------------------------------------------------------
 
@@ -68,9 +68,9 @@ CREATE TABLE `categoria` (
 INSERT INTO `categoria` (`idCategoria`, `nombre`, `descripcion`, `direccionamiento`) VALUES
 (1, 'Motivos Económicos', 'El aprendiz posee problemas económicos', 'Coordinador académico'),
 (3, 'Motivos Sociales', 'El aprendiz presenta problemas de discriminación en el SENA', 'Coordinador académico'),
-(8, 'Motivos Familiares ', 'El aprendiz posee tristeza ', 'Coordinador de formación'),
 (9, 'Motivos Laborales', 'Afecto de horario por su trabajo', 'Coordinador de formación'),
-(10, 'Prueba', 'Prueba', 'Coordinador académico');
+(10, 'Prueba', 'Prueba', 'Coordinador académico'),
+(13, 'Motivos familiares', 'El aprendiz tiene problemas familiares y su padre no lo deja estudiar', 'Coordinador de formación');
 
 -- --------------------------------------------------------
 
@@ -130,7 +130,17 @@ INSERT INTO `causa_reporte` (`fkIdReporte`, `fkIdCausa`) VALUES
 (20, 2),
 (21, 1),
 (22, 1),
-(22, 3);
+(22, 3),
+(23, 3),
+(23, 2),
+(24, 3),
+(25, 1),
+(25, 3),
+(26, 1),
+(26, 12),
+(30, 1),
+(31, 2),
+(31, 12);
 
 -- --------------------------------------------------------
 
@@ -198,7 +208,9 @@ CREATE TABLE `intervencion` (
 
 INSERT INTO `intervencion` (`idIntervencion`, `fechaCreacion`, `descripcion`, `fkIdEstrategias`, `fkIdReporte`, `fkIdUsuario`) VALUES
 (1, '2025-04-16 07:09:00', 'Se habla con el aprendiz sobre el caso de los problemas económicos que tiene y tanto familiares.', 2, 4, 3),
-(2, '2025-04-09 20:37:00', 'Se realiza atención psicológica al aprendiz por comportamientos de rabia y problemas mentales', 3, 6, 4);
+(2, '2025-04-09 20:37:00', 'Se realiza atención psicológica al aprendiz por comportamientos de rabia y problemas mentales', 3, 6, 4),
+(7, '2025-06-14 21:18:34', 'Fecha automática prueba 1 - editado ', 2, 4, 3),
+(9, '2025-06-16 10:59:48', 'fdsfsdfdfdfsdf', 2, 26, 19);
 
 -- --------------------------------------------------------
 
@@ -259,7 +271,13 @@ INSERT INTO `reporte` (`idReporte`, `fechaCreacion`, `descripcion`, `direccionam
 (19, '2025-05-14 19:44:00', 'Prueba 14-05', 'Coordinador académico', 'En proceso', 3, 3),
 (20, '2025-05-14 20:45:00', 'Prueba 14-05 \"2\"', 'Coordinador académico', 'En proceso', 4, 1),
 (21, '2025-05-14 20:47:00', 'Prueba 15-05 \"3\"', 'Coordinador académico', 'En proceso', 3, 1),
-(22, '2025-05-14 20:59:00', 'Ultima prueba 14-05', 'Coordinador académico', 'En proceso', 6, 1);
+(22, '2025-05-14 20:59:00', 'Ultima prueba 14-05', 'Coordinador académico', 'En proceso', 6, 1),
+(23, '2025-06-14 19:08:53', 'Prueba fecha Automática, editado ', 'Coordinador académico', 'En proceso', 6, 1),
+(24, '2025-06-14 19:41:38', 'Prueba fecha automatica 2, editado ', 'Coordinador académico', 'En proceso', 2, 13),
+(25, '2025-06-14 20:15:07', 'Prueba de fecha automatica 3 - editado ', 'Coordinador de formación', 'En proceso', 4, 1),
+(26, '2025-06-16 10:55:30', 'Aprendiz lleva tres dias sin ejemlo ', 'Coordinador de formación', 'Registrado', 4, 1),
+(30, '2025-06-25 20:37:03', 'Prrubeaaa ', 'Coordinador académico', 'Registrado', 4, 17),
+(31, '2025-06-25 20:39:30', 'dsfdsfdsfdf', 'Coordinador académico', 'Registrado', 2, 18);
 
 -- --------------------------------------------------------
 
@@ -403,13 +421,13 @@ ALTER TABLE `usuario`
 -- AUTO_INCREMENT de la tabla `aprendiz`
 --
 ALTER TABLE `aprendiz`
-  MODIFY `idAprendiz` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `idAprendiz` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT de la tabla `categoria`
 --
 ALTER TABLE `categoria`
-  MODIFY `idCategoria` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `idCategoria` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT de la tabla `causa`
@@ -433,7 +451,7 @@ ALTER TABLE `grupo`
 -- AUTO_INCREMENT de la tabla `intervencion`
 --
 ALTER TABLE `intervencion`
-  MODIFY `idIntervencion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `idIntervencion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT de la tabla `programaformacion`
@@ -445,7 +463,7 @@ ALTER TABLE `programaformacion`
 -- AUTO_INCREMENT de la tabla `reporte`
 --
 ALTER TABLE `reporte`
-  MODIFY `idReporte` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `idReporte` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 
 --
 -- AUTO_INCREMENT de la tabla `rol`
