@@ -53,21 +53,30 @@
             </div>
 
             <!-- Campo Usuario -->
-            <div class="form-group">
+            <!-- Campo Usuario Responsable (oculto) -->
+            <input type="hidden" name="txtFkIdUsuario" value="<?php echo $_SESSION['id']; ?>">
+
+            <!-- Mostrar nombre del usuario responsable actual -->
+             <div class="form-group">
+                <label>Usuario Responsable</label>
+                <input type="text" class="form-control" value="<?php echo $_SESSION['nombre']; ?>" readonly>
+            </div>
+
+            <!-- <div class="form-group">
                 <label for="txtFkIdUsuario">Usuario Responsable</label>
                 <select name="txtFkIdUsuario" id="txtFkIdUsuario" class="form-control" required>
                     <option value="">Selecciona un usuario</option>
                     <?php
-                        if (isset($usuarios) && is_array($usuarios)) {
-                            foreach ($usuarios as $usuario) {
-                                echo "<option value='".$usuario->idUsuario."'>".$usuario->nombre."</option>";
-                            }
-                        } else {
-                            echo "ERROR";
-                        }
+                        // if (isset($usuarios) && is_array($usuarios)) {
+                        //     foreach ($usuarios as $usuario) {
+                        //         echo "<option value='".$usuario->idUsuario."'>".$usuario->nombre."</option>";
+                        //     }
+                        // } else {
+                        //     echo "ERROR";
+                        // }
                     ?>
                 </select>
-            </div>
+            </div> -->
 
             <!-- Botón de Guardar -->
             <div class="form-group">

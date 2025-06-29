@@ -63,11 +63,11 @@ class IntervencionController extends BaseController {
         // Lógica para capturar datos relacionados
         $estrategiaObj = new EstrategiasModel();
         $reporteObj = new ReporteModel();
-        $usuarioObj = new UsuarioModel();
+        //$usuarioObj = new UsuarioModel();     // Ya no necesitamos cargar los usuarios para generacion de usuario automatico
         
         $estrategias = $estrategiaObj->getAll();
         $reportes = $reporteObj->getAll();
-        $usuarios = $usuarioObj->getAll();
+        //$usuarios = $usuarioObj->getAll();
 
         // Obtener información del usuario y rol para el card icon user cerrar sesion
         $rolNombre = "Usuario";
@@ -89,7 +89,7 @@ class IntervencionController extends BaseController {
             "title" => "Intervenciones",
             "estrategias" => $estrategias,
             "reportes" => $reportes,
-            "usuarios" => $usuarios,
+            //"usuarios" => $usuarios,
             "nombreUsuario" => $nombreUsuario,   // Enviamos datos para el card icon user cerrar sesion
             "rolUsuario" => $rolNombre
         ];
@@ -98,14 +98,22 @@ class IntervencionController extends BaseController {
 
     public function createIntervencion() {
         if (isset($_POST['txtDescripcion']) && 
-            isset($_POST['txtFkIdEstrategias']) && isset($_POST['txtFkIdReporte']) && 
-            isset($_POST['txtFkIdUsuario'])) {     // Se quita campo isset($_POST['txtFechaCreacion']) por que la fecha de creacion se geneara atomaticamente.
+            isset($_POST['txtFkIdEstrategias']) && isset($_POST['txtFkIdReporte'])) {     
+                                        // Se quita campo isset($_POST['txtFechaCreacion']) por que la fecha de creacion se geneara atomaticamente.
+                                        // Se quita campo usuario isset($_POST['txtFkIdUsuario']) para la generacion automatica de usuario responsable. 
+
+            // Obtener ID de usuario de la sesión para la generacion automatica
+            $fkIdUsuario = $_SESSION['id'] ?? null;
+            if (!$fkIdUsuario) {
+                echo "Error: No se pudo identificar al usuario";
+                return;
+            }
             
             //$fechaCreacion = $_POST['txtFechaCreacion'] ?? null;
             $descripcion = $_POST['txtDescripcion'] ?? null;
             $fkIdEstrategias = $_POST['txtFkIdEstrategias'] ?? null;
             $fkIdReporte = $_POST['txtFkIdReporte'] ?? null;
-            $fkIdUsuario = $_POST['txtFkIdUsuario'] ?? null;
+            //$fkIdUsuario = $_POST['txtFkIdUsuario'] ?? null;
 
             // Creamos instancia del Modelo Intervencion
             $intervencionObj = new IntervencionModel();
