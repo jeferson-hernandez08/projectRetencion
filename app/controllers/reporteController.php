@@ -65,8 +65,8 @@ class ReporteController extends BaseController {
 
     public function newReporte() {
         // Lógica para capturar usuarios y aprendices
-        $usuarioObj = new UsuarioModel();
-        $usuarios = $usuarioObj->getAll();
+        //$usuarioObj = new UsuarioModel();     // Ya no necesitamos cargar los usuarios en el campo usuarios | Será en automatico
+        //$usuarios = $usuarioObj->getAll();
         
         $aprendizObj = new AprendizModel();
         $aprendices = $aprendizObj->getAll();
@@ -103,7 +103,7 @@ class ReporteController extends BaseController {
         // Llamamos a la vista
         $data = [
             "title" => "Reportes",
-            "usuarios" => $usuarios,
+            // "usuarios" => $usuarios,      // Ya no necesitamos cargar los usuarios
             "aprendices" => $aprendices,
 
             "categorias" => $categorias,     // Capturamos los datos de CategoriaModel y CausaModel para rendenrizar y relacionar datos en newReporte.php
@@ -119,10 +119,19 @@ class ReporteController extends BaseController {
 
     public function createReporte() {
         if (isset($_POST['txtDescripcion']) && isset($_POST['txtDireccionamiento']) && 
-            isset($_POST['txtFkIdAprendiz']) && isset($_POST['txtFkIdUsuario']) &&
+            isset($_POST['txtFkIdAprendiz']) &&
             isset($_POST['relacionesCausaReporte'])) { // Capturamos el valor de la relación causa_reporte
                 // SE CAMBIA ESTO                      // Se quita campo isset($_POST['txtFechaCreacion']) por que la fecha de creacion se geneara atomaticamente.
-
+                                                       // Se quita el campo isset($_POST['txtEstado']) para generar estado en atomatico "Registrado"
+                                                       // Se quita el campo isset($_POST['txtFkIdUsuario']) para generar el usuario automatico dependiendo del usuario que ingrese al sistema.
+                                                       
+            // Obtener ID de usuario de la sesión para la generación de campo usaurio automatica
+            $fkIdUsuario = $_SESSION['id'] ?? null;
+            if (!$fkIdUsuario) {
+                echo "Error: No se pudo identificar al usuario";
+                return;
+            }
+            
             // Estado fijo como "Registrado"
             $estado = "Registrado"; // <-- Valor fijo del campo registrado, usuario mayor interactividad.
             
@@ -131,7 +140,7 @@ class ReporteController extends BaseController {
             $direccionamiento = $_POST['txtDireccionamiento'] ?? null;
             //$estado = $_POST['txtEstado'] ?? null;
             $fkIdAprendiz = $_POST['txtFkIdAprendiz'] ?? null;
-            $fkIdUsuario = $_POST['txtFkIdUsuario'] ?? null;
+            //$fkIdUsuario = $_POST['txtFkIdUsuario'] ?? null;
 
             // SE CAMBIA ESTO
             $relacionesCausaReporte = json_decode($_POST['relacionesCausaReporte'], true); // Decodificamos el JSON recibido del formulario
