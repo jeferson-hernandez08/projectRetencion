@@ -89,7 +89,10 @@
             </div>
 
             <!-- Campo Estado (select) -->
-            <div class="form-group">
+            <!-- Campo Estado (oculto) -->
+            <input type="hidden" name="txtEstado" value="Registrado">   <!-- Campo Estado Registrado se pone fijo para que usuario tenga mas interactividad -->
+
+            <!-- <div class="form-group">
                 <label for="txtEstado">Estado</label>
                 <select name="txtEstado" id="txtEstado" class="form-control" required>
                     <option value="" selected disabled>Seleccione un estado</option>
@@ -98,7 +101,7 @@
                     <option value="Retenido">Retenido</option>
                     <option value="Desertado">Desertado</option>
                 </select>
-            </div>
+            </div> -->
 
             <!-- Campo Aprendiz -->
             <div class="form-group">

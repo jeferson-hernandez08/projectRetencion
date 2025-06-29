@@ -119,14 +119,17 @@ class ReporteController extends BaseController {
 
     public function createReporte() {
         if (isset($_POST['txtDescripcion']) && isset($_POST['txtDireccionamiento']) && 
-            isset($_POST['txtEstado']) && isset($_POST['txtFkIdAprendiz']) && isset($_POST['txtFkIdUsuario']) &&
+            isset($_POST['txtFkIdAprendiz']) && isset($_POST['txtFkIdUsuario']) &&
             isset($_POST['relacionesCausaReporte'])) { // Capturamos el valor de la relación causa_reporte
                 // SE CAMBIA ESTO                      // Se quita campo isset($_POST['txtFechaCreacion']) por que la fecha de creacion se geneara atomaticamente.
+
+            // Estado fijo como "Registrado"
+            $estado = "Registrado"; // <-- Valor fijo del campo registrado, usuario mayor interactividad.
             
             //$fechaCreacion = date('Y-m-d H:i:s', strtotime($_POST['txtFechaCreacion']));      // Convertir el valor recibido al formato DATETIME de MySQL (Y-m-d H:i:s) y usé strtotime() para parsear correctamente la fecha+hora  |  // Eliminado txtFechaCreacion
             $descripcion = $_POST['txtDescripcion'] ?? null;                                  // Convierte el valor recibido del formulario (datetime-local) al formato DATETIME de MySQL.
             $direccionamiento = $_POST['txtDireccionamiento'] ?? null;
-            $estado = $_POST['txtEstado'] ?? null;
+            //$estado = $_POST['txtEstado'] ?? null;
             $fkIdAprendiz = $_POST['txtFkIdAprendiz'] ?? null;
             $fkIdUsuario = $_POST['txtFkIdUsuario'] ?? null;
 

@@ -23,6 +23,9 @@ class ReporteModel extends BaseModel {
 
     public function saveReporte($descripcion, $direccionamiento, $estado, $fkIdAprendiz, $fkIdUsuario) {   // Eliminamos la variable $fechaCreacion, para generacion automatica
         try {
+            // Forzar estado "Registrado" al crear
+            $estado = "Registrado"; // <-- Aseguramos el valor fijo del campo registrado, usuario mayor interactividad.
+
             // Generar fecha automática | Colombia
             date_default_timezone_set('America/Bogota');
             $fechaCreacion = date('Y-m-d H:i:s');
