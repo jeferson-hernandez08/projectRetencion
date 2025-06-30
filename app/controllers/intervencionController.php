@@ -91,7 +91,8 @@ class IntervencionController extends BaseController {
             "reportes" => $reportes,
             //"usuarios" => $usuarios,
             "nombreUsuario" => $nombreUsuario,   // Enviamos datos para el card icon user cerrar sesion
-            "rolUsuario" => $rolNombre
+            "rolUsuario" => $rolNombre,
+            "reporteId" => $_GET['reporteId'] ?? null // Agregar esta línea
         ];
         $this->render('intervencion/newIntervencion.php', $data);
     }

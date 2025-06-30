@@ -1,3 +1,8 @@
+<!-- Al principio del archivo -->
+<?php
+$reporteSeleccionado = $_GET['reporteId'] ?? null;
+?>
+
 <div class="data-container">
     <div class="navegate-group">
         <div class="back">
@@ -43,6 +48,7 @@
                     <?php
                         if (isset($reportes) && is_array($reportes)) {
                             foreach ($reportes as $reporte) {
+                                $selected = ($reporteSeleccionado == $reporte->idReporte) ? 'selected' : '';
                                 echo "<option value='".$reporte->idReporte."'>".$reporte->descripcion."</option>";
                             }
                         } else {

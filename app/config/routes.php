@@ -403,6 +403,10 @@ return [         // Prueba cimmit | base contrller , programa formacion controll
         "controller" => "App\Controllers\intervencionController",  
         "action" => "removeIntervencion"
     ],
+    '/reporte/intervenciones/(\d+)' => [
+    'controller' => 'App\Controllers\ReporteController',
+    'action' => 'intervenciones'
+    ],
 
     // Tabla causa_reporte 
     '/causaReporte/index'=> [

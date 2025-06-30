@@ -20,6 +20,7 @@
                             <a href='/reporte/view/$value->idReporte'> <button>Consultar</button> </a> 
                             <a href='/reporte/edit/$value->idReporte'> <button>Editar</button> </a> 
                             <a href='/reporte/delete/$value->idReporte'> <button>Eliminar</button> </a> 
+                            <a href='/reporte/intervenciones/$value->idReporte'> <button>Ver Intervenciones</button> </a> 
                         </div>
                     </div>";
                 }

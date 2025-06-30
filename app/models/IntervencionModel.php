@@ -103,4 +103,23 @@ class IntervencionModel extends BaseModel {
             echo "No se pudo eliminar la intervención".$ex->getMessage();
         }
     }
+
+    // Funcion getByReporteId para ver intervencion de dicho reporte o aprendiz | Y enviar a funcion intervenciones() en reporte controller
+    public function getByReporteId($idReporte) {
+        try {
+            $sql = "SELECT intervencion.*, estrategias.estrategia AS nombreEstrategia, 
+                    usuario.nombre AS nombreUsuario
+                    FROM intervencion 
+                    INNER JOIN estrategias ON intervencion.fkIdEstrategias = estrategias.idEstrategias
+                    INNER JOIN usuario ON intervencion.fkIdUsuario = usuario.idUsuario
+                    WHERE intervencion.fkIdReporte = :idReporte";
+            $statement = $this->dbConnection->prepare($sql);
+            $statement->bindParam(":idReporte", $idReporte, PDO::PARAM_INT);
+            $statement->execute();
+            return $statement->fetchAll(PDO::FETCH_OBJ);
+        } catch (PDOException $ex) {
+            echo "Error al obtener las intervenciones: " . $ex->getMessage();
+            return [];
+        }
+    }
 }

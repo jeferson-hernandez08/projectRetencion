@@ -7,7 +7,9 @@ use App\Models\AprendizModel;       // Importar la clase AprendizModel
 use App\Models\CategoriaModel;       // Importar la clase CategoriaModel  | Capturas datos para tabla causa_reporte
 use App\Models\CausaModel;           // Importar la clase CausaModel
 
-use App\Models\RolModel;         // Importar la clase RolModel para el card icon user cerrar sesion
+use App\Models\RolModel;             // Importar la clase RolModel para el card icon user cerrar sesion
+
+use App\Models\IntervencionModel;    // Importar la clase IntervencionModel para ver las intervenciones de un reporte en especifico.
 
 require_once 'baseController.php';
 require_once MAIN_APP_ROUTE."../models/ReporteModel.php";
@@ -17,6 +19,7 @@ require_once MAIN_APP_ROUTE."../models/AprendizModel.php";
 require_once MAIN_APP_ROUTE."../models/CategoriaModel.php";    // Impoprtar para relacion tabla causa_reporte
 require_once MAIN_APP_ROUTE."../models/CausaModel.php";
 require_once MAIN_APP_ROUTE . "../models/RolModel.php";
+require_once MAIN_APP_ROUTE."../models/IntervencionModel.php";  
 
 class ReporteController extends BaseController {
     
@@ -291,6 +294,41 @@ class ReporteController extends BaseController {
             $reporteObj->removeReporte($id);
             $this->redirectTo("reporte/view");
         }
+    }
+
+    // Funcion para ver intervencion de dicho reporte o aprendiz
+    public function intervenciones($idReporte) {
+        // Obtener el reporte
+        $reporteModel = new ReporteModel();
+        $reporte = $reporteModel->getReporte($idReporte);
+        
+        // Obtener las intervenciones de este reporte
+        $intervencionModel = new IntervencionModel();
+        $intervenciones = $intervencionModel->getByReporteId($idReporte);
+
+        // Obtener información del usuario y rol para el card icon user cerrar sesion
+        $rolNombre = "Usuario";
+        $nombreUsuario = $_SESSION['nombre'] ?? "Usuario";
+
+        if (isset($_SESSION['id'])) {
+            // Obtener detalles del usuario
+            $usuarioModel = new UsuarioModel();
+            $usuario = $usuarioModel->getUsuario($_SESSION['id']);
+            
+            // Obtener nombre del rol
+            $rolModel = new RolModel();
+            $rol = $rolModel->getRol($usuario->fkIdRol);
+            $rolNombre = $rol->nombre ?? "Usuario";
+        }
+
+        $data = [
+            "title" => "Intervenciones del Reporte",
+            "reporte" => $reporte,
+            "intervenciones" => $intervenciones,
+            "nombreUsuario" => $nombreUsuario,
+            "rolUsuario" => $rolNombre
+        ];
+        $this->render('reporte/viewIntervencionesReporte.php', $data);
     }
 
 }

@@ -46,4 +46,9 @@
             }
         ?>
     </div>
+    <div class="buttons">
+        <a href="/reporte/intervenciones/<?php echo $reporte->idReporte; ?>">
+            <button>Ver Intervención de este reporte</button>
+        </a>
+    </div>
 </div>
