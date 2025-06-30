@@ -61,22 +61,30 @@
             </div>
 
             <!-- Campo Usuario -->
+            <!-- Campo Usuario (oculto y mostrado) -->
+            <input type="hidden" name="txtFkIdUsuario" value="<?php echo $usuarioActual->idUsuario; ?>">
+            <!-- Campo Usuario (mostrar en el edit) -->
             <div class="form-group">
+                <label>Usuario Resposable</label>
+                <input type="text" class="form-control" value="<?php echo $usuarioActual->nombre; ?>" readonly>
+            </div>
+            
+            <!-- <div class="form-group">
                 <label for="txtFkIdUsuario">Usuario Responsable</label>
                 <select name="txtFkIdUsuario" id="txtFkIdUsuario" class="form-control">
                     <option value="">Selecciona un usuario</option>
                     <?php
-                        if (isset($usuarios) && is_array($usuarios)) {
-                            foreach ($usuarios as $usuario) {
-                                $selected = ($intervencion->fkIdUsuario == $usuario->idUsuario) ? 'selected' : '';
-                                echo "<option value='".$usuario->idUsuario."' $selected>".$usuario->nombre."</option>";
-                            }
-                        } else {
-                            echo "ERROR";
-                        }
+                        // if (isset($usuarios) && is_array($usuarios)) {
+                        //     foreach ($usuarios as $usuario) {
+                        //         $selected = ($intervencion->fkIdUsuario == $usuario->idUsuario) ? 'selected' : '';
+                        //         echo "<option value='".$usuario->idUsuario."' $selected>".$usuario->nombre."</option>";
+                        //     }
+                        // } else {
+                        //     echo "ERROR";
+                        // }
                     ?>
                 </select>
-            </div>
+            </div> -->
 
             <!-- Botón de Guardar -->
             <div class="form-group">

@@ -161,20 +161,24 @@ class IntervencionController extends BaseController {
         
         $estrategiaObj = new EstrategiasModel();
         $reporteObj = new ReporteModel();
-        $usuarioObj = new UsuarioModel();
+        //$usuarioObj = new UsuarioModel();     // Eliminamos la carga de todos los usuarios para que no se edite el usuario si no isemore sea el rol ingresado al sistema
         
         $estrategias = $estrategiaObj->getAll();
         $reportes = $reporteObj->getAll();
-        $usuarios = $usuarioObj->getAll();
+        //$usuarios = $usuarioObj->getAll();
 
         // Obtener información del usuario y rol para el card icon user cerrar sesion
         $rolNombre = "Usuario";
         $nombreUsuario = $_SESSION['nombre'] ?? "Usuario";
 
+        // Obtener la información del usuario actual que esta en sistema
+        $usuarioActual = null; // Inicializamos usuario actual ingresado al sistema
+
         if (isset($_SESSION['id'])) {
             // Obtener detalles del usuario
             $usuarioModel = new UsuarioModel();
             $usuario = $usuarioModel->getUsuario($_SESSION['id']);
+            $usuarioActual = $usuarioModel->getUsuario($_SESSION['id']); // Capturamos usuario actual aquí
             
             // Obtener nombre del rol
             $rolModel = new RolModel();
@@ -187,9 +191,10 @@ class IntervencionController extends BaseController {
             "intervencion" => $intervencionInfo,
             "estrategias" => $estrategias,
             "reportes" => $reportes,
-            "usuarios" => $usuarios,
+            //"usuarios" => $usuarios,
             "nombreUsuario" => $nombreUsuario,   // Enviamos datos para el card icon user cerrar sesion
-            "rolUsuario" => $rolNombre
+            "rolUsuario" => $rolNombre,
+            "usuarioActual" => $usuarioActual   // Pasamos el usuario actual que esta en el sistema ingresado
         ];
         $this->render('intervencion/editIntervencion.php', $data);
     }

@@ -49,7 +49,7 @@
             <div class="no-interventions-container">
                 <div class="no-interventions-icon">📋</div>
                 <h3 class="no-interventions-title">Sin intervenciones registradas</h3>
-                <p class="no-interventions-message">Actualmente no hay intervenciones asociadas a este reporte. Puedes agregar nuevas intervenciones utilizando el botón inferior.</p>
+                <p class="no-interventions-message">Actualmente no hay intervenciones asociadas a este reporte.</p>
                 <!-- <button class="no-interventions-action">
                     <span>+ Agregar Intervención</span>
                 </button> -->

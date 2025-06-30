@@ -206,8 +206,8 @@ class ReporteController extends BaseController {
         $reporteObj = new ReporteModel();
         $reporteInfo = $reporteObj->getReporte($id);
         
-        $usuarioObj = new UsuarioModel();
-        $usuariosInfo = $usuarioObj->getAll();
+        // $usuarioObj = new UsuarioModel();      // Eliminamos la carga de todos los usuarios para que no se edite el usuario si no isemore sea el rol ingresado al sistema
+        // $usuariosInfo = $usuarioObj->getAll();
         
         $aprendizObj = new AprendizModel();
         $aprendicesInfo = $aprendizObj->getAll();
@@ -216,10 +216,14 @@ class ReporteController extends BaseController {
         $rolNombre = "Usuario";
         $nombreUsuario = $_SESSION['nombre'] ?? "Usuario";
 
+        // Obtener la información del usuario actual que esta en sistema
+        $usuarioActual = null; // Inicializamos usuario actual ingresado al sistema
+
         if (isset($_SESSION['id'])) {
             // Obtener detalles del usuario
             $usuarioModel = new UsuarioModel();
             $usuario = $usuarioModel->getUsuario($_SESSION['id']);
+            $usuarioActual = $usuarioModel->getUsuario($_SESSION['id']); // Capturamos usuario actual aquí
             
             // Obtener nombre del rol
             $rolModel = new RolModel();
@@ -230,27 +234,34 @@ class ReporteController extends BaseController {
         $data = [
             "title" => "Reportes",
             "reporte" => $reporteInfo,
-            "usuarios" => $usuariosInfo,
+            //"usuarios" => $usuariosInfo,
             "aprendices" => $aprendicesInfo,
             "nombreUsuario" => $nombreUsuario,   // Enviamos datos para el card icon user cerrar sesion
-            "rolUsuario" => $rolNombre
-
+            "rolUsuario" => $rolNombre,
+            "usuarioActual" => $usuarioActual   // Pasamos el usuario actual que esta en el sistema ingresado
         ];
         $this->render('reporte/editReporte.php', $data);
     }
 
     public function updateReporte() {
         if (isset($_POST['txtId']) && isset($_POST['txtDescripcion']) && 
-            isset($_POST['txtDireccionamiento']) && isset($_POST['txtEstado']) && isset($_POST['txtFkIdAprendiz']) && 
-            isset($_POST['txtFkIdUsuario'])) {    // Se elimina isset($_POST['txtFechaCreacion']) por que se genera automaticamente la fecha de creación
-            
+            isset($_POST['txtDireccionamiento']) && isset($_POST['txtEstado']) && 
+            isset($_POST['txtFkIdAprendiz'])) {    // Se elimina isset($_POST['txtFechaCreacion']) por que se genera automaticamente la fecha de creación
+                                                   // Se elimina isset($_POST['txtFkIdUsuario']) por que se genera el usuario de manera automatica segun rol o usuario ingresado
             $id = $_POST['txtId'] ?? null;
             //$fechaCreacion = $_POST['txtFechaCreacion'] ?? null;
             $descripcion = $_POST['txtDescripcion'] ?? null;
             $direccionamiento = $_POST['txtDireccionamiento'] ?? null;
             $estado = $_POST['txtEstado'] ?? null;
             $fkIdAprendiz = $_POST['txtFkIdAprendiz'] ?? null;
-            $fkIdUsuario = $_POST['txtFkIdUsuario'] ?? null;
+            //$fkIdUsuario = $_POST['txtFkIdUsuario'] ?? null;
+
+            // Obtener ID de usuario de la sesión | Para la generacion de usuario por defecto sugun usuario ingresado al sistema
+            $fkIdUsuario = $_SESSION['id'] ?? null;
+            if (!$fkIdUsuario) {
+                echo "Error: No se pudo identificar al usuario";
+                return;
+            }
 
             $reporteObj = new ReporteModel();
             $respuesta = $reporteObj->editReporte($id, $descripcion, $direccionamiento, $estado, $fkIdAprendiz, $fkIdUsuario);   // Quitamos $fechaCreacion, por generacion automatica.
