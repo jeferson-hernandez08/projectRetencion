@@ -342,4 +342,37 @@ class ReporteController extends BaseController {
         $this->render('reporte/viewIntervencionesReporte.php', $data);
     }
 
+    // Funcion para cambio de estado del aprendiz en viewReporte
+    public function updateEstado($id) {
+        // Verificar si es petición AJAX
+        if (!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && 
+            strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest') {
+            
+            $json = file_get_contents('php://input');
+            $data = json_decode($json, true);
+            
+            if (isset($data['estado'])) {
+                $reporteModel = new ReporteModel();
+                
+                // Obtener estado actual para revertir si falla
+                $reporteActual = $reporteModel->getReporte($id);
+                $oldEstado = $reporteActual->estado;
+                
+                // Actualizar solo el estado
+                $result = $reporteModel->updateEstado($id, $data['estado']);
+                
+                if ($result) {
+                    echo json_encode(['success' => true]);
+                    exit;
+                } else {
+                    echo json_encode(['success' => false, 'oldEstado' => $oldEstado]);
+                    exit;
+                }
+            }
+        }
+        
+        echo json_encode(['success' => false]);
+        exit;
+    }
+
 }

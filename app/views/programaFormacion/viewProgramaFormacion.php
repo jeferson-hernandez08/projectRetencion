@@ -7,23 +7,44 @@
             <a href="/programaFormacion/new"><button>+</button></a>
         </div>
     </div>
-    <div class="info">
-        <?php
-            if (empty($programas)) {
-                echo '<br>No se encuentran programas de formación en la base de datos';
-            } else {
-                foreach ($programas as $key => $value) {
-                    echo
-                    "<div class='record'>
-                        <span> ID: $value->idProgramaFormacion - $value->nombre</span>
-                        <div class='buttons'>
-                            <a href='/programaFormacion/view/$value->idProgramaFormacion'> <button>Consultar</button> </a> 
-                            <a href='/programaFormacion/edit/$value->idProgramaFormacion'> <button>Editar</button> </a> 
-                            <a href='/programaFormacion/delete/$value->idProgramaFormacion'> <button>Eliminar</button> </a> 
+    
+    <?php if (empty($programas)): ?>
+        <div class="no-records-message">
+            <div class="no-records-icon">🎓</div>
+            <h3>No se encontraron programas de formación</h3>
+            <p>Actualmente no hay programas de formación registrados en el sistema.</p>
+            <a href="/programaFormacion/new" class="create-programa-btn">Crear Nuevo Programa</a>
+        </div>
+    <?php else: ?>
+        <div class="report-cards-container">
+            <?php foreach ($programas as $programa): ?>
+                <div class="report-card">
+                    <div class="card-header">
+                        <span class="report-id">Programa ID #  <?php echo $programa->idProgramaFormacion; ?></span>
+                    </div>
+                    
+                    <div class="card-body">
+                        <div class="report-info">
+                            <div class="info-label">Nombre:</div>
+                            <div class="info-value"><?php echo $programa->nombre; ?></div>
                         </div>
-                    </div>";
-                }
-            }
-        ?>
-    </div>
+                    </div>
+                    
+                    <div class="card-footer">
+                        <div class="card-actions">
+                            <a href="/programaFormacion/view/<?php echo $programa->idProgramaFormacion; ?>" class="action-btn consultar" title="Ver detalles">
+                                <i class="fas fa-eye"></i> Detalles
+                            </a>
+                            <a href="/programaFormacion/edit/<?php echo $programa->idProgramaFormacion; ?>" class="action-btn editar" title="Editar programa">
+                                <i class="fas fa-edit"></i> Editar
+                            </a>
+                            <a href="/programaFormacion/delete/<?php echo $programa->idProgramaFormacion; ?>" class="action-btn eliminar" title="Eliminar programa">
+                                <i class="fas fa-trash"></i> Eliminar
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            <?php endforeach; ?>
+        </div>
+    <?php endif; ?>
 </div>

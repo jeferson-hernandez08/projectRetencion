@@ -153,5 +153,32 @@ class ReporteModel extends BaseModel {
         }
     }
 
+    // Funcion para cambio de estado del aprendiz en viewReporte
+    public function updateEstado($id, $estado) {
+        try {
+            $sql = "UPDATE $this->table SET estado = :estado WHERE idReporte = :id";
+            $statement = $this->dbConnection->prepare($sql);
+            $statement->bindParam(":id", $id, PDO::PARAM_INT);
+            $statement->bindParam(":estado", $estado, PDO::PARAM_STR);
+            return $statement->execute();
+        } catch (PDOException $ex) {
+            error_log("Error al actualizar estado: " . $ex->getMessage());
+            return false;
+        }
+    }
 
+    // Funcion getAll para capturar nombre completo del aprendiz y renderizarla en el viewReporte.
+    public function getAll():array {     // Se usa : array en la declaración del método para coincidir con la clase padre
+        try {
+            $sql = "SELECT reporte.*, aprendiz.nombre AS nombreAprendiz 
+                    FROM reporte 
+                    INNER JOIN aprendiz ON reporte.fkIdAprendiz = aprendiz.idAprendiz";
+            $statement = $this->dbConnection->prepare($sql);
+            $statement->execute();
+            return $statement->fetchAll(PDO::FETCH_OBJ);
+        } catch (PDOException $ex) {
+            echo "Error al obtener todos los reportes: " . $ex->getMessage();
+            return [];
+        }
+    }
 }

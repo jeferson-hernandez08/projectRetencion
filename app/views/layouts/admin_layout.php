@@ -200,7 +200,6 @@
         
     </footer>
     
-
     <script>
         // Función para cambiar el icono
         function updateThemeIcon(isDark) {

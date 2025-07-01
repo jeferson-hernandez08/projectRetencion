@@ -7,23 +7,50 @@
             <a href="/causa/new"><button>+</button></a>
         </div>
     </div>
-    <div class="info">
-        <?php
-            if (empty($causas)) {
-                echo '<br>No se encuentran causas en la base de datos';
-            } else {
-                foreach ($causas as $key => $value) {
-                    echo
-                    "<div class='record'>
-                        <span> ID: $value->idCausa - $value->causa</span>
-                        <div class='buttons'>
-                            <a href='/causa/view/$value->idCausa'> <button>Consultar</button> </a> 
-                            <a href='/causa/edit/$value->idCausa'> <button>Editar</button> </a> 
-                            <a href='/causa/delete/$value->idCausa'> <button>Eliminar</button> </a> 
+    
+    <?php if (empty($causas)): ?>
+        <div class="no-records-message">
+            <div class="no-records-icon">🔍</div>
+            <h3>No se encontraron causas</h3>
+            <p>Actualmente no hay causas registradas en el sistema.</p>
+            <a href="/causa/new" class="create-causa-btn">Crear Nueva Causa</a>
+        </div>
+    <?php else: ?>
+        <div class="report-cards-container">
+            <?php foreach ($causas as $value): ?>
+                <div class="report-card">
+                    <div class="card-header">
+                        <span class="report-id">Causa ID # <?php echo $value->idCausa; ?></span>
+                        <!-- <span class="causa-categoria">Categoría: <?php echo $value->nombreCategoria ?? 'Sin categoría'; ?></span> -->
+                    </div>
+                    
+                    <div class="card-body">
+                        <div class="report-info">
+                            <div class="info-label">Causa:</div>
+                            <div class="info-value"><?php echo $value->causa; ?></div>
                         </div>
-                    </div>";
-                }
-            }
-        ?>
-    </div>
+                        
+                        <div class="report-info">
+                            <div class="info-label">Variables:</div>
+                            <div class="info-value"><?php echo $value->variables; ?></div>
+                        </div>
+                    </div>
+                    
+                    <div class="card-footer">
+                        <div class="card-actions">
+                            <a href="/causa/view/<?php echo $value->idCausa; ?>" class="action-btn consultar" title="Ver detalles">
+                                <i class="fas fa-eye"></i> Detalles
+                            </a>
+                            <a href="/causa/edit/<?php echo $value->idCausa; ?>" class="action-btn editar" title="Editar causa">
+                                <i class="fas fa-edit"></i> Editar
+                            </a>
+                            <a href="/causa/delete/<?php echo $value->idCausa; ?>" class="action-btn eliminar" title="Eliminar causa">
+                                <i class="fas fa-trash"></i> Eliminar
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            <?php endforeach; ?>
+        </div>
+    <?php endif; ?>
 </div>

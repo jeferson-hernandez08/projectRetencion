@@ -139,4 +139,19 @@ class UsuarioModel extends BaseModel {
         return false;
     }
 
+    // Funcion para enviar el nombre del Rol a la card de viewReporte.php
+    public function getAll():array {
+        try {
+            $sql = "SELECT usuario.*, rol.nombre AS nombreRol 
+                    FROM usuario 
+                    LEFT JOIN rol ON usuario.fkIdRol = rol.idRol";
+            $statement = $this->dbConnection->prepare($sql);
+            $statement->execute();
+            return $statement->fetchAll(PDO::FETCH_OBJ);
+        } catch (PDOException $ex) {
+            echo "Error al obtener los usuarios: " . $ex->getMessage();
+            return [];
+        }
+    }
+
 }

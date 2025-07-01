@@ -251,6 +251,11 @@ return [         // Prueba cimmit | base contrller , programa formacion controll
         "controller" => "App\Controllers\ReporteController",   // Error de r en minuscula
         "action" => "removeReporte"
     ],
+    // Nueva ruta para actualización de estado AJAX
+    '/reporte/updateEstado/(\d+)' => [
+        'controller' => 'App\Controllers\ReporteController',
+        'action' => 'updateEstado'
+    ],
 
     // Tabla estrategias
     '/estrategias/index'=> [
