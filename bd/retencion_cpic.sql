@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 26-06-2025 a las 03:46:30
+-- Tiempo de generación: 01-07-2025 a las 05:33:29
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -46,7 +46,7 @@ INSERT INTO `aprendiz` (`idAprendiz`, `nombre`, `email`, `telefono`, `trimestre`
 (4, 'Daniel Duque', 'dani@gmail.com', '3127827845', '6', 11),
 (6, 'Angie Rios', 'angie@gmail.com', '3245678978', '5', 11),
 (7, 'Daniel Gallego', 'daniel@gmail.com', '3245678978', '8', 13),
-(10, 'David Gonzales', 'david@gmail.com', '3148761938', '4', 11);
+(11, 'David Aguapacha', 'david@gmail.com', '3245768907', '4', 10);
 
 -- --------------------------------------------------------
 
@@ -66,11 +66,14 @@ CREATE TABLE `categoria` (
 --
 
 INSERT INTO `categoria` (`idCategoria`, `nombre`, `descripcion`, `direccionamiento`) VALUES
-(1, 'Motivos Económicos', 'El aprendiz posee problemas económicos', 'Coordinador académico'),
-(3, 'Motivos Sociales', 'El aprendiz presenta problemas de discriminación en el SENA', 'Coordinador académico'),
-(9, 'Motivos Laborales', 'Afecto de horario por su trabajo', 'Coordinador de formación'),
-(10, 'Prueba', 'Prueba', 'Coordinador académico'),
-(13, 'Motivos familiares', 'El aprendiz tiene problemas familiares y su padre no lo deja estudiar', 'Coordinador de formación');
+(1, 'Motivos Económicos', 'El aprendiz posee problemas económicos para estudiar en el SENA.', 'Coordinador de formación'),
+(3, 'Motivos Laborales', 'El trabajo del aprendiz no le da tiempo para estudiar.', 'Coordinador académico'),
+(9, 'Motivos Familares', 'A la familia del aprendiz no le agrada que estudie', 'Coordinador de formación'),
+(10, 'Motivos de Salud', 'El aprendiz posee una  enfermedad que lo limita a estudiar.', 'Coordinador de formación'),
+(13, 'Motivos Sociales', 'El aprendiz se le dificulta llegar por temas de distancia.', 'Coordinador de formación'),
+(15, 'Motivos Academicos del Aprendiz', 'El aprendiz no se sintió capaz con todo lo que le pedían en la formación.', 'Coordinador académico'),
+(16, 'Motivos Asociados a la Calidad del Programa de Formación.', 'El aprendiz siente que le dejan muchos trabajos y actividades.', 'Coordinador académico'),
+(17, 'Motivos Asociados a las Condiciones Institucionales.', 'El aprendiz no encuentra apoyo para nivelarse en conocimientos.', 'Coordinador de formación');
 
 -- --------------------------------------------------------
 
@@ -90,11 +93,19 @@ CREATE TABLE `causa` (
 --
 
 INSERT INTO `causa` (`idCausa`, `causa`, `variables`, `fkIdCategoria`) VALUES
-(1, 'No cuento con recursos económicos para estudiar en el SENA', 'Necesidad del auto sostenimiento del aprendiz', 1),
-(2, 'Tuve que dedicarme a trabajar por no contar con apoyo economico para dedicarme a estudiar', 'Necesidad del auto sostenimiento del aprendiz', 1),
-(3, 'Me sentí discriminado por mis instructores o personal del SENA', 'Relación entre pares', 3),
-(11, 'No cuento con recursos económicos para estudiar en el SENA', 'Relación entre pares', 1),
-(12, 'Mi trabajo no me deja tiempo para estudiar', 'Rol laboral', 9);
+(1, 'No cuento con recursos económicos para estudiar en el SENA.', 'Necesidad del auto sostenimiento del aprendiz.', 1),
+(2, 'Tuve que dedicarme a trabajar por no contar con apoyo economico para dedicarme a estudiar.', 'Necesidad del auto sostenimiento del aprendiz.', 1),
+(3, 'Mi trabajo no me deja tiempo para estudiar.', 'Rol laboral', 3),
+(11, 'Se me presentó una oportunidad laboral.', 'Rol laboral.', 3),
+(13, 'A mi familia no le agrada que yo estudiara en ese programa, quería que estudiara algo diferente.', 'Apoyo y relación familiar.', 9),
+(14, 'Se me presentaron conflictos, crisis o calamidades familiares que me afectaron.', 'Apoyo y relación familiar.', 9),
+(15, 'Tuve enfermedades que me limitó a seguir estudiando.', 'Física y emocional.', 10),
+(16, 'Tuve problemas con el consumo de licor u otras sustancias psicoactivas que me afectaron.', 'Física y emocional.', 10),
+(17, 'Se me dificulta llegar al centro de formación por temas de distancia. ', 'Contexto territorial.', 13),
+(18, 'No me sentí capaz con todo  lo que me pedían en la formación. ', 'Autopercepción académica.', 15),
+(19, 'No me iba bien en las actividades que hacía.', 'Autopercepción académica.', 15),
+(20, 'No logré manejar plataformas digitales dispuestas para el desarrollo de mi formación.', 'Preparación y recursos académicos.', 15),
+(21, 'Dejaban muchas actividades y trabajos.', 'Metodología.', 16);
 
 -- --------------------------------------------------------
 
@@ -106,41 +117,6 @@ CREATE TABLE `causa_reporte` (
   `fkIdReporte` int(11) NOT NULL,
   `fkIdCausa` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
-
---
--- Volcado de datos para la tabla `causa_reporte`
---
-
-INSERT INTO `causa_reporte` (`fkIdReporte`, `fkIdCausa`) VALUES
-(3, 1),
-(3, 3),
-(4, 3),
-(3, 2),
-(4, 1),
-(6, 2),
-(16, 1),
-(16, 3),
-(16, 12),
-(16, 2),
-(17, 1),
-(17, 3),
-(18, 1),
-(19, 1),
-(19, 3),
-(20, 2),
-(21, 1),
-(22, 1),
-(22, 3),
-(23, 3),
-(23, 2),
-(24, 3),
-(25, 1),
-(25, 3),
-(26, 1),
-(26, 12),
-(30, 1),
-(31, 2),
-(31, 12);
 
 -- --------------------------------------------------------
 
@@ -160,8 +136,14 @@ CREATE TABLE `estrategias` (
 
 INSERT INTO `estrategias` (`idEstrategias`, `estrategia`, `fkIdCategoria`) VALUES
 (2, 'Orientar al aprendiz sobre las oportunidades a aplicar a apoyos socioeconómicos.', 1),
-(3, 'Organización de grupos focales o campañas con aprendices para orientación de herramientas o habilidades sociales y sana convivencia entre pares.', 3),
-(6, 'Organización de grupos focales o campañas con aprendices para orientación de herramientas o habilidades sociales y sana convivencia entre pares ', 3);
+(3, 'Tener conocimiento de las oportunidades de apoyos económicos que ofrece el gobierno nacional para orientas a los aprendices (Jóvenes en acción, ingreso solidario, etc.).', 1),
+(6, 'Articular acciones con el responsable de contrato para orientar a los aprendices de oportunidades de contrato de patrocinio.', 1),
+(7, 'Organización de grupos focales con aprendices para orientación de herramientas socioemocionales que les ayuden a superar las dificultades familiares. ', 9),
+(8, 'Organización de grupos focales o campañas con aprendices para orientación de herramientas o habilidades sociales y sana convivencia entre pares.', 13),
+(9, 'Apoyo al aprendiz en la gestión para solicitar cambios de jornada o lugar de formación.', 13),
+(10, 'Organización de grupos focales o campañas con instructores para promover la sana convivencia y el buen trato de los aprendices.', 13),
+(11, 'Apoyo de estrategias para el mejoramiento de hábitos de estudio y actitudes positivas sobre el proceso formativo.', 15),
+(12, 'Formular estrategias para adelantar transparencia de conocimiento para el aprendiz por parte de la gestión de monitorias.', 15);
 
 -- --------------------------------------------------------
 
@@ -202,16 +184,6 @@ CREATE TABLE `intervencion` (
   `fkIdUsuario` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
---
--- Volcado de datos para la tabla `intervencion`
---
-
-INSERT INTO `intervencion` (`idIntervencion`, `fechaCreacion`, `descripcion`, `fkIdEstrategias`, `fkIdReporte`, `fkIdUsuario`) VALUES
-(1, '2025-04-16 07:09:00', 'Se habla con el aprendiz sobre el caso de los problemas económicos que tiene y tanto familiares.', 2, 4, 3),
-(2, '2025-04-09 20:37:00', 'Se realiza atención psicológica al aprendiz por comportamientos de rabia y problemas mentales', 3, 6, 4),
-(7, '2025-06-14 21:18:34', 'Fecha automática prueba 1 - editado ', 2, 4, 3),
-(9, '2025-06-16 10:59:48', 'fdsfsdfdfdfsdf', 2, 26, 19);
-
 -- --------------------------------------------------------
 
 --
@@ -229,7 +201,7 @@ CREATE TABLE `programaformacion` (
 
 INSERT INTO `programaformacion` (`idProgramaFormacion`, `nombre`) VALUES
 (1, 'Análisis y Desarrollo de Software'),
-(2, 'Electrónica'),
+(2, 'Mantenimiento Electrónico'),
 (3, 'Automatización Industrial'),
 (5, 'Mantenimiento de Equipos Biomédicos'),
 (6, 'Mecánica Industrial'),
@@ -251,33 +223,6 @@ CREATE TABLE `reporte` (
   `fkIdAprendiz` int(11) NOT NULL,
   `fkIdUsuario` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
-
---
--- Volcado de datos para la tabla `reporte`
---
-
-INSERT INTO `reporte` (`idReporte`, `fechaCreacion`, `descripcion`, `direccionamiento`, `estado`, `fkIdAprendiz`, `fkIdUsuario`) VALUES
-(3, '2025-03-30 09:30:00', 'Aprendiz con problemas actitudinales', 'Coordinador de formación', 'En proceso', 2, 3),
-(4, '2025-03-31 10:45:00', 'Aprendiz con problemas académicos', 'Coordinador académico', 'Registrado', 2, 1),
-(6, '2025-03-20 09:05:00', 'Aprendiz es insoportable en clase', 'Coordinador académico', 'En proceso', 3, 1),
-(11, '2025-04-23 11:19:00', ' Aprendiz agrede físicamente a otro aprendiz dentro el ambiente de formación', 'Coordinador académico', 'En proceso', 7, 1),
-(12, '2025-04-28 20:31:00', 'dfdsfdsfdsfddfdsfdsf', 'Coordinador académico', 'Registrado', 3, 3),
-(13, '2025-04-28 21:24:00', 'hghgfhgfhf', 'Coordinador de formación', 'En proceso', 6, 1),
-(14, '2025-04-28 21:25:00', 'hgjghjghjghjhgj', 'Coordinador de formación', 'En proceso', 4, 1),
-(15, '2025-04-28 21:25:00', 'dfgdfgfdgdg', 'Coordinador de formación', 'En proceso', 2, 3),
-(16, '2025-05-12 10:31:00', 'Prueba 1', 'Coordinador académico', 'En proceso', 3, 3),
-(17, '2025-05-12 10:34:00', 'Prueba 2', 'Coordinador académico', 'Registrado', 2, 3),
-(18, '2025-05-12 11:26:00', 'Prueba 3', 'Coordinador de formación', 'En proceso', 2, 4),
-(19, '2025-05-14 19:44:00', 'Prueba 14-05', 'Coordinador académico', 'En proceso', 3, 3),
-(20, '2025-05-14 20:45:00', 'Prueba 14-05 \"2\"', 'Coordinador académico', 'En proceso', 4, 1),
-(21, '2025-05-14 20:47:00', 'Prueba 15-05 \"3\"', 'Coordinador académico', 'En proceso', 3, 1),
-(22, '2025-05-14 20:59:00', 'Ultima prueba 14-05', 'Coordinador académico', 'En proceso', 6, 1),
-(23, '2025-06-14 19:08:53', 'Prueba fecha Automática, editado ', 'Coordinador académico', 'En proceso', 6, 1),
-(24, '2025-06-14 19:41:38', 'Prueba fecha automatica 2, editado ', 'Coordinador académico', 'En proceso', 2, 13),
-(25, '2025-06-14 20:15:07', 'Prueba de fecha automatica 3 - editado ', 'Coordinador de formación', 'En proceso', 4, 1),
-(26, '2025-06-16 10:55:30', 'Aprendiz lleva tres dias sin ejemlo ', 'Coordinador de formación', 'Registrado', 4, 1),
-(30, '2025-06-25 20:37:03', 'Prrubeaaa ', 'Coordinador académico', 'Registrado', 4, 17),
-(31, '2025-06-25 20:39:30', 'dsfdsfdsfdf', 'Coordinador académico', 'Registrado', 2, 18);
 
 -- --------------------------------------------------------
 
@@ -330,7 +275,8 @@ INSERT INTO `usuario` (`idUsuario`, `nombre`, `email`, `password`, `telefono`, `
 (17, 'Daniela Isaza ', 'daniela@gmail.com', '$2y$10$0/MtpfaRbooSN0QXBaHfmOp9qJnTxv5eOujHgK0FxxzSqiNJeVeS2', '3127827845', 'No es coordinador', 0, 4),
 (18, 'Esteban Reyes', 'reyes@gmail.com', '$2y$10$R8JK3N2RYhKpsDMyPvKFfuh5iXvM8zdtmf71X6Qs/HkL1JUt.mTei', '3124567867', 'No es coordinador', 0, 9),
 (19, 'Mariana Carvajal ', 'mariana@gmail.com', '$2y$10$EIZaWwEWbDEnRn1ebIs6NeoP5/CbwtaqmWZiK7NC3SK3qrbxHIPKq', '3245678976', 'Coordinador de formación', 0, 6),
-(20, 'Jeferson Hernandez', 'admin@gmail.com', '$2y$10$z8fF2TvCCWaZgcpdyWUqR.WvwOAcPINb1yQBCfAiTg1ypW6Ud78Ei', '3113975576', 'No es coordinador', 0, 18);
+(20, 'Jeferson Hernandez', 'admin@gmail.com', '$2y$10$z8fF2TvCCWaZgcpdyWUqR.WvwOAcPINb1yQBCfAiTg1ypW6Ud78Ei', '3113975576', 'No es coordinador', 0, 18),
+(21, 'Sofia Ocampo ', 'sofia@gmail.com', '$2y$10$M5yI8K.tQpuV4Y2ulfN/veMpgEhtalZvrrKYgKh8exG3xICeC4GRe', '3145679867', 'Coordinador de formación', 0, 6);
 
 --
 -- Índices para tablas volcadas
@@ -421,25 +367,25 @@ ALTER TABLE `usuario`
 -- AUTO_INCREMENT de la tabla `aprendiz`
 --
 ALTER TABLE `aprendiz`
-  MODIFY `idAprendiz` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `idAprendiz` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT de la tabla `categoria`
 --
 ALTER TABLE `categoria`
-  MODIFY `idCategoria` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `idCategoria` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT de la tabla `causa`
 --
 ALTER TABLE `causa`
-  MODIFY `idCausa` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `idCausa` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT de la tabla `estrategias`
 --
 ALTER TABLE `estrategias`
-  MODIFY `idEstrategias` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `idEstrategias` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT de la tabla `grupo`
@@ -451,7 +397,7 @@ ALTER TABLE `grupo`
 -- AUTO_INCREMENT de la tabla `intervencion`
 --
 ALTER TABLE `intervencion`
-  MODIFY `idIntervencion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `idIntervencion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT de la tabla `programaformacion`
@@ -463,7 +409,7 @@ ALTER TABLE `programaformacion`
 -- AUTO_INCREMENT de la tabla `reporte`
 --
 ALTER TABLE `reporte`
-  MODIFY `idReporte` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
+  MODIFY `idReporte` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
 
 --
 -- AUTO_INCREMENT de la tabla `rol`
@@ -475,7 +421,7 @@ ALTER TABLE `rol`
 -- AUTO_INCREMENT de la tabla `usuario`
 --
 ALTER TABLE `usuario`
-  MODIFY `idUsuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `idUsuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- Restricciones para tablas volcadas

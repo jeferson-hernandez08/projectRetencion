@@ -21,13 +21,18 @@
                 <div class="report-card">
                     <div class="card-header">
                         <span class="report-id">Estrategia ID # <?php echo $value->idEstrategias; ?></span>
-                        <!-- <span class="estrategia-categoria">Categoría: <?php echo $value->fkIdCategoria ?? 'Sin categoría'; ?></span> -->
+                        <span class="estrategia-categoria">Categoría: <?php echo $value->nombreCategoria ?? 'Sin categoría'; ?></span>
                     </div>
                     
                     <div class="card-body">
                         <div class="report-info">
                             <div class="info-label">Estrategia:</div>
                             <div class="info-value"><?php echo $value->estrategia; ?></div>
+                        </div>
+
+                        <div class="report-info">
+                            <div class="info-label">Categoría:</div>
+                            <div class="info-value"><?php echo $value->nombreCategoria; ?></div>
                         </div>
                     </div>
                     

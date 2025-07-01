@@ -13,7 +13,7 @@
             <div class="no-records-icon">📝</div>
             <h3>No se encontraron intervenciones</h3>
             <p>Actualmente no hay intervenciones registradas en el sistema.</p>
-            <a href="/intervencion/new" class="create-intervencion-btn">Crear Nueva Intervención</a>
+            <a href="/intervencion/new" class="create-report-btn">Crear Nueva Intervención</a>
         </div>
     <?php else: ?>
         <div class="report-cards-container">

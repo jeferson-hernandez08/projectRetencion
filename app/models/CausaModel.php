@@ -92,4 +92,18 @@ class CausaModel extends BaseModel {
             return false;
         }
     }
+
+    public function getAll():array {
+        try {
+            $sql = "SELECT causa.*, categoria.nombre AS nombreCategoria 
+                    FROM causa 
+                    LEFT JOIN categoria ON causa.fkIdCategoria = categoria.idCategoria";
+            $statement = $this->dbConnection->prepare($sql);
+            $statement->execute();
+            return $statement->fetchAll(PDO::FETCH_OBJ);
+        } catch (PDOException $ex) {
+            echo "Error al obtener las causas: " . $ex->getMessage();
+            return [];
+        }
+    }
 }

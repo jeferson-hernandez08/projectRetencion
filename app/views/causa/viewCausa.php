@@ -21,7 +21,7 @@
                 <div class="report-card">
                     <div class="card-header">
                         <span class="report-id">Causa ID # <?php echo $value->idCausa; ?></span>
-                        <!-- <span class="causa-categoria">Categoría: <?php echo $value->nombreCategoria ?? 'Sin categoría'; ?></span> -->
+                        <span class="causa-categoria">Categoría: <?php echo $value->nombreCategoria ?? 'Sin categoría'; ?></span>
                     </div>
                     
                     <div class="card-body">

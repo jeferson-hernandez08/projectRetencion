@@ -83,4 +83,18 @@ class EstrategiasModel extends BaseModel {
             echo "No se pudo eliminar la estrategia".$ex->getMessage();
         }
     }
+
+    public function getAll():array {      // Mandar a cards nombreCategoria en viewCategorias.php
+        try {
+            $sql = "SELECT estrategias.*, categoria.nombre AS nombreCategoria 
+                    FROM estrategias 
+                    LEFT JOIN categoria ON estrategias.fkIdCategoria = categoria.idCategoria";
+            $statement = $this->dbConnection->prepare($sql);
+            $statement->execute();
+            return $statement->fetchAll(PDO::FETCH_OBJ);
+        } catch (PDOException $ex) {
+            echo "Error al obtener las estrategias: " . $ex->getMessage();
+            return [];
+        }
+    }
 }
