@@ -2104,22 +2104,63 @@ body.dark-mode .no-interventions-action:hover {
 }
 
 .consultar {
-    background-color: #3498db;
+    border: solid 2px #3498db;
+    background-color: #3498dbc2;
     color: white;
+    transition: all 0.3s ease-in-out;
+}
+
+.consultar:hover {
+    background-color: #3498db;
 }
 
 .editar {
-    background-color: #f39c12;
+    border: solid 2px #f39c12;
+    background-color: #f39d12cb;
     color: white;
+    transition: all 0.3s ease-in-out;
+}
+
+.editar:hover {
+    background-color: #f39c12;
 }
 
 .eliminar {
-    background-color: #e74c3c;
+    border: solid 2px #e74c3c;
+    background-color: #e74d3cce;
     color: white;
+    transition: all 0.3s ease-in-out;
+}
+
+.eliminar:hover {
+    background-color: #e74c3c;
 }
 
 .intervenciones {
+    border: solid 2px #9b59b6;
+    background-color: #9c59b6cb;
+    color: white;
+    transition: all 0.3s ease-in-out;
+}
+
+.intervenciones:hover {
     background-color: #9b59b6;
+}
+
+/* Estilos para los iconos de CRUDS */
+i.fa-eye {
+    color: white;
+}
+
+i.fa-edit {
+    color: white;
+}
+
+i.fa-comments {
+    color: white;
+}
+
+i.fa-trash {
     color: white;
 }
 
@@ -2172,7 +2213,7 @@ body.dark-mode .no-interventions-action:hover {
 }
 
 .create-report-btn:hover {
-    transform: translateY(-3px);
+    transform: scale(1.1);      /*  translateY(-3px) */
     box-shadow: 0 6px 20px rgba(26, 60, 64, 0.3);
 }
 
