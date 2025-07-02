@@ -314,7 +314,8 @@ body.dark-mode .content {
     margin: 0 auto;      /* Centra el contenedor */
     padding: 20px;       /* Añade padding interno */
     overflow-x: hidden;  /* Evita scroll horizontal */
-    height: 100%;            /* Aumenta la altura para cubrir más pantalla */
+    height: 100%;            /* Aumenta la altura para cubrir más pantalla */   /* Se cambia de 100% a 800px para dar overflow */ 
+    max-height: 750px;     /* Limita la altura máxima | La altura maxima sea de 750px del 100%*/
     overflow-y: auto;         /* Permite desplazamiento si el contenido es demasiado alto  */
     position: relative;
 }
