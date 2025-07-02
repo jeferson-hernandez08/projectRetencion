@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 01-07-2025 a las 05:33:29
+-- Tiempo de generación: 03-07-2025 a las 01:46:14
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -118,6 +118,14 @@ CREATE TABLE `causa_reporte` (
   `fkIdCausa` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
+--
+-- Volcado de datos para la tabla `causa_reporte`
+--
+
+INSERT INTO `causa_reporte` (`fkIdReporte`, `fkIdCausa`) VALUES
+(45, 1),
+(45, 15);
+
 -- --------------------------------------------------------
 
 --
@@ -184,6 +192,14 @@ CREATE TABLE `intervencion` (
   `fkIdUsuario` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
+--
+-- Volcado de datos para la tabla `intervencion`
+--
+
+INSERT INTO `intervencion` (`idIntervencion`, `fechaCreacion`, `descripcion`, `fkIdEstrategias`, `fkIdReporte`, `fkIdUsuario`) VALUES
+(17, '2025-07-01 08:06:25', 'Se gablo con el aprendiz para aplicar apoyo econonomico', 2, 45, 19),
+(18, '2025-07-01 08:09:36', 'Se habla con el el aprendiz y se da apoyo psicológico', 7, 45, 19);
+
 -- --------------------------------------------------------
 
 --
@@ -223,6 +239,13 @@ CREATE TABLE `reporte` (
   `fkIdAprendiz` int(11) NOT NULL,
   `fkIdUsuario` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+--
+-- Volcado de datos para la tabla `reporte`
+--
+
+INSERT INTO `reporte` (`idReporte`, `fechaCreacion`, `descripcion`, `direccionamiento`, `estado`, `fkIdAprendiz`, `fkIdUsuario`) VALUES
+(45, '2025-07-01 08:01:31', 'Aprendiz no llega a clase se habla con el . (Posada)', 'Coordinador de formación', 'Desertado', 2, 1);
 
 -- --------------------------------------------------------
 
@@ -373,7 +396,7 @@ ALTER TABLE `aprendiz`
 -- AUTO_INCREMENT de la tabla `categoria`
 --
 ALTER TABLE `categoria`
-  MODIFY `idCategoria` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `idCategoria` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT de la tabla `causa`
@@ -397,7 +420,7 @@ ALTER TABLE `grupo`
 -- AUTO_INCREMENT de la tabla `intervencion`
 --
 ALTER TABLE `intervencion`
-  MODIFY `idIntervencion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `idIntervencion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT de la tabla `programaformacion`
@@ -409,7 +432,7 @@ ALTER TABLE `programaformacion`
 -- AUTO_INCREMENT de la tabla `reporte`
 --
 ALTER TABLE `reporte`
-  MODIFY `idReporte` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
+  MODIFY `idReporte` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
 
 --
 -- AUTO_INCREMENT de la tabla `rol`
