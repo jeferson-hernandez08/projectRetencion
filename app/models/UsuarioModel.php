@@ -154,4 +154,21 @@ class UsuarioModel extends BaseModel {
         }
     }
 
+    // Funcion para crear notificaión al crear un reporte
+    // public function getUsuariosByRol($roles) {
+    //     if (empty($roles)) return [];
+        
+    //     $placeholders = implode(',', array_fill(0, count($roles), '?'));
+    //     $sql = "SELECT * FROM usuario WHERE fkIdRol IN ($placeholders)";
+    //     $stmt = $this->dbConnection->prepare($sql);
+        
+    //     // Bindear cada valor individualmente
+    //     foreach ($roles as $k => $rol) {
+    //         $stmt->bindValue($k+1, $rol, PDO::PARAM_INT);
+    //     }
+        
+    //     $stmt->execute();
+    //     return $stmt->fetchAll(PDO::FETCH_OBJ);
+    // }
+
 }

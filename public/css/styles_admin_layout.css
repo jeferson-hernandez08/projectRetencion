@@ -2272,3 +2272,111 @@ body.dark-mode .create-report-btn {
     background: linear-gradient(135deg, #0d1b2a 0%, #1a2a3a 100%);
     box-shadow: 0 4px 15px rgba(13, 27, 42, 0.3);
 }
+
+
+
+
+
+/********************** Icono de notificaciones **************************/
+.icon-link {
+    position: relative;
+}
+
+.notification-badge {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    background-color: #e74c3c;
+    color: white;
+    border-radius: 50%;
+    padding: 3px 7px;
+    font-size: 10px;
+}
+
+/* Contenedor de notificaciones */
+.notificaciones-container {
+    display: none;
+    position: absolute;
+    top: 60px;
+    right: 20px;
+    width: 350px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    z-index: 1000;
+}
+
+.notificaciones-container.show {
+    display: block;
+}
+
+.notificaciones-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    border-bottom: 1px solid #eee;
+}
+
+.notificaciones-header h3 {
+    margin: 0;
+    font-size: 16px;
+}
+
+.notificaciones-body {
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+.notificacion-item {
+    padding: 10px 15px;
+    border-bottom: 1px solid #eee;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.notificacion-item:last-child {
+    border-bottom: none;
+}
+
+.notificacion-item:hover {
+    background-color: #f9f9f9;
+}
+
+.notificacion-item.no-leida {
+    background-color: #f0f7ff;
+    font-weight: bold;
+}
+
+.notificacion-titulo {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.notificacion-descripcion {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 5px;
+}
+
+.notificacion-fecha {
+    font-size: 12px;
+    color: #999;
+    text-align: right;
+}
+
+.notificaciones-footer {
+    padding: 10px 15px;
+    text-align: center;
+    border-top: 1px solid #eee;
+}
+
+.notificaciones-footer a {
+    color: #3498db;
+    text-decoration: none;
+}
+
+.notificaciones-footer a:hover {
+    text-decoration: underline;
+}

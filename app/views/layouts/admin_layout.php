@@ -110,11 +110,31 @@
                             </div>
                         </div>
                         <!-- <a href="#" class="icon-link"><i class="fas fa-user-circle"></i></a> -->
-                        <a href="#" class="icon-link"><i class="fas fa-bell"></i></a>
+                        <!-- <a href="#" class="icon-link"><i class="fas fa-bell"></i></a> -->
+                        <a href="#" class="icon-link" id="notificaciones-toggle">
+                            <i class="fas fa-bell"></i>
+                            <span class="notification-badge" id="notification-badge">0</span>
+                        </a>
+
                         <a href="#" class="icon-link" id="theme-toggle-link" onclick="toggleDarkMode(); return false;"><i class="fas fa-moon"></i></a>
                     </div>
                 </div>
             </header>
+
+            <!-- Ventana de notificaciones -->
+            <div class="notificaciones-container" id="notificaciones-container">
+                <div class="notificaciones-header">
+                    <h3>Notificaciones</h3>
+                    <a href="#" id="marcar-todas-leidas">Marcar todas como leídas</a>
+                </div>
+                <div class="notificaciones-body" id="notificaciones-body">
+                    <!-- Las notificaciones se cargarán aquí con AJAX -->
+                </div>
+                <div class="notificaciones-footer">
+                    <a href="#">Ver todas las notificaciones</a>
+                </div>
+            </div>
+
             <div class="content">
                 <?php include_once $content; ?>
             </div>
@@ -314,6 +334,99 @@
         //     alert('Sesión cerrada correctamente. Redirigiendo al inicio de sesión...');
         //     window.location.href = '/login';
         // });
+
+        // ******************** Notificaciones ********************
+        document.addEventListener('DOMContentLoaded', function() {
+            const notificacionesToggle = document.getElementById('notificaciones-toggle');
+            const notificacionesContainer = document.getElementById('notificaciones-container');
+            const notificacionesBody = document.getElementById('notificaciones-body');
+            const notificationBadge = document.getElementById('notification-badge');
+            const marcarTodasBtn = document.getElementById('marcar-todas-leidas');
+
+            // Función para cargar notificaciones
+            function cargarNotificaciones() {
+                fetch('/notificacion/get')
+                    .then(response => response.json())
+                    .then(data => {
+                        notificacionesBody.innerHTML = '';
+                        notificationBadge.textContent = data.noLeidas || 0;
+
+                        if (!data.notificaciones || data.notificaciones.length === 0) {
+                            notificacionesBody.innerHTML = '<div class="notificacion-item">No hay notificaciones</div>';
+                            return;
+                        }
+
+                        data.notificaciones.forEach(notificacion => {
+                            const fecha = new Date(notificacion.fecha);
+                            const fechaFormateada = fecha.toLocaleDateString('es-ES', {
+                                day: '2-digit',
+                                month: '2-digit',
+                                year: 'numeric',
+                                hour: '2-digit',
+                                minute: '2-digit'
+                            });
+
+                            const notificacionItem = document.createElement('div');
+                            notificacionItem.className = `notificacion-item ${notificacion.leida ? '' : 'no-leida'}`;
+                            notificacionItem.dataset.id = notificacion.idNotificacion;
+                            notificacionItem.innerHTML = `
+                                <div class="notificacion-titulo">${notificacion.mensaje}</div>
+                                <div class="notificacion-fecha">${fechaFormateada}</div>
+                            `;
+                            
+                            notificacionItem.addEventListener('click', function() {
+                                marcarComoLeida(notificacion.idNotificacion);
+                                window.location.href = `/reporte/viewReporte/${notificacion.fkIdReporte}`;
+                            });
+                            
+                            notificacionesBody.appendChild(notificacionItem);
+                        });
+                    })
+                    .catch(error => {
+                        console.error('Error cargando notificaciones:', error);
+                    });
+            }
+
+            // Función para marcar notificación como leída
+            function marcarComoLeida(id) {
+                fetch(`/notificacion/marcar-leida/${id}`, { method: 'POST' })
+                    .then(() => cargarNotificaciones())
+                    .catch(error => console.error('Error marcando como leída:', error));
+            }
+
+            // Toggle notificaciones
+            notificacionesToggle.addEventListener('click', function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                notificacionesContainer.classList.toggle('show');
+                if (notificacionesContainer.classList.contains('show')) {
+                    cargarNotificaciones();
+                }
+            });
+
+            // Marcar todas como leídas
+            marcarTodasBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                fetch('/notificacion/marcar-todas-leidas', { method: 'POST' })
+                    .then(() => cargarNotificaciones())
+                    .catch(error => console.error('Error marcando todas como leídas:', error));
+            });
+
+            // Cerrar notificaciones al hacer clic fuera
+            document.addEventListener('click', function(e) {
+                if (!notificacionesContainer.contains(e.target) && 
+                    !notificacionesToggle.contains(e.target) &&
+                    notificacionesContainer.classList.contains('show')) {
+                    notificacionesContainer.classList.remove('show');
+                }
+            });
+
+            // Cargar notificaciones cada 30 segundos
+            setInterval(cargarNotificaciones, 30000);
+
+            // Cargar inicialmente
+            cargarNotificaciones();
+        });
     </script>
 </body>
 

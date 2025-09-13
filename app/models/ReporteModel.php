@@ -181,4 +181,5 @@ class ReporteModel extends BaseModel {
             return [];
         }
     }
+
 }

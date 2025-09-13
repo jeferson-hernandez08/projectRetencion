@@ -10,6 +10,7 @@ use App\Models\CausaModel;           // Importar la clase CausaModel
 use App\Models\RolModel;             // Importar la clase RolModel para el card icon user cerrar sesion
 
 use App\Models\IntervencionModel;    // Importar la clase IntervencionModel para ver las intervenciones de un reporte en especifico.
+use App\Models\NotificacionModel;    // Importar la clase NotificacionModel para crear notificaciones
 
 require_once 'baseController.php';
 require_once MAIN_APP_ROUTE."../models/ReporteModel.php";
@@ -20,6 +21,7 @@ require_once MAIN_APP_ROUTE."../models/CategoriaModel.php";    // Impoprtar para
 require_once MAIN_APP_ROUTE."../models/CausaModel.php";
 require_once MAIN_APP_ROUTE . "../models/RolModel.php";
 require_once MAIN_APP_ROUTE."../models/IntervencionModel.php";  
+require_once MAIN_APP_ROUTE."../models/NotificacionModel.php";  // Requerir el archivo del modelo Notificacion
 
 class ReporteController extends BaseController {
     
@@ -161,6 +163,9 @@ class ReporteController extends BaseController {
                  // Guardar relaciones usando el método del modelo
                 $relaciones = json_decode($_POST['relacionesCausaReporte'], true);
                 $reporteObj->guardarRelacionesCausa($idReporte, $relaciones);
+
+                // ===== CREAR NOTIFICACIÓN =====
+                // $this->crearNotificacion($idReporte, $fkIdUsuario);
                 
                 $this->redirectTo("reporte/view");
             } else {
@@ -374,5 +379,30 @@ class ReporteController extends BaseController {
         echo json_encode(['success' => false]);
         exit;
     }
+
+    // Funcion para crear notificaión al crear un reporte
+    // private function crearNotificacion($idReporte, $idUsuarioCreador) {
+    //     // Obtener aprendiz del reporte
+    //     $reporteModel = new ReporteModel();
+    //     $reporte = $reporteModel->getReporte($idReporte);
+        
+    //     // Crear mensaje de notificación
+    //     $mensaje = "Nuevo reporte creado para: " . $reporte->nombreAprendiz;
+        
+    //     // Obtener coordinadores (usuarios con rol 5 o 6)
+    //     $usuarioModel = new UsuarioModel();
+    //     $coordinadores = $usuarioModel->getUsuariosByRol([5, 6]);
+        
+    //     // Modelo para notificaciones
+    //     $notificacionModel = new NotificacionModel();
+        
+    //     // Guardar notificación para cada coordinador
+    //     foreach ($coordinadores as $coordinador) {
+    //         // Evitar notificar al usuario que creó el reporte
+    //         if ($coordinador->idUsuario == $idUsuarioCreador) continue;
+            
+    //         $notificacionModel->crearNotificacion($mensaje, $coordinador->idUsuario, $idReporte);
+    //     }
+    // }
 
 }
