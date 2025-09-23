@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 03-07-2025 a las 01:46:14
+-- Tiempo de generación: 23-09-2025 a las 14:58:28
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -124,7 +124,9 @@ CREATE TABLE `causa_reporte` (
 
 INSERT INTO `causa_reporte` (`fkIdReporte`, `fkIdCausa`) VALUES
 (45, 1),
-(45, 15);
+(45, 15),
+(55, 15),
+(57, 1);
 
 -- --------------------------------------------------------
 
@@ -203,6 +205,21 @@ INSERT INTO `intervencion` (`idIntervencion`, `fechaCreacion`, `descripcion`, `f
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `notificacion`
+--
+
+CREATE TABLE `notificacion` (
+  `idNotificacion` int(11) NOT NULL,
+  `mensaje` varchar(255) NOT NULL,
+  `fecha` datetime NOT NULL,
+  `leida` tinyint(1) NOT NULL DEFAULT 0,
+  `fkIdUsuario` int(11) NOT NULL,
+  `fkIdReporte` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `programaformacion`
 --
 
@@ -245,7 +262,9 @@ CREATE TABLE `reporte` (
 --
 
 INSERT INTO `reporte` (`idReporte`, `fechaCreacion`, `descripcion`, `direccionamiento`, `estado`, `fkIdAprendiz`, `fkIdUsuario`) VALUES
-(45, '2025-07-01 08:01:31', 'Aprendiz no llega a clase se habla con el . (Posada)', 'Coordinador de formación', 'Desertado', 2, 1);
+(45, '2025-07-01 08:01:31', 'Aprendiz no llega a clase se habla con el . (Posada)', 'Coordinador de formación', 'Registrado', 2, 1),
+(55, '2025-09-13 16:42:40', 'Aprendiz presenta problemas de salud y desea abandonar el programa', 'Coordinador de formación', 'Registrado', 6, 1),
+(57, '2025-09-18 11:28:16', 'aprendiz no viene a clase en 1 mes', 'Coordinador de formación', 'Registrado', 2, 1);
 
 -- --------------------------------------------------------
 
@@ -356,6 +375,14 @@ ALTER TABLE `intervencion`
   ADD KEY `fkIdUsuario3` (`fkIdUsuario`);
 
 --
+-- Indices de la tabla `notificacion`
+--
+ALTER TABLE `notificacion`
+  ADD PRIMARY KEY (`idNotificacion`),
+  ADD KEY `fkIdUsuario` (`fkIdUsuario`),
+  ADD KEY `fkIdReporte` (`fkIdReporte`);
+
+--
 -- Indices de la tabla `programaformacion`
 --
 ALTER TABLE `programaformacion`
@@ -423,6 +450,12 @@ ALTER TABLE `intervencion`
   MODIFY `idIntervencion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
+-- AUTO_INCREMENT de la tabla `notificacion`
+--
+ALTER TABLE `notificacion`
+  MODIFY `idNotificacion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+
+--
 -- AUTO_INCREMENT de la tabla `programaformacion`
 --
 ALTER TABLE `programaformacion`
@@ -432,7 +465,7 @@ ALTER TABLE `programaformacion`
 -- AUTO_INCREMENT de la tabla `reporte`
 --
 ALTER TABLE `reporte`
-  MODIFY `idReporte` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
+  MODIFY `idReporte` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=58;
 
 --
 -- AUTO_INCREMENT de la tabla `rol`
@@ -488,6 +521,13 @@ ALTER TABLE `intervencion`
   ADD CONSTRAINT `fkIdEstrategias` FOREIGN KEY (`fkIdEstrategias`) REFERENCES `estrategias` (`idEstrategias`) ON UPDATE CASCADE,
   ADD CONSTRAINT `fkIdReporte` FOREIGN KEY (`fkIdReporte`) REFERENCES `reporte` (`idReporte`) ON UPDATE CASCADE,
   ADD CONSTRAINT `fkIdUsuario3` FOREIGN KEY (`fkIdUsuario`) REFERENCES `usuario` (`idUsuario`) ON UPDATE CASCADE;
+
+--
+-- Filtros para la tabla `notificacion`
+--
+ALTER TABLE `notificacion`
+  ADD CONSTRAINT `notificacion_ibfk_1` FOREIGN KEY (`fkIdUsuario`) REFERENCES `usuario` (`idUsuario`),
+  ADD CONSTRAINT `notificacion_ibfk_2` FOREIGN KEY (`fkIdReporte`) REFERENCES `reporte` (`idReporte`);
 
 --
 -- Filtros para la tabla `reporte`
