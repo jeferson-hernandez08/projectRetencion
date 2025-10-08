@@ -444,7 +444,29 @@
         width: 50px;
         height: 50px;
     }
-    
+    @media (max-width: 768px) {
+  .contenido-caja {
+    padding: 20px;
+  }
+
+  .titulo-principal {
+    font-size: 1.6rem;
+  }
+
+  .subtitulo {
+    font-size: 1.4rem;
+  }
+
+  .botones {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .btn-accion {
+    width: 100%;
+  }
+}
+
     .mensaje-rol {
         padding: 10px;
         font-size: 1rem;
@@ -486,4 +508,41 @@
         padding: 10px 15px;
         font-size: 0.9rem;
     }
+}
+/* --- Responsive bienvenida --- */
+@media (max-width: 768px) {
+  .contenido-caja {
+    padding: 20px;
+  }
+
+  .titulo-principal {
+    font-size: 1.6rem;
+  }
+
+  .subtitulo {
+    font-size: 1.4rem;
+  }
+
+  .rol-badge {
+    font-size: 1rem;
+    padding: 6px 15px;
+  }
+
+  .btn-accion {
+    min-width: 150px;
+  }
+}
+
+@media (max-width: 480px) {
+  .contenedor-principal {
+    padding: 5px;
+  }
+
+  .contenido-caja {
+    border-radius: 15px;
+  }
+
+  .btn-accion {
+    width: 100%;
+  }
 }

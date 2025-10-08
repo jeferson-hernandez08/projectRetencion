@@ -257,23 +257,63 @@
             return localStorage.getItem('sidebarHidden') === '1';
         }
 
-        document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function() {
             // Restaurar estado del sidebar
             const sidebar = document.getElementById('sidebar');
-            if (getSidebarState()) {
-                sidebar.classList.add('sidebar-hidden');
-            } else {
-                sidebar.classList.remove('sidebar-hidden');
+            const isMobile = window.innerWidth <= 768;
+            
+            if (!isMobile) {
+                if (getSidebarState()) {
+                    sidebar.classList.add('sidebar-hidden');
+                } else {
+                    sidebar.classList.remove('sidebar-hidden');
+                }
             }
 
-            // Botón hamburguesa
+            // BotÃ³n hamburguesa
             document.querySelector('#menu-toggle').addEventListener('click', function() {
-                sidebar.classList.toggle('sidebar-hidden');
-                setSidebarState(sidebar.classList.contains('sidebar-hidden'));
+                if (window.innerWidth <= 768) {
+                    // En móvil: toggle de la clase sidebar-visible
+                    sidebar.classList.toggle('sidebar-visible');
+                } else {
+                    // En escritorio: toggle de sidebar-hidden
+                    sidebar.classList.toggle('sidebar-hidden');
+                    setSidebarState(sidebar.classList.contains('sidebar-hidden'));
+                }
             });
 
-            // Si haces clic en un enlace del menú, NO cambies el estado
-            // Así el sidebar se mantiene comprimido si estaba comprimido
+            // Cerrar sidebar en móvil al hacer clic fuera
+            document.addEventListener('click', function(e) {
+                if (window.innerWidth <= 768) {
+                    if (!sidebar.contains(e.target) && 
+                        !e.target.closest('#menu-toggle') &&
+                        sidebar.classList.contains('sidebar-visible')) {
+                        sidebar.classList.remove('sidebar-visible');
+                    }
+                }
+            });
+
+            // Cerrar sidebar en móvil al hacer clic en un enlace
+            const menuLinks = sidebar.querySelectorAll('.menu a');
+            menuLinks.forEach(link => {
+                link.addEventListener('click', function() {
+                    if (window.innerWidth <= 768) {
+                        sidebar.classList.remove('sidebar-visible');
+                    }
+                });
+            });
+
+            // Ajustar sidebar al cambiar el tamaño de la ventana
+            window.addEventListener('resize', function() {
+                if (window.innerWidth > 768) {
+                    sidebar.classList.remove('sidebar-visible');
+                    if (getSidebarState()) {
+                        sidebar.classList.add('sidebar-hidden');
+                    }
+                } else {
+                    sidebar.classList.remove('sidebar-hidden');
+                }
+            });
         });
         // ***************** Header y Footer Modo Oscuro ******************
         function toggleDarkMode() {

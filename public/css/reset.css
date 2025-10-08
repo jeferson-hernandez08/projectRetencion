@@ -31,10 +31,11 @@ body {
 }
 
 /* /Imagenes responsivas/ */
+/* /Imagenes responsivas/ */
 img,
 video,
 svg {
-    /* max-width: 100%; */
+    max-width: 100%; /* <<--- Asegúrate de que esta línea esté activa */
     height: auto;
     display: block;
 }

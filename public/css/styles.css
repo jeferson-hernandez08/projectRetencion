@@ -169,3 +169,161 @@ span{
     border-radius: 5px;
     gap: 80px;
 }
+/***************  MENÚ HAMBURGUESA RESPONSIVE  ****************/
+@media (max-width: 1024px) {
+    /* Sidebar colapsable */
+    .sidebar {
+        position: fixed;
+        left: -250px;
+        top: 0;
+        height: 100%;
+        z-index: 1000;
+        transition: left 0.3s ease;
+    }
+
+    .sidebar.show {
+        left: 0;
+    }
+
+    /* Ocultar logo grande */
+    .sidebar .logo img {
+        width: 140px;
+    }
+
+    /* Reducir el tamaño de texto e íconos */
+    .menu a {
+        font-size: 0.9rem;
+        padding: 0.8rem;
+    }
+
+    .sidebar .menu a i {
+        font-size: 16px;
+    }
+
+    /* Botón hamburguesa visible */
+    .menu-toggle {
+        display: block;
+        font-size: 1.8rem;
+        margin-right: 15px;
+    }
+
+    /* Ajustar header */
+    .header {
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0.7rem 1rem;
+    }
+
+    .header-container {
+        justify-content: space-between;
+    }
+
+    /* Ajustar título */
+    .header-container h1 {
+        position: static;
+        transform: none;
+        font-size: 1.4rem;
+        text-align: left;
+    }
+
+    /* Íconos del header */
+    .header-icons {
+        gap: 10px;
+    }
+
+    .header-icons .icon-link {
+        font-size: 20px;
+    }
+
+    /* Buscador */
+    .search-container {
+        width: 150px;
+        margin: 0;
+    }
+}
+
+@media (max-width: 768px) {
+    /* Menú lateral oculto por defecto */
+    .sidebar {
+        width: 200px;
+    }
+
+    /* Header más compacto */
+    .header {
+        padding: 0.5rem 0.8rem;
+    }
+
+    .header-container h1 {
+        font-size: 1.2rem;
+    }
+
+    /* Íconos y logo más pequeños */
+    .logo img {
+        width: 130px;
+    }
+
+    .header-icons .icon-link {
+        font-size: 18px;
+    }
+
+    .menu a {
+        font-size: 0.85rem;
+    }
+
+    .menu a i {
+        font-size: 15px;
+    }
+
+    /* Buscador más pequeño */
+    .search-container {
+        width: 120px;
+        padding: 3px 8px;
+    }
+
+    .search-container input {
+        font-size: 0.8rem;
+    }
+}
+
+@media (max-width: 480px) {
+    /* Menú hamburguesa ocupa toda la pantalla */
+    .sidebar {
+        width: 100%;
+        left: -100%;
+    }
+
+    .sidebar.show {
+        left: 0;
+    }
+
+    .header-container h1 {
+        font-size: 1rem;
+    }
+
+    .logo img {
+        width: 100px;
+    }
+
+    .menu a {
+        font-size: 0.9rem;
+        justify-content: center;
+    }
+
+    .menu a i {
+        font-size: 1.1rem;
+        margin-right: 8px;
+    }
+
+    .header-icons {
+        gap: 8px;
+    }
+
+    .header-icons .icon-link {
+        font-size: 1rem;
+    }
+
+    .search-container {
+        display: none; /* Ocultar buscador en móviles */
+    }
+}
