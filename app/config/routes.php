@@ -453,5 +453,19 @@ return [         // Prueba cimmit | base contrller , programa formacion controll
         "action" => "view"
     ],
 
+    // NOTIFICACIONES 
+    // '/notificacion/get' => [
+    //     'controller' => 'App\Controllers\NotificacionController',
+    //     'action' => 'getNotificaciones'
+    // ],
+    // '/notificacion/marcar-leida/(\d+)' => [
+    //     'controller' => 'App\Controllers\NotificacionController',
+    //     'action' => 'marcarLeida'
+    // ],
+    // '/notificacion/marcar-todas-leidas' => [
+    //     'controller' => 'App\Controllers\NotificacionController',
+    //     'action' => 'marcarTodasLeidas'
+    // ],
+
 
 ];

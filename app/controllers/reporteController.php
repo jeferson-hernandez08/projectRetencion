@@ -129,7 +129,10 @@ class ReporteController extends BaseController {
     public function createReporte() {
         if (isset($_POST['txtDescripcion']) && isset($_POST['txtDireccionamiento']) && 
             isset($_POST['txtFkIdAprendiz']) &&
-            isset($_POST['relacionesCausaReporte'])) { 
+            isset($_POST['relacionesCausaReporte'])) {   // Capturamos el valor de la relación causa_reporte
+                // SE CAMBIA ESTO                       // Se quita campo isset($_POST['txtFechaCreacion']) por que la fecha de creacion se geneara atomaticamente.
+                                                        // Se quita el campo isset($_POST['txtEstado']) para generar estado en atomatico "Registrado"
+                                                        // Se quita el campo isset($_POST['txtFkIdUsuario']) para generar el usuario automatico dependiendo del usuario que ingrese al sistema.
                                                        
             // Obtener ID de usuario de la sesión para la generación de campo usaurio automatica
             $fkIdUsuario = $_SESSION['id'] ?? null;
@@ -139,23 +142,23 @@ class ReporteController extends BaseController {
             }
             
             // Estado fijo como "Registrado"
-            $estado = "Registrado"; 
+            $estado = "Registrado";         // <-- Valor fijo del campo registrado, usuario mayor interactividad.
             
             $descripcion = $_POST['txtDescripcion'] ?? null;                                  
             $direccionamiento = $_POST['txtDireccionamiento'] ?? null;
             $fkIdAprendiz = $_POST['txtFkIdAprendiz'] ?? null;
 
-            $relacionesCausaReporte = json_decode($_POST['relacionesCausaReporte'], true); 
+            $relacionesCausaReporte = json_decode($_POST['relacionesCausaReporte'], true);  // Decodificamos el JSON recibido del formulario
 
             // Creamos instancia del Modelo Reporte
             $reporteObj = new ReporteModel();
             
-            // Se llama al método que guarda en la base de datos
+            // Se llama al método que guarda en la base de datosc | Sin $fechaCreacion
             $result = $reporteObj->saveReporte($descripcion, $direccionamiento, $estado, $fkIdAprendiz, $fkIdUsuario);
             
             if ($result) {
                 // Obtenemos el ID del reporte recién creado
-                $idReporte = $reporteObj->getLastInsertId();     
+                $idReporte = $reporteObj->getLastInsertId();     // Método para obtener el último ID insertado en la tabla reporte
                  // Guardar relaciones usando el método del modelo
                 $relaciones = json_decode($_POST['relacionesCausaReporte'], true);
                 $reporteObj->guardarRelacionesCausa($idReporte, $relaciones);
@@ -250,7 +253,8 @@ class ReporteController extends BaseController {
     public function updateReporte() {
         if (isset($_POST['txtId']) && isset($_POST['txtDescripcion']) && 
             isset($_POST['txtDireccionamiento']) && isset($_POST['txtEstado']) && 
-            isset($_POST['txtFkIdAprendiz'])) {    
+            isset($_POST['txtFkIdAprendiz'])) {    // Se elimina isset($_POST['txtFechaCreacion']) por que se genera automaticamente la fecha de creación
+                                                   // Se elimina isset($_POST['txtFkIdUsuario']) por que se genera el usuario de manera automatica segun rol o usuario ingresado
                                                    
             $id = $_POST['txtId'] ?? null;
             $descripcion = $_POST['txtDescripcion'] ?? null;
@@ -376,4 +380,30 @@ class ReporteController extends BaseController {
         echo json_encode(['success' => false]);
         exit;
     }
+
+    // Funcion para crear notificaión al crear un reporte
+    // private function crearNotificacion($idReporte, $idUsuarioCreador) {
+    //     // Obtener aprendiz del reporte
+    //     $reporteModel = new ReporteModel();
+    //     $reporte = $reporteModel->getReporte($idReporte);
+        
+    //     // Crear mensaje de notificación
+    //     $mensaje = "Nuevo reporte creado para: " . $reporte->nombreAprendiz;
+        
+    //     // Obtener coordinadores (usuarios con rol 5 o 6)
+    //     $usuarioModel = new UsuarioModel();
+    //     $coordinadores = $usuarioModel->getUsuariosByRol([5, 6]);
+        
+    //     // Modelo para notificaciones
+    //     $notificacionModel = new NotificacionModel();
+        
+    //     // Guardar notificación para cada coordinador
+    //     foreach ($coordinadores as $coordinador) {
+    //         // Evitar notificar al usuario que creó el reporte
+    //         if ($coordinador->idUsuario == $idUsuarioCreador) continue;
+            
+    //         $notificacionModel->crearNotificacion($mensaje, $coordinador->idUsuario, $idReporte);
+    //     }
+    // }
+
 }
