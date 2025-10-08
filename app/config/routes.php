@@ -300,8 +300,8 @@ return [         // Prueba cimmit | base contrller , programa formacion controll
         'controller' =>'App\Controllers\categoriaController',
         'action' => 'index'
     ],
-    '/categoria/view'=> [
-        'controller' =>'App\Controllers\categoriaController',
+    '/categoria/view' => [
+        'controller' => 'App\Controllers\categoriaController',
         'action' => 'view'
     ],
     '/categoria/new' => [
@@ -453,18 +453,5 @@ return [         // Prueba cimmit | base contrller , programa formacion controll
         "action" => "view"
     ],
 
-    // NOTIFICACIONES 
-    // '/notificacion/get' => [
-    //     'controller' => 'App\Controllers\NotificacionController',
-    //     'action' => 'getNotificaciones'
-    // ],
-    // '/notificacion/marcar-leida/(\d+)' => [
-    //     'controller' => 'App\Controllers\NotificacionController',
-    //     'action' => 'marcarLeida'
-    // ],
-    // '/notificacion/marcar-todas-leidas' => [
-    //     'controller' => 'App\Controllers\NotificacionController',
-    //     'action' => 'marcarTodasLeidas'
-    // ],
-    
+
 ];

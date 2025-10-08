@@ -149,7 +149,7 @@ class UsuarioModel extends BaseModel {
             $statement->execute();
             return $statement->fetchAll(PDO::FETCH_OBJ);
         } catch (PDOException $ex) {
-            echo "Error al obtener los usuarios: " . $ex->getMessage();
+            error_log("Error al obtener los usuarios: " . $ex->getMessage());
             return [];
         }
     }
