@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 23-09-2025 a las 14:58:28
+-- Tiempo de generación: 09-10-2025 a las 02:02:17
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -126,7 +126,9 @@ INSERT INTO `causa_reporte` (`fkIdReporte`, `fkIdCausa`) VALUES
 (45, 1),
 (45, 15),
 (55, 15),
-(57, 1);
+(57, 1),
+(59, 3),
+(61, 14);
 
 -- --------------------------------------------------------
 
@@ -264,7 +266,9 @@ CREATE TABLE `reporte` (
 INSERT INTO `reporte` (`idReporte`, `fechaCreacion`, `descripcion`, `direccionamiento`, `estado`, `fkIdAprendiz`, `fkIdUsuario`) VALUES
 (45, '2025-07-01 08:01:31', 'Aprendiz no llega a clase se habla con el . (Posada)', 'Coordinador de formación', 'Registrado', 2, 1),
 (55, '2025-09-13 16:42:40', 'Aprendiz presenta problemas de salud y desea abandonar el programa', 'Coordinador de formación', 'Registrado', 6, 1),
-(57, '2025-09-18 11:28:16', 'aprendiz no viene a clase en 1 mes', 'Coordinador de formación', 'Registrado', 2, 1);
+(57, '2025-09-18 11:28:16', 'aprendiz no viene a clase en 1 mes', 'Coordinador de formación', 'Registrado', 2, 1),
+(59, '2025-10-08 09:28:29', 'Aprendiz juan calle no viene a clase ', 'Coordinador de formación', 'Registrado', 3, 1),
+(61, '2025-10-08 09:59:25', 'Aprendiz Angie ríos llega llorando a clase ', 'Coordinador de formación', 'Registrado', 6, 1);
 
 -- --------------------------------------------------------
 
@@ -318,7 +322,8 @@ INSERT INTO `usuario` (`idUsuario`, `nombre`, `email`, `password`, `telefono`, `
 (18, 'Esteban Reyes', 'reyes@gmail.com', '$2y$10$R8JK3N2RYhKpsDMyPvKFfuh5iXvM8zdtmf71X6Qs/HkL1JUt.mTei', '3124567867', 'No es coordinador', 0, 9),
 (19, 'Mariana Carvajal ', 'mariana@gmail.com', '$2y$10$EIZaWwEWbDEnRn1ebIs6NeoP5/CbwtaqmWZiK7NC3SK3qrbxHIPKq', '3245678976', 'Coordinador de formación', 0, 6),
 (20, 'Jeferson Hernandez', 'admin@gmail.com', '$2y$10$z8fF2TvCCWaZgcpdyWUqR.WvwOAcPINb1yQBCfAiTg1ypW6Ud78Ei', '3113975576', 'No es coordinador', 0, 18),
-(21, 'Sofia Ocampo ', 'sofia@gmail.com', '$2y$10$M5yI8K.tQpuV4Y2ulfN/veMpgEhtalZvrrKYgKh8exG3xICeC4GRe', '3145679867', 'Coordinador de formación', 0, 6);
+(21, 'Sofia Ocampo ', 'sofia@gmail.com', '$2y$10$M5yI8K.tQpuV4Y2ulfN/veMpgEhtalZvrrKYgKh8exG3xICeC4GRe', '3145679867', 'Coordinador de formación', 0, 6),
+(22, 'Jeferson Hernandez Ladino', 'jefer.hernandez1@gmail.com', '$2y$10$6tfD3qtSiOvamkNueTDR7eGy3U9akp0rZLSc8sepEBrtaoAyfC2Ye', '3113975576', 'No es coordinador', 0, 4);
 
 --
 -- Índices para tablas volcadas
@@ -465,7 +470,7 @@ ALTER TABLE `programaformacion`
 -- AUTO_INCREMENT de la tabla `reporte`
 --
 ALTER TABLE `reporte`
-  MODIFY `idReporte` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=58;
+  MODIFY `idReporte` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=62;
 
 --
 -- AUTO_INCREMENT de la tabla `rol`
@@ -477,7 +482,7 @@ ALTER TABLE `rol`
 -- AUTO_INCREMENT de la tabla `usuario`
 --
 ALTER TABLE `usuario`
-  MODIFY `idUsuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `idUsuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- Restricciones para tablas volcadas
