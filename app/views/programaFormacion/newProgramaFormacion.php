@@ -8,13 +8,13 @@
         <form action="/programaFormacion/create" method="post">
             <!-- Campo Nombre del Programa de Formación -->
             <div class="form-group">
-                <label for="txtNombre">Nombre del Programa de Formación</label>
+                <label for="txtNombre"><i class="fas fa-graduation-cap"></i> Nombre del Programa de Formación</label>
                 <input type="text" name="txtNombre" id="txtNombre" class="form-control" required>
             </div>
 
             <!-- Campo Nivel del programa de formación -->
             <div class="form-group">
-                <label for="txtNivel">Nivel del programa de formación</label>
+                <label for="txtNivel"><i class="fas fa-chart-line"></i> Nivel del programa de formación</label>
                 <select name="txtNivel" id="txtNivel" class="form-control">
                     <option value="">Seleccione un nivel</option>
                     <option value="Tecnólogo">Tecnólogo</option>
@@ -24,13 +24,13 @@
 
             <!-- Campo Versión del programa de formación -->
             <div class="form-group">
-                <label for="txtVersion">Versión del programa de formación</label>
+                <label for="txtVersion"><i class="fas fa-code-branch"></i> Versión del programa de formación</label>
                 <input type="text" name="txtVersion" id="txtVersion" class="form-control" placeholder="Ej: 228118 V1, 836114 V2, 842200 V3">
             </div>
 
             <!-- Botón de Guardar -->
             <div class="form-group">
-                <button type="submit">Guardar</button>
+                <button type="submit"><i class="fas fa-save"></i> Guardar Programa</button>
             </div>
         </form>
     </div>

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 09-10-2025 a las 16:40:59
+-- Tiempo de generación: 09-10-2025 a las 21:15:28
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -167,6 +167,11 @@ INSERT INTO `estrategias` (`idEstrategias`, `estrategia`, `fkIdCategoria`) VALUE
 CREATE TABLE `grupo` (
   `idGrupo` int(11) NOT NULL,
   `ficha` varchar(45) NOT NULL,
+  `inicioLectiva` date DEFAULT NULL,
+  `finLectiva` date DEFAULT NULL,
+  `inicioPractica` date DEFAULT NULL,
+  `finPractica` date DEFAULT NULL,
+  `nombreGestor` varchar(50) DEFAULT NULL,
   `jornada` varchar(45) NOT NULL,
   `modalidad` varchar(45) NOT NULL,
   `fkIdProgramaFormacion` int(11) NOT NULL
@@ -176,11 +181,11 @@ CREATE TABLE `grupo` (
 -- Volcado de datos para la tabla `grupo`
 --
 
-INSERT INTO `grupo` (`idGrupo`, `ficha`, `jornada`, `modalidad`, `fkIdProgramaFormacion`) VALUES
-(10, '2873711', 'Diurna', 'Presencial', 1),
-(11, '299200', 'Mixta', 'Presencial', 3),
-(13, '2873456', 'Diurna', 'Presencial', 5),
-(15, '299299', 'Diurna', 'Presencial', 6);
+INSERT INTO `grupo` (`idGrupo`, `ficha`, `inicioLectiva`, `finLectiva`, `inicioPractica`, `finPractica`, `nombreGestor`, `jornada`, `modalidad`, `fkIdProgramaFormacion`) VALUES
+(10, '2873711', '2024-01-28', '2025-10-22', '2025-10-22', '2026-04-22', 'Julian Salazar', 'Diurna', 'Presencial', 1),
+(11, '299200', '0000-00-00', '0000-00-00', '0000-00-00', '0000-00-00', '', 'Mixta', 'Presencial', 3),
+(13, '2873456', NULL, NULL, NULL, NULL, NULL, 'Diurna', 'Presencial', 5),
+(15, '299299', NULL, NULL, NULL, NULL, NULL, 'Diurna', 'Presencial', 6);
 
 -- --------------------------------------------------------
 
@@ -239,12 +244,13 @@ CREATE TABLE `programaformacion` (
 
 INSERT INTO `programaformacion` (`idProgramaFormacion`, `nombre`, `nivel`, `version`) VALUES
 (1, 'Análisis y Desarrollo de Software', 'Tecnólogo', '228118 V1'),
-(2, 'Mantenimiento Electrónico', NULL, NULL),
+(2, 'Mantenimiento Electrónico', 'Tecnólogo', '836138 V1'),
 (3, 'Automatización Industrial', NULL, NULL),
 (5, 'Mantenimiento de Equipos Biomédicos', NULL, NULL),
 (6, 'Mecánica Industrial', NULL, NULL),
 (8, 'Motores Diesel', NULL, NULL),
-(9, 'Computación CNC', NULL, NULL);
+(9, 'Computación CNC', NULL, NULL),
+(10, 'Automatización industrial', 'Tecnólogo', '225208 V1');
 
 -- --------------------------------------------------------
 
@@ -468,7 +474,7 @@ ALTER TABLE `notificacion`
 -- AUTO_INCREMENT de la tabla `programaformacion`
 --
 ALTER TABLE `programaformacion`
-  MODIFY `idProgramaFormacion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `idProgramaFormacion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT de la tabla `reporte`

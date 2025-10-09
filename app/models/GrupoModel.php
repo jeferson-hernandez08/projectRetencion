@@ -50,7 +50,24 @@ class GrupoModel extends BaseModel {
         }
     }
 
-     public function getGrupo($id) {
+    // Método para obtener todos los grupos con información del programa de formación
+    public function getAllWithPrograma() {
+        try {
+            $sql = "SELECT grupo.*, programaformacion.nombre AS nombrePrograma 
+                    FROM grupo 
+                    INNER JOIN programaformacion 
+                    ON grupo.fkIdProgramaFormacion = programaformacion.idProgramaFormacion";
+            $statement = $this->dbConnection->prepare($sql);
+            $statement->execute();
+            $result = $statement->fetchAll(PDO::FETCH_OBJ);
+            return $result;
+        } catch (PDOException $ex) {
+            echo "Error al obtener los grupos con programa: " . $ex->getMessage();
+            return [];
+        }
+    }
+
+    public function getGrupo($id) {
         try {
             $sql = "SELECT grupo.*, programaformacion.nombre AS nombrePrograma 
                     FROM grupo 

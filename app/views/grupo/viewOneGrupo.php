@@ -33,6 +33,40 @@
                                 <span class='record-one__label'>Programa de Formación:</span>
                                 <span class='record-one__value'>{$grupo->nombrePrograma}</span>
                             </div>
+                            <div class='record-one__row'>
+                                <span class='record-one__label'>Inicio Lectiva:</span>
+                                <span class='record-one__value'>" . 
+                                    (!empty($grupo->inicioLectiva) && $grupo->inicioLectiva != '0000-00-00' ? 
+                                    date('d/m/Y', strtotime($grupo->inicioLectiva)) : 'No asignada') . 
+                                "</span>
+                            </div>
+                            <div class='record-one__row'>
+                                <span class='record-one__label'>Fin Lectiva:</span>
+                                <span class='record-one__value'>" . 
+                                    (!empty($grupo->finLectiva) && $grupo->finLectiva != '0000-00-00' ? 
+                                    date('d/m/Y', strtotime($grupo->finLectiva)) : 'No asignada') . 
+                                "</span>
+                            </div>
+                            <div class='record-one__row'>
+                                <span class='record-one__label'>Inicio Práctica:</span>
+                                <span class='record-one__value'>" . 
+                                    (!empty($grupo->inicioPractica) && $grupo->inicioPractica != '0000-00-00' ? 
+                                    date('d/m/Y', strtotime($grupo->inicioPractica)) : 'No asignada') . 
+                                "</span>
+                            </div>
+                            <div class='record-one__row'>
+                                <span class='record-one__label'>Fin Práctica:</span>
+                                <span class='record-one__value'>" . 
+                                    (!empty($grupo->finPractica) && $grupo->finPractica != '0000-00-00' ? 
+                                    date('d/m/Y', strtotime($grupo->finPractica)) : 'No asignada') . 
+                                "</span>
+                            </div>
+                            <div class='record-one__row'>
+                                <span class='record-one__label'>Gestor:</span>
+                                <span class='record-one__value'>" . 
+                                    (!empty($grupo->nombreGestor) ? $grupo->nombreGestor : 'No asignado') . 
+                                "</span>
+                            </div>
                         </div>
                       </div>";
             }

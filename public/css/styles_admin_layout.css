@@ -411,7 +411,7 @@ div.record {
 
 .form-group button{
     cursor: pointer;
-    background-color: #008000; /* Verde */
+    background-color: #16A34A; /* Verde */
     color: #fff;
     border: none;
     padding: .8em;
@@ -422,9 +422,14 @@ div.record {
 }
 
 .form-group button:hover {
-    background-color: #00ff00; /* Verde más oscuro */
+    background-color: #15803D; /* Verde más oscuro */
     transform: translateY(-2px);
     box-shadow: 0 6px 12px rgba(16, 185, 129, 0.3);
+}
+
+.form-group button i {
+    color: #ffffff; /* Hace que el ícono se vea bien sobre verde */
+    font-size: 1rem;
 }
 
 .form-group {

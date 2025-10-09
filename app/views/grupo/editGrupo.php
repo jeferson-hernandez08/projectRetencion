@@ -92,7 +92,7 @@
 
             <!-- Botón de Guardar -->
             <div class="form-group">
-                <button type="submit"><i class="fas fa-save"></i> Actualizar Grupo</button>
+                <button type="submit"><i class="fas fa-pen-to-square"></i> Editar Grupo</button>
             </div>
         </form>
     </div>
