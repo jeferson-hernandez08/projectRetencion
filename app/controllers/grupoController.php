@@ -88,10 +88,16 @@ class GrupoController extends BaseController {
     }
 
     public function createGrupo() {
-        if (isset($_POST['txtFicha']) && isset($_POST['txtJornada']) && isset($_POST['txtModalidad']) && 
-            isset($_POST['txtFkIdProgramaFormacion'])) {
+        if (isset($_POST['txtFicha']) && isset($_POST['txtInicioLectiva']) && isset($_POST['txtFinLectiva']) && 
+            isset($_POST['txtInicioPractica']) && isset($_POST['txtFinPractica']) && isset($_POST['txtNombreGestor']) &&
+            isset($_POST['txtJornada']) && isset($_POST['txtModalidad']) && isset($_POST['txtFkIdProgramaFormacion'])) {
             
             $ficha = $_POST['txtFicha'] ?? null;
+            $inicioLectiva = $_POST['txtInicioLectiva'] ?? null;
+            $finLectiva = $_POST['txtFinLectiva'] ?? null;
+            $inicioPractica = $_POST['txtInicioPractica'] ?? null;
+            $finPractica = $_POST['txtFinPractica'] ?? null;
+            $nombreGestor = $_POST['txtNombreGestor'] ?? null;
             $jornada = $_POST['txtJornada'] ?? null;
             $modalidad = $_POST['txtModalidad'] ?? null;
             $fkIdProgramaFormacion = $_POST['txtFkIdProgramaFormacion'] ?? null;
@@ -100,7 +106,7 @@ class GrupoController extends BaseController {
             $grupoObj = new GrupoModel();
             
             // Se llama al método que guarda en la base de datos
-            $grupoObj->saveGrupo($ficha, $jornada, $modalidad, $fkIdProgramaFormacion);
+            $grupoObj->saveGrupo($ficha, $inicioLectiva, $finLectiva, $inicioPractica, $finPractica, $nombreGestor, $jornada, $modalidad, $fkIdProgramaFormacion);
             $this->redirectTo("grupo/view");
         } else {
             echo "No se capturaron todos los datos del grupo";
@@ -167,17 +173,24 @@ class GrupoController extends BaseController {
     }
 
     public function updateGrupo() {
-        if (isset($_POST['txtId']) && isset($_POST['txtFicha']) && isset($_POST['txtJornada']) && 
-            isset($_POST['txtModalidad']) && isset($_POST['txtFkIdProgramaFormacion'])) {
+        if (isset($_POST['txtId']) && isset($_POST['txtFicha']) && isset($_POST['txtInicioLectiva']) && 
+            isset($_POST['txtFinLectiva']) && isset($_POST['txtInicioPractica']) && isset($_POST['txtFinPractica']) && 
+            isset($_POST['txtNombreGestor']) && isset($_POST['txtJornada']) && isset($_POST['txtModalidad']) && 
+            isset($_POST['txtFkIdProgramaFormacion'])) {
             
             $id = $_POST['txtId'] ?? null;
             $ficha = $_POST['txtFicha'] ?? null;
+            $inicioLectiva = $_POST['txtInicioLectiva'] ?? null;
+            $finLectiva = $_POST['txtFinLectiva'] ?? null;
+            $inicioPractica = $_POST['txtInicioPractica'] ?? null;
+            $finPractica = $_POST['txtFinPractica'] ?? null;
+            $nombreGestor = $_POST['txtNombreGestor'] ?? null;
             $jornada = $_POST['txtJornada'] ?? null;
             $modalidad = $_POST['txtModalidad'] ?? null;
             $fkIdProgramaFormacion = $_POST['txtFkIdProgramaFormacion'] ?? null;
 
             $grupoObj = new GrupoModel();
-            $respuesta = $grupoObj->editGrupo($id, $ficha, $jornada, $modalidad, $fkIdProgramaFormacion);
+            $respuesta = $grupoObj->editGrupo($id, $ficha, $inicioLectiva, $finLectiva, $inicioPractica, $finPractica, $nombreGestor, $jornada, $modalidad, $fkIdProgramaFormacion);
         }
         header("location: /grupo/view");
     }

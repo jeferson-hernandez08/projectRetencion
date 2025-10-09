@@ -25,7 +25,7 @@
                     
                     <div class="card-body">
                         <div class="report-info">
-                            <div class="info-label">Nombre:</div>
+                            <div class="info-label"><i class="fas fa-graduation-cap"></i> Nombre:</div>
                             <div class="info-value"><?php echo $programa->nombre; ?></div>
                         </div>
                         <div class="report-info">

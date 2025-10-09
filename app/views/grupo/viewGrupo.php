@@ -21,34 +21,34 @@
                 <div class="report-card">
                     <div class="card-header">
                         <span class="report-id">Grupo ID # <?php echo $value->idGrupo; ?></span>
-                        <span class="grupo-ficha"><?php echo $value->ficha; ?></span>
+                        <span class="grupo-ficha">Ficha: <?php echo $value->ficha; ?></span>
                     </div>
                     
                     <div class="card-body">
                         <div class="report-info">
-                            <div class="info-label">Ficha:</div>
+                            <div class="info-label"><i class="fas fa-id-badge"></i> Ficha:</div>
                             <div class="info-value"><?php echo $value->ficha; ?></div>
                         </div>
 
                         <div class="report-info">
-                            <div class="info-label">Jornada:</div>
-                            <div class="info-value"><?php echo $value->jornada; ?></div>
-                        </div>
-                        
-                        <div class="report-info">
-                            <div class="info-label">Modalidad:</div>
-                            <div class="info-value"><?php echo $value->modalidad; ?></div>
-                        </div>
-                        
-                        <!-- <div class="report-info">
-                            <div class="info-label">Programa de Formación:</div>
+                            <div class="info-label"><i class="fas fa-chalkboard-teacher"></i> Programa Formación:</div>
                             <div class="info-value"><?php 
                                 // Si tenemos información del programa, la mostramos
                                 echo $value->nombrePrograma ?? 'Sin programa asignado'; 
                             ?></div>
-                        </div> -->
+                        </div>
+
+                        <div class="report-info">
+                            <div class="info-label"><i class="fas fa-clock"></i> Jornada:</div>
+                            <div class="info-value"><?php echo $value->jornada; ?></div>
+                        </div>
+                        
+                        <div class="report-info">
+                            <div class="info-label"><i class="fas fa-user-tie"></i> Gestor:</div>
+                            <div class="info-value"><?php echo $value->nombreGestor ?? 'No asignado'; ?></div>
+                        </div>
                     </div>
-                    
+
                     <div class="card-footer">
                         <div class="card-actions">
                             <a href="/grupo/view/<?php echo $value->idGrupo; ?>" class="action-btn consultar" title="Ver detalles">
