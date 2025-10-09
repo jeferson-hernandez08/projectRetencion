@@ -8,7 +8,7 @@
     <link rel="shortcut icon" href="/img/logoSenaGreen.png" type="image/x-icon"> <!-- Icono de la pestaña del navegador -->
     <link rel="stylesheet" href="/css/reset.css">
     <link rel="stylesheet" href="/css/styles_admin_layout.css">
-    <!-- Añadiendo Font Awesome para los iconos -->
+    <!-- Añadir Font Awesome para los iconos -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 
@@ -111,10 +111,10 @@
                         </div>
                         <!-- <a href="#" class="icon-link"><i class="fas fa-user-circle"></i></a> -->
                         <!-- <a href="#" class="icon-link"><i class="fas fa-bell"></i></a> -->
-                        <a href="#" class="icon-link" id="notificaciones-toggle">
+                        <!-- <a href="#" class="icon-link" id="notificaciones-toggle">
                             <i class="fas fa-bell"></i>
                             <span class="notification-badge" id="notification-badge">0</span>
-                        </a>
+                        </a> -->
 
                         <a href="#" class="icon-link" id="theme-toggle-link" onclick="toggleDarkMode(); return false;"><i class="fas fa-moon"></i></a>
                     </div>

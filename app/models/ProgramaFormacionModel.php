@@ -9,21 +9,25 @@ require_once MAIN_APP_ROUTE."../models/BaseModel.php";
 class ProgramaFormacionModel extends BaseModel {
     public function __construct(
         ?int $idProgramaFormacion = null,
-        ?string $nombre = null
+        ?string $nombre = null,
+        ?string $nivel = null,
+        ?string $version = null
     ) {
         $this->table = "programaformacion";
         // Se llama al constructor del padre
         parent::__construct();
     }
 
-    public function saveProgramaFormacion($nombre) {
+    public function saveProgramaFormacion($nombre, $nivel, $version) {
         try {
-            $sql = "INSERT INTO $this->table (nombre) VALUES (:nombre)";
+            $sql = "INSERT INTO $this->table (nombre, nivel, version) VALUES (:nombre, :nivel, :version)";
             // 1. Se prepara la consulta
             $statement = $this->dbConnection->prepare($sql);
 
             // 2. BindParam para sanitizar los datos de entrada
             $statement->bindParam('nombre', $nombre, PDO::PARAM_STR);
+            $statement->bindParam('nivel', $nivel, PDO::PARAM_STR);
+            $statement->bindParam('version', $version, PDO::PARAM_STR);
 
             // 3. Ejecutar la consulta
             $result = $statement->execute();
@@ -49,12 +53,14 @@ class ProgramaFormacionModel extends BaseModel {
         }
     }
 
-    public function editProgramaFormacion($id, $nombre) {
+    public function editProgramaFormacion($id, $nombre, $nivel, $version) {
         try {
-            $sql = "UPDATE $this->table SET nombre=:nombre WHERE idProgramaFormacion=:id";
+            $sql = "UPDATE $this->table SET nombre=:nombre, nivel=:nivel, version=:version WHERE idProgramaFormacion=:id";
             $statement = $this->dbConnection->prepare($sql);
             $statement->bindParam(":id", $id, PDO::PARAM_INT);
             $statement->bindParam(":nombre", $nombre, PDO::PARAM_STR);
+            $statement->bindParam(":nivel", $nivel, PDO::PARAM_STR);
+            $statement->bindParam(":version", $version, PDO::PARAM_STR);
             $result = $statement->execute();
             return $result;
         } catch (PDOException $ex) {

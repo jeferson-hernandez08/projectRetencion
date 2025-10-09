@@ -20,13 +20,21 @@
             <?php foreach ($programas as $programa): ?>
                 <div class="report-card">
                     <div class="card-header">
-                        <span class="report-id">Programa ID #  <?php echo $programa->idProgramaFormacion; ?></span>
+                        <span class="report-id">Programa ID # <?php echo $programa->idProgramaFormacion; ?></span>
                     </div>
                     
                     <div class="card-body">
                         <div class="report-info">
                             <div class="info-label">Nombre:</div>
                             <div class="info-value"><?php echo $programa->nombre; ?></div>
+                        </div>
+                        <div class="report-info">
+                            <div class="info-label"><i class="fas fa-chart-line"></i> Nivel:</div>
+                            <div class="info-value"><?php echo !empty($programa->nivel) ? $programa->nivel : 'No especificado'; ?></div>
+                        </div>
+                        <div class="report-info">
+                            <div class="info-label"><i class="fas fa-code-branch"></i> Versión:</div>
+                            <div class="info-value"><?php echo !empty($programa->version) ? $programa->version : 'No especificado'; ?></div>
                         </div>
                     </div>
                     

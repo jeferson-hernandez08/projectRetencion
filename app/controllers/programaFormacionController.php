@@ -84,12 +84,14 @@ class ProgramaFormacionController extends BaseController {
     public function createProgramaFormacion() {
         if (isset($_POST['txtNombre'])) {
             $nombre = $_POST['txtNombre'] ?? null;
+            $nivel = $_POST['txtNivel'] ?? null;
+            $version = $_POST['txtVersion'] ?? null;
             
             // Creamos instancia del Modelo ProgramaFormacion
             $programaObj = new ProgramaFormacionModel();
             
             // Se llama al método que guarda en la base de datos
-            $programaObj->saveProgramaFormacion($nombre);
+            $programaObj->saveProgramaFormacion($nombre, $nivel, $version);
             $this->redirectTo("programaFormacion/view");
         } else {
             echo "No se capturó el nombre del programa de formación";
@@ -156,9 +158,11 @@ class ProgramaFormacionController extends BaseController {
         if (isset($_POST['txtId']) && isset($_POST['txtNombre'])) {
             $id = $_POST['txtId'] ?? null;
             $nombre = $_POST['txtNombre'] ?? null;
+            $nivel = $_POST['txtNivel'] ?? null;
+            $version = $_POST['txtVersion'] ?? null;
             
             $programaObj = new ProgramaFormacionModel();
-            $respuesta = $programaObj->editProgramaFormacion($id, $nombre);
+            $respuesta = $programaObj->editProgramaFormacion($id, $nombre, $nivel, $version);
         }
         header("location: /programaFormacion/view");
     }
