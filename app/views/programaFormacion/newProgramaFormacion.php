@@ -12,6 +12,22 @@
                 <input type="text" name="txtNombre" id="txtNombre" class="form-control" required>
             </div>
 
+            <!-- Campo Nivel del programa de formación -->
+            <div class="form-group">
+                <label for="txtNivel">Nivel del programa de formación</label>
+                <select name="txtNivel" id="txtNivel" class="form-control">
+                    <option value="">Seleccione un nivel</option>
+                    <option value="Tecnólogo">Tecnólogo</option>
+                    <option value="Técnico">Técnico</option>
+                </select>
+            </div>
+
+            <!-- Campo Versión del programa de formación -->
+            <div class="form-group">
+                <label for="txtVersion">Versión del programa de formación</label>
+                <input type="text" name="txtVersion" id="txtVersion" class="form-control" placeholder="Ej: 228118 V1, 836114 V2, 842200 V3">
+            </div>
+
             <!-- Botón de Guardar -->
             <div class="form-group">
                 <button type="submit">Guardar</button>

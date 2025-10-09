@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 09-10-2025 a las 02:02:17
+-- Tiempo de generación: 09-10-2025 a las 16:40:59
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -128,7 +128,8 @@ INSERT INTO `causa_reporte` (`fkIdReporte`, `fkIdCausa`) VALUES
 (55, 15),
 (57, 1),
 (59, 3),
-(61, 14);
+(61, 14),
+(63, 1);
 
 -- --------------------------------------------------------
 
@@ -227,21 +228,23 @@ CREATE TABLE `notificacion` (
 
 CREATE TABLE `programaformacion` (
   `idProgramaFormacion` int(11) NOT NULL,
-  `nombre` varchar(45) NOT NULL
+  `nombre` varchar(45) NOT NULL,
+  `nivel` varchar(45) DEFAULT NULL,
+  `version` varchar(45) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Volcado de datos para la tabla `programaformacion`
 --
 
-INSERT INTO `programaformacion` (`idProgramaFormacion`, `nombre`) VALUES
-(1, 'Análisis y Desarrollo de Software'),
-(2, 'Mantenimiento Electrónico'),
-(3, 'Automatización Industrial'),
-(5, 'Mantenimiento de Equipos Biomédicos'),
-(6, 'Mecánica Industrial'),
-(8, 'Motores Diesel'),
-(9, 'Computación CNC');
+INSERT INTO `programaformacion` (`idProgramaFormacion`, `nombre`, `nivel`, `version`) VALUES
+(1, 'Análisis y Desarrollo de Software', 'Tecnólogo', '228118 V1'),
+(2, 'Mantenimiento Electrónico', NULL, NULL),
+(3, 'Automatización Industrial', NULL, NULL),
+(5, 'Mantenimiento de Equipos Biomédicos', NULL, NULL),
+(6, 'Mecánica Industrial', NULL, NULL),
+(8, 'Motores Diesel', NULL, NULL),
+(9, 'Computación CNC', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -268,7 +271,8 @@ INSERT INTO `reporte` (`idReporte`, `fechaCreacion`, `descripcion`, `direccionam
 (55, '2025-09-13 16:42:40', 'Aprendiz presenta problemas de salud y desea abandonar el programa', 'Coordinador de formación', 'Registrado', 6, 1),
 (57, '2025-09-18 11:28:16', 'aprendiz no viene a clase en 1 mes', 'Coordinador de formación', 'Registrado', 2, 1),
 (59, '2025-10-08 09:28:29', 'Aprendiz juan calle no viene a clase ', 'Coordinador de formación', 'Registrado', 3, 1),
-(61, '2025-10-08 09:59:25', 'Aprendiz Angie ríos llega llorando a clase ', 'Coordinador de formación', 'Registrado', 6, 1);
+(61, '2025-10-08 09:59:25', 'Aprendiz Angie ríos llega llorando a clase ', 'Coordinador de formación', 'Registrado', 6, 1),
+(63, '2025-10-08 23:40:44', 'Aprendiz daniel gallego no viene a formación durante 10 dias ', 'Coordinador de formación', 'Registrado', 7, 19);
 
 -- --------------------------------------------------------
 
@@ -470,7 +474,7 @@ ALTER TABLE `programaformacion`
 -- AUTO_INCREMENT de la tabla `reporte`
 --
 ALTER TABLE `reporte`
-  MODIFY `idReporte` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=62;
+  MODIFY `idReporte` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=64;
 
 --
 -- AUTO_INCREMENT de la tabla `rol`

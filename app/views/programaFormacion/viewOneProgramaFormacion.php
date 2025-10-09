@@ -21,7 +21,22 @@
                                 <span class='record-one__label'>Nombre:</span>
                                 <span class='record-one__value'>{$programa->nombre}</span>
                             </div>
+                            <div class='record-one__row'>
+                                <span class='record-one__label'>Nivel:</span>
+                                <span class='record-one__value'>" . ($programa->nivel ?? 'No especificado') . "</span>
+                            </div>
+                            <div class='record-one__row'>
+                                <span class='record-one__label'>Versión:</span>
+                                <span class='record-one__value'>" . ($programa->version ?? 'No especificada') . "</span>
+                            </div>
                         </div>
+                      </div>";
+            } else {
+                echo "<div class='no-records-message'>
+                        <div class='no-records-icon'>📝</div>
+                        <h3>Programa de Formación No Encontrado</h3>
+                        <p>El programa de formación que buscas no existe o ha sido eliminado.</p>
+                        <a href='/programaFormacion/view' class='create-report-btn'>Volver a Programas</a>
                       </div>";
             }
         ?>
