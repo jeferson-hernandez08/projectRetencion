@@ -83,11 +83,13 @@ class UsuarioController extends BaseController {
     }
 
     public function createUsuario() {
-        if (isset($_POST['txtNombre']) && isset($_POST['txtEmail']) && isset($_POST['txtPassword']) && 
-            isset($_POST['txtTelefono']) && isset($_POST['txtTipoCoordinador']) && isset($_POST['txtGestor']) && 
-            isset($_POST['txtFkIdRol'])) {
+        if (isset($_POST['txtNombres']) && isset($_POST['txtApellidos']) && isset($_POST['txtDocumento']) && 
+            isset($_POST['txtEmail']) && isset($_POST['txtPassword']) && isset($_POST['txtTelefono']) && 
+            isset($_POST['txtTipoCoordinador']) && isset($_POST['txtGestor']) && isset($_POST['txtFkIdRol'])) {
             
-            $nombre = $_POST['txtNombre'] ?? null;
+            $nombres = $_POST['txtNombres'] ?? null;
+            $apellidos = $_POST['txtApellidos'] ?? null;
+            $documento = $_POST['txtDocumento'] ?? null;
             $email = $_POST['txtEmail'] ?? null;
             $password = $_POST['txtPassword'] ?? null;
             $telefono = $_POST['txtTelefono'] ?? null;
@@ -99,7 +101,7 @@ class UsuarioController extends BaseController {
             $usuarioObj = new UsuarioModel();
             
             // Se llama al método que guarda en la base de datos
-            $usuarioObj->saveUsuario($nombre, $email, $password, $telefono, $tipoCoordinador, $gestor, $fkIdRol);
+            $usuarioObj->saveUsuario($nombres, $apellidos, $documento, $email, $password, $telefono, $tipoCoordinador, $gestor, $fkIdRol);
             $this->redirectTo("usuario/view");
         } else {
             echo "No se capturaron todos los datos del usuario";
@@ -166,12 +168,15 @@ class UsuarioController extends BaseController {
     }
 
     public function updateUsuario() {
-        if (isset($_POST['txtId']) && isset($_POST['txtNombre']) && isset($_POST['txtEmail']) && 
-            isset($_POST['txtPassword']) && isset($_POST['txtTelefono']) && isset($_POST['txtTipoCoordinador']) && 
-            isset($_POST['txtGestor']) && isset($_POST['txtFkIdRol'])) {
+        if (isset($_POST['txtId']) && isset($_POST['txtNombres']) && isset($_POST['txtApellidos']) && 
+            isset($_POST['txtDocumento']) && isset($_POST['txtEmail']) && isset($_POST['txtPassword']) && 
+            isset($_POST['txtTelefono']) && isset($_POST['txtTipoCoordinador']) && isset($_POST['txtGestor']) && 
+            isset($_POST['txtFkIdRol'])) {
             
             $id = $_POST['txtId'] ?? null;
-            $nombre = $_POST['txtNombre'] ?? null;
+            $nombres = $_POST['txtNombres'] ?? null;
+            $apellidos = $_POST['txtApellidos'] ?? null;
+            $documento = $_POST['txtDocumento'] ?? null;
             $email = $_POST['txtEmail'] ?? null;
             $password = $_POST['txtPassword'] ?? null;
             $telefono = $_POST['txtTelefono'] ?? null;
@@ -180,14 +185,14 @@ class UsuarioController extends BaseController {
             $fkIdRol = $_POST['txtFkIdRol'] ?? null;
 
             $usuarioObj = new UsuarioModel();
-            $respuesta = $usuarioObj->editUsuario($id, $nombre, $email, $password, $telefono, $tipoCoordinador, $gestor, $fkIdRol);
+            $respuesta = $usuarioObj->editUsuario($id, $nombres, $apellidos, $documento, $email, $password, $telefono, $tipoCoordinador, $gestor, $fkIdRol);
         }
         header("location: /usuario/view");
     }
 
     public function deleteUsuario($id) {
         $usuarioObj = new UsuarioModel();
-        $usuario = $usuarioObj->getUsuario($id);
+        $usuarioEliminar  = $usuarioObj->getUsuario($id);
 
         // Obtener información del usuario y rol para el card icon user cerrar sesion
         $rolNombre = "Usuario";
@@ -196,17 +201,17 @@ class UsuarioController extends BaseController {
         if (isset($_SESSION['id'])) {
             // Obtener detalles del usuario
             $usuarioModel = new UsuarioModel();
-            $usuario = $usuarioModel->getUsuario($_SESSION['id']);
+            $usuarioSesion = $usuarioModel->getUsuario($_SESSION['id']);   // Este error: Antes era: $usuario = $usuarioModel->getUsuario($_SESSION['id']);
             
             // Obtener nombre del rol
             $rolModel = new RolModel();
-            $rol = $rolModel->getRol($usuario->fkIdRol);
+            $rol = $rolModel->getRol($usuarioSesion->fkIdRol);    // Error Solucionado
             $rolNombre = $rol->nombre ?? "Usuario";
         }
 
         $data = [
             "title" => "Eliminar Usuario",
-            "usuario" => $usuario,
+            "usuario" => $usuarioEliminar,        // Enviamos la clave usuario para deleteUsuario.dart ($usuario)
             "nombreUsuario" => $nombreUsuario,   // Enviamos datos para el card icon user cerrar sesion
             "rolUsuario" => $rolNombre
         ];

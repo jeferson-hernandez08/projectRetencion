@@ -9,7 +9,9 @@ require_once MAIN_APP_ROUTE."../models/BaseModel.php";
 class UsuarioModel extends BaseModel {
     public function __construct(
         ?int $idUsuario = null,
-        ?string $nombre = null,
+        ?string $nombres = null,
+        ?string $apellidos = null,
+        ?string $documento = null,
         ?string $email = null,
         ?string $password = null,
         ?string $telefono = null,
@@ -22,14 +24,16 @@ class UsuarioModel extends BaseModel {
         parent::__construct();
     }
 
-    public function saveUsuario($nombre, $email, $password, $telefono, $tipoCoordinador, $gestor, $fkIdRol) {
+    public function saveUsuario($nombres, $apellidos, $documento, $email, $password, $telefono, $tipoCoordinador, $gestor, $fkIdRol) {
         try {
             $hashedPassword = password_hash($password, PASSWORD_DEFAULT);   // Hash de la contraseña
-            $sql = "INSERT INTO $this->table (nombre, email, password, telefono, tipoCoordinador, gestor, fkIdRol) 
-                    VALUES (:nombre, :email, :password, :telefono, :tipoCoordinador, :gestor, :fkIdRol)";
+            $sql = "INSERT INTO $this->table (nombres, apellidos, documento, email, password, telefono, tipoCoordinador, gestor, fkIdRol) 
+                    VALUES (:nombres, :apellidos, :documento, :email, :password, :telefono, :tipoCoordinador, :gestor, :fkIdRol)";
             // 1. Se prepara la consulta
             $statement = $this->dbConnection->prepare($sql);
-            // $nombre = $this->nombre ?? '';         // Estos datos es opcional
+            // $nombres = $this->nombres ?? '';         // Estos datos es opcional
+            // $apellidos = $this->apellidos ?? '';
+            // $documento = $this->documento ?? '';
             // $email = $this->email ?? '';
             // $password = $this->password ?? '';
             // $telefono = $this->telefono ?? '';
@@ -38,7 +42,9 @@ class UsuarioModel extends BaseModel {
             // $fkIdRol = $this->fkIdRol ?? '';
 
             // 2. BindParam para sanitizar los datos de entrada
-            $statement->bindParam('nombre', $nombre, PDO::PARAM_STR);
+            $statement->bindParam('nombres', $nombres, PDO::PARAM_STR);
+            $statement->bindParam('apellidos', $apellidos, PDO::PARAM_STR);
+            $statement->bindParam('documento', $documento, PDO::PARAM_STR);
             $statement->bindParam('email', $email, PDO::PARAM_STR);
             $statement->bindParam('password', $hashedPassword, PDO::PARAM_STR);   // Guardar el hash
             $statement->bindParam('telefono', $telefono, PDO::PARAM_STR);
@@ -71,13 +77,15 @@ class UsuarioModel extends BaseModel {
         }
     }
 
-    public function editUsuario($id, $nombre, $email, $password, $telefono, $tipoCoordinador, $gestor, $fkIdRol) {
+    public function editUsuario($id, $nombres, $apellidos, $documento, $email, $password, $telefono, $tipoCoordinador, $gestor, $fkIdRol) {
         try {
             // Añadimos hashing de contraseña para editar contraseña
             $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
             $sql = "UPDATE $this->table SET 
-                        nombre=:nombre, 
+                        nombres=:nombres, 
+                        apellidos=:apellidos, 
+                        documento=:documento, 
                         email=:email, 
                         password=:password, 
                         telefono=:telefono, 
@@ -87,7 +95,9 @@ class UsuarioModel extends BaseModel {
                     WHERE idUsuario=:id";
             $statement = $this->dbConnection->prepare($sql);
             $statement->bindParam(":id", $id, PDO::PARAM_INT);
-            $statement->bindParam(":nombre", $nombre, PDO::PARAM_STR);
+            $statement->bindParam(":nombres", $nombres, PDO::PARAM_STR);
+            $statement->bindParam(":apellidos", $apellidos, PDO::PARAM_STR);
+            $statement->bindParam(":documento", $documento, PDO::PARAM_STR);
             $statement->bindParam(":email", $email, PDO::PARAM_STR);
             $statement->bindParam(":password", $hashedPassword, PDO::PARAM_STR);    // Para editar el hash de la contraseña
             $statement->bindParam(":telefono", $telefono, PDO::PARAM_STR);
@@ -129,7 +139,7 @@ class UsuarioModel extends BaseModel {
             // Verificar contraseña con hash almacenado
             if(password_verify($password, $hash)){            // password_verify verifica las contraseñas hasheadas y no textto plano 123.
                 $_SESSION['id'] = $resultSet[0]->idUsuario;     // ***Veridficar si los datos aqui son exactamente de los de la BD
-                $_SESSION['nombre'] = $resultSet[0]->nombre;
+                $_SESSION['nombre'] = $resultSet[0]->nombres;
                 $_SESSION['rol'] = $resultSet[0]->fkIdRol;       // REVISAR ESTO COMO CAPRTURAR EL ROL PARA USAR EN USUARIO
                 $_SESSION['timeout'] = time();
                 session_regenerate_id();

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 10-10-2025 a las 02:14:50
+-- Tiempo de generación: 10-10-2025 a las 19:02:56
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -45,12 +45,13 @@ CREATE TABLE `aprendiz` (
 --
 
 INSERT INTO `aprendiz` (`idAprendiz`, `tipoDocumento`, `documento`, `nombres`, `apellidos`, `email`, `estado`, `telefono`, `trimestre`, `fkIdGrupo`) VALUES
-(2, NULL, NULL, 'Juan Jose Posada', NULL, 'juan@gmail.com', NULL, '3245678978', '7', 10),
-(3, NULL, NULL, 'Juan Esteban Calle', NULL, 'juan@gmail.com', NULL, '3127827845', '5', 10),
+(2, 'CC', '1234567', 'Juan Jose ', 'Posada', 'juan@gmail.com', 'En formación', '3245678978', '7', 10),
+(3, 'TI', '123456', 'Juan Esteban ', 'Calle', 'juan@gmail.com', 'En formación', '3127827845', '5', 10),
 (4, NULL, NULL, 'Daniel Duque', NULL, 'dani@gmail.com', NULL, '3127827845', '6', 11),
 (6, NULL, NULL, 'Angie Rios', NULL, 'angie@gmail.com', NULL, '3245678978', '5', 11),
 (7, NULL, NULL, 'Daniel Gallego', NULL, 'daniel@gmail.com', NULL, '3245678978', '8', 13),
-(11, NULL, NULL, 'David Aguapacha', NULL, 'david@gmail.com', NULL, '3245768907', '4', 10);
+(11, NULL, NULL, 'David Aguapacha', NULL, 'david@gmail.com', NULL, '3245768907', '4', 10),
+(13, 'CC', '12345678', 'Juan Manuel', 'Zuluaga', 'zuluaga@gmail.com', 'En formación', '3145679867', '2', 11);
 
 -- --------------------------------------------------------
 
@@ -315,7 +316,9 @@ INSERT INTO `rol` (`idRol`, `nombre`) VALUES
 
 CREATE TABLE `usuario` (
   `idUsuario` int(11) NOT NULL,
-  `nombre` varchar(50) NOT NULL,
+  `nombres` varchar(50) NOT NULL,
+  `apellidos` varchar(50) DEFAULT NULL,
+  `documento` varchar(50) DEFAULT NULL,
   `email` varchar(50) NOT NULL,
   `password` varchar(255) NOT NULL,
   `telefono` varchar(20) NOT NULL,
@@ -328,17 +331,17 @@ CREATE TABLE `usuario` (
 -- Volcado de datos para la tabla `usuario`
 --
 
-INSERT INTO `usuario` (`idUsuario`, `nombre`, `email`, `password`, `telefono`, `tipoCoordinador`, `gestor`, `fkIdRol`) VALUES
-(1, 'Julian Salazar', 'julian@gmail.com', '$2y$10$w6K3VVm2g04kjaBixy7sz.x1hZxiOpBlrQTCk/G.EMOWwQ36CCHSW', '3245678978', 'No es coordinador', 1, 4),
-(3, 'Oscar Aristizabal (Ofac)', 'ofac@gmail.com', '$2y$10$7SU075MUw2xCKHirUYl.DOutJNXTRPgzE/sfRCjO.fH5zvZnbsLva', '3127827845', 'No es coordinador', 0, 4),
-(4, 'Santiago Becerra', 'santiago@gmail.com', '$2y$10$oPu/Pp7A6Q1dRycMA1S2yutr5vDrnb8TnykdSLG7MPRDgbPutK6Yi', '3127827845', 'Coordinador académico', 0, 5),
-(13, 'German Estrada', 'german@gmail.com', '$2y$10$ADHhAHdLpPrvqnLs.1sdPe.a73J9O.0YnHKaEp2PParaaFe94jaSy', '3245678978', 'No es coordinador', 0, 4),
-(17, 'Daniela Isaza ', 'daniela@gmail.com', '$2y$10$0/MtpfaRbooSN0QXBaHfmOp9qJnTxv5eOujHgK0FxxzSqiNJeVeS2', '3127827845', 'No es coordinador', 0, 4),
-(18, 'Esteban Reyes', 'reyes@gmail.com', '$2y$10$R8JK3N2RYhKpsDMyPvKFfuh5iXvM8zdtmf71X6Qs/HkL1JUt.mTei', '3124567867', 'No es coordinador', 0, 9),
-(19, 'Mariana Carvajal ', 'mariana@gmail.com', '$2y$10$EIZaWwEWbDEnRn1ebIs6NeoP5/CbwtaqmWZiK7NC3SK3qrbxHIPKq', '3245678976', 'Coordinador de formación', 0, 6),
-(20, 'Jeferson Hernandez', 'admin@gmail.com', '$2y$10$z8fF2TvCCWaZgcpdyWUqR.WvwOAcPINb1yQBCfAiTg1ypW6Ud78Ei', '3113975576', 'No es coordinador', 0, 18),
-(21, 'Sofia Ocampo ', 'sofia@gmail.com', '$2y$10$M5yI8K.tQpuV4Y2ulfN/veMpgEhtalZvrrKYgKh8exG3xICeC4GRe', '3145679867', 'Coordinador de formación', 0, 6),
-(22, 'Jeferson Hernandez Ladino', 'jefer.hernandez1@gmail.com', '$2y$10$6tfD3qtSiOvamkNueTDR7eGy3U9akp0rZLSc8sepEBrtaoAyfC2Ye', '3113975576', 'No es coordinador', 0, 4);
+INSERT INTO `usuario` (`idUsuario`, `nombres`, `apellidos`, `documento`, `email`, `password`, `telefono`, `tipoCoordinador`, `gestor`, `fkIdRol`) VALUES
+(1, 'Julian Salazar', NULL, NULL, 'julian@gmail.com', '$2y$10$w6K3VVm2g04kjaBixy7sz.x1hZxiOpBlrQTCk/G.EMOWwQ36CCHSW', '3245678978', 'No es coordinador', 1, 4),
+(3, 'Oscar Aristizabal (Ofac)', NULL, NULL, 'ofac@gmail.com', '$2y$10$7SU075MUw2xCKHirUYl.DOutJNXTRPgzE/sfRCjO.fH5zvZnbsLva', '3127827845', 'No es coordinador', 0, 4),
+(4, 'Santiago Becerra', NULL, NULL, 'santiago@gmail.com', '$2y$10$oPu/Pp7A6Q1dRycMA1S2yutr5vDrnb8TnykdSLG7MPRDgbPutK6Yi', '3127827845', 'Coordinador académico', 0, 5),
+(13, 'German Estrada', NULL, NULL, 'german@gmail.com', '$2y$10$ADHhAHdLpPrvqnLs.1sdPe.a73J9O.0YnHKaEp2PParaaFe94jaSy', '3245678978', 'No es coordinador', 0, 4),
+(17, 'Daniela Isaza ', NULL, NULL, 'daniela@gmail.com', '$2y$10$0/MtpfaRbooSN0QXBaHfmOp9qJnTxv5eOujHgK0FxxzSqiNJeVeS2', '3127827845', 'No es coordinador', 0, 4),
+(18, 'Esteban Reyes', NULL, NULL, 'reyes@gmail.com', '$2y$10$R8JK3N2RYhKpsDMyPvKFfuh5iXvM8zdtmf71X6Qs/HkL1JUt.mTei', '3124567867', 'No es coordinador', 0, 9),
+(19, 'Mariana Carvajal ', NULL, NULL, 'mariana@gmail.com', '$2y$10$EIZaWwEWbDEnRn1ebIs6NeoP5/CbwtaqmWZiK7NC3SK3qrbxHIPKq', '3245678976', 'Coordinador de formación', 0, 6),
+(20, 'Jeferson Hernandez', NULL, NULL, 'admin@gmail.com', '$2y$10$z8fF2TvCCWaZgcpdyWUqR.WvwOAcPINb1yQBCfAiTg1ypW6Ud78Ei', '3113975576', 'No es coordinador', 0, 18),
+(21, 'Sofia Ocampo ', NULL, NULL, 'sofia@gmail.com', '$2y$10$M5yI8K.tQpuV4Y2ulfN/veMpgEhtalZvrrKYgKh8exG3xICeC4GRe', '3145679867', 'Coordinador de formación', 0, 6),
+(22, 'Jeferson Hernandez Ladino', NULL, NULL, 'jefer.hernandez1@gmail.com', '$2y$10$6tfD3qtSiOvamkNueTDR7eGy3U9akp0rZLSc8sepEBrtaoAyfC2Ye', '3113975576', 'No es coordinador', 0, 4);
 
 --
 -- Índices para tablas volcadas
@@ -437,7 +440,7 @@ ALTER TABLE `usuario`
 -- AUTO_INCREMENT de la tabla `aprendiz`
 --
 ALTER TABLE `aprendiz`
-  MODIFY `idAprendiz` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `idAprendiz` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT de la tabla `categoria`
