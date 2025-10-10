@@ -20,33 +20,52 @@
             <?php foreach ($aprendices as $value): ?>
                 <div class="report-card">
                     <div class="card-header">
-                        <span class="report-id">Aprendiz ID # <?php echo $value->idAprendiz; ?></span>
+                        <span class="report-id">ID Aprendiz : <?php echo $value->idAprendiz; ?></span>
                         <span class="aprendiz-email">Email: <?php echo $value->email; ?></span>
                     </div>
                     
                     <div class="card-body">
                         <div class="report-info">
-                            <div class="info-label">Nombre:</div>
-                            <div class="info-value"><?php echo $value->nombre; ?></div>
+                            <div class="info-label"><i class="fas fa-user"></i> Nombres:</div>
+                            <div class="info-value"><?php echo $value->nombres ?? 'No especificado'; ?></div>
                         </div>
                         
                         <div class="report-info">
-                            <div class="info-label">Teléfono:</div>
+                            <div class="info-label"><i class="fas fa-user-tag"></i> Apellidos:</div>
+                            <div class="info-value"><?php echo $value->apellidos ?? 'No especificado'; ?></div>
+                        </div>
+                        
+                        <div class="report-info">
+                            <div class="info-label"><i class="fas fa-phone"></i> Teléfono:</div>
                             <div class="info-value"><?php echo $value->telefono; ?></div>
                         </div>
                         
                         <div class="report-info">
-                            <div class="info-label">Trimestre:</div>
-                            <div class="info-value"><?php echo $value->trimestre; ?></div>
+                            <div class="info-label"><i class="fas fa-info-circle"></i> Estado:</div>
+                            <div class="info-value"><?php echo $value->estado ?? 'No especificado'; ?></div>
                         </div>
                         
-                        <!-- <div class="report-info">
-                            <div class="info-label">Grupo:</div>
+                        
+                        <div class="report-info">
+                            <div class="info-label"><i class="fas fa-users"></i> Grupo:</div>
                             <div class="info-value"><?php 
                                 // Si tenemos información del grupo, la mostramos
                                 echo $value->fichaGrupo ?? 'Sin grupo asignado'; 
-                            ?></div>
-                        </div> -->
+                                ?></div>
+                        </div>
+                        
+                        <div class="report-info">
+                            <div class="info-label"><i class="fas fa-graduation-cap"></i> Programa:</div>
+                            <div class="info-value"><?php 
+                                // Si tenemos información del programa, la mostramos
+                                echo $value->nombrePrograma ?? 'Sin programa asignado'; 
+                                ?></div>
+                        </div>
+                        
+                        <div class="report-info">
+                            <div class="info-label"><i class="fas fa-calendar-alt"></i> Trimestre:</div>
+                            <div class="info-value"><?php echo $value->trimestre; ?></div>
+                        </div>
                     </div>
                     
                     <div class="card-footer">

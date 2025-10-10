@@ -21,7 +21,7 @@
         <h2 class="confirmation-title">¿Está seguro de realizar esta acción?</h2>
         <p class="confirmation-message">
             Se eliminará permanentemente el aprendiz #<?php echo $aprendiz->idAprendiz ?>,
-            aprendiz <?php echo $aprendiz->nombre ?>
+            aprendiz <?php echo $aprendiz->nombres ?> <?php echo $aprendiz->apellidos ?>
         </p>
         
         <form action="/aprendiz/remove" method="post">

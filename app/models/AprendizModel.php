@@ -9,9 +9,13 @@ require_once MAIN_APP_ROUTE."../models/BaseModel.php";
 class AprendizModel extends BaseModel {
     public function __construct(
         ?int $idAprendiz = null,
-        ?string $nombre = null,
-        ?string $email = null,
+        ?string $tipoDocumento = null,
+        ?string $documento = null,
+        ?string $nombres = null,
+        ?string $apellidos = null,
         ?string $telefono = null,
+        ?string $email = null,
+        ?string $estado = null,
         ?string $trimestre = null,
         ?string $fkIdGrupo = null
     ) {
@@ -20,22 +24,21 @@ class AprendizModel extends BaseModel {
         parent::__construct();
     }
 
-    public function saveAprendiz($nombre, $email, $telefono, $trimestre, $fkIdGrupo) {
+    public function saveAprendiz($tipoDocumento, $documento, $nombres, $apellidos, $telefono, $email, $estado, $trimestre, $fkIdGrupo) {
         try {
-            $sql = "INSERT INTO $this->table (nombre, email, telefono, trimestre, fkIdGrupo) 
-                    VALUES (:nombre, :email, :telefono, :trimestre, :fkIdGrupo)";
+            $sql = "INSERT INTO $this->table (tipoDocumento, documento, nombres, apellidos, telefono, email, estado, trimestre, fkIdGrupo) 
+                    VALUES (:tipoDocumento, :documento, :nombres, :apellidos, :telefono, :email, :estado, :trimestre, :fkIdGrupo)";
             // 1. Se prepara la consulta
             $statement = $this->dbConnection->prepare($sql);
-            // $nombre = $this->nombre ?? '';         // Estos datos es opcional
-            // $email = $this->email ?? '';
-            // $telefono = $this->telefono ?? '';
-            // $trimestre = $this->trimestre ?? '';
-            // $fkIdGrupo = $this->fkIdGrupo ?? '';
 
             // 2. BindParam para sanitizar los datos de entrada
-            $statement->bindParam('nombre', $nombre, PDO::PARAM_STR);
-            $statement->bindParam('email', $email, PDO::PARAM_STR);
+            $statement->bindParam('tipoDocumento', $tipoDocumento, PDO::PARAM_STR);
+            $statement->bindParam('documento', $documento, PDO::PARAM_STR);
+            $statement->bindParam('nombres', $nombres, PDO::PARAM_STR);
+            $statement->bindParam('apellidos', $apellidos, PDO::PARAM_STR);
             $statement->bindParam('telefono', $telefono, PDO::PARAM_STR);
+            $statement->bindParam('email', $email, PDO::PARAM_STR);
+            $statement->bindParam('estado', $estado, PDO::PARAM_STR);
             $statement->bindParam('trimestre', $trimestre, PDO::PARAM_STR);
             $statement->bindParam('fkIdGrupo', $fkIdGrupo, PDO::PARAM_INT);
 
@@ -44,6 +47,23 @@ class AprendizModel extends BaseModel {
             return $result;
         } catch (PDOException $ex) {
             echo "Error al guardar el aprendiz> ".$ex->getMessage();
+        }
+    }
+
+    // Método para obtener todos los aprendices con información del grupo y programa de formación
+    public function getAllWithGrupo() {
+        try {
+            $sql = "SELECT aprendiz.*, grupo.ficha AS fichaGrupo, programaformacion.nombre AS nombrePrograma 
+                    FROM aprendiz 
+                    INNER JOIN grupo ON aprendiz.fkIdGrupo = grupo.idGrupo
+                    INNER JOIN programaformacion ON grupo.fkIdProgramaFormacion = programaformacion.idProgramaFormacion";
+            $statement = $this->dbConnection->prepare($sql);
+            $statement->execute();
+            $result = $statement->fetchAll(PDO::FETCH_OBJ);
+            return $result;
+        } catch (PDOException $ex) {
+            echo "Error al obtener los aprendices con grupo: " . $ex->getMessage();
+            return [];
         }
     }
 
@@ -64,20 +84,28 @@ class AprendizModel extends BaseModel {
         }
     }
 
-    public function editAprendiz($id, $nombre, $email, $telefono, $trimestre, $fkIdGrupo) {
+    public function editAprendiz($id, $tipoDocumento, $documento, $nombres, $apellidos, $telefono, $email, $estado, $trimestre, $fkIdGrupo) {
         try {
             $sql = "UPDATE $this->table SET 
-                        nombre=:nombre, 
-                        email=:email, 
+                        tipoDocumento=:tipoDocumento, 
+                        documento=:documento, 
+                        nombres=:nombres, 
+                        apellidos=:apellidos, 
                         telefono=:telefono, 
+                        email=:email, 
+                        estado=:estado, 
                         trimestre=:trimestre, 
                         fkIdGrupo=:fkIdGrupo 
                     WHERE idAprendiz=:id";
             $statement = $this->dbConnection->prepare($sql);
             $statement->bindParam(":id", $id, PDO::PARAM_INT);
-            $statement->bindParam(":nombre", $nombre, PDO::PARAM_STR);
-            $statement->bindParam(":email", $email, PDO::PARAM_STR);
+            $statement->bindParam(":tipoDocumento", $tipoDocumento, PDO::PARAM_STR);
+            $statement->bindParam(":documento", $documento, PDO::PARAM_STR);
+            $statement->bindParam(":nombres", $nombres, PDO::PARAM_STR);
+            $statement->bindParam(":apellidos", $apellidos, PDO::PARAM_STR);
             $statement->bindParam(":telefono", $telefono, PDO::PARAM_STR);
+            $statement->bindParam(":email", $email, PDO::PARAM_STR);
+            $statement->bindParam(":estado", $estado, PDO::PARAM_STR);
             $statement->bindParam(":trimestre", $trimestre, PDO::PARAM_STR);
             $statement->bindParam(":fkIdGrupo", $fkIdGrupo, PDO::PARAM_INT);
             $result = $statement->execute();

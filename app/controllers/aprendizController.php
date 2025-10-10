@@ -30,7 +30,7 @@ class AprendizController extends BaseController {
     public function view() {
         // Llamamos al modelo de Aprendiz
         $aprendizObj = new AprendizModel();
-        $aprendices = $aprendizObj->getAll();
+        $aprendices = $aprendizObj->getAllWithGrupo();   // Llamamos funcion para capturar grupo
 
         // Obtener información del usuario y rol para el card icon user cerrar sesion
         $rolNombre = "Usuario";
@@ -49,7 +49,7 @@ class AprendizController extends BaseController {
         
         // Llamamos a la vista
         $data = [
-            "title"     => "Aprendices",
+            "title"     => '<i class="fas fa-user-graduate"></i> Aprendices',
             "aprendices" => $aprendices,
             "nombreUsuario" => $nombreUsuario,   // Enviamos datos para el card icon user cerrar sesion
             "rolUsuario" => $rolNombre
@@ -88,12 +88,17 @@ class AprendizController extends BaseController {
     }
 
     public function createAprendiz() {
-        if (isset($_POST['txtNombre']) && isset($_POST['txtEmail']) && isset($_POST['txtTelefono']) && 
-            isset($_POST['txtTrimestre']) && isset($_POST['txtFkIdGrupo'])) {
+        if (isset($_POST['txtTipoDocumento']) && isset($_POST['txtDocumento']) && isset($_POST['txtNombres']) && 
+            isset($_POST['txtApellidos']) && isset($_POST['txtTelefono']) && isset($_POST['txtEmail']) && 
+            isset($_POST['txtEstado']) && isset($_POST['txtTrimestre']) && isset($_POST['txtFkIdGrupo'])) {
             
-            $nombre = $_POST['txtNombre'] ?? null;
-            $email = $_POST['txtEmail'] ?? null;
+            $tipoDocumento = $_POST['txtTipoDocumento'] ?? null;
+            $documento = $_POST['txtDocumento'] ?? null;
+            $nombres = $_POST['txtNombres'] ?? null;
+            $apellidos = $_POST['txtApellidos'] ?? null;
             $telefono = $_POST['txtTelefono'] ?? null;
+            $email = $_POST['txtEmail'] ?? null;
+            $estado = $_POST['txtEstado'] ?? null;
             $trimestre = $_POST['txtTrimestre'] ?? null;
             $fkIdGrupo = $_POST['txtFkIdGrupo'] ?? null;
 
@@ -101,7 +106,7 @@ class AprendizController extends BaseController {
             $aprendizObj = new AprendizModel();
             
             // Se llama al método que guarda en la base de datos
-            $aprendizObj->saveAprendiz($nombre, $email, $telefono, $trimestre, $fkIdGrupo);
+            $aprendizObj->saveAprendiz($tipoDocumento, $documento, $nombres, $apellidos, $telefono, $email, $estado, $trimestre, $fkIdGrupo);
             $this->redirectTo("aprendiz/view");
         } else {
             echo "No se capturaron todos los datos del aprendiz";
@@ -168,18 +173,24 @@ class AprendizController extends BaseController {
     }
 
     public function updateAprendiz() {
-        if (isset($_POST['txtId']) && isset($_POST['txtNombre']) && isset($_POST['txtEmail']) && 
-            isset($_POST['txtTelefono']) && isset($_POST['txtTrimestre']) && isset($_POST['txtFkIdGrupo'])) {
+        if (isset($_POST['txtId']) && isset($_POST['txtTipoDocumento']) && isset($_POST['txtDocumento']) && 
+            isset($_POST['txtNombres']) && isset($_POST['txtApellidos']) && isset($_POST['txtTelefono']) && 
+            isset($_POST['txtEmail']) && isset($_POST['txtEstado']) && isset($_POST['txtTrimestre']) && 
+            isset($_POST['txtFkIdGrupo'])) {
             
             $id = $_POST['txtId'] ?? null;
-            $nombre = $_POST['txtNombre'] ?? null;
-            $email = $_POST['txtEmail'] ?? null;
+            $tipoDocumento = $_POST['txtTipoDocumento'] ?? null;
+            $documento = $_POST['txtDocumento'] ?? null;
+            $nombres = $_POST['txtNombres'] ?? null;
+            $apellidos = $_POST['txtApellidos'] ?? null;
             $telefono = $_POST['txtTelefono'] ?? null;
+            $email = $_POST['txtEmail'] ?? null;
+            $estado = $_POST['txtEstado'] ?? null;
             $trimestre = $_POST['txtTrimestre'] ?? null;
             $fkIdGrupo = $_POST['txtFkIdGrupo'] ?? null;
 
             $aprendizObj = new AprendizModel();
-            $respuesta = $aprendizObj->editAprendiz($id, $nombre, $email, $telefono, $trimestre, $fkIdGrupo);
+            $respuesta = $aprendizObj->editAprendiz($id, $tipoDocumento, $documento, $nombres, $apellidos, $telefono, $email, $estado, $trimestre, $fkIdGrupo);
         }
         header("location: /aprendiz/view");
     }

@@ -12,8 +12,8 @@
                 // echo "<pre>";
                 echo "<div class='record-one'>
                         <div class='record-one__header'>
-                            <div class='record-one__icon'>📝</div>
-                            <div class='record-one__title'>Detalle del aprendiz</div>
+                            <div class='record-one__icon'>👨‍🎓</div>
+                            <div class='record-one__title'>Detalle del Aprendiz</div>
                         </div>
                         <div class='record-one__details'>
                             <div class='record-one__row'>
@@ -21,16 +21,32 @@
                                 <span class='record-one__value'>$aprendiz->idAprendiz</span>
                             </div>
                             <div class='record-one__row'>
-                                <span class='record-one__label'>Nombre:</span>
-                                <span class='record-one__value'>$aprendiz->nombre</span>
+                                <span class='record-one__label'>Tipo Documento:</span>
+                                <span class='record-one__value'>" . ($aprendiz->tipoDocumento ?? 'No especificado') . "</span>
+                            </div>
+                            <div class='record-one__row'>
+                                <span class='record-one__label'>Documento:</span>
+                                <span class='record-one__value'>" . ($aprendiz->documento ?? 'No especificado') . "</span>
+                            </div>
+                            <div class='record-one__row'>
+                                <span class='record-one__label'>Nombres:</span>
+                                <span class='record-one__value'>" . ($aprendiz->nombres ?? 'No especificado') . "</span>
+                            </div>
+                            <div class='record-one__row'>
+                                <span class='record-one__label'>Apellidos:</span>
+                                <span class='record-one__value'>" . ($aprendiz->apellidos ?? 'No especificado') . "</span>
+                            </div>
+                            <div class='record-one__row'>
+                                <span class='record-one__label'>Teléfono:</span>
+                                <span class='record-one__value'>$aprendiz->telefono</span>
                             </div>
                             <div class='record-one__row'>
                                 <span class='record-one__label'>Email:</span>
                                 <span class='record-one__value'>$aprendiz->email</span>
                             </div>
                             <div class='record-one__row'>
-                                <span class='record-one__label'>Teléfono:</span>
-                                <span class='record-one__value'>$aprendiz->telefono</span>
+                                <span class='record-one__label'>Estado:</span>
+                                <span class='record-one__value'>" . ($aprendiz->estado ?? 'No especificado') . "</span>
                             </div>
                             <div class='record-one__row'>
                                 <span class='record-one__label'>Trimestre:</span>

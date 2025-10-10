@@ -30,7 +30,7 @@ class GrupoController extends BaseController {
     public function view() {
         // Llamamos al modelo de Grupo
         $grupoObj = new GrupoModel();
-        $grupos = $grupoObj->getAllWithPrograma();
+        $grupos = $grupoObj->getAllWithPrograma();    // Llamamos funcion para capturar programa
 
         // Obtener información del usuario y rol para el card icon user cerrar sesion
         $rolNombre = "Usuario";

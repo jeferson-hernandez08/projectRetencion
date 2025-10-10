@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 09-10-2025 a las 21:15:28
+-- Tiempo de generación: 10-10-2025 a las 02:14:50
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -29,8 +29,12 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `aprendiz` (
   `idAprendiz` int(11) NOT NULL,
-  `nombre` varchar(50) NOT NULL,
+  `tipoDocumento` varchar(50) DEFAULT NULL,
+  `documento` varchar(50) DEFAULT NULL,
+  `nombres` varchar(50) DEFAULT NULL,
+  `apellidos` varchar(50) DEFAULT NULL,
   `email` varchar(50) NOT NULL,
+  `estado` varchar(45) DEFAULT NULL,
   `telefono` varchar(20) NOT NULL,
   `trimestre` varchar(20) NOT NULL,
   `fkIdGrupo` int(11) NOT NULL
@@ -40,13 +44,13 @@ CREATE TABLE `aprendiz` (
 -- Volcado de datos para la tabla `aprendiz`
 --
 
-INSERT INTO `aprendiz` (`idAprendiz`, `nombre`, `email`, `telefono`, `trimestre`, `fkIdGrupo`) VALUES
-(2, 'Juan Jose Posada', 'juan@gmail.com', '3245678978', '7', 10),
-(3, 'Juan Esteban Calle', 'juan@gmail.com', '3127827845', '5', 10),
-(4, 'Daniel Duque', 'dani@gmail.com', '3127827845', '6', 11),
-(6, 'Angie Rios', 'angie@gmail.com', '3245678978', '5', 11),
-(7, 'Daniel Gallego', 'daniel@gmail.com', '3245678978', '8', 13),
-(11, 'David Aguapacha', 'david@gmail.com', '3245768907', '4', 10);
+INSERT INTO `aprendiz` (`idAprendiz`, `tipoDocumento`, `documento`, `nombres`, `apellidos`, `email`, `estado`, `telefono`, `trimestre`, `fkIdGrupo`) VALUES
+(2, NULL, NULL, 'Juan Jose Posada', NULL, 'juan@gmail.com', NULL, '3245678978', '7', 10),
+(3, NULL, NULL, 'Juan Esteban Calle', NULL, 'juan@gmail.com', NULL, '3127827845', '5', 10),
+(4, NULL, NULL, 'Daniel Duque', NULL, 'dani@gmail.com', NULL, '3127827845', '6', 11),
+(6, NULL, NULL, 'Angie Rios', NULL, 'angie@gmail.com', NULL, '3245678978', '5', 11),
+(7, NULL, NULL, 'Daniel Gallego', NULL, 'daniel@gmail.com', NULL, '3245678978', '8', 13),
+(11, NULL, NULL, 'David Aguapacha', NULL, 'david@gmail.com', NULL, '3245768907', '4', 10);
 
 -- --------------------------------------------------------
 
@@ -182,10 +186,11 @@ CREATE TABLE `grupo` (
 --
 
 INSERT INTO `grupo` (`idGrupo`, `ficha`, `inicioLectiva`, `finLectiva`, `inicioPractica`, `finPractica`, `nombreGestor`, `jornada`, `modalidad`, `fkIdProgramaFormacion`) VALUES
-(10, '2873711', '2024-01-28', '2025-10-22', '2025-10-22', '2026-04-22', 'Julian Salazar', 'Diurna', 'Presencial', 1),
-(11, '299200', '0000-00-00', '0000-00-00', '0000-00-00', '0000-00-00', '', 'Mixta', 'Presencial', 3),
-(13, '2873456', NULL, NULL, NULL, NULL, NULL, 'Diurna', 'Presencial', 5),
-(15, '299299', NULL, NULL, NULL, NULL, NULL, 'Diurna', 'Presencial', 6);
+(10, '2873711', '2024-01-28', '2025-10-20', '2025-10-22', '2026-04-22', 'Julian Salazar', 'Diurna', 'Presencial', 1),
+(11, '299200', '0000-00-00', '0000-00-00', '0000-00-00', '0000-00-00', 'Oscar Aristizábal ', 'Mixta', 'Presencial', 3),
+(13, '2873456', '0000-00-00', '0000-00-00', '0000-00-00', '0000-00-00', 'German Estrada', 'Diurna', 'Presencial', 5),
+(15, '299299', NULL, NULL, NULL, NULL, NULL, 'Diurna', 'Presencial', 6),
+(17, '2345000', '2025-10-09', '2026-07-09', '2027-11-18', '2028-02-02', 'Sandra Gutierrez', 'Mixta', 'Presencial', 10);
 
 -- --------------------------------------------------------
 
@@ -456,7 +461,7 @@ ALTER TABLE `estrategias`
 -- AUTO_INCREMENT de la tabla `grupo`
 --
 ALTER TABLE `grupo`
-  MODIFY `idGrupo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `idGrupo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT de la tabla `intervencion`
