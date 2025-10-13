@@ -126,4 +126,19 @@ class AprendizModel extends BaseModel {
             echo "No se pudo eliminar el aprendiz".$ex->getMessage();
         }
     }
+
+    // Funcion para verificar importacion excel que no este repetido
+    public function getAprendizPorDocumento($documento) {
+        try {
+            $sql = "SELECT * FROM aprendiz WHERE documento = ? LIMIT 1";
+            $stmt = $this->dbConnection->prepare($sql);
+            $stmt->execute([$documento]);
+            return $stmt->fetch(PDO::FETCH_OBJ);
+        } catch (PDOException $e) {
+            error_log("Error en getAprendizPorDocumento: " . $e->getMessage());
+            return false;
+        }
+    }
+
+
 }

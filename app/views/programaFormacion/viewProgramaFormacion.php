@@ -304,6 +304,7 @@
     background: #d1ecf1;
     border: 1px solid #bee5eb;
     color: #0c5460;
+    overflow: auto;
 }
 
 .alert-success {

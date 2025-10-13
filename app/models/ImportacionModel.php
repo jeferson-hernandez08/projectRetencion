@@ -59,6 +59,7 @@ class ImportacionModel {
                 $nivel = trim($fila[1] ?? '');
                 $version = trim($fila[2] ?? '');
                 
+                //======= Aquí para validar que dato es obligatorio Excel ======//
                 // Validar que al menos el nombre esté presente
                 if (empty($nombre)) {
                     $errores[] = "Fila " . ($i + 1) . ": El nombre del programa es obligatorio";
@@ -148,6 +149,7 @@ class ImportacionModel {
                 $modalidad = trim($fila[7] ?? '');
                 $fkIdProgramaFormacion = trim($fila[8] ?? '');
                 
+                //======= Aquí para validar que dato es obligatorio Excel ======//
                 // Validar que al menos la ficha esté presente
                 if (empty($ficha)) {
                     $errores[] = "Fila " . ($i + 1) . ": La ficha del grupo es obligatoria";
@@ -226,52 +228,125 @@ class ImportacionModel {
     
     // Método para procesar Aprendices desde Excel
     public function procesarExcelAprendiz($archivo) {
-        $datos = $this->excelReader->leerArchivo($archivo['tmp_name']);
-        $registrosProcesados = 0;
-        $errores = [];
-        
-        for ($i = 1; $i < count($datos); $i++) {
-            $fila = $datos[$i];
+        try {
+            // Validaciones del archivo
+            if ($archivo['error'] !== UPLOAD_ERR_OK) {
+                throw new \Exception("Error en la subida del archivo. Código: " . $archivo['error']);
+            }
             
-            if (empty($fila[0])) continue;
+            // Validar extensión del archivo
+            $extension = strtolower(pathinfo($archivo['name'], PATHINFO_EXTENSION));
+            if (!in_array($extension, ['xlsx', 'xls'])) {
+                throw new \Exception("Tipo de archivo no válido. Solo se permiten archivos Excel (.xlsx, .xls)");
+            }
             
-            $aprendiz = [
-                'tipoDocumento' => $fila[0] ?? '',
-                'documento' => $fila[1] ?? '',
-                'nombres' => $fila[2] ?? '',
-                'apellidos' => $fila[3] ?? '',
-                'email' => $fila[4] ?? '',
-                'estado' => $fila[5] ?? 'En formación',
-                'telefono' => $fila[6] ?? '',
-                'trimestre' => $fila[7] ?? '',
-                'fkIdGrupo' => $fila[8] ?? ''
+            error_log("Procesando archivo aprendiz: " . $archivo['name']);
+            
+            $datos = $this->excelReader->leerArchivo($archivo['tmp_name']);
+            
+            if (empty($datos)) {
+                throw new \Exception("El archivo está vacío o no se pudieron leer los datos");
+            }
+            
+            error_log("Datos leídos: " . count($datos) . " filas");
+            
+            $registrosProcesados = 0;
+            $errores = [];
+            
+            // Saltar encabezados (primera fila)
+            for ($i = 1; $i < count($datos); $i++) {
+                $fila = $datos[$i];
+                
+                // Saltar filas completamente vacías
+                if (empty(array_filter($fila, function($value) { 
+                    return $value !== null && $value !== ''; 
+                }))) {
+                    continue;
+                }
+                
+                $tipoDocumento = trim($fila[0] ?? '');
+                $documento = trim($fila[1] ?? '');
+                $nombres = trim($fila[2] ?? '');
+                $apellidos = trim($fila[3] ?? '');
+                $email = trim($fila[4] ?? '');
+                $estado = trim($fila[5] ?? 'En formación');
+                $telefono = trim($fila[6] ?? '');
+                $trimestre = trim($fila[7] ?? '');
+                $fkIdGrupo = trim($fila[8] ?? '');
+                
+                //======= Aquí para validar que dato es obligatorio Excel ======//
+                // Validar que al menos el tipo documento esté presente
+                if (empty($tipoDocumento)) {
+                    $errores[] = "Fila " . ($i + 1) . ": El tipo de documento es obligatorio";
+                    continue;
+                }
+
+                // Validar que al menos el documento esté presente
+                if (empty($documento)) {
+                    $errores[] = "Fila " . ($i + 1) . ": El documento del aprendiz es obligatorio";
+                    continue;
+                }
+
+                // Validar que al menos el nombre esté presente
+                if (empty($nombres)) {
+                    $errores[] = "Fila " . ($i + 1) . ": El nombre del aprendiz es obligatorio";
+                    continue;
+                }
+
+                // Validar que al menos el apellido esté presente
+                if (empty($apellidos)) {
+                    $errores[] = "Fila " . ($i + 1) . ": El apellido del aprendiz es obligatorio";
+                    continue;
+                }
+                
+                // Validar que el grupo exista
+                if (empty($fkIdGrupo)) {
+                    $errores[] = "Fila " . ($i + 1) . ": El ID del grupo es obligatorio";
+                    continue;
+                }
+                
+                try {
+                    $aprendizModel = new AprendizModel();
+                    
+                    // Verificar si el aprendiz ya existe por documento
+                    $existe = $aprendizModel->getAprendizPorDocumento($documento);
+                    if ($existe) {
+                        $errores[] = "Fila " . ($i + 1) . ": El aprendiz con documento '{$documento}' ya existe";
+                        continue;
+                    }
+                    
+                    // Validar que el grupo exista en la base de datos
+                    $grupoModel = new GrupoModel();
+                    $grupoExiste = $grupoModel->getGrupo($fkIdGrupo);
+                    if (!$grupoExiste) {
+                        $errores[] = "Fila " . ($i + 1) . ": El grupo con ID '{$fkIdGrupo}' no existe";
+                        continue;
+                    }
+                    
+                    // Guardar el aprendiz
+                    if ($aprendizModel->saveAprendiz($tipoDocumento, $documento, $nombres, $apellidos, $telefono, $email, $estado, $trimestre, $fkIdGrupo)) {
+                        $registrosProcesados++;
+                        error_log("Aprendiz guardado: " . $documento);
+                    } else {
+                        $errores[] = "Fila " . ($i + 1) . ": No se pudo guardar el aprendiz '{$documento}'";
+                    }
+                } catch (\Exception $e) {
+                    $errores[] = "Fila " . ($i + 1) . ": " . $e->getMessage();
+                    error_log("Error en fila " . ($i + 1) . ": " . $e->getMessage());
+                }
+            }
+            
+            error_log("Procesamiento completado: " . $registrosProcesados . " registros, " . count($errores) . " errores");
+            
+            return [
+                'procesados' => $registrosProcesados,
+                'errores' => $errores
             ];
             
-            try {
-                // Aquí necesitarás un método saveAprendiz en tu AprendizModel
-                $aprendizModel = new AprendizModel();
-                if ($aprendizModel->saveAprendiz(
-                    $aprendiz['tipoDocumento'],
-                    $aprendiz['documento'],
-                    $aprendiz['nombres'],
-                    $aprendiz['apellidos'],
-                    $aprendiz['email'],
-                    $aprendiz['estado'],
-                    $aprendiz['telefono'],
-                    $aprendiz['trimestre'],
-                    $aprendiz['fkIdGrupo']
-                )) {
-                    $registrosProcesados++;
-                }
-            } catch (\Exception $e) {
-                $errores[] = "Fila " . ($i + 1) . ": " . $e->getMessage();
-            }
+        } catch (\Exception $e) {
+            error_log("Error crítico en procesarExcelAprendiz: " . $e->getMessage());
+            throw $e;
         }
-        
-        return [
-            'procesados' => $registrosProcesados,
-            'errores' => $errores
-        ];
     }
     
     // Método para procesar Usuarios desde Excel

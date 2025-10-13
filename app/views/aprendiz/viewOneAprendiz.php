@@ -38,11 +38,11 @@
                             </div>
                             <div class='record-one__row'>
                                 <span class='record-one__label'>Teléfono:</span>
-                                <span class='record-one__value'>$aprendiz->telefono</span>
+                                <span class='record-one__value'>". (!empty($aprendiz->telefono) ? htmlspecialchars($aprendiz->telefono) : 'No asignado') . "</span>
                             </div>
                             <div class='record-one__row'>
                                 <span class='record-one__label'>Email:</span>
-                                <span class='record-one__value'>$aprendiz->email</span>
+                                <span class='record-one__value'>". (!empty($aprendiz->email) ? htmlspecialchars($aprendiz->email) : 'No asignado') . "</span>
                             </div>
                             <div class='record-one__row'>
                                 <span class='record-one__label'>Estado:</span>
@@ -50,7 +50,7 @@
                             </div>
                             <div class='record-one__row'>
                                 <span class='record-one__label'>Trimestre:</span>
-                                <span class='record-one__value'>$aprendiz->trimestre</span>
+                                <span class='record-one__value'>" . (!empty($aprendiz->trimestre) ? htmlspecialchars($aprendiz->trimestre) : 'No asignado') . "</span>
                             </div>
                             <div class='record-one__row'>
                                 <span class='record-one__label'>Ficha Grupo:</span>

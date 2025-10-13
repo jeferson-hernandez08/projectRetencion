@@ -223,6 +223,12 @@ return [         // Prueba cimmit | base contrller , programa formacion controll
         "controller" => "App\Controllers\aprendizController",
         "action" => "removeAprendiz"
     ],
+    // Importacion excel aprendiz
+    '/aprendiz/importarExcel' => [
+        'controller' => 'App\Controllers\aprendizController',
+        'action' => 'importarExcel'
+    ],
+    
 
     // Tabla reporte
     '/reporte/index'=> [
