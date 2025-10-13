@@ -41,6 +41,11 @@ class GrupoModel extends BaseModel {
             $statement->bindParam('jornada', $jornada, PDO::PARAM_STR);
             $statement->bindParam('modalidad', $modalidad, PDO::PARAM_STR);
             $statement->bindParam('fkIdProgramaFormacion', $fkIdProgramaFormacion, PDO::PARAM_INT);
+            // if (!empty($fkIdProgramaFormacion)) {
+            //     $statement->bindParam('fkIdProgramaFormacion', $fkIdProgramaFormacion, PDO::PARAM_INT);
+            // } else {
+            //     $statement->bindValue('fkIdProgramaFormacion', null, PDO::PARAM_NULL);
+            // }
 
             // 3. Ejecutar la consulta
             $result = $statement->execute();
@@ -126,4 +131,18 @@ class GrupoModel extends BaseModel {
             echo "No se pudo eliminar el grupo".$ex->getMessage();
         }
     }
+
+    // Funcion para verificar importacion excel que no este repetido
+    public function getGrupoPorFicha($ficha) {
+        try {
+            $sql = "SELECT * FROM grupo WHERE ficha = ? LIMIT 1";
+            $stmt = $this->dbConnection->prepare($sql);
+            $stmt->execute([$ficha]);
+            return $stmt->fetch(PDO::FETCH_OBJ);
+        } catch (PDOException $e) {
+            error_log("Error en getGrupoPorFicha: " . $e->getMessage());
+            return false;
+        }
+    }
+
 }

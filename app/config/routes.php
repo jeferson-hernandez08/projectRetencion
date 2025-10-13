@@ -180,6 +180,11 @@ return [         // Prueba cimmit | base contrller , programa formacion controll
         "controller" => "App\Controllers\grupoController",
         "action" => "removeGrupo"
     ],
+    // Importacion excel grupo
+    '/grupo/importarExcel' => [
+        'controller' => 'App\Controllers\grupoController',
+        'action' => 'importarExcel'
+    ],
 
     // Tabla aprendiz
     '/aprendiz/index'=> [

@@ -81,7 +81,7 @@
             <?php foreach ($programas as $programa): ?>
                 <div class="report-card">
                     <div class="card-header">
-                        <span class="report-id">Programa ID # <?php echo $programa->idProgramaFormacion; ?></span>
+                        <span class="report-id">ID Programa : <?php echo $programa->idProgramaFormacion; ?></span>
                     </div>
                     
                     <div class="card-body">
@@ -123,7 +123,7 @@
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    padding: 10px 20px;
+    padding: 2px 20px;
     background: #28a745;
     color: white;
     text-decoration: none;
@@ -164,6 +164,7 @@
     width: 100%;
     height: 100%;
     background-color: rgba(0,0,0,0.5);
+    /* overflow: auto; */
 }
 
 .modal-content {
@@ -184,6 +185,12 @@
     border-bottom: 1px solid #eee;
 }
 
+.modal-body {
+    padding: 20px;
+    overflow-y: auto;
+    max-height: 70vh;
+}
+
 .modal-header h3 {
     margin: 0;
     color: #2c3e50;
@@ -199,10 +206,6 @@
 
 .close:hover {
     color: #000;
-}
-
-.modal-body {
-    padding: 20px;
 }
 
 .format-table {
@@ -261,6 +264,7 @@
     display: inline-flex;
     align-items: center;
     gap: 5px;
+    transition: background-color 0.3s ease;
 }
 
 .btn-primary {
@@ -268,9 +272,26 @@
     color: white;
 }
 
+.btn-primary:hover {
+    background: #2980b9;
+}
+
 .btn-secondary {
     background: #6c757d;
     color: white;
+}
+
+.btn-secondary:hover {
+    background: #5a6268;
+}
+
+.btn-success {
+    background: #28a745;
+    color: white;
+}
+
+.btn-success:hover {
+    background: #218838;
 }
 
 .alert {
@@ -296,6 +317,39 @@
     border: 1px solid #f5c6cb;
     color: #721c24;
 }
+
+/* Estilos para el área de resultados */
+#resultado-importacion {
+    margin-top: 20px;
+}
+
+#resultado-importacion .alert {
+    word-wrap: break-word;
+}
+
+#resultado-importacion ul {
+    max-height: 150px;
+    overflow-y: auto;
+    margin-top: 10px;
+    padding-left: 20px;
+}
+
+#resultado-importacion li {
+    margin-bottom: 5px;
+    word-break: break-word;
+}
+
+.result-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+    justify-content: flex-end;
+}
+
+i.fa-file-excel {
+    font-size: 23px;
+    color: #FFFFFFFF; /* Blanco */
+}
 </style>
 
 <script>
@@ -314,11 +368,18 @@ document.addEventListener('DOMContentLoaded', function() {
         resultadoDiv.style.display = 'none';
         resultadoDiv.innerHTML = '';
         form.reset();
+        form.style.display = 'block';
     }
 
     // Función para cerrar modal
     function closeModal() {
         modal.style.display = 'none';
+    }
+
+    // Función para recargar y cerrar
+    function reloadAndClose() {
+        window.location.reload();
+        closeModal();
     }
 
     // Event listeners
@@ -361,21 +422,21 @@ document.addEventListener('DOMContentLoaded', function() {
         .then(response => response.json())
         .then(data => {
             if (data.success) {
-                resultadoDiv.innerHTML = `
+                let resultadoHTML = `
                     <div class="alert alert-success">
                         <strong>¡Importación exitosa!</strong><br>
                         Registros procesados: ${data.procesados}<br>
                         ${data.errores.length > 0 ? 
-                            `Errores: ${data.errores.length}` : 
+                            `Errores encontrados: ${data.errores.length}` : 
                             'Todos los registros se importaron correctamente.'
                         }
                     </div>
                 `;
                 
                 if (data.errores.length > 0) {
-                    resultadoDiv.innerHTML += `
+                    resultadoHTML += `
                         <div class="alert alert-danger">
-                            <strong>Errores encontrados:</strong>
+                            <strong>Detalles de errores:</strong>
                             <ul>
                                 ${data.errores.map(error => `<li>${error}</li>`).join('')}
                             </ul>
@@ -383,10 +444,22 @@ document.addEventListener('DOMContentLoaded', function() {
                     `;
                 }
                 
-                // Recargar la página después de 3 segundos para ver los nuevos datos
-                setTimeout(() => {
-                    window.location.reload();
-                }, 3000);
+                // Agregar botón Continuar
+                resultadoHTML += `
+                    <div class="result-actions">
+                        <button type="button" class="btn btn-success" id="btn-continuar">
+                            <i class="fas fa-check"></i> Continuar
+                        </button>
+                    </div>
+                `;
+                
+                resultadoDiv.innerHTML = resultadoHTML;
+                
+                // Ocultar formulario después de éxito
+                form.style.display = 'none';
+                
+                // Event listener para el botón Continuar
+                document.getElementById('btn-continuar').addEventListener('click', reloadAndClose);
                 
             } else {
                 resultadoDiv.innerHTML = `
@@ -394,7 +467,15 @@ document.addEventListener('DOMContentLoaded', function() {
                         <strong>Error en la importación:</strong><br>
                         ${data.message || 'Error desconocido'}
                     </div>
+                    <div class="result-actions">
+                        <button type="button" class="btn btn-secondary" id="btn-cerrar-error">
+                            <i class="fas fa-times"></i> Cerrar
+                        </button>
+                    </div>
                 `;
+                
+                // Event listener para el botón Cerrar en caso de error
+                document.getElementById('btn-cerrar-error').addEventListener('click', closeModal);
             }
         })
         .catch(error => {
@@ -404,7 +485,15 @@ document.addEventListener('DOMContentLoaded', function() {
                     <strong>Error de conexión:</strong><br>
                     No se pudo procesar la solicitud. Intente nuevamente.
                 </div>
+                <div class="result-actions">
+                    <button type="button" class="btn btn-secondary" id="btn-cerrar-conexion">
+                        <i class="fas fa-times"></i> Cerrar
+                    </button>
+                </div>
             `;
+            
+            // Event listener para el botón Cerrar en caso de error de conexión
+            document.getElementById('btn-cerrar-conexion').addEventListener('click', closeModal);
         });
     });
 });

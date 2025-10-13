@@ -102,52 +102,126 @@ class ImportacionModel {
     }
     
     public function procesarExcelGrupo($archivo) {
-        $datos = $this->excelReader->leerArchivo($archivo['tmp_name']);
-        $registrosProcesados = 0;
-        $errores = [];
-        
-        for ($i = 1; $i < count($datos); $i++) {
-            $fila = $datos[$i];
+        try {
+            // Validaciones del archivo
+            if ($archivo['error'] !== UPLOAD_ERR_OK) {
+                throw new \Exception("Error en la subida del archivo: " . $archivo['error']);
+            }
             
-            if (empty($fila[0])) continue;
+            // Validar extensión del archivo
+            $extension = strtolower(pathinfo($archivo['name'], PATHINFO_EXTENSION));
+            if (!in_array($extension, ['xlsx', 'xls'])) {
+                throw new \Exception("Tipo de archivo no válido. Solo se permiten archivos Excel (.xlsx, .xls)");
+            }
             
-            $grupo = [
-                'ficha' => $fila[0] ?? '',
-                'inicioLectiva' => $this->excelReader->formatearFechaExcel($fila[1] ?? ''),
-                'finLectiva' => $this->excelReader->formatearFechaExcel($fila[2] ?? ''),
-                'inicioPractica' => $this->excelReader->formatearFechaExcel($fila[3] ?? ''),
-                'finPractica' => $this->excelReader->formatearFechaExcel($fila[4] ?? ''),
-                'nombreGestor' => $fila[5] ?? '',
-                'jornada' => $fila[6] ?? '',
-                'modalidad' => $fila[7] ?? '',
-                'fkIdProgramaFormacion' => $fila[8] ?? ''
+            error_log("Procesando archivo grupo: " . $archivo['name']);
+            
+            $datos = $this->excelReader->leerArchivo($archivo['tmp_name']);
+            
+            if (empty($datos)) {
+                throw new \Exception("El archivo está vacío o no se pudieron leer los datos");
+            }
+            
+            error_log("Datos leídos: " . count($datos) . " filas");
+            
+            $registrosProcesados = 0;
+            $errores = [];
+            
+            // Saltar encabezados (primera fila)
+            for ($i = 1; $i < count($datos); $i++) {
+                $fila = $datos[$i];
+                
+                // Saltar filas completamente vacías
+                if (empty(array_filter($fila, function($value) { 
+                    return $value !== null && $value !== ''; 
+                }))) {
+                    continue;
+                }
+                
+                $ficha = trim($fila[0] ?? '');
+                $inicioLectiva = trim($fila[1] ?? '');
+                $finLectiva = trim($fila[2] ?? '');
+                $inicioPractica = trim($fila[3] ?? '');
+                $finPractica = trim($fila[4] ?? '');
+                $nombreGestor = trim($fila[5] ?? '');
+                $jornada = trim($fila[6] ?? '');
+                $modalidad = trim($fila[7] ?? '');
+                $fkIdProgramaFormacion = trim($fila[8] ?? '');
+                
+                // Validar que al menos la ficha esté presente
+                if (empty($ficha)) {
+                    $errores[] = "Fila " . ($i + 1) . ": La ficha del grupo es obligatoria";
+                    continue;
+                }
+                
+                
+                // Validar que el programa de formación exista solo si se proporcionó
+                // if (!empty($fkIdProgramaFormacion)) {
+                //     $programaModel = new ProgramaFormacionModel();
+                //     $programaExiste = $programaModel->getProgramaFormacion($fkIdProgramaFormacion);
+                //     if (!$programaExiste) {
+                //         $errores[] = "Fila " . ($i + 1) . ": El programa de formación con ID '{$fkIdProgramaFormacion}' no existe";
+                //         continue;
+                //     }
+                // } else {
+                //     // Si está vacío, lo dejamos en NULL para el insert
+                //     $fkIdProgramaFormacion = null;
+                // }
+
+                // Validar que el programa de formación exista
+                if (empty($fkIdProgramaFormacion)) {
+                    $errores[] = "Fila " . ($i + 1) . ": El ID del programa de formación es obligatorio";
+                    continue;
+                }
+                
+                try {
+                    $grupoModel = new GrupoModel();
+                    
+                    // Verificar si el grupo ya existe por ficha
+                    $existe = $grupoModel->getGrupoPorFicha($ficha);
+                    if ($existe) {
+                        $errores[] = "Fila " . ($i + 1) . ": El grupo con ficha '{$ficha}' ya existe";
+                        continue;
+                    }
+                    
+                    // Convertir fechas si es necesario
+                    $inicioLectiva = $this->excelReader->formatearFechaExcel($inicioLectiva);
+                    $finLectiva = $this->excelReader->formatearFechaExcel($finLectiva);
+                    $inicioPractica = $this->excelReader->formatearFechaExcel($inicioPractica);
+                    $finPractica = $this->excelReader->formatearFechaExcel($finPractica);
+                    
+                    // Validar que el programa de formación exista en la base de datos
+                    $programaModel = new ProgramaFormacionModel();
+                    $programaExiste = $programaModel->getProgramaFormacion($fkIdProgramaFormacion);
+                    if (!$programaExiste) {
+                        $errores[] = "Fila " . ($i + 1) . ": El programa de formación con ID '{$fkIdProgramaFormacion}' no existe";
+                        continue;
+                    }
+                    
+                    // Guardar el grupo
+                    if ($grupoModel->saveGrupo($ficha, $inicioLectiva, $finLectiva, $inicioPractica, $finPractica, $nombreGestor, $jornada, $modalidad, $fkIdProgramaFormacion)) {
+                        $registrosProcesados++;
+                        error_log("Grupo guardado: " . $ficha);
+                    } else {
+                        $errores[] = "Fila " . ($i + 1) . ": No se pudo guardar el grupo '{$ficha}'";
+                    }
+                } catch (\Exception $e) {
+                    $errores[] = "Fila " . ($i + 1) . ": " . $e->getMessage();
+                    error_log("Error en fila " . ($i + 1) . ": " . $e->getMessage());
+                }
+            }
+            
+            error_log("Procesamiento completado: " . $registrosProcesados . " registros, " . count($errores) . " errores");
+            
+            return [
+                'procesados' => $registrosProcesados,
+                'errores' => $errores
             ];
             
-            try {
-                // Aquí necesitarás un método saveGrupo en tu GrupoModel
-                $grupoModel = new GrupoModel();
-                if ($grupoModel->saveGrupo(
-                    $grupo['ficha'],
-                    $grupo['inicioLectiva'],
-                    $grupo['finLectiva'],
-                    $grupo['inicioPractica'],
-                    $grupo['finPractica'],
-                    $grupo['nombreGestor'],
-                    $grupo['jornada'],
-                    $grupo['modalidad'],
-                    $grupo['fkIdProgramaFormacion']
-                )) {
-                    $registrosProcesados++;
-                }
-            } catch (\Exception $e) {
-                $errores[] = "Fila " . ($i + 1) . ": " . $e->getMessage();
-            }
+        } catch (\Exception $e) {
+            error_log("Error crítico en procesarExcelGrupo: " . $e->getMessage());
+            throw $e;
         }
-        
-        return [
-            'procesados' => $registrosProcesados,
-            'errores' => $errores
-        ];
     }
     
     // Método para procesar Aprendices desde Excel
