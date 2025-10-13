@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 12-10-2025 a las 17:59:55
+-- Tiempo de generación: 13-10-2025 a las 23:01:54
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -29,14 +29,14 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `aprendiz` (
   `idAprendiz` int(11) NOT NULL,
-  `tipoDocumento` varchar(50) DEFAULT NULL,
-  `documento` varchar(50) DEFAULT NULL,
-  `nombres` varchar(50) DEFAULT NULL,
-  `apellidos` varchar(50) DEFAULT NULL,
-  `email` varchar(50) NOT NULL,
+  `tipoDocumento` varchar(50) NOT NULL,
+  `documento` varchar(50) NOT NULL,
+  `nombres` varchar(50) NOT NULL,
+  `apellidos` varchar(50) NOT NULL,
+  `email` varchar(50) DEFAULT NULL,
   `estado` varchar(45) DEFAULT NULL,
-  `telefono` varchar(20) NOT NULL,
-  `trimestre` varchar(20) NOT NULL,
+  `telefono` varchar(20) DEFAULT NULL,
+  `trimestre` varchar(20) DEFAULT NULL,
   `fkIdGrupo` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
@@ -47,10 +47,10 @@ CREATE TABLE `aprendiz` (
 INSERT INTO `aprendiz` (`idAprendiz`, `tipoDocumento`, `documento`, `nombres`, `apellidos`, `email`, `estado`, `telefono`, `trimestre`, `fkIdGrupo`) VALUES
 (2, 'CC', '1234567', 'Juan Jose ', 'Posada', 'juan@gmail.com', 'En formación', '3245678978', '7', 10),
 (3, 'TI', '123456', 'Juan Esteban ', 'Calle', 'juan@gmail.com', 'En formación', '3127827845', '5', 10),
-(4, NULL, NULL, 'Daniel Duque', NULL, 'dani@gmail.com', NULL, '3127827845', '6', 11),
-(6, NULL, NULL, 'Angie Rios', NULL, 'angie@gmail.com', NULL, '3245678978', '5', 11),
-(7, NULL, NULL, 'Daniel Gallego', NULL, 'daniel@gmail.com', NULL, '3245678978', '8', 13),
-(11, NULL, NULL, 'David Aguapacha', NULL, 'david@gmail.com', NULL, '3245768907', '4', 10),
+(4, 'TI', '123456', 'Daniel ', 'Duque', 'dani@gmail.com', 'En formación', '3127827845', '6', 11),
+(6, 'CC', '123456', 'Angie ', 'Rios', 'angie@gmail.com', 'En formación', '3245678978', '5', 11),
+(7, 'TI', '10557653478', 'Daniel Gallego', 'Gallego', 'daniel@gmail.com', 'En formación', '3245678978', '8', 13),
+(11, 'CC', '1234567', 'David ', 'Aguapacha', 'david@gmail.com', 'En formación', '3245768907', '4', 10),
 (13, 'CC', '12345678', 'Juan Manuel', 'Zuluaga', 'zuluaga@gmail.com', 'En formación', '3145679867', '2', 11);
 
 -- --------------------------------------------------------
@@ -191,7 +191,10 @@ INSERT INTO `grupo` (`idGrupo`, `ficha`, `inicioLectiva`, `finLectiva`, `inicioP
 (11, '299200', '0000-00-00', '0000-00-00', '0000-00-00', '0000-00-00', 'Oscar Aristizábal ', 'Mixta', 'Presencial', 3),
 (13, '2873456', '0000-00-00', '0000-00-00', '0000-00-00', '0000-00-00', 'German Estrada', 'Diurna', 'Presencial', 5),
 (15, '299299', NULL, NULL, NULL, NULL, NULL, 'Diurna', 'Presencial', 6),
-(17, '2345000', '2025-10-09', '2026-07-09', '2027-11-18', '2028-02-02', 'Sandra Gutierrez', 'Mixta', 'Presencial', 10);
+(17, '2345000', '2025-10-09', '2026-07-09', '2027-11-18', '2028-02-02', 'Sandra Gutierrez', 'Mixta', 'Presencial', 10),
+(31, '20038390', '0000-00-00', '0000-00-00', '0000-00-00', '0000-00-00', 'Cristian Mauricio', 'Diurna', 'Presencial', 1),
+(32, '2822225', '0000-00-00', '0000-00-00', '0000-00-00', '0000-00-00', 'Andres Mauricio', 'Mixta', 'Presencial', 2),
+(33, '0000000', '0000-00-00', '0000-00-00', '0000-00-00', '0000-00-00', 'Oscar Aristizábal ', 'Mixta', 'Presencial', 69);
 
 -- --------------------------------------------------------
 
@@ -251,12 +254,17 @@ CREATE TABLE `programaformacion` (
 INSERT INTO `programaformacion` (`idProgramaFormacion`, `nombre`, `nivel`, `version`) VALUES
 (1, 'Análisis y Desarrollo de Software', 'Tecnólogo', '228118 V1'),
 (2, 'Mantenimiento Electrónico', 'Tecnólogo', '836138 V1'),
-(3, 'Automatización Industrial', NULL, NULL),
+(3, 'Automatización Industrial', 'Técnico', ''),
 (5, 'Mantenimiento de Equipos Biomédicos', NULL, NULL),
 (6, 'Mecánica Industrial', NULL, NULL),
 (8, 'Motores Diesel', NULL, NULL),
 (9, 'Computación CNC', NULL, NULL),
-(10, 'Automatización industrial', 'Tecnólogo', '225208 V1');
+(10, 'Automatización industrial', 'Tecnólogo', '225208 V1'),
+(69, 'CONSTRUCCION EN EDIFICACIONES', 'Tecnólogo', '223104 V1'),
+(70, 'CONSTRUCCIONES LIVIANAS INDUSTRIALIZADAS EN S', 'Técnico', '836135 V1'),
+(71, 'CONTROL DE LA SEGURIDAD DIGITAL', 'Técnico', '233103 V1'),
+(72, 'COORDINADOR DE SISTEMAS INTEGRADOS DE GESTIÓN', 'Tecnólogo', '226701 V1'),
+(75, 'CONSTRUCCIONES LIVIANAS INDUSTRIALIZADAS EN S', 'Técnico', '836135 V1');
 
 -- --------------------------------------------------------
 
@@ -317,12 +325,12 @@ INSERT INTO `rol` (`idRol`, `nombre`) VALUES
 CREATE TABLE `usuario` (
   `idUsuario` int(11) NOT NULL,
   `nombres` varchar(50) NOT NULL,
-  `apellidos` varchar(50) DEFAULT NULL,
+  `apellidos` varchar(50) NOT NULL,
   `documento` varchar(50) DEFAULT NULL,
-  `email` varchar(50) NOT NULL,
-  `password` varchar(255) NOT NULL,
-  `telefono` varchar(20) NOT NULL,
-  `tipoCoordinador` varchar(50) NOT NULL,
+  `email` varchar(50) DEFAULT NULL,
+  `password` varchar(255) DEFAULT NULL,
+  `telefono` varchar(20) DEFAULT NULL,
+  `tipoCoordinador` varchar(50) DEFAULT NULL,
   `gestor` tinyint(4) DEFAULT NULL,
   `fkIdRol` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
@@ -333,15 +341,15 @@ CREATE TABLE `usuario` (
 
 INSERT INTO `usuario` (`idUsuario`, `nombres`, `apellidos`, `documento`, `email`, `password`, `telefono`, `tipoCoordinador`, `gestor`, `fkIdRol`) VALUES
 (1, 'Julián ', 'Salazar Pineda', '12345678', 'julian@gmail.com', '$2y$10$ps.H/dPzOedlaut9zANJRunU4Bi8.ZqcQaihxDix9LIQwpUvvIyDm', '3245678978', 'No es coordinador', 1, 4),
-(3, 'Oscar Aristizabal (Ofac)', NULL, NULL, 'ofac@gmail.com', '$2y$10$7SU075MUw2xCKHirUYl.DOutJNXTRPgzE/sfRCjO.fH5zvZnbsLva', '3127827845', 'No es coordinador', 0, 4),
-(4, 'Santiago Becerra', NULL, NULL, 'santiago@gmail.com', '$2y$10$oPu/Pp7A6Q1dRycMA1S2yutr5vDrnb8TnykdSLG7MPRDgbPutK6Yi', '3127827845', 'Coordinador académico', 0, 5),
-(13, 'German Estrada', NULL, NULL, 'german@gmail.com', '$2y$10$ADHhAHdLpPrvqnLs.1sdPe.a73J9O.0YnHKaEp2PParaaFe94jaSy', '3245678978', 'No es coordinador', 0, 4),
-(17, 'Daniela Isaza ', NULL, NULL, 'daniela@gmail.com', '$2y$10$0/MtpfaRbooSN0QXBaHfmOp9qJnTxv5eOujHgK0FxxzSqiNJeVeS2', '3127827845', 'No es coordinador', 0, 4),
-(18, 'Esteban Reyes', NULL, NULL, 'reyes@gmail.com', '$2y$10$R8JK3N2RYhKpsDMyPvKFfuh5iXvM8zdtmf71X6Qs/HkL1JUt.mTei', '3124567867', 'No es coordinador', 0, 9),
-(19, 'Mariana Carvajal ', NULL, NULL, 'mariana@gmail.com', '$2y$10$EIZaWwEWbDEnRn1ebIs6NeoP5/CbwtaqmWZiK7NC3SK3qrbxHIPKq', '3245678976', 'Coordinador de formación', 0, 6),
-(20, 'Jeferson Hernandez', NULL, NULL, 'admin@gmail.com', '$2y$10$z8fF2TvCCWaZgcpdyWUqR.WvwOAcPINb1yQBCfAiTg1ypW6Ud78Ei', '3113975576', 'No es coordinador', 0, 18),
-(21, 'Sofia Ocampo ', NULL, NULL, 'sofia@gmail.com', '$2y$10$M5yI8K.tQpuV4Y2ulfN/veMpgEhtalZvrrKYgKh8exG3xICeC4GRe', '3145679867', 'Coordinador de formación', 0, 6),
-(22, 'Jeferson Hernandez Ladino', NULL, NULL, 'jefer.hernandez1@gmail.com', '$2y$10$6tfD3qtSiOvamkNueTDR7eGy3U9akp0rZLSc8sepEBrtaoAyfC2Ye', '3113975576', 'No es coordinador', 0, 4),
+(3, 'Oscar Aristizabal (Ofac)', '', NULL, 'ofac@gmail.com', '$2y$10$7SU075MUw2xCKHirUYl.DOutJNXTRPgzE/sfRCjO.fH5zvZnbsLva', '3127827845', 'No es coordinador', 0, 4),
+(4, 'Santiago Becerra', '', NULL, 'santiago@gmail.com', '$2y$10$oPu/Pp7A6Q1dRycMA1S2yutr5vDrnb8TnykdSLG7MPRDgbPutK6Yi', '3127827845', 'Coordinador académico', 0, 5),
+(13, 'German Estrada', '', NULL, 'german@gmail.com', '$2y$10$ADHhAHdLpPrvqnLs.1sdPe.a73J9O.0YnHKaEp2PParaaFe94jaSy', '3245678978', 'No es coordinador', 0, 4),
+(17, 'Daniela Isaza ', '', NULL, 'daniela@gmail.com', '$2y$10$0/MtpfaRbooSN0QXBaHfmOp9qJnTxv5eOujHgK0FxxzSqiNJeVeS2', '3127827845', 'No es coordinador', 0, 4),
+(18, 'Esteban Reyes', '', NULL, 'reyes@gmail.com', '$2y$10$R8JK3N2RYhKpsDMyPvKFfuh5iXvM8zdtmf71X6Qs/HkL1JUt.mTei', '3124567867', 'No es coordinador', 0, 9),
+(19, 'Mariana Carvajal ', '', NULL, 'mariana@gmail.com', '$2y$10$EIZaWwEWbDEnRn1ebIs6NeoP5/CbwtaqmWZiK7NC3SK3qrbxHIPKq', '3245678976', 'Coordinador de formación', 0, 6),
+(20, 'Jeferson Hernandez', '', NULL, 'admin@gmail.com', '$2y$10$z8fF2TvCCWaZgcpdyWUqR.WvwOAcPINb1yQBCfAiTg1ypW6Ud78Ei', '3113975576', 'No es coordinador', 0, 18),
+(21, 'Sofia Ocampo ', '', NULL, 'sofia@gmail.com', '$2y$10$M5yI8K.tQpuV4Y2ulfN/veMpgEhtalZvrrKYgKh8exG3xICeC4GRe', '3145679867', 'Coordinador de formación', 0, 6),
+(22, 'Jeferson Hernandez Ladino', '', NULL, 'jefer.hernandez1@gmail.com', '$2y$10$6tfD3qtSiOvamkNueTDR7eGy3U9akp0rZLSc8sepEBrtaoAyfC2Ye', '3113975576', 'No es coordinador', 0, 4),
 (24, 'Henry ', 'Daza', '1234567', 'henry@gmail.com', '$2y$10$NoeY4MOmrBnutDjPTV9bS.uKaR0XFe09Vi3Mgt9jFnpmqONEOzoyG', '3224567645', 'No es coordinador', 1, 4);
 
 --
@@ -441,7 +449,7 @@ ALTER TABLE `usuario`
 -- AUTO_INCREMENT de la tabla `aprendiz`
 --
 ALTER TABLE `aprendiz`
-  MODIFY `idAprendiz` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `idAprendiz` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
 
 --
 -- AUTO_INCREMENT de la tabla `categoria`
@@ -465,7 +473,7 @@ ALTER TABLE `estrategias`
 -- AUTO_INCREMENT de la tabla `grupo`
 --
 ALTER TABLE `grupo`
-  MODIFY `idGrupo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `idGrupo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
 
 --
 -- AUTO_INCREMENT de la tabla `intervencion`
@@ -483,7 +491,7 @@ ALTER TABLE `notificacion`
 -- AUTO_INCREMENT de la tabla `programaformacion`
 --
 ALTER TABLE `programaformacion`
-  MODIFY `idProgramaFormacion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `idProgramaFormacion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=76;
 
 --
 -- AUTO_INCREMENT de la tabla `reporte`

@@ -351,52 +351,130 @@ class ImportacionModel {
     
     // Método para procesar Usuarios desde Excel
     public function procesarExcelUsuario($archivo) {
-        $datos = $this->excelReader->leerArchivo($archivo['tmp_name']);
-        $registrosProcesados = 0;
-        $errores = [];
-        
-        for ($i = 1; $i < count($datos); $i++) {
-            $fila = $datos[$i];
+        try {
+            // Validaciones del archivo
+            if ($archivo['error'] !== UPLOAD_ERR_OK) {
+                throw new \Exception("Error en la subida del archivo. Código: " . $archivo['error']);
+            }
             
-            if (empty($fila[0])) continue;
+            // Validar extensión del archivo
+            $extension = strtolower(pathinfo($archivo['name'], PATHINFO_EXTENSION));
+            if (!in_array($extension, ['xlsx', 'xls'])) {
+                throw new \Exception("Tipo de archivo no válido. Solo se permiten archivos Excel (.xlsx, .xls)");
+            }
             
-            $usuario = [
-                'nombres' => $fila[0] ?? '',
-                'apellidos' => $fila[1] ?? '',
-                'documento' => $fila[2] ?? '',
-                'email' => $fila[3] ?? '',
-                'password' => password_hash($fila[4] ?? '123456', PASSWORD_DEFAULT),
-                'telefono' => $fila[5] ?? '',
-                'tipoCoordinador' => $fila[6] ?? 'No es coordinador',
-                'gestor' => $fila[7] ?? 0,
-                'fkIdRol' => $fila[8] ?? 4
+            error_log("Procesando archivo usuario: " . $archivo['name']);
+            
+            $datos = $this->excelReader->leerArchivo($archivo['tmp_name']);
+            
+            if (empty($datos)) {
+                throw new \Exception("El archivo está vacío o no se pudieron leer los datos");
+            }
+            
+            error_log("Datos leídos: " . count($datos) . " filas");
+            
+            $registrosProcesados = 0;
+            $errores = [];
+            
+            // Saltar encabezados (primera fila)
+            for ($i = 1; $i < count($datos); $i++) {
+                $fila = $datos[$i];
+                
+                // Saltar filas completamente vacías
+                if (empty(array_filter($fila, function($value) { 
+                    return $value !== null && $value !== ''; 
+                }))) {
+                    continue;
+                }
+                
+                $nombres = trim($fila[0] ?? '');
+                $apellidos = trim($fila[1] ?? '');
+                $documento = trim($fila[2] ?? '');
+                $email = trim($fila[3] ?? '');
+                $password = trim($fila[4] ?? '123456');
+                $telefono = trim($fila[5] ?? '');
+                $tipoCoordinador = trim($fila[6] ?? 'No es coordinador');
+                $gestor = trim($fila[7] ?? '');
+                $fkIdRol = trim($fila[8] ?? 4);
+                
+                //======= Aquí para validar que dato es obligatorio Excel ======//
+                // Validar que al menos el nombre esté presente
+                if (empty($nombres)) {
+                    $errores[] = "Fila " . ($i + 1) . ": El nombre del usuario es obligatorio";
+                    continue;
+                }
+
+                // Validar que al menos el apellido esté presente
+                if (empty($apellidos)) {
+                    $errores[] = "Fila " . ($i + 1) . ": El apellido del usuario es obligatorio";
+                    continue;
+                }
+
+                // Validar que el email esté presente
+                if (empty($email)) {
+                    $errores[] = "Fila " . ($i + 1) . ": El email del usuario es obligatorio";
+                    continue;
+                }
+                
+                // Validar que el rol esté presente
+                if (empty($fkIdRol)) {
+                    $errores[] = "Fila " . ($i + 1) . ": El ID del rol es obligatorio";
+                    continue;
+                }
+                
+                try {
+                    $usuarioModel = new UsuarioModel();
+                    
+                    // Verificar si el usuario ya existe por email
+                    $existe = $usuarioModel->getUsuarioPorEmail($email);
+                    if ($existe) {
+                        $errores[] = "Fila " . ($i + 1) . ": El usuario con email '{$email}' ya existe";
+                        continue;
+                    }
+                    
+                    // Validar que el rol exista en la base de datos
+                    $rolModel = new RolModel();
+                    $rolExiste = $rolModel->getRol($fkIdRol);
+                    if (!$rolExiste) {
+                        $errores[] = "Fila " . ($i + 1) . ": El rol con ID '{$fkIdRol}' no existe";
+                        continue;
+                    }
+                    
+                    // Convertir gestor a booleano/entero
+                    if ($gestor === '' || is_null($gestor)) {
+                        $gestor = null;
+                    } else {
+                        $gestor = ($gestor === '1' || $gestor === 1 || strtolower($gestor) === 'true' || strtolower($gestor) === 'si') ? 1 : 0;
+                    }
+
+                    // Hashear la contraseña
+                    //$hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+                    
+                    // Guardar el usuario | Enviamos la contraseña normalmente en estexto - EL MODELO SE ENCARGA DEL HASH
+                    if ($usuarioModel->saveUsuario($nombres, $apellidos, $documento, $email, $password, $telefono, $tipoCoordinador, $gestor, $fkIdRol)) {
+                        $registrosProcesados++;
+                        error_log("Usuario guardado: " . $email);
+                    } else {
+                        $errores[] = "Fila " . ($i + 1) . ": No se pudo guardar el usuario '{$email}'";
+                    }
+                } catch (\Exception $e) {
+                    $errores[] = "Fila " . ($i + 1) . ": " . $e->getMessage();
+                    error_log("Error en fila " . ($i + 1) . ": " . $e->getMessage());
+                }
+            }
+            
+            error_log("Procesamiento completado: " . $registrosProcesados . " registros, " . count($errores) . " errores");
+            
+            return [
+                'procesados' => $registrosProcesados,
+                'errores' => $errores
             ];
             
-            try {
-                //Aquí necesitarás un método saveUsuario en tu UsuarioModel
-                $usuarioModel = new UsuarioModel();
-                if ($usuarioModel->saveUsuario(
-                    $usuario['nombres'],
-                    $usuario['apellidos'],
-                    $usuario['documento'],
-                    $usuario['email'],
-                    $usuario['password'],
-                    $usuario['telefono'],
-                    $usuario['tipoCoordinador'],
-                    $usuario['gestor'],
-                    $usuario['fkIdRol']
-                )) {
-                    $registrosProcesados++;
-                }
-            } catch (\Exception $e) {
-                $errores[] = "Fila " . ($i + 1) . ": " . $e->getMessage();
-            }
+        } catch (\Exception $e) {
+            error_log("Error crítico en procesarExcelUsuario: " . $e->getMessage());
+            throw $e;
         }
-        
-        return [
-            'procesados' => $registrosProcesados,
-            'errores' => $errores
-        ];
     }
+    
 }
 ?>

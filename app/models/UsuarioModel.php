@@ -164,6 +164,19 @@ class UsuarioModel extends BaseModel {
         }
     }
 
+    // Funcion para verificar importacion excel que no este repetido
+    public function getUsuarioPorEmail($email) {
+        try {
+            $sql = "SELECT * FROM usuario WHERE email = ? LIMIT 1";
+            $stmt = $this->dbConnection->prepare($sql);
+            $stmt->execute([$email]);
+            return $stmt->fetch(PDO::FETCH_OBJ);
+        } catch (PDOException $e) {
+            error_log("Error en getUsuarioPorEmail: " . $e->getMessage());
+            return false;
+        }
+    }
+
     // Funcion para crear notificaión al crear un reporte
     // public function getUsuariosByRol($roles) {
     //     if (empty($roles)) return [];

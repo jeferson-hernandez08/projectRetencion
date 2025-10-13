@@ -27,7 +27,7 @@
                             </div>
                             <div class='record-one__row'>
                                 <span class='record-one__label'>Documento:</span>
-                                <span class='record-one__value'>" . ($usuario->documento ?? 'No especificado') . "</span>
+                                <span class='record-one__value'>" . (!empty($usuario->documento) ? htmlspecialchars($usuario->documento) : 'No asignado') . "</span>
                             </div>
                             <div class='record-one__row'>
                                 <span class='record-one__label'>Email:</span>
@@ -35,7 +35,7 @@
                             </div>
                             <div class='record-one__row'>
                                 <span class='record-one__label'>Teléfono:</span>
-                                <span class='record-one__value'>{$usuario->telefono}</span>
+                                <span class='record-one__value'>" . (!empty($usuario->telefono) ? htmlspecialchars($usuario->telefono) : 'No asignado') . "</span>
                             </div>
                             <div class='record-one__row'>
                                 <span class='record-one__label'>Tipo Coordinador:</span>

@@ -99,6 +99,11 @@ return [         // Prueba cimmit | base contrller , programa formacion controll
         "controller" => "App\Controllers\usuarioController",
         "action" => "removeUsuario"
     ],
+    // Importacion excel usuario
+    '/usuario/importarExcel' => [
+        'controller' => 'App\Controllers\usuarioController',
+        'action' => 'importarExcel'
+    ],
 
     // Tabla programaFormacion
     '/programaFormacion/index'=> [
