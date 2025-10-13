@@ -82,4 +82,17 @@ class ProgramaFormacionModel extends BaseModel {
         }
     }
 
+    // Funcion para verificar importacion excel que no este repetido
+    public function getProgramaPorNombre($nombre) {
+        try {
+            $sql = "SELECT * FROM programaformacion WHERE nombre = ? LIMIT 1";
+            $stmt = $this->dbConnection->prepare($sql);
+            $stmt->execute([$nombre]);
+            return $stmt->fetch(PDO::FETCH_OBJ);
+        } catch (PDOException $e) {
+            error_log("Error en getProgramaPorNombre: " . $e->getMessage());
+            return false;
+        }
+    }
+
 }

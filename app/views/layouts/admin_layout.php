@@ -25,7 +25,7 @@
                         <li><a href="/main"><i class="fas fa-home"></i><span class="info-text">Inicio</span></a></li>
                         <?php if(isset($_SESSION['rol']) && $_SESSION['rol'] == 4): ?>    <!-- Instructor -->
                             <li><a href="/aprendiz/view"><i class="fas fa-user-graduate"></i><span class="info-text">Aprendices</span></a></li>
-                            <li><a href="/reporte/view"><i class="fas fa-chart-line"></i><span class="info-text">Reportes</span></a></li>       
+                            <li><a href="/reporte/view"><i class="fas fa-chart-line"></i><span class="info-text">Reportes</span></a></li> 
                         <?php endif ?>   
                         <?php if(isset($_SESSION['rol']) && $_SESSION['rol'] == 5): ?>     <!-- Coordinador Academico  -->
                             <li><a href="/programaFormacion/view"><i class="fas fa-chalkboard-teacher"></i><span class="info-text">Programas</span></a></li>

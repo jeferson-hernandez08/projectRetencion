@@ -12,15 +12,15 @@ return [         // Prueba cimmit | base contrller , programa formacion controll
 
     // Tablas 
     "/" => [
-        'controller' => 'App\Controllers\HomeController',
+        'controller' => 'App\Controllers\homeController',
         'action' => 'index'
     ],
     '/home'  => [
-        'controller' => 'App\Controllers\HomeController',
+        'controller' => 'App\Controllers\homeController',
         'action' => 'index'
     ],
     '/hello' => [
-        'controller' => 'App\Controllers\HomeController',
+        'controller' => 'App\Controllers\homeController',
         'action' => 'index'
     ], 
 
@@ -136,6 +136,11 @@ return [         // Prueba cimmit | base contrller , programa formacion controll
     "/programaFormacion/remove" => [
         "controller" => "App\Controllers\programaFormacionController",
         "action" => "removeProgramaFormacion"
+    ],
+    // Importacion exel programasFromacion
+    '/programaFormacion/importarExcel' => [
+        'controller' => 'App\Controllers\programaFormacionController',
+        'action' => 'importarExcel'
     ],
 
     // Tabla Grupo
@@ -449,9 +454,36 @@ return [         // Prueba cimmit | base contrller , programa formacion controll
 
     // Página Principal
     "/main" => [
-        "controller" => "App\Controllers\MainController",
+        "controller" => "App\Controllers\mainController",
         "action" => "view"
     ],
+
+    // Importación desde Excel
+    // '/importacion/index' => [
+    //     'controller' => 'App\Controllers\importacionController',
+    //     'action' => 'index'
+    // ],
+    // '/importacion/view' => [
+    //     'controller' => 'App\Controllers\importacionController',
+    //     'action' => 'view'
+    // ],
+    // '/importacion/programaFormacion' => [
+    //     'controller' => 'App\Controllers\importacionController',
+    //     'action' => 'importarProgramaFormacion'
+    // ],
+    // '/importacion/grupo' => [
+    //     'controller' => 'App\Controllers\importacionController',
+    //     'action' => 'importarGrupo'
+    // ],
+    // '/importacion/aprendiz' => [
+    //     'controller' => 'App\Controllers\importacionController',
+    //     'action' => 'importarAprendiz'
+    // ],
+    // '/importacion/usuario' => [
+    //     'controller' => 'App\Controllers\importacionController',
+    //     'action' => 'importarUsuario'
+    // ],
+       
 
     // NOTIFICACIONES 
     // '/notificacion/get' => [
