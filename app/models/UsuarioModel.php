@@ -139,7 +139,9 @@ class UsuarioModel extends BaseModel {
             // Verificar contraseña con hash almacenado
             if(password_verify($password, $hash)){            // password_verify verifica las contraseñas hasheadas y no textto plano 123.
                 $_SESSION['id'] = $resultSet[0]->idUsuario;     // ***Veridficar si los datos aqui son exactamente de los de la BD
-                $_SESSION['nombre'] = $resultSet[0]->nombres;
+                $_SESSION['nombres'] = $resultSet[0]->nombres;
+                $_SESSION['apellidos'] = $resultSet[0]->apellidos;
+                $_SESSION['nombre'] = $resultSet[0]->nombres . ' ' . $resultSet[0]->apellidos; // Nombre completo
                 $_SESSION['rol'] = $resultSet[0]->fkIdRol;       // REVISAR ESTO COMO CAPRTURAR EL ROL PARA USAR EN USUARIO
                 $_SESSION['timeout'] = time();
                 session_regenerate_id();

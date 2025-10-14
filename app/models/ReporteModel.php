@@ -60,7 +60,9 @@ class ReporteModel extends BaseModel {
 
     public function getReporte($id) {
         try {
-            $sql = "SELECT reporte.*, usuario.nombre AS nombreUsuario, aprendiz.nombre AS nombreAprendiz 
+            $sql = "SELECT reporte.*, 
+                        CONCAT(usuario.nombres, ' ', usuario.apellidos) AS nombreUsuario, 
+                        CONCAT(aprendiz.nombres, ' ', aprendiz.apellidos) AS nombreAprendiz 
                     FROM reporte 
                     INNER JOIN usuario 
                     ON reporte.fkIdUsuario = usuario.idUsuario 
@@ -170,7 +172,8 @@ class ReporteModel extends BaseModel {
     // Funcion getAll para capturar nombre completo del aprendiz y renderizarla en el viewReporte.
     public function getAll():array {     // Se usa : array en la declaración del método para coincidir con la clase padre
         try {
-            $sql = "SELECT reporte.*, aprendiz.nombre AS nombreAprendiz 
+            $sql = "SELECT reporte.*, 
+                        CONCAT(aprendiz.nombres, ' ', aprendiz.apellidos) AS nombreAprendiz 
                     FROM reporte 
                     INNER JOIN aprendiz ON reporte.fkIdAprendiz = aprendiz.idAprendiz";
             $statement = $this->dbConnection->prepare($sql);
@@ -178,7 +181,7 @@ class ReporteModel extends BaseModel {
             return $statement->fetchAll(PDO::FETCH_OBJ);
         } catch (PDOException $ex) {
             echo "Error al obtener todos los reportes: " . $ex->getMessage();
-            return [];
+            return [];    
         }
     }
 

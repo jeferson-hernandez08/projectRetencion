@@ -111,7 +111,9 @@
                     <?php
                         if (isset($aprendices) && is_array($aprendices)) {
                             foreach ($aprendices as $aprendiz) {
-                                echo "<option value='".$aprendiz->idAprendiz."'>".$aprendiz->nombre."</option>";
+                                $nombreCompletoAprendiz = $aprendiz->nombres . ' ' . $aprendiz->apellidos;
+                                echo "<option value='".$aprendiz->idAprendiz."'>".$nombreCompletoAprendiz."</option>";
+
                             }
                         } else {
                             echo "ERROR";

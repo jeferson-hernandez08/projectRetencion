@@ -53,7 +53,8 @@
                         if (isset($aprendices) && is_array($aprendices)) {
                             foreach ($aprendices as $aprendiz) {
                                 $selected = ($reporte->fkIdAprendiz == $aprendiz->idAprendiz) ? 'selected' : '';
-                                echo "<option value='".$aprendiz->idAprendiz."' $selected>".$aprendiz->nombre."</option>";
+                                $nombreCompletoAprendiz = $aprendiz->nombres . ' ' . $aprendiz->apellidos;
+                                echo "<option value='".$aprendiz->idAprendiz."' $selected>".$nombreCompletoAprendiz."</option>";
                             }
                         } else {
                             echo "ERROR";
@@ -68,7 +69,7 @@
             <!-- Campo Usuario (mostrar en el edit) -->
             <div class="form-group">
                 <label>Usuario</label>
-                <input type="text" class="form-control" value="<?php echo $usuarioActual->nombre; ?>" readonly>
+                <input type="text" class="form-control" value="<?php echo $usuarioActual->nombres . ' ' . $usuarioActual->apellidos; ?>" readonly>
             </div>
             <!-- <div class="form-group">
                 <label for="txtFkIdUsuario">Usuario</label>

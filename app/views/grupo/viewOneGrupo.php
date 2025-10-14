@@ -23,11 +23,11 @@
                             </div>
                             <div class='record-one__row'>
                                 <span class='record-one__label'>Jornada:</span>
-                                <span class='record-one__value'>{$grupo->jornada}</span>
+                                <span class='record-one__value'>". (!empty($grupo->jornada) ? $grupo->jornada : 'No asignado') ."</span>
                             </div>
                             <div class='record-one__row'>
                                 <span class='record-one__label'>Modalidad:</span>
-                                <span class='record-one__value'>{$grupo->modalidad}</span>
+                                <span class='record-one__value'>". (!empty($grupo->modalidad) ? $grupo->modalidad : 'No asignado') ."</span>
                             </div>
                             <div class='record-one__row'>
                                 <span class='record-one__label'>Programa de Formación:</span>

@@ -54,7 +54,8 @@ class IntervencionModel extends BaseModel {
     public function getIntervencion($id) {
         try {
             $sql = "SELECT intervencion.*, estrategias.estrategia AS nombreEstrategia, 
-                    reporte.descripcion AS descripcionReporte, usuario.nombre AS nombreUsuario
+                    reporte.descripcion AS descripcionReporte, 
+                    CONCAT(usuario.nombres, ' ', usuario.apellidos) AS nombreUsuario
                     FROM intervencion 
                     INNER JOIN estrategias ON intervencion.fkIdEstrategias = estrategias.idEstrategias
                     INNER JOIN reporte ON intervencion.fkIdReporte = reporte.idReporte
@@ -108,11 +109,12 @@ class IntervencionModel extends BaseModel {
     public function getByReporteId($idReporte) {
         try {
             $sql = "SELECT intervencion.*, estrategias.estrategia AS nombreEstrategia, 
-                    usuario.nombre AS nombreUsuario
+                    CONCAT(usuario.nombres, ' ', usuario.apellidos) AS nombreUsuario
                     FROM intervencion 
                     INNER JOIN estrategias ON intervencion.fkIdEstrategias = estrategias.idEstrategias
                     INNER JOIN usuario ON intervencion.fkIdUsuario = usuario.idUsuario
-                    WHERE intervencion.fkIdReporte = :idReporte";
+                    WHERE intervencion.fkIdReporte = :idReporte
+                    ORDER BY intervencion.fechaCreacion DESC";
             $statement = $this->dbConnection->prepare($sql);
             $statement->bindParam(":idReporte", $idReporte, PDO::PARAM_INT);
             $statement->execute();

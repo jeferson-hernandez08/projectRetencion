@@ -119,7 +119,7 @@
 
                         <div class="report-info">
                             <div class="info-label"><i class="fas fa-clock"></i> Jornada:</div>
-                            <div class="info-value"><?php echo $value->jornada; ?></div>
+                            <div class="info-value"><?php echo (!empty ($value->jornada)) ? htmlspecialchars($value->jornada) : 'No asignado'; ?></div>
                         </div>
                         
                         <div class="report-info">
