@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 13-10-2025 a las 23:01:54
+-- Tiempo de generación: 15-10-2025 a las 00:07:45
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -51,7 +51,10 @@ INSERT INTO `aprendiz` (`idAprendiz`, `tipoDocumento`, `documento`, `nombres`, `
 (6, 'CC', '123456', 'Angie ', 'Rios', 'angie@gmail.com', 'En formación', '3245678978', '5', 11),
 (7, 'TI', '10557653478', 'Daniel Gallego', 'Gallego', 'daniel@gmail.com', 'En formación', '3245678978', '8', 13),
 (11, 'CC', '1234567', 'David ', 'Aguapacha', 'david@gmail.com', 'En formación', '3245768907', '4', 10),
-(13, 'CC', '12345678', 'Juan Manuel', 'Zuluaga', 'zuluaga@gmail.com', 'En formación', '3145679867', '2', 11);
+(13, 'CC', '12345678', 'Juan Manuel', 'Zuluaga', 'zuluaga@gmail.com', 'En formación', '3145679867', '2', 11),
+(52, 'CC', '1002635253', 'JESUS DAVID', 'ORTIZ GIRALDO', 'jdortizg2002@gmail.com', 'EN FORMACION', '3148932648', '3', 10),
+(53, 'CC', '1002635268', 'DANIEL FERNANDO', 'TABARES LOPEZ', 'dtabaresl268@gmail.com', 'EN FORMACION', '3113711277', '4', 11),
+(54, 'TI', '1002652270', 'JUAN ALEJANDRO', 'CASTAÑO SUAREZ', 'castanojuanalejandro@gmail.com', 'EN FORMACION', '3136757653', '7', 13);
 
 -- --------------------------------------------------------
 
@@ -134,7 +137,8 @@ INSERT INTO `causa_reporte` (`fkIdReporte`, `fkIdCausa`) VALUES
 (57, 1),
 (59, 3),
 (61, 14),
-(63, 1);
+(63, 1),
+(64, 1);
 
 -- --------------------------------------------------------
 
@@ -177,8 +181,8 @@ CREATE TABLE `grupo` (
   `inicioPractica` date DEFAULT NULL,
   `finPractica` date DEFAULT NULL,
   `nombreGestor` varchar(50) DEFAULT NULL,
-  `jornada` varchar(45) NOT NULL,
-  `modalidad` varchar(45) NOT NULL,
+  `jornada` varchar(45) DEFAULT NULL,
+  `modalidad` varchar(45) DEFAULT NULL,
   `fkIdProgramaFormacion` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
@@ -192,9 +196,8 @@ INSERT INTO `grupo` (`idGrupo`, `ficha`, `inicioLectiva`, `finLectiva`, `inicioP
 (13, '2873456', '0000-00-00', '0000-00-00', '0000-00-00', '0000-00-00', 'German Estrada', 'Diurna', 'Presencial', 5),
 (15, '299299', NULL, NULL, NULL, NULL, NULL, 'Diurna', 'Presencial', 6),
 (17, '2345000', '2025-10-09', '2026-07-09', '2027-11-18', '2028-02-02', 'Sandra Gutierrez', 'Mixta', 'Presencial', 10),
-(31, '20038390', '0000-00-00', '0000-00-00', '0000-00-00', '0000-00-00', 'Cristian Mauricio', 'Diurna', 'Presencial', 1),
-(32, '2822225', '0000-00-00', '0000-00-00', '0000-00-00', '0000-00-00', 'Andres Mauricio', 'Mixta', 'Presencial', 2),
-(33, '0000000', '0000-00-00', '0000-00-00', '0000-00-00', '0000-00-00', 'Oscar Aristizábal ', 'Mixta', 'Presencial', 69);
+(34, '20038390', '0000-00-00', '0000-00-00', '0000-00-00', '0000-00-00', 'Cristian Mauricio', 'Diurna', 'Presencial', 1),
+(35, '2822225', '0000-00-00', '0000-00-00', '0000-00-00', '0000-00-00', 'Andres Mauricio', '', '', 2);
 
 -- --------------------------------------------------------
 
@@ -217,7 +220,8 @@ CREATE TABLE `intervencion` (
 
 INSERT INTO `intervencion` (`idIntervencion`, `fechaCreacion`, `descripcion`, `fkIdEstrategias`, `fkIdReporte`, `fkIdUsuario`) VALUES
 (17, '2025-07-01 08:06:25', 'Se gablo con el aprendiz para aplicar apoyo econonomico', 2, 45, 19),
-(18, '2025-07-01 08:09:36', 'Se habla con el el aprendiz y se da apoyo psicológico', 7, 45, 19);
+(18, '2025-07-01 08:09:36', 'Se habla con el el aprendiz y se da apoyo psicológico', 7, 45, 19),
+(19, '2025-10-13 23:19:49', 'Se habla con el aprendiz para brindar apoyo economico , prueba jff', 2, 64, 19);
 
 -- --------------------------------------------------------
 
@@ -242,7 +246,7 @@ CREATE TABLE `notificacion` (
 
 CREATE TABLE `programaformacion` (
   `idProgramaFormacion` int(11) NOT NULL,
-  `nombre` varchar(45) NOT NULL,
+  `nombre` varchar(100) NOT NULL,
   `nivel` varchar(45) DEFAULT NULL,
   `version` varchar(45) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
@@ -260,11 +264,10 @@ INSERT INTO `programaformacion` (`idProgramaFormacion`, `nombre`, `nivel`, `vers
 (8, 'Motores Diesel', NULL, NULL),
 (9, 'Computación CNC', NULL, NULL),
 (10, 'Automatización industrial', 'Tecnólogo', '225208 V1'),
-(69, 'CONSTRUCCION EN EDIFICACIONES', 'Tecnólogo', '223104 V1'),
-(70, 'CONSTRUCCIONES LIVIANAS INDUSTRIALIZADAS EN S', 'Técnico', '836135 V1'),
-(71, 'CONTROL DE LA SEGURIDAD DIGITAL', 'Técnico', '233103 V1'),
-(72, 'COORDINADOR DE SISTEMAS INTEGRADOS DE GESTIÓN', 'Tecnólogo', '226701 V1'),
-(75, 'CONSTRUCCIONES LIVIANAS INDUSTRIALIZADAS EN S', 'Técnico', '836135 V1');
+(79, 'CONSTRUCCION EN EDIFICACIONES', 'Tecnólogo', '223104 V1'),
+(80, 'CONSTRUCCIONES LIVIANAS INDUSTRIALIZADAS EN SECO', 'Técnico', '836135 V1'),
+(81, 'CONTROL DE LA SEGURIDAD DIGITAL', 'Técnico', '233103 V1'),
+(82, 'COORDINADOR DE SISTEMAS INTEGRADOS DE GESTIÓN', 'Tecnólogo', '226701 V1');
 
 -- --------------------------------------------------------
 
@@ -292,7 +295,8 @@ INSERT INTO `reporte` (`idReporte`, `fechaCreacion`, `descripcion`, `direccionam
 (57, '2025-09-18 11:28:16', 'aprendiz no viene a clase en 1 mes', 'Coordinador de formación', 'Registrado', 2, 1),
 (59, '2025-10-08 09:28:29', 'Aprendiz juan calle no viene a clase ', 'Coordinador de formación', 'Registrado', 3, 1),
 (61, '2025-10-08 09:59:25', 'Aprendiz Angie ríos llega llorando a clase ', 'Coordinador de formación', 'Registrado', 6, 1),
-(63, '2025-10-08 23:40:44', 'Aprendiz daniel gallego no viene a formación durante 10 dias ', 'Coordinador de formación', 'Registrado', 7, 19);
+(63, '2025-10-08 23:40:44', 'Aprendiz daniel gallego no viene a formación durante 10 dias ', 'Coordinador de formación', 'Registrado', 7, 19),
+(64, '2025-10-13 23:18:20', 'pri¿uena jeferson', 'Coordinador de formación', 'Retenido', 52, 19);
 
 -- --------------------------------------------------------
 
@@ -327,7 +331,7 @@ CREATE TABLE `usuario` (
   `nombres` varchar(50) NOT NULL,
   `apellidos` varchar(50) NOT NULL,
   `documento` varchar(50) DEFAULT NULL,
-  `email` varchar(50) DEFAULT NULL,
+  `email` varchar(50) NOT NULL,
   `password` varchar(255) DEFAULT NULL,
   `telefono` varchar(20) DEFAULT NULL,
   `tipoCoordinador` varchar(50) DEFAULT NULL,
@@ -346,11 +350,14 @@ INSERT INTO `usuario` (`idUsuario`, `nombres`, `apellidos`, `documento`, `email`
 (13, 'German Estrada', '', NULL, 'german@gmail.com', '$2y$10$ADHhAHdLpPrvqnLs.1sdPe.a73J9O.0YnHKaEp2PParaaFe94jaSy', '3245678978', 'No es coordinador', 0, 4),
 (17, 'Daniela Isaza ', '', NULL, 'daniela@gmail.com', '$2y$10$0/MtpfaRbooSN0QXBaHfmOp9qJnTxv5eOujHgK0FxxzSqiNJeVeS2', '3127827845', 'No es coordinador', 0, 4),
 (18, 'Esteban Reyes', '', NULL, 'reyes@gmail.com', '$2y$10$R8JK3N2RYhKpsDMyPvKFfuh5iXvM8zdtmf71X6Qs/HkL1JUt.mTei', '3124567867', 'No es coordinador', 0, 9),
-(19, 'Mariana Carvajal ', '', NULL, 'mariana@gmail.com', '$2y$10$EIZaWwEWbDEnRn1ebIs6NeoP5/CbwtaqmWZiK7NC3SK3qrbxHIPKq', '3245678976', 'Coordinador de formación', 0, 6),
+(19, 'Mariana ', 'Carvajal ', '123456', 'mariana@gmail.com', '$2y$10$ejmQtOLj0fQmGYVWc38sQepEal/zMVVCAk7wO9gNq3Cntt0JYXlz2', '3245678976', 'Coordinador de formación', 0, 6),
 (20, 'Jeferson Hernandez', '', NULL, 'admin@gmail.com', '$2y$10$z8fF2TvCCWaZgcpdyWUqR.WvwOAcPINb1yQBCfAiTg1ypW6Ud78Ei', '3113975576', 'No es coordinador', 0, 18),
 (21, 'Sofia Ocampo ', '', NULL, 'sofia@gmail.com', '$2y$10$M5yI8K.tQpuV4Y2ulfN/veMpgEhtalZvrrKYgKh8exG3xICeC4GRe', '3145679867', 'Coordinador de formación', 0, 6),
 (22, 'Jeferson Hernandez Ladino', '', NULL, 'jefer.hernandez1@gmail.com', '$2y$10$6tfD3qtSiOvamkNueTDR7eGy3U9akp0rZLSc8sepEBrtaoAyfC2Ye', '3113975576', 'No es coordinador', 0, 4),
-(24, 'Henry ', 'Daza', '1234567', 'henry@gmail.com', '$2y$10$NoeY4MOmrBnutDjPTV9bS.uKaR0XFe09Vi3Mgt9jFnpmqONEOzoyG', '3224567645', 'No es coordinador', 1, 4);
+(24, 'Henry ', 'Daza', '1234567', 'henry@gmail.com', '$2y$10$NoeY4MOmrBnutDjPTV9bS.uKaR0XFe09Vi3Mgt9jFnpmqONEOzoyG', '3224567645', 'No es coordinador', 1, 4),
+(52, 'Adriana', 'Rodriguez Morales', '', 'adrrodriguez@sena.edu.co', '$2y$10$zwAz.A2ssckMI2FF5BPX3e.LkXkF6qT1j3IURVgTNJcBZ9CBnNcRq', '3176366444', 'No es coordinador', NULL, 4),
+(53, 'Alejandro', 'Pinilla Valencia', '', 'apinilla@sena.edu.co', '$2y$10$V.Gdqxr3sxnD6k1nKM0hyOyEW158V62od8zBSFsUVY1R72DE7DpH.', '3103989868', 'No es coordinador', NULL, 4),
+(54, 'Alexander', 'Aguirre Arcila', '', 'aaguirre@sena.edu.co', '$2y$10$RUnAe5vpuZSSYT0ES7n8gOGJP86RvTfsQeu2/6tax/gdWxC7XgowG', '3204038236', 'No es coordinador', NULL, 4);
 
 --
 -- Índices para tablas volcadas
@@ -449,7 +456,7 @@ ALTER TABLE `usuario`
 -- AUTO_INCREMENT de la tabla `aprendiz`
 --
 ALTER TABLE `aprendiz`
-  MODIFY `idAprendiz` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
+  MODIFY `idAprendiz` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=55;
 
 --
 -- AUTO_INCREMENT de la tabla `categoria`
@@ -473,13 +480,13 @@ ALTER TABLE `estrategias`
 -- AUTO_INCREMENT de la tabla `grupo`
 --
 ALTER TABLE `grupo`
-  MODIFY `idGrupo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
+  MODIFY `idGrupo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 
 --
 -- AUTO_INCREMENT de la tabla `intervencion`
 --
 ALTER TABLE `intervencion`
-  MODIFY `idIntervencion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `idIntervencion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT de la tabla `notificacion`
@@ -491,13 +498,13 @@ ALTER TABLE `notificacion`
 -- AUTO_INCREMENT de la tabla `programaformacion`
 --
 ALTER TABLE `programaformacion`
-  MODIFY `idProgramaFormacion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=76;
+  MODIFY `idProgramaFormacion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=83;
 
 --
 -- AUTO_INCREMENT de la tabla `reporte`
 --
 ALTER TABLE `reporte`
-  MODIFY `idReporte` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=64;
+  MODIFY `idReporte` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=65;
 
 --
 -- AUTO_INCREMENT de la tabla `rol`
@@ -509,7 +516,7 @@ ALTER TABLE `rol`
 -- AUTO_INCREMENT de la tabla `usuario`
 --
 ALTER TABLE `usuario`
-  MODIFY `idUsuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `idUsuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=55;
 
 --
 -- Restricciones para tablas volcadas
