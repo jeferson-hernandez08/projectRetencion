@@ -10,11 +10,17 @@ return [         // Prueba cimmit | base contrller , programa formacion controll
         "action" => 'logoutLogin'
     ],
 
-    // Tablas 
+    // Redirigir raíz al login
     "/" => [
-        'controller' => 'App\Controllers\homeController',
-        'action' => 'index'
+        'controller' => 'App\Controllers\loginController',
+        'action' => 'initLogin'
     ],
+
+    // Tablas 
+    // "/" => [
+    //     'controller' => 'App\Controllers\homeController',
+    //     'action' => 'index'
+    // ],
     '/home'  => [
         'controller' => 'App\Controllers\homeController',
         'action' => 'index'
