@@ -18,15 +18,15 @@
                         <div class='record-one__details'>
                             <div class='record-one__row'>
                                 <span class='record-one__label'>ID:</span>
-                                <span class='record-one__value'>$causa->idCausa</span>
+                                <span class='record-one__value'>$causa->id</span>
                             </div>
                             <div class='record-one__row'>
                                 <span class='record-one__label'>Causa:</span>
-                                <span class='record-one__value'>$causa->causa</span>
+                                <span class='record-one__value'>$causa->cause</span>
                             </div>
                             <div class='record-one__row'>
                                 <span class='record-one__label'>Variables:</span>
-                                <span class='record-one__value'>$causa->variables</span>
+                                <span class='record-one__value'>$causa->variable</span>
                             </div>
                             <div class='record-one__row'>
                                 <span class='record-one__label'>Categoría:</span>

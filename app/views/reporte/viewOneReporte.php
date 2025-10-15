@@ -15,23 +15,23 @@
                         <div class='record-one__details'>
                             <div class='record-one__row'>
                                 <span class='record-one__label'>ID:</span>
-                                <span class='record-one__value'>{$reporte->idReporte}</span>
+                                <span class='record-one__value'>{$reporte->id}</span>
                             </div>
                             <div class='record-one__row'>
                                 <span class='record-one__label'>Fecha Creación:</span>
-                                <span class='record-one__value'>{$reporte->fechaCreacion}</span>
+                                <span class='record-one__value'>{$reporte->creationDate}</span>
                             </div>
                             <div class='record-one__row'>
                                 <span class='record-one__label'>Descripción:</span>
-                                <span class='record-one__value'>{$reporte->descripcion}</span>
+                                <span class='record-one__value'>{$reporte->description}</span>
                             </div>
                             <div class='record-one__row'>
                                 <span class='record-one__label'>Direccionamiento:</span>
-                                <span class='record-one__value'>{$reporte->direccionamiento}</span>
+                                <span class='record-one__value'>{$reporte->addressing}</span>
                             </div>
                             <div class='record-one__row'>
                                 <span class='record-one__label'>Estado:</span>
-                                <span class='record-one__value'>{$reporte->estado}</span>
+                                <span class='record-one__value'>{$reporte->state}</span>
                             </div>
                             <div class='record-one__row'>
                                 <span class='record-one__label'>Aprendiz:</span>

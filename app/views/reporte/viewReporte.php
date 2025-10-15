@@ -20,8 +20,8 @@
             <?php foreach ($reportes as $value): ?>
                 <div class="report-card">
                     <div class="card-header">
-                        <span class="report-id">Reporte # <?php echo $value->idReporte; ?></span>
-                        <span class="report-date">Creación: <?php echo date('d/m/Y H:i', strtotime($value->fechaCreacion)); ?></span>
+                        <span class="report-id">Reporte # <?php echo $value->id; ?></span>
+                        <span class="report-date">Creación: <?php echo date('d/m/Y H:i', strtotime($value->creationDate)); ?></span>
                     </div>
                     
                     <div class="card-body">
@@ -33,11 +33,11 @@
                         <div class="report-info">
                             <div class="info-label">Estado:</div>
                             <div class="status-container">
-                                <select class="estado-select" data-id="<?php echo $value->idReporte; ?>">
-                                    <option value="Registrado" <?= ($value->estado == 'Registrado') ? 'selected' : '' ?>>Registrado</option>
-                                    <option value="En proceso" <?= ($value->estado == 'En proceso') ? 'selected' : '' ?>>En proceso</option>
-                                    <option value="Retenido" <?= ($value->estado == 'Retenido') ? 'selected' : '' ?>>Retenido</option>
-                                    <option value="Desertado" <?= ($value->estado == 'Desertado') ? 'selected' : '' ?>>Desertado</option>
+                                <select class="estado-select" data-id="<?php echo $value->id; ?>">
+                                    <option value="Registrado" <?= ($value->state == 'Registrado') ? 'selected' : '' ?>>Registrado</option>
+                                    <option value="En proceso" <?= ($value->state == 'En proceso') ? 'selected' : '' ?>>En proceso</option>
+                                    <option value="Retenido" <?= ($value->state == 'Retenido') ? 'selected' : '' ?>>Retenido</option>
+                                    <option value="Desertado" <?= ($value->state == 'Desertado') ? 'selected' : '' ?>>Desertado</option>
                                 </select>
                                 <span class="update-badge"></span>
                             </div>
@@ -45,22 +45,22 @@
                         
                         <div class="report-info">
                             <div class="info-label">Direccionamiento:</div>
-                            <div class="info-value"><?php echo $value->direccionamiento; ?></div>
+                            <div class="info-value"><?php echo $value->addressing; ?></div>
                         </div>
                     </div>
                     
                     <div class="card-footer">
                         <div class="card-actions">
-                            <a href="/reporte/view/<?php echo $value->idReporte; ?>" class="action-btn consultar" title="Ver detalles">
+                            <a href="/reporte/view/<?php echo $value->id; ?>" class="action-btn consultar" title="Ver detalles">
                                 <i class="fas fa-eye"></i> Detalles
                             </a>
-                            <a href="/reporte/edit/<?php echo $value->idReporte; ?>" class="action-btn editar" title="Editar reporte">
+                            <a href="/reporte/edit/<?php echo $value->id; ?>" class="action-btn editar" title="Editar reporte">
                                 <i class="fas fa-edit"></i> Editar
                             </a>
-                            <a href="/reporte/intervenciones/<?php echo $value->idReporte; ?>" class="action-btn intervenciones" title="Ver intervenciones">
+                            <a href="/reporte/intervenciones/<?php echo $value->id; ?>" class="action-btn intervenciones" title="Ver intervenciones">
                                 <i class="fas fa-comments"></i> Ver Intervenciones
                             </a>
-                            <a href="/reporte/delete/<?php echo $value->idReporte; ?>" class="action-btn eliminar" title="Eliminar reporte">
+                            <a href="/reporte/delete/<?php echo $value->id; ?>" class="action-btn eliminar" title="Eliminar reporte">
                                 <i class="fas fa-trash"></i> Eliminar
                             </a>
                         </div>

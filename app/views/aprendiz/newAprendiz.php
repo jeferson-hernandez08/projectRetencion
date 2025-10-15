@@ -83,7 +83,7 @@
                     <?php
                         if (isset($grupos) && is_array($grupos)) {
                             foreach ($grupos as $grupo) {
-                                echo "<option value='".$grupo->idGrupo."'>".$grupo->ficha." - ".$grupo->jornada."</option>";
+                                echo "<option value='".$grupo->id."'>".$grupo->file." - ".$grupo->shift."</option>";
                             }
                         } else {
                             echo "ERROR";

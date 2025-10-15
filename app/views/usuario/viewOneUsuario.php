@@ -15,19 +15,19 @@
                         <div class='record-one__details'>
                             <div class='record-one__row'>
                                 <span class='record-one__label'>ID Usuario:</span>
-                                <span class='record-one__value'>{$usuario->idUsuario}</span>
+                                <span class='record-one__value'>{$usuario->id}</span>
                             </div>
                             <div class='record-one__row'>
                                 <span class='record-one__label'>Nombres:</span>
-                                <span class='record-one__value'>" . ($usuario->nombres ?? 'No especificado') . "</span>
+                                <span class='record-one__value'>" . ($usuario->firstName ?? 'No especificado') . "</span>
                             </div>
                             <div class='record-one__row'>
                                 <span class='record-one__label'>Apellidos:</span>
-                                <span class='record-one__value'>" . ($usuario->apellidos ?? 'No especificado') . "</span>
+                                <span class='record-one__value'>" . ($usuario->lastName ?? 'No especificado') . "</span>
                             </div>
                             <div class='record-one__row'>
                                 <span class='record-one__label'>Documento:</span>
-                                <span class='record-one__value'>" . (!empty($usuario->documento) ? htmlspecialchars($usuario->documento) : 'No asignado') . "</span>
+                                <span class='record-one__value'>" . (!empty($usuario->document) ? htmlspecialchars($usuario->document) : 'No asignado') . "</span>
                             </div>
                             <div class='record-one__row'>
                                 <span class='record-one__label'>Email:</span>
@@ -35,15 +35,15 @@
                             </div>
                             <div class='record-one__row'>
                                 <span class='record-one__label'>Teléfono:</span>
-                                <span class='record-one__value'>" . (!empty($usuario->telefono) ? htmlspecialchars($usuario->telefono) : 'No asignado') . "</span>
+                                <span class='record-one__value'>" . (!empty($usuario->phone) ? htmlspecialchars($usuario->phone) : 'No asignado') . "</span>
                             </div>
                             <div class='record-one__row'>
                                 <span class='record-one__label'>Tipo Coordinador:</span>
-                                <span class='record-one__value'>" . ($usuario->tipoCoordinador ?? 'No especificado') . "</span>
+                                <span class='record-one__value'>" . ($usuario->coordinadorType ?? 'No especificado') . "</span>
                             </div>
                             <div class='record-one__row'>
                                 <span class='record-one__label'>Gestor:</span>
-                                <span class='record-one__value'>" . ($usuario->gestor ? 'Sí' : 'No') . "</span>
+                                <span class='record-one__value'>" . ($usuario->manager ? 'Sí' : 'No') . "</span>
                             </div>
                             <div class='record-one__row'>
                                 <span class='record-one__label'>Rol:</span>

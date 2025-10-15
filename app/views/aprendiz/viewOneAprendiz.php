@@ -22,23 +22,23 @@
                             </div>
                             <div class='record-one__row'>
                                 <span class='record-one__label'>Tipo Documento:</span>
-                                <span class='record-one__value'>" . ($aprendiz->tipoDocumento ?? 'No especificado') . "</span>
+                                <span class='record-one__value'>" . ($aprendiz->documentType ?? 'No especificado') . "</span>
                             </div>
                             <div class='record-one__row'>
                                 <span class='record-one__label'>Documento:</span>
-                                <span class='record-one__value'>" . ($aprendiz->documento ?? 'No especificado') . "</span>
+                                <span class='record-one__value'>" . ($aprendiz->document ?? 'No especificado') . "</span>
                             </div>
                             <div class='record-one__row'>
                                 <span class='record-one__label'>Nombres:</span>
-                                <span class='record-one__value'>" . ($aprendiz->nombres ?? 'No especificado') . "</span>
+                                <span class='record-one__value'>" . ($aprendiz->firtsName ?? 'No especificado') . "</span>
                             </div>
                             <div class='record-one__row'>
                                 <span class='record-one__label'>Apellidos:</span>
-                                <span class='record-one__value'>" . ($aprendiz->apellidos ?? 'No especificado') . "</span>
+                                <span class='record-one__value'>" . ($aprendiz->lastName ?? 'No especificado') . "</span>
                             </div>
                             <div class='record-one__row'>
                                 <span class='record-one__label'>Teléfono:</span>
-                                <span class='record-one__value'>". (!empty($aprendiz->telefono) ? htmlspecialchars($aprendiz->telefono) : 'No asignado') . "</span>
+                                <span class='record-one__value'>". (!empty($aprendiz->phone) ? htmlspecialchars($aprendiz->phone) : 'No asignado') . "</span>
                             </div>
                             <div class='record-one__row'>
                                 <span class='record-one__label'>Email:</span>
@@ -46,11 +46,11 @@
                             </div>
                             <div class='record-one__row'>
                                 <span class='record-one__label'>Estado:</span>
-                                <span class='record-one__value'>" . ($aprendiz->estado ?? 'No especificado') . "</span>
+                                <span class='record-one__value'>" . (!empty($aprendiz->status) ? htmlspecialchars($aprendiz->status) : 'No asignado') . "</span>
                             </div>
                             <div class='record-one__row'>
                                 <span class='record-one__label'>Trimestre:</span>
-                                <span class='record-one__value'>" . (!empty($aprendiz->trimestre) ? htmlspecialchars($aprendiz->trimestre) : 'No asignado') . "</span>
+                                <span class='record-one__value'>" . (!empty($aprendiz->quarter) ? htmlspecialchars($aprendiz->quarter) : 'No asignado') . "</span>
                             </div>
                             <div class='record-one__row'>
                                 <span class='record-one__label'>Ficha Grupo:</span>

@@ -269,7 +269,7 @@ class ImportacionModel {
                 $nombres = trim($fila[2] ?? '');
                 $apellidos = trim($fila[3] ?? '');
                 $email = trim($fila[4] ?? '');
-                $estado = trim($fila[5] ?? 'En formación');
+                $estado = trim($fila[5] ?? '');
                 $telefono = trim($fila[6] ?? '');
                 $trimestre = trim($fila[7] ?? '');
                 $fkIdGrupo = trim($fila[8] ?? '');
@@ -395,7 +395,7 @@ class ImportacionModel {
                 $telefono = trim($fila[5] ?? '');
                 $tipoCoordinador = trim($fila[6] ?? 'No es coordinador');
                 $gestor = trim($fila[7] ?? '');
-                $fkIdRol = trim($fila[8] ?? 4);
+                $fkIdRol = trim($fila[8] ?? 2);
                 
                 //======= Aquí para validar que dato es obligatorio Excel ======//
                 // Validar que al menos el nombre esté presente

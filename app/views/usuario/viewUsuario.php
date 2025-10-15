@@ -100,7 +100,7 @@
             <?php foreach ($usuarios as $usuario): ?>
                 <div class="report-card">
                     <div class="card-header">
-                        <span class="report-id">ID Usuario : <?php echo $usuario->idUsuario; ?></span>
+                        <span class="report-id">ID Usuario : <?php echo $usuario->id; ?></span>
                         <span class="usuario-email">Email: <?php echo $usuario->email; ?></span>
                     </div>
                     
@@ -108,17 +108,17 @@
                         <!-- Nuevos campos agregados -->
                         <div class="report-info">
                             <div class="info-label"><i class="fas fa-user"></i> Nombres:</div>
-                            <div class="info-value"><?php echo $usuario->nombres ?? 'No especificado'; ?></div>
+                            <div class="info-value"><?php echo $usuario->firstName ?? 'No especificado'; ?></div>
                         </div>
                         
                         <div class="report-info">
                             <div class="info-label"><i class="fas fa-user-tag"></i> Apellidos:</div>
-                            <div class="info-value"><?php echo $usuario->apellidos ?? 'No especificado'; ?></div>
+                            <div class="info-value"><?php echo $usuario->lastName ?? 'No especificado'; ?></div>
                         </div>
                         
                         <!-- <div class="report-info">
                             <div class="info-label"><i class="fas fa-id-card"></i> Documento:</div>
-                            <div class="info-value"><?php echo $usuario->documento ?? 'No especificado'; ?></div>
+                            <div class="info-value"><?php echo $usuario->document ?? 'No especificado'; ?></div>
                         </div> -->
                         
                         <div class="report-info">
@@ -128,7 +128,7 @@
                         
                         <div class="report-info">
                             <div class="info-label"><i class="fas fa-phone"></i> Teléfono:</div>
-                            <div class="info-value"><?php echo (!empty ($usuario->telefono)) ? htmlspecialchars($usuario->telefono) : 'No asignado'; ?></div> 
+                            <div class="info-value"><?php echo (!empty ($usuario->phone)) ? htmlspecialchars($usuario->phone) : 'No asignado'; ?></div> 
                         </div>
                         
                         <?php if (isset($usuario->nombreRol)): ?>
@@ -140,24 +140,24 @@
                         
                         <div class="report-info">
                             <div class="info-label"><i class="fas fa-user-cog"></i> Tipo Coordinador:</div>
-                            <div class="info-value"><?php echo $usuario->tipoCoordinador ?? 'No especificado'; ?></div>
+                            <div class="info-value"><?php echo $usuario->coordinadorType ?? 'No especificado'; ?></div>
                         </div>
                         
                         <!-- <div class="report-info">
                             <div class="info-label"><i class="fas fa-chalkboard-teacher"></i> Gestor:</div>
-                            <div class="info-value"><?php echo $usuario->gestor ?? 'No especificado'; ?></div>
+                            <div class="info-value"><?php echo $usuario->manager ?? 'No especificado'; ?></div>
                         </div> -->
                     </div>
                     
                     <div class="card-footer">
                         <div class="card-actions">
-                            <a href="/usuario/view/<?php echo $usuario->idUsuario; ?>" class="action-btn consultar" title="Ver detalles">
+                            <a href="/usuario/view/<?php echo $usuario->id; ?>" class="action-btn consultar" title="Ver detalles">
                                 <i class="fas fa-eye"></i> Detalles
                             </a>
-                            <a href="/usuario/edit/<?php echo $usuario->idUsuario; ?>" class="action-btn editar" title="Editar usuario">
+                            <a href="/usuario/edit/<?php echo $usuario->id; ?>" class="action-btn editar" title="Editar usuario">
                                 <i class="fas fa-edit"></i> Editar
                             </a>
-                            <a href="/usuario/delete/<?php echo $usuario->idUsuario; ?>" class="action-btn eliminar" title="Eliminar usuario">
+                            <a href="/usuario/delete/<?php echo $usuario->id; ?>" class="action-btn eliminar" title="Eliminar usuario">
                                 <i class="fas fa-trash"></i> Eliminar
                             </a>
                         </div>

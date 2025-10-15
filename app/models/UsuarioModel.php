@@ -63,7 +63,7 @@ class UsuarioModel extends BaseModel {
     public function getUsuario($id) {
         try {
             // CONSULTA ADAPTADA para PostgreSQL - unión con tabla 'rols' (no 'rol')
-            $sql = "SELECT users.*, rols.name AS nombreRol 
+            $sql = "SELECT users.*, rols.name AS \"nombreRol\" 
                     FROM users 
                     INNER JOIN rols 
                     ON users.\"fkIdRols\" = rols.id 
@@ -173,7 +173,7 @@ class UsuarioModel extends BaseModel {
     public function getAll():array {
         try {
             // CONSULTA ADAPTADA para PostgreSQL - unión con tabla 'rols'
-            $sql = "SELECT users.*, rols.name AS nombreRol 
+            $sql = "SELECT users.*, rols.name AS \"nombreRol\" 
                     FROM users 
                     LEFT JOIN rols ON users.\"fkIdRols\" = rols.id";
             $statement = $this->dbConnection->prepare($sql);

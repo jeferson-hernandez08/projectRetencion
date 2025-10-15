@@ -58,7 +58,7 @@ class ReporteController extends BaseController {
             
             // Obtener nombre del rol
             $rolModel = new RolModel();
-            $rol = $rolModel->getRol($usuario->fkIdRol);
+            $rol = $rolModel->getRol($usuario->{"fkIdRols"});
             $rolNombre = $rol->nombre ?? "Usuario";
         }
         
@@ -105,7 +105,7 @@ class ReporteController extends BaseController {
             
             // Obtener nombre del rol
             $rolModel = new RolModel();
-            $rol = $rolModel->getRol($usuario->fkIdRol);
+            $rol = $rolModel->getRol($usuario->{"fkIdRols"});
             $rolNombre = $rol->nombre ?? "Usuario";
         }
         
@@ -200,7 +200,7 @@ class ReporteController extends BaseController {
             
             // Obtener nombre del rol
             $rolModel = new RolModel();
-            $rol = $rolModel->getRol($usuario->fkIdRol);
+            $rol = $rolModel->getRol($usuario->{"fkIdRols"});
             $rolNombre = $rol->nombre ?? "Usuario";
         }
 
@@ -235,7 +235,7 @@ class ReporteController extends BaseController {
             
             // Obtener nombre del rol
             $rolModel = new RolModel();
-            $rol = $rolModel->getRol($usuario->fkIdRol);
+            $rol = $rolModel->getRol($usuario->{"fkIdRols"});
             $rolNombre = $rol->nombre ?? "Usuario";
         }
         
@@ -290,7 +290,7 @@ class ReporteController extends BaseController {
             
             // Obtener nombre del rol
             $rolModel = new RolModel();
-            $rol = $rolModel->getRol($usuario->fkIdRol);
+            $rol = $rolModel->getRol($usuario->{"fkIdRols"});
             $rolNombre = $rol->nombre ?? "Usuario";
         }
         
@@ -334,7 +334,7 @@ class ReporteController extends BaseController {
             
             // Obtener nombre del rol
             $rolModel = new RolModel();
-            $rol = $rolModel->getRol($usuario->fkIdRol);
+            $rol = $rolModel->getRol($usuario->{"fkIdRols"});
             $rolNombre = $rol->nombre ?? "Usuario";
         }
 

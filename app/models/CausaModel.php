@@ -22,7 +22,7 @@ class CausaModel extends BaseModel {
         try {
             // CONSULTA ADAPTADA para PostgreSQL con nombres de columnas en inglés
             // Se incluyen createdAt y updatedAt que son NOT NULL en PostgreSQL
-            $sql = "INSERT INTO $this->table (cause, variable, fkIdCategories, createdAt, updatedAt) 
+            $sql = "INSERT INTO $this->table (cause, variable, \"fkIdCategories\", \"createdAt\", \"updatedAt\") 
                     VALUES (:cause, :variable, :fkIdCategories, NOW(), NOW())";
                     
             // 1. Se prepara la consulta
@@ -48,10 +48,10 @@ class CausaModel extends BaseModel {
     public function getCausa($id) {
         try {
             // CONSULTA ADAPTADA para PostgreSQL - nombres de tablas y columnas actualizados
-            $sql = "SELECT causes.*, categories.name AS nombreCategoria 
+            $sql = "SELECT causes.*, categories.name AS \"nombreCategoria\" 
                     FROM causes 
                     INNER JOIN categories 
-                    ON causes.fkIdCategories = categories.id 
+                    ON causes.\"fkIdCategories\" = categories.id 
                     WHERE causes.id = :id";
                     
             $statement = $this->dbConnection->prepare($sql);
@@ -71,8 +71,8 @@ class CausaModel extends BaseModel {
             $sql = "UPDATE $this->table SET 
                         cause = :cause, 
                         variable = :variable, 
-                        fkIdCategories = :fkIdCategories,
-                        updatedAt = NOW() 
+                        \"fkIdCategories\" = :fkIdCategories,
+                        \"updatedAt\" = NOW() 
                     WHERE id = :id";
                     
             $statement = $this->dbConnection->prepare($sql);
@@ -105,9 +105,9 @@ class CausaModel extends BaseModel {
     public function getAll():array {
         try {
             // CONSULTA ADAPTADA para PostgreSQL - nombres de tablas y columnas actualizados
-            $sql = "SELECT causes.*, categories.name AS nombreCategoria 
+            $sql = "SELECT causes.*, categories.name AS \"nombreCategoria\" 
                     FROM causes 
-                    LEFT JOIN categories ON causes.fkIdCategories = categories.id";
+                    LEFT JOIN categories ON causes.\"fkIdCategories\" = categories.id";
                     
             $statement = $this->dbConnection->prepare($sql);
             $statement->execute();

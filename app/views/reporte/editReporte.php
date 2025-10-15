@@ -9,7 +9,7 @@
             <!-- Campo ID (oculto) -->
             <div class="form-group">
                 <label for="txtId">Id del reporte</label>
-                <input type="text" readonly value="<?php echo $reporte->idReporte ?>" name="txtId" id="txtId" class="form-control">
+                <input type="text" readonly value="<?php echo $reporte->id ?>" name="txtId" id="txtId" class="form-control">
             </div>
 
             <!-- Campo Fecha de Creación -->
@@ -21,15 +21,15 @@
             <!-- Campo Descripción -->
             <div class="form-group">
                 <label for="txtDescripcion">Descripción</label>
-                <textarea name="txtDescripcion" id="txtDescripcion" class="form-control" required><?php echo $reporte->descripcion ?></textarea>
+                <textarea name="txtDescripcion" id="txtDescripcion" class="form-control" required><?php echo $reporte->description ?></textarea>
             </div>
 
             <!-- Campo Direccionamiento (select) -->
             <div class="form-group">
                 <label for="txtDireccionamiento">Direccionamiento</label>
                 <select name="txtDireccionamiento" id="txtDireccionamiento" class="form-control" required>
-                    <option value="Coordinador académico" <?php echo ($reporte->direccionamiento == 'Coordinador académico') ? 'selected' : '' ?>>Coordinador académico</option>
-                    <option value="Coordinador de formación" <?php echo ($reporte->direccionamiento == 'Coordinador de formación') ? 'selected' : '' ?>>Coordinador de formación</option>
+                    <option value="Coordinador académico" <?php echo ($reporte->addressing == 'Coordinador académico') ? 'selected' : '' ?>>Coordinador académico</option>
+                    <option value="Coordinador de formación" <?php echo ($reporte->addressing == 'Coordinador de formación') ? 'selected' : '' ?>>Coordinador de formación</option>
                 </select>
             </div>
 
@@ -37,10 +37,10 @@
             <div class="form-group">
                 <label for="txtEstado">Estado</label>
                 <select name="txtEstado" id="txtEstado" class="form-control" required>
-                    <option value="Registrado" <?php echo ($reporte->estado == 'Registrado') ? 'selected' : '' ?>>Registrado</option>
-                    <option value="En proceso" <?php echo ($reporte->estado == 'En proceso') ? 'selected' : '' ?>>En proceso</option>
-                    <option value="Retenido" <?php echo ($reporte->estado == 'Retenido') ? 'selected' : '' ?>>Retenido</option>
-                    <option value="Desertado" <?php echo ($reporte->estado == 'Desertado') ? 'selected' : '' ?>>Desertado</option>
+                    <option value="Registrado" <?php echo ($reporte->state == 'Registrado') ? 'selected' : '' ?>>Registrado</option>
+                    <option value="En proceso" <?php echo ($reporte->state == 'En proceso') ? 'selected' : '' ?>>En proceso</option>
+                    <option value="Retenido" <?php echo ($reporte->state == 'Retenido') ? 'selected' : '' ?>>Retenido</option>
+                    <option value="Desertado" <?php echo ($reporte->state == 'Desertado') ? 'selected' : '' ?>>Desertado</option>
                 </select>
             </div>
 
@@ -52,9 +52,9 @@
                     <?php
                         if (isset($aprendices) && is_array($aprendices)) {
                             foreach ($aprendices as $aprendiz) {
-                                $selected = ($reporte->fkIdAprendiz == $aprendiz->idAprendiz) ? 'selected' : '';
-                                $nombreCompletoAprendiz = $aprendiz->nombres . ' ' . $aprendiz->apellidos;
-                                echo "<option value='".$aprendiz->idAprendiz."' $selected>".$nombreCompletoAprendiz."</option>";
+                                $selected = ($reporte->fkIdApprentices == $aprendiz->id) ? 'selected' : '';
+                                $nombreCompletoAprendiz = $aprendiz->firtsName . ' ' . $aprendiz->lastName;
+                                echo "<option value='".$aprendiz->id."' $selected>".$nombreCompletoAprendiz."</option>";
                             }
                         } else {
                             echo "ERROR";
@@ -65,11 +65,11 @@
 
             <!-- Campo Usuario -->
             <!-- Campo Usuario (oculto y mostrado) -->
-            <input type="hidden" name="txtFkIdUsuario" value="<?php echo $usuarioActual->idUsuario; ?>">
+            <input type="hidden" name="txtFkIdUsuario" value="<?php echo $usuarioActual->id; ?>">
             <!-- Campo Usuario (mostrar en el edit) -->
             <div class="form-group">
                 <label>Usuario</label>
-                <input type="text" class="form-control" value="<?php echo $usuarioActual->nombres . ' ' . $usuarioActual->apellidos; ?>" readonly>
+                <input type="text" class="form-control" value="<?php echo $usuarioActual->firstName . ' ' . $usuarioActual->lastName; ?>" readonly>
             </div>
             <!-- <div class="form-group">
                 <label for="txtFkIdUsuario">Usuario</label>

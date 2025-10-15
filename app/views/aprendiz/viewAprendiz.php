@@ -111,7 +111,7 @@
                         
                         <div class="report-info">
                             <div class="info-label"><i class="fas fa-user-tag"></i> Apellidos:</div>
-                            <div class="info-value"><?php echo $value->apellidos ?? 'No especificado'; ?></div>
+                            <div class="info-value"><?php echo $value->lastName ?? 'No especificado'; ?></div>
                         </div>
                         
                         <div class="report-info">
@@ -121,7 +121,7 @@
                         
                         <div class="report-info">
                             <div class="info-label"><i class="fas fa-info-circle"></i> Estado:</div>
-                            <div class="info-value"><?php echo $value->status ?? 'No especificado'; ?></div>
+                            <div class="info-value"><?php echo (!empty ($value->status)) ? htmlspecialchars($value->status) : 'No asignado'; ?></div>
                         </div>
                         
                         

@@ -100,13 +100,13 @@ class AprendizModel extends BaseModel {
                         \"documentType\" = :documentType, 
                         document = :document, 
                         \"firtsName\" = :firtsName, 
-                        lastName = :lastName, 
+                        \"lastName\" = :lastName, 
                         phone = :phone, 
                         email = :email, 
                         status = :status, 
                         quarter = :quarter, 
-                        fkIdGroups = :fkIdGroups,
-                        updatedAt = NOW() 
+                        \"fkIdGroups\" = :fkIdGroups,
+                        \"updatedAt\" = NOW() 
                     WHERE id = :id";
                     
             $statement = $this->dbConnection->prepare($sql);

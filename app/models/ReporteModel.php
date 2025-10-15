@@ -28,7 +28,7 @@ class ReporteModel extends BaseModel {
 
             // CONSULTA ADAPTADA para PostgreSQL con nombres de columnas en inglés
             // Se usa NOW() para las fechas automáticas de PostgreSQL
-            $sql = "INSERT INTO $this->table (creationDate, description, addressing, state, fkIdApprentices, fkIdUsers, createdAt, updatedAt) 
+            $sql = "INSERT INTO $this->table (\"creationDate\", description, addressing, state, \"fkIdApprentices\", \"fkIdUsers\", \"createdAt\", \"updatedAt\") 
                     VALUES (NOW(), :description, :addressing, :state, :fkIdApprentices, :fkIdUsers, NOW(), NOW())";
                     
             // 1. Se prepara la consulta
@@ -56,13 +56,13 @@ class ReporteModel extends BaseModel {
             // CONSULTA ADAPTADA para PostgreSQL - nombres de tablas y columnas actualizados
             // Se usa CONCAT de PostgreSQL y nombres de tablas en inglés
             $sql = "SELECT reports.*, 
-                        CONCAT(users.firstName, ' ', users.lastName) AS nombreUsuario, 
-                        CONCAT(apprentices.firtsName, ' ', apprentices.lastName) AS nombreAprendiz 
+                        CONCAT(users.\"firstName\", ' ', users.\"lastName\") AS \"nombreUsuario\", 
+                        CONCAT(apprentices.\"firtsName\", ' ', apprentices.\"lastName\") AS \"nombreAprendiz\" 
                     FROM reports 
                     INNER JOIN users 
-                    ON reports.fkIdUsers = users.id 
+                    ON reports.\"fkIdUsers\" = users.id 
                     INNER JOIN apprentices
-                    ON reports.fkIdApprentices = apprentices.id
+                    ON reports.\"fkIdApprentices\" = apprentices.id
                     WHERE reports.id = :id";
                     
             $statement = $this->dbConnection->prepare($sql);
@@ -83,9 +83,9 @@ class ReporteModel extends BaseModel {
                         description = :description, 
                         addressing = :addressing, 
                         state = :state, 
-                        fkIdApprentices = :fkIdApprentices, 
-                        fkIdUsers = :fkIdUsers,
-                        updatedAt = NOW() 
+                        \"fkIdApprentices\" = :fkIdApprentices, 
+                        \"fkIdUsers\" = :fkIdUsers,
+                        \"updatedAt\" = NOW() 
                     WHERE id = :id";       // Se elimina fechaCreacion=:fechaCreacion, para fecha automática.
                     
             $statement = $this->dbConnection->prepare($sql);
@@ -110,7 +110,7 @@ class ReporteModel extends BaseModel {
             $this->dbConnection->beginTransaction();
 
             // 1. Eliminar relaciones en causes_reports (nombre de tabla en PostgreSQL)
-            $sqlRelaciones = "DELETE FROM causes_reports WHERE fkIdReports = :id";
+            $sqlRelaciones = "DELETE FROM causes_reports WHERE \"fkIdReports\" = :id";
             $stmtRelaciones = $this->dbConnection->prepare($sqlRelaciones);
             $stmtRelaciones->bindParam(":id", $id, PDO::PARAM_INT);
             $stmtRelaciones->execute();
@@ -144,7 +144,7 @@ class ReporteModel extends BaseModel {
                 $idCausa = $causa['causaId'];
 
                 // CONSULTA ADAPTADA para PostgreSQL - nombres de tabla y columnas actualizados
-                $sql = "INSERT INTO causes_reports (fkIdReports, fkIdCauses) VALUES (:idReporte, :idCausa)";
+                $sql = "INSERT INTO causes_reports (\"fkIdReports\", \"fkIdCauses\") VALUES (:idReporte, :idCausa)";
                 $statement = $this->dbConnection->prepare($sql);
                 $statement->bindParam(':idReporte', $idReporte, PDO::PARAM_INT);
                 $statement->bindParam(':idCausa', $idCausa, PDO::PARAM_INT);
@@ -161,7 +161,7 @@ class ReporteModel extends BaseModel {
     public function updateEstado($id, $estado) {
         try {
             // CONSULTA ADAPTADA para PostgreSQL
-            $sql = "UPDATE $this->table SET state = :state, updatedAt = NOW() WHERE id = :id";
+            $sql = "UPDATE $this->table SET state = :state, \"updatedAt\" = NOW() WHERE id = :id";
             $statement = $this->dbConnection->prepare($sql);
             $statement->bindParam(":id", $id, PDO::PARAM_INT);
             $statement->bindParam(":state", $estado, PDO::PARAM_STR);
@@ -177,9 +177,9 @@ class ReporteModel extends BaseModel {
         try {
             // CONSULTA ADAPTADA para PostgreSQL - nombres de tablas y columnas actualizados
             $sql = "SELECT reports.*, 
-                        CONCAT(apprentices.firtsName, ' ', apprentices.lastName) AS nombreAprendiz 
+                        CONCAT(apprentices.\"firtsName\", ' ', apprentices.\"lastName\") AS \"nombreAprendiz\" 
                     FROM reports 
-                    INNER JOIN apprentices ON reports.fkIdApprentices = apprentices.id";
+                    INNER JOIN apprentices ON reports.\"fkIdApprentices\" = apprentices.id";
                     
             $statement = $this->dbConnection->prepare($sql);
             $statement->execute();

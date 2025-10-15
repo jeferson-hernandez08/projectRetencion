@@ -26,7 +26,7 @@
                     <?php
                         if (isset($categorias) && is_array($categorias)) {
                             foreach ($categorias as $key => $value) {
-                                echo "<option value='".$value->idCategoria."'>".$value->nombre."</option>";
+                                echo "<option value='".$value->id."'>".$value->name."</option>";
                             }
                         } else {
                             echo "ERROR";

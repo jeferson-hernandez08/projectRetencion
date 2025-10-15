@@ -70,7 +70,7 @@
                     <?php
                         if (isset($roles) && is_array($roles)) {
                             foreach ($roles as $key => $value) {
-                                echo "<option value='".$value->idRol."'>".$value->nombre."</option>";
+                                echo "<option value='".$value->id."'>".$value->name."</option>";
                             }
                         } else {
                             echo "ERROR";

@@ -20,12 +20,12 @@
         <img src="/img/warning.svg" alt="Advertencia" class="confirmation-icon">
         <h2 class="confirmation-title">¿Está seguro de realizar esta acción?</h2>
         <p class="confirmation-message">
-            Se eliminará permanentemente el aprendiz #<?php echo $aprendiz->idAprendiz ?>,
-            aprendiz <?php echo $aprendiz->nombres ?> <?php echo $aprendiz->apellidos ?>
+            Se eliminará permanentemente el aprendiz #<?php echo $aprendiz->id ?>,
+            aprendiz <?php echo $aprendiz->firtsName ?> <?php echo $aprendiz->lastName ?>
         </p>
         
         <form action="/aprendiz/remove" method="post">
-            <input type="hidden" value="<?php echo $aprendiz->idAprendiz ?>" name="txtId">
+            <input type="hidden" value="<?php echo $aprendiz->id ?>" name="txtId">
             <div class="confirmation-buttons">
                 <button type="submit" class="btn-confirm">Confirmar</button>
                 <a href="/aprendiz/view" class="btn-cancel">Cancelar</a>
