@@ -15,15 +15,15 @@
                         <div class='record-one__details'>
                             <div class='record-one__row'>
                                 <span class='record-one__label'>ID:</span>
-                                <span class='record-one__value'>{$programa->idProgramaFormacion}</span>
+                                <span class='record-one__value'>{$programa->id}</span>
                             </div>
                             <div class='record-one__row'>
                                 <span class='record-one__label'>Nombre:</span>
-                                <span class='record-one__value'>{$programa->nombre}</span>
+                                <span class='record-one__value'>{$programa->name}</span>
                             </div>
                             <div class='record-one__row'>
                                 <span class='record-one__label'>Nivel:</span>
-                                <span class='record-one__value'>" . ($programa->nivel ?? 'No especificado') . "</span>
+                                <span class='record-one__value'>" . ($programa->level ?? 'No especificado') . "</span>
                             </div>
                             <div class='record-one__row'>
                                 <span class='record-one__label'>Versión:</span>

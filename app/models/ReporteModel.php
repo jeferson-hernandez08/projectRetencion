@@ -16,7 +16,7 @@ class ReporteModel extends BaseModel {
         ?string $fkIdAprendiz = null,
         ?string $fkIdUsuario = null
     ) {
-        $this->table = "reporte";
+        $this->table = "reports";  // Cambiado de "reporte" a "reports" para PostgreSQL
         // Se llama al constructor del padre
         parent::__construct();
     }
@@ -26,28 +26,20 @@ class ReporteModel extends BaseModel {
             // Forzar estado "Registrado" al crear
             $estado = "Registrado"; // <-- Aseguramos el valor fijo del campo registrado, usuario mayor interactividad.
 
-            // Generar fecha automática | Colombia
-            date_default_timezone_set('America/Bogota');
-            $fechaCreacion = date('Y-m-d H:i:s');
-
-            $sql = "INSERT INTO $this->table (fechaCreacion, descripcion, direccionamiento, estado, fkIdAprendiz, fkIdUsuario) 
-                    VALUES (:fechaCreacion, :descripcion, :direccionamiento, :estado, :fkIdAprendiz, :fkIdUsuario)";
+            // CONSULTA ADAPTADA para PostgreSQL con nombres de columnas en inglés
+            // Se usa NOW() para las fechas automáticas de PostgreSQL
+            $sql = "INSERT INTO $this->table (creationDate, description, addressing, state, fkIdApprentices, fkIdUsers, createdAt, updatedAt) 
+                    VALUES (NOW(), :description, :addressing, :state, :fkIdApprentices, :fkIdUsers, NOW(), NOW())";
+                    
             // 1. Se prepara la consulta
             $statement = $this->dbConnection->prepare($sql);
-            // $fechaCreacion = $this->fechaCreacion ?? '';         // Estos datos es opcional
-            // $descripcion = $this->descripcion ?? '';
-            // $direccionamiento = $this->direccionamiento ?? '';
-            // $estado = $this->estado ?? '';
-            // $fkIdAprendiz = $this->fkIdAprendiz ?? '';
-            // $fkIdUsuario = $this->fkIdUsuario ?? '';
 
-            // 2. BindParam para sanitizar los datos de entrada
-            $statement->bindParam('fechaCreacion', $fechaCreacion, PDO::PARAM_STR);
-            $statement->bindParam('descripcion', $descripcion, PDO::PARAM_STR);
-            $statement->bindParam('direccionamiento', $direccionamiento, PDO::PARAM_STR);
-            $statement->bindParam('estado', $estado, PDO::PARAM_STR);
-            $statement->bindParam('fkIdAprendiz', $fkIdAprendiz, PDO::PARAM_INT);
-            $statement->bindParam('fkIdUsuario', $fkIdUsuario, PDO::PARAM_INT);
+            // 2. BindParam para sanitizar los datos de entrada - NOMBRES ADAPTADOS
+            $statement->bindParam('description', $descripcion, PDO::PARAM_STR);
+            $statement->bindParam('addressing', $direccionamiento, PDO::PARAM_STR);
+            $statement->bindParam('state', $estado, PDO::PARAM_STR);
+            $statement->bindParam('fkIdApprentices', $fkIdAprendiz, PDO::PARAM_INT);
+            $statement->bindParam('fkIdUsers', $fkIdUsuario, PDO::PARAM_INT);
 
             // 3. Ejecutar la consulta
             // $result = $statement->execute();
@@ -55,51 +47,60 @@ class ReporteModel extends BaseModel {
             return $statement->execute();    // SE CAMBIA ESTO  
         } catch (PDOException $ex) {
             echo "Error al guardar el reporte> ".$ex->getMessage();
+            return false;
         }
     }
 
     public function getReporte($id) {
         try {
-            $sql = "SELECT reporte.*, 
-                        CONCAT(usuario.nombres, ' ', usuario.apellidos) AS nombreUsuario, 
-                        CONCAT(aprendiz.nombres, ' ', aprendiz.apellidos) AS nombreAprendiz 
-                    FROM reporte 
-                    INNER JOIN usuario 
-                    ON reporte.fkIdUsuario = usuario.idUsuario 
-                    INNER JOIN aprendiz
-                    ON reporte.fkIdAprendiz = aprendiz.idAprendiz
-                    WHERE reporte.idReporte=:id";
+            // CONSULTA ADAPTADA para PostgreSQL - nombres de tablas y columnas actualizados
+            // Se usa CONCAT de PostgreSQL y nombres de tablas en inglés
+            $sql = "SELECT reports.*, 
+                        CONCAT(users.firstName, ' ', users.lastName) AS nombreUsuario, 
+                        CONCAT(apprentices.firtsName, ' ', apprentices.lastName) AS nombreAprendiz 
+                    FROM reports 
+                    INNER JOIN users 
+                    ON reports.fkIdUsers = users.id 
+                    INNER JOIN apprentices
+                    ON reports.fkIdApprentices = apprentices.id
+                    WHERE reports.id = :id";
+                    
             $statement = $this->dbConnection->prepare($sql);
             $statement->bindParam(":id", $id, PDO::PARAM_INT);
             $statement->execute();
             $result = $statement->fetchAll(PDO::FETCH_OBJ);
             return $result[0]; 
         } catch (PDOException $ex) {
-            echo "Error al obtener el reporte" . $ex->getMessage();
+            echo "Error al obtener el reporte: " . $ex->getMessage();
+            return null;
         }
     }
 
     public function editReporte($id, $descripcion, $direccionamiento, $estado, $fkIdAprendiz, $fkIdUsuario) {  // Se elimina $fechaCreacion, fecha automática.
         try {
+            // CONSULTA ADAPTADA para PostgreSQL - nombres de columnas actualizados
             $sql = "UPDATE $this->table SET 
-                        descripcion=:descripcion, 
-                        direccionamiento=:direccionamiento, 
-                        estado=:estado, 
-                        fkIdAprendiz=:fkIdAprendiz, 
-                        fkIdUsuario=:fkIdUsuario 
-                    WHERE idReporte=:id";       // Se elimina fechaCreacion=:fechaCreacion, para fecha automática.
+                        description = :description, 
+                        addressing = :addressing, 
+                        state = :state, 
+                        fkIdApprentices = :fkIdApprentices, 
+                        fkIdUsers = :fkIdUsers,
+                        updatedAt = NOW() 
+                    WHERE id = :id";       // Se elimina fechaCreacion=:fechaCreacion, para fecha automática.
+                    
             $statement = $this->dbConnection->prepare($sql);
             $statement->bindParam(":id", $id, PDO::PARAM_INT);
             //$statement->bindParam(":fechaCreacion", $fechaCreacion, PDO::PARAM_STR);
-            $statement->bindParam(":descripcion", $descripcion, PDO::PARAM_STR);
-            $statement->bindParam(":direccionamiento", $direccionamiento, PDO::PARAM_STR);
-            $statement->bindParam(":estado", $estado, PDO::PARAM_STR);
-            $statement->bindParam(":fkIdAprendiz", $fkIdAprendiz, PDO::PARAM_INT);
-            $statement->bindParam(":fkIdUsuario", $fkIdUsuario, PDO::PARAM_INT);
+            $statement->bindParam(":description", $descripcion, PDO::PARAM_STR);
+            $statement->bindParam(":addressing", $direccionamiento, PDO::PARAM_STR);
+            $statement->bindParam(":state", $estado, PDO::PARAM_STR);
+            $statement->bindParam(":fkIdApprentices", $fkIdAprendiz, PDO::PARAM_INT);
+            $statement->bindParam(":fkIdUsers", $fkIdUsuario, PDO::PARAM_INT);
             $result = $statement->execute();
             return $result;
         } catch (PDOException $ex) {
-            echo "No se pudo editar el reporte".$ex->getMessage();
+            echo "No se pudo editar el reporte: ".$ex->getMessage();
+            return false;
         }
     }
 
@@ -108,14 +109,14 @@ class ReporteModel extends BaseModel {
             // Iniciar transacción | Para asegurar que ambas eliminaciones (reporte y relaciones) se completen con éxito. Si falla alguna operación, se revierten todos los cambios
             $this->dbConnection->beginTransaction();
 
-            // 1. Eliminar relaciones en causa_reporte
-            $sqlRelaciones = "DELETE FROM causa_reporte WHERE fkIdReporte = :id";
+            // 1. Eliminar relaciones en causes_reports (nombre de tabla en PostgreSQL)
+            $sqlRelaciones = "DELETE FROM causes_reports WHERE fkIdReports = :id";
             $stmtRelaciones = $this->dbConnection->prepare($sqlRelaciones);
             $stmtRelaciones->bindParam(":id", $id, PDO::PARAM_INT);
             $stmtRelaciones->execute();
 
-            // 2. Eliminar el reporte
-            $sql = "DELETE FROM $this->table WHERE idReporte=:id";
+            // 2. Eliminar el reporte - CONSULTA ADAPTADA
+            $sql = "DELETE FROM $this->table WHERE id = :id";
             $statement = $this->dbConnection->prepare($sql);
             $statement->bindParam(":id", $id, PDO::PARAM_INT);
             $result = $statement->execute();
@@ -126,7 +127,7 @@ class ReporteModel extends BaseModel {
         } catch (PDOException $ex) {
             // Revertir cambios en caso de error
             $this->dbConnection->rollBack();
-            echo "No se pudo eliminar el reporte".$ex->getMessage();
+            echo "No se pudo eliminar el reporte: ".$ex->getMessage();
             return false;
         }
     }
@@ -142,7 +143,8 @@ class ReporteModel extends BaseModel {
                 // Acceder correctamente al valor de causaId
                 $idCausa = $causa['causaId'];
 
-                $sql = "INSERT INTO causa_reporte (fkIdReporte, fkIdCausa) VALUES (:idReporte, :idCausa)";
+                // CONSULTA ADAPTADA para PostgreSQL - nombres de tabla y columnas actualizados
+                $sql = "INSERT INTO causes_reports (fkIdReports, fkIdCauses) VALUES (:idReporte, :idCausa)";
                 $statement = $this->dbConnection->prepare($sql);
                 $statement->bindParam(':idReporte', $idReporte, PDO::PARAM_INT);
                 $statement->bindParam(':idCausa', $idCausa, PDO::PARAM_INT);
@@ -158,10 +160,11 @@ class ReporteModel extends BaseModel {
     // Funcion para cambio de estado del aprendiz en viewReporte
     public function updateEstado($id, $estado) {
         try {
-            $sql = "UPDATE $this->table SET estado = :estado WHERE idReporte = :id";
+            // CONSULTA ADAPTADA para PostgreSQL
+            $sql = "UPDATE $this->table SET state = :state, updatedAt = NOW() WHERE id = :id";
             $statement = $this->dbConnection->prepare($sql);
             $statement->bindParam(":id", $id, PDO::PARAM_INT);
-            $statement->bindParam(":estado", $estado, PDO::PARAM_STR);
+            $statement->bindParam(":state", $estado, PDO::PARAM_STR);
             return $statement->execute();
         } catch (PDOException $ex) {
             error_log("Error al actualizar estado: " . $ex->getMessage());
@@ -172,16 +175,59 @@ class ReporteModel extends BaseModel {
     // Funcion getAll para capturar nombre completo del aprendiz y renderizarla en el viewReporte.
     public function getAll():array {     // Se usa : array en la declaración del método para coincidir con la clase padre
         try {
-            $sql = "SELECT reporte.*, 
-                        CONCAT(aprendiz.nombres, ' ', aprendiz.apellidos) AS nombreAprendiz 
-                    FROM reporte 
-                    INNER JOIN aprendiz ON reporte.fkIdAprendiz = aprendiz.idAprendiz";
+            // CONSULTA ADAPTADA para PostgreSQL - nombres de tablas y columnas actualizados
+            $sql = "SELECT reports.*, 
+                        CONCAT(apprentices.firtsName, ' ', apprentices.lastName) AS nombreAprendiz 
+                    FROM reports 
+                    INNER JOIN apprentices ON reports.fkIdApprentices = apprentices.id";
+                    
             $statement = $this->dbConnection->prepare($sql);
             $statement->execute();
             return $statement->fetchAll(PDO::FETCH_OBJ);
         } catch (PDOException $ex) {
             echo "Error al obtener todos los reportes: " . $ex->getMessage();
             return [];    
+        }
+    }
+
+    /**
+     * Método adicional para obtener reportes por aprendiz
+     * @param int $idAprendiz ID del aprendiz
+     * @return array Array de reportes del aprendiz
+     */
+    public function getReportesPorAprendiz($idAprendiz) {
+        try {
+            $sql = "SELECT * FROM $this->table WHERE fkIdApprentices = :idAprendiz ORDER BY creationDate DESC";
+            $statement = $this->dbConnection->prepare($sql);
+            $statement->bindParam(":idAprendiz", $idAprendiz, PDO::PARAM_INT);
+            $statement->execute();
+            return $statement->fetchAll(PDO::FETCH_OBJ);
+        } catch (PDOException $ex) {
+            error_log("Error al obtener reportes por aprendiz: " . $ex->getMessage());
+            return [];
+        }
+    }
+
+    /**
+     * Método adicional para obtener reportes por estado
+     * @param string $estado Estado del reporte
+     * @return array Array de reportes con el estado especificado
+     */
+    public function getReportesPorEstado($estado) {
+        try {
+            $sql = "SELECT reports.*, 
+                        CONCAT(apprentices.firtsName, ' ', apprentices.lastName) AS nombreAprendiz 
+                    FROM reports 
+                    INNER JOIN apprentices ON reports.fkIdApprentices = apprentices.id
+                    WHERE reports.state = :estado";
+                    
+            $statement = $this->dbConnection->prepare($sql);
+            $statement->bindParam(":estado", $estado, PDO::PARAM_STR);
+            $statement->execute();
+            return $statement->fetchAll(PDO::FETCH_OBJ);
+        } catch (PDOException $ex) {
+            error_log("Error al obtener reportes por estado: " . $ex->getMessage());
+            return [];
         }
     }
 

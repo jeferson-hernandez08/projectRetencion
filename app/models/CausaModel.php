@@ -13,25 +13,28 @@ class CausaModel extends BaseModel {
         ?string $variables = null,
         ?string $fkIdCategoria = null
     ) {
-        $this->table = "causa";
+        $this->table = "causes";  // Cambiado de "causa" a "causes" para PostgreSQL
         // Se llama al constructor del padre
         parent::__construct();
     }
 
     public function saveCausa($causa, $variables, $fkIdCategoria) {
         try {
-            $sql = "INSERT INTO $this->table (causa, variables, fkIdCategoria) 
-                    VALUES (:causa, :variables, :fkIdCategoria)";
+            // CONSULTA ADAPTADA para PostgreSQL con nombres de columnas en inglés
+            // Se incluyen createdAt y updatedAt que son NOT NULL en PostgreSQL
+            $sql = "INSERT INTO $this->table (cause, variable, fkIdCategories, createdAt, updatedAt) 
+                    VALUES (:cause, :variable, :fkIdCategories, NOW(), NOW())";
+                    
             // 1. Se prepara la consulta
             $statement = $this->dbConnection->prepare($sql);
             // $causa = $this->causa ?? '';         // Estos datos es opcional
             // $variables = $this->variables ?? '';
             // $fkIdCategoria = $this->fkIdCategoria ?? '';
 
-            // 2. BindParam para sanitizar los datos de entrada
-            $statement->bindParam('causa', $causa, PDO::PARAM_STR);
-            $statement->bindParam('variables', $variables, PDO::PARAM_STR);
-            $statement->bindParam('fkIdCategoria', $fkIdCategoria, PDO::PARAM_INT);
+            // 2. BindParam para sanitizar los datos de entrada - NOMBRES ADAPTADOS
+            $statement->bindParam('cause', $causa, PDO::PARAM_STR);
+            $statement->bindParam('variable', $variables, PDO::PARAM_STR);
+            $statement->bindParam('fkIdCategories', $fkIdCategoria, PDO::PARAM_INT);
 
             // 3. Ejecutar la consulta
             $result = $statement->execute();
@@ -44,11 +47,13 @@ class CausaModel extends BaseModel {
 
     public function getCausa($id) {
         try {
-            $sql = "SELECT causa.*, categoria.nombre AS nombreCategoria 
-                    FROM causa 
-                    INNER JOIN categoria 
-                    ON causa.fkIdCategoria = categoria.idCategoria 
-                    WHERE causa.idCausa=:id";
+            // CONSULTA ADAPTADA para PostgreSQL - nombres de tablas y columnas actualizados
+            $sql = "SELECT causes.*, categories.name AS nombreCategoria 
+                    FROM causes 
+                    INNER JOIN categories 
+                    ON causes.fkIdCategories = categories.id 
+                    WHERE causes.id = :id";
+                    
             $statement = $this->dbConnection->prepare($sql);
             $statement->bindParam(":id", $id, PDO::PARAM_INT);
             $statement->execute();
@@ -62,16 +67,19 @@ class CausaModel extends BaseModel {
 
     public function editCausa($id, $causa, $variables, $fkIdCategoria) {
         try {
+            // CONSULTA ADAPTADA para PostgreSQL - nombres de columnas actualizados
             $sql = "UPDATE $this->table SET 
-                        causa=:causa, 
-                        variables=:variables, 
-                        fkIdCategoria=:fkIdCategoria 
-                    WHERE idCausa=:id";
+                        cause = :cause, 
+                        variable = :variable, 
+                        fkIdCategories = :fkIdCategories,
+                        updatedAt = NOW() 
+                    WHERE id = :id";
+                    
             $statement = $this->dbConnection->prepare($sql);
             $statement->bindParam(":id", $id, PDO::PARAM_INT);
-            $statement->bindParam(":causa", $causa, PDO::PARAM_STR);
-            $statement->bindParam(":variables", $variables, PDO::PARAM_STR);
-            $statement->bindParam(":fkIdCategoria", $fkIdCategoria, PDO::PARAM_INT);
+            $statement->bindParam(":cause", $causa, PDO::PARAM_STR);
+            $statement->bindParam(":variable", $variables, PDO::PARAM_STR);
+            $statement->bindParam(":fkIdCategories", $fkIdCategoria, PDO::PARAM_INT);
             $result = $statement->execute();
             return $result;
         } catch (PDOException $ex) {
@@ -82,7 +90,8 @@ class CausaModel extends BaseModel {
 
     public function removeCausa($id) {
         try {
-            $sql = "DELETE FROM $this->table WHERE idCausa=:id";
+            // CONSULTA ADAPTADA para PostgreSQL - nombre de columna cambiado
+            $sql = "DELETE FROM $this->table WHERE id = :id";
             $statement = $this->dbConnection->prepare($sql);
             $statement->bindParam(":id", $id, PDO::PARAM_INT);
             $result = $statement->execute();
@@ -95,9 +104,11 @@ class CausaModel extends BaseModel {
 
     public function getAll():array {
         try {
-            $sql = "SELECT causa.*, categoria.nombre AS nombreCategoria 
-                    FROM causa 
-                    LEFT JOIN categoria ON causa.fkIdCategoria = categoria.idCategoria";
+            // CONSULTA ADAPTADA para PostgreSQL - nombres de tablas y columnas actualizados
+            $sql = "SELECT causes.*, categories.name AS nombreCategoria 
+                    FROM causes 
+                    LEFT JOIN categories ON causes.fkIdCategories = categories.id";
+                    
             $statement = $this->dbConnection->prepare($sql);
             $statement->execute();
             return $statement->fetchAll(PDO::FETCH_OBJ);
@@ -106,4 +117,95 @@ class CausaModel extends BaseModel {
             return [];
         }
     }
+
+    /**
+     * Método para obtener causas por categoría
+     * @param int $idCategoria ID de la categoría
+     * @return array Array de causas de la categoría especificada
+     */
+    public function getCausasPorCategoria($idCategoria) {
+        try {
+            $sql = "SELECT causes.*, categories.name AS nombreCategoria 
+                    FROM causes 
+                    INNER JOIN categories ON causes.fkIdCategories = categories.id
+                    WHERE causes.fkIdCategories = :idCategoria
+                    ORDER BY causes.cause";
+                    
+            $statement = $this->dbConnection->prepare($sql);
+            $statement->bindParam(":idCategoria", $idCategoria, PDO::PARAM_INT);
+            $statement->execute();
+            return $statement->fetchAll(PDO::FETCH_OBJ);
+        } catch (PDOException $ex) {
+            error_log("Error al obtener causas por categoría: " . $ex->getMessage());
+            return [];
+        }
+    }
+
+    /**
+     * Método para contar causas por categoría
+     * @param int $idCategoria ID de la categoría
+     * @return int Número de causas en la categoría
+     */
+    public function contarCausasPorCategoria($idCategoria) {
+        try {
+            $sql = "SELECT COUNT(*) as total FROM causes WHERE fkIdCategories = :idCategoria";
+            $statement = $this->dbConnection->prepare($sql);
+            $statement->bindParam(":idCategoria", $idCategoria, PDO::PARAM_INT);
+            $statement->execute();
+            $result = $statement->fetch(PDO::FETCH_OBJ);
+            return $result->total;
+        } catch (PDOException $ex) {
+            error_log("Error al contar causas por categoría: " . $ex->getMessage());
+            return 0;
+        }
+    }
+
+    /**
+     * Método para buscar causas por texto
+     * @param string $texto Texto a buscar en las causas
+     * @return array Array de causas que coinciden con la búsqueda
+     */
+    public function buscarCausas($texto) {
+        try {
+            $sql = "SELECT causes.*, categories.name AS nombreCategoria 
+                    FROM causes 
+                    LEFT JOIN categories ON causes.fkIdCategories = categories.id
+                    WHERE causes.cause ILIKE :texto OR causes.variable ILIKE :texto
+                    ORDER BY causes.cause";
+                    
+            $statement = $this->dbConnection->prepare($sql);
+            $textoBusqueda = "%$texto%";
+            $statement->bindParam(":texto", $textoBusqueda, PDO::PARAM_STR);
+            $statement->execute();
+            return $statement->fetchAll(PDO::FETCH_OBJ);
+        } catch (PDOException $ex) {
+            error_log("Error al buscar causas: " . $ex->getMessage());
+            return [];
+        }
+    }
+
+    /**
+     * Método para obtener causas más utilizadas en reportes
+     * @param int $limite Límite de resultados (opcional, por defecto 10)
+     * @return array Array de causas con conteo de uso
+     */
+    public function getCausasMasUtilizadas($limite = 10) {
+        try {
+            $sql = "SELECT c.*, COUNT(cr.fkIdCauses) as total_uso
+                    FROM causes c
+                    LEFT JOIN causes_reports cr ON c.id = cr.fkIdCauses
+                    GROUP BY c.id
+                    ORDER BY total_uso DESC
+                    LIMIT :limite";
+                    
+            $statement = $this->dbConnection->prepare($sql);
+            $statement->bindParam(":limite", $limite, PDO::PARAM_INT);
+            $statement->execute();
+            return $statement->fetchAll(PDO::FETCH_OBJ);
+        } catch (PDOException $ex) {
+            error_log("Error al obtener causas más utilizadas: " . $ex->getMessage());
+            return [];
+        }
+    }
+
 }

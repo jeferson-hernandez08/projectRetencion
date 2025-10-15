@@ -23,11 +23,11 @@
                 <nav class="menu">
                     <ul>
                         <li><a href="/main"><i class="fas fa-home"></i><span class="info-text">Inicio</span></a></li>
-                        <?php if(isset($_SESSION['rol']) && $_SESSION['rol'] == 4): ?>    <!-- Instructor -->
+                        <?php if(isset($_SESSION['rol']) && $_SESSION['rol'] == 2): ?>    <!-- Instructor -->
                             <li><a href="/aprendiz/view"><i class="fas fa-user-graduate"></i><span class="info-text">Aprendices</span></a></li>
                             <li><a href="/reporte/view"><i class="fas fa-chart-line"></i><span class="info-text">Reportes</span></a></li> 
                         <?php endif ?>   
-                        <?php if(isset($_SESSION['rol']) && $_SESSION['rol'] == 5): ?>     <!-- Coordinador Academico  -->
+                        <?php if(isset($_SESSION['rol']) && $_SESSION['rol'] == 3): ?>     <!-- Coordinador Academico  -->
                             <li><a href="/programaFormacion/view"><i class="fas fa-chalkboard-teacher"></i><span class="info-text">Programas</span></a></li>
                             <li><a href="/grupo/view"><i class="fas fa-graduation-cap"></i><span class="info-text">Grupos</span></a></li>
                             <li><a href="/aprendiz/view"><i class="fas fa-user-graduate"></i><span class="info-text">Aprendices</span></a></li>
@@ -38,7 +38,7 @@
                             <li><a href="/intervencion/view"><i class="fas fa-hand-holding-heart"></i><span class="info-text">Intervenciones</span></a></li>
                             <li><a href="/usuario/view"><i class="fas fa-users"></i><span class="info-text">Usuarios</span></a></li> 
                         <?php endif ?>
-                        <?php if(isset($_SESSION['rol']) && $_SESSION['rol'] == 6): ?>   <!-- Coordinador de Formacion (Profesional de Bienestar) -->
+                        <?php if(isset($_SESSION['rol']) && $_SESSION['rol'] == 4): ?>   <!-- Coordinador de Formacion (Profesional de Bienestar) -->
                             <li><a href="/programaFormacion/view"><i class="fas fa-chalkboard-teacher"></i><span class="info-text">Programas</span></a></li>
                             <li><a href="/grupo/view"><i class="fas fa-graduation-cap"></i><span class="info-text">Grupos</span></a></li>
                             <li><a href="/aprendiz/view"><i class="fas fa-user-graduate"></i><span class="info-text">Aprendices</span></a></li>
@@ -49,11 +49,11 @@
                             <li><a href="/intervencion/view"><i class="fas fa-hand-holding-heart"></i><span class="info-text">Intervenciones</span></a></li>
                             <li><a href="/usuario/view"><i class="fas fa-users"></i><span class="info-text">Usuarios</span></a></li> 
                         <?php endif ?>
-                        <?php if(isset($_SESSION['rol']) && $_SESSION['rol'] == 9): ?>   <!-- Vocero -->
+                        <?php if(isset($_SESSION['rol']) && $_SESSION['rol'] == 5): ?>   <!-- Vocero -->
                             <li><a href="/aprendiz/view"><i class="fas fa-user-graduate"></i><span class="info-text">Aprendices</span></a></li>
                             <li><a href="/reporte/view"><i class="fas fa-chart-line"></i><span class="info-text">Reportes</span></a></li>
                         <?php endif ?>
-                        <?php if(isset($_SESSION['rol']) && $_SESSION['rol'] == 18): ?>   <!-- Administrador -->
+                        <?php if(isset($_SESSION['rol']) && $_SESSION['rol'] == 1): ?>   <!-- Administrador -->
                             <li><a href="/rol/view"><i class="fas fa-users-cog"></i><span class="info-text">Roles</span></a></li>
                             <li><a href="/usuario/view"><i class="fas fa-users"></i><span class="info-text">Usuarios</span></a></li>    <!-- Permitimos que el administrador cree usuarios tambien -->
                         <?php endif ?>
@@ -161,11 +161,11 @@
                 <h3>Enlaces Rápidos</h3>
                 <ul class="footer-links">
                     <li><a href="/main"><i class="fas fa-home"></i> Inicio</a></li>
-                    <?php if(isset($_SESSION['rol']) && $_SESSION['rol'] == 4): ?>   <!-- Instructor -->
+                    <?php if(isset($_SESSION['rol']) && $_SESSION['rol'] == 2): ?>   <!-- Instructor -->
                         <li><a href="/aprendiz/view"><i class="fas fa-user-graduate"></i> Aprendices</a></li>
                         <li><a href="/reporte/view"><i class="fas fa-chart-line"></i> Reportes</a></li>       
                     <?php endif ?>
-                    <?php if(isset($_SESSION['rol']) && $_SESSION['rol'] == 5): ?>   <!-- Coordinador Academico  -->
+                    <?php if(isset($_SESSION['rol']) && $_SESSION['rol'] == 3): ?>   <!-- Coordinador Academico  -->
                         <li><a href="/programaFormacion/view"><i class="fas fa-chalkboard-teacher"></i> Programas</a></li>
                         <li><a href="/grupo/view"><i class="fas fa-graduation-cap"></i> Grupos</a></li>
                         <li><a href="/aprendiz/view"><i class="fas fa-user-graduate"></i> Aprendices</a></li>
@@ -176,7 +176,7 @@
                         <li><a href="/intervencion/view"><i class="fas fa-hand-holding-heart"></i> Intervenciones</a></li>
                         <li><a href="/usuario/view"><i class="fas fa-users"></i> Usuarios</a></li> 
                     <?php endif ?>
-                    <?php if(isset($_SESSION['rol']) && $_SESSION['rol'] == 6): ?>   <!-- Coordinador de Formacion (Profesional de Bienestar) -->
+                    <?php if(isset($_SESSION['rol']) && $_SESSION['rol'] == 4): ?>   <!-- Coordinador de Formacion (Profesional de Bienestar) -->
                         <li><a href="/programaFormacion/view"><i class="fas fa-chalkboard-teacher"></i> Programas</a></li>
                         <li><a href="/grupo/view"><i class="fas fa-graduation-cap"></i> Grupos</a></li>
                         <li><a href="/aprendiz/view"><i class="fas fa-user-graduate"></i> Aprendices</a></li>
@@ -187,11 +187,11 @@
                         <li><a href="/intervencion/view"><i class="fas fa-hand-holding-heart"></i> Intervenciones</a></li>
                         <li><a href="/usuario/view"><i class="fas fa-users"></i> Usuarios</a></li>
                     <?php endif ?>
-                    <?php if(isset($_SESSION['rol']) && $_SESSION['rol'] == 9): ?>   <!-- Vocero -->
+                    <?php if(isset($_SESSION['rol']) && $_SESSION['rol'] == 5): ?>   <!-- Vocero -->
                         <li><a href="/reporte/view"><i class="fas fa-chart-line"></i> Reportes</a></li>
                         <li><a href="/aprendiz/view"><i class="fas fa-user-graduate"></i> Aprendices</a></li>
                     <?php endif ?>
-                    <?php if(isset($_SESSION['rol']) && $_SESSION['rol'] == 18): ?>   <!-- Administrador -->
+                    <?php if(isset($_SESSION['rol']) && $_SESSION['rol'] == 1): ?>   <!-- Administrador -->
                         <li><a href="/rol/view"><i class="fas fa-users-cog"></i> Roles</a></li>
                         <li><a href="/usuario/view"><i class="fas fa-users"></i><span class="info-text">Usuarios</span></a></li>    <!-- Permitimos que el administrador cree usuarios tambien -->
                     <?php endif ?>

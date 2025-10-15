@@ -9,13 +9,13 @@
             <!-- Campo ID (oculto) -->
             <div class="form-group">
                 <label for="txtId"><i class="fas fa-id-card"></i> Id del programa de formación</label>
-                <input type="text" readonly value="<?php echo $programa->idProgramaFormacion ?>"  name="txtId" id="txtId" class="form-control">
+                <input type="text" readonly value="<?php echo $programa->id ?>"  name="txtId" id="txtId" class="form-control">
             </div>
 
             <!-- Campo Nombre del programa de formación -->
             <div class="form-group">
                 <label for="txtNombre"><i class="fas fa-graduation-cap"></i> Nombre del programa de formación</label>
-                <input type="text" value="<?php echo $programa->nombre ?>" name="txtNombre" id="txtNombre" class="form-control">
+                <input type="text" value="<?php echo $programa->name ?>" name="txtNombre" id="txtNombre" class="form-control">
             </div>
 
             <!-- Campo Nivel del programa de formación -->
@@ -23,8 +23,8 @@
                 <label for="txtNivel"><i class="fas fa-chart-line"></i> Nivel del programa de formación</label>
                 <select name="txtNivel" id="txtNivel" class="form-control">
                     <option value="">Seleccione un nivel</option>
-                    <option value="Tecnólogo" <?php echo ($programa->nivel ?? '') == 'Tecnólogo' ? 'selected' : '' ?>>Tecnólogo</option>
-                    <option value="Técnico" <?php echo ($programa->nivel ?? '') == 'Técnico' ? 'selected' : '' ?>>Técnico</option>
+                    <option value="Tecnólogo" <?php echo ($programa->level ?? '') == 'Tecnólogo' ? 'selected' : '' ?>>Tecnólogo</option>
+                    <option value="Técnico" <?php echo ($programa->level ?? '') == 'Técnico' ? 'selected' : '' ?>>Técnico</option>
                 </select>
             </div>
 

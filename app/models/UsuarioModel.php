@@ -19,7 +19,7 @@ class UsuarioModel extends BaseModel {
         ?string $gestor = null,
         ?string $fkIdRol = null
     ) {
-        $this->table = "usuario";
+        $this->table = "users";  // Cambiado de "usuario" a "users" para PostgreSQL
         // Se llama al constructor del padre
         parent::__construct();
     }
@@ -27,53 +27,55 @@ class UsuarioModel extends BaseModel {
     public function saveUsuario($nombres, $apellidos, $documento, $email, $password, $telefono, $tipoCoordinador, $gestor, $fkIdRol) {
         try {
             $hashedPassword = password_hash($password, PASSWORD_DEFAULT);   // Hash de la contraseña
-            $sql = "INSERT INTO $this->table (nombres, apellidos, documento, email, password, telefono, tipoCoordinador, gestor, fkIdRol) 
-                    VALUES (:nombres, :apellidos, :documento, :email, :password, :telefono, :tipoCoordinador, :gestor, :fkIdRol)";
+            
+            // CONSULTA ADAPTADA para PostgreSQL con nombres de columnas en inglés
+            // Se incluyen passwordResetToken y passwordResetExpires con valores NULL por defecto
+            $sql = "INSERT INTO $this->table (\"firstName\", \"lastName\", \"document\", \"email\", \"password\", \"phone\", \"coordinadorType\", \"manager\", \"fkIdRols\", \"passwordResetToken\", \"passwordResetExpires\", \"createdAt\", \"updatedAt\") 
+                    VALUES (:firstName, :lastName, :document, :email, :password, :phone, :coordinadorType, :manager, :fkIdRols, NULL, NULL, NOW(), NOW())";
+            
             // 1. Se prepara la consulta
             $statement = $this->dbConnection->prepare($sql);
-            // $nombres = $this->nombres ?? '';         // Estos datos es opcional
-            // $apellidos = $this->apellidos ?? '';
-            // $documento = $this->documento ?? '';
-            // $email = $this->email ?? '';
-            // $password = $this->password ?? '';
-            // $telefono = $this->telefono ?? '';
-            // $tipoCoordinador = $this->tipoCoordinador ?? '';
-            // $gestor = $this->gestor ?? '';
-            // $fkIdRol = $this->fkIdRol ?? '';
 
-            // 2. BindParam para sanitizar los datos de entrada
-            $statement->bindParam('nombres', $nombres, PDO::PARAM_STR);
-            $statement->bindParam('apellidos', $apellidos, PDO::PARAM_STR);
-            $statement->bindParam('documento', $documento, PDO::PARAM_STR);
+            // 2. BindParam para sanitizar los datos de entrada - NOMBRES ADAPTADOS
+            $statement->bindParam('firstName', $nombres, PDO::PARAM_STR);
+            $statement->bindParam('lastName', $apellidos, PDO::PARAM_STR);
+            $statement->bindParam('document', $documento, PDO::PARAM_STR);
             $statement->bindParam('email', $email, PDO::PARAM_STR);
             $statement->bindParam('password', $hashedPassword, PDO::PARAM_STR);   // Guardar el hash
-            $statement->bindParam('telefono', $telefono, PDO::PARAM_STR);
-            $statement->bindParam('tipoCoordinador', $tipoCoordinador, PDO::PARAM_STR);
-            $statement->bindParam('gestor', $gestor, PDO::PARAM_STR);
-            $statement->bindParam('fkIdRol', $fkIdRol, PDO::PARAM_INT);
+            $statement->bindParam('phone', $telefono, PDO::PARAM_STR);
+            $statement->bindParam('coordinadorType', $tipoCoordinador, PDO::PARAM_STR);
+            
+            // Convertir gestor (string) a booleano para PostgreSQL
+            $gestorBoolean = ($gestor == '1' || $gestor === true) ? true : false;
+            $statement->bindParam('manager', $gestorBoolean, PDO::PARAM_BOOL);
+            
+            $statement->bindParam('fkIdRols', $fkIdRol, PDO::PARAM_INT);
 
             // 3. Ejecutar la consulta
             $result = $statement->execute();
             return $result;
         } catch (PDOException $ex) {
             echo "Error al guardar el usuario> ".$ex->getMessage();
+            return false;
         }
     }
 
     public function getUsuario($id) {
         try {
-            $sql = "SELECT usuario.*, rol.nombre AS nombreRol 
-                    FROM usuario 
-                    INNER JOIN rol 
-                    ON usuario.fkIdRol = rol.idRol 
-                    WHERE usuario.idUsuario=:id";
+            // CONSULTA ADAPTADA para PostgreSQL - unión con tabla 'rols' (no 'rol')
+            $sql = "SELECT users.*, rols.name AS nombreRol 
+                    FROM users 
+                    INNER JOIN rols 
+                    ON users.\"fkIdRols\" = rols.id 
+                    WHERE users.id = :id";
             $statement = $this->dbConnection->prepare($sql);
             $statement->bindParam(":id", $id, PDO::PARAM_INT);
             $statement->execute();
             $result = $statement->fetchAll(PDO::FETCH_OBJ);
             return $result[0]; 
         } catch (PDOException $ex) {
-            echo "Error al obtener el usuario" . $ex->getMessage();
+            echo "Error al obtener el usuario: " . $ex->getMessage();
+            return null;
         }
     }
 
@@ -82,81 +84,98 @@ class UsuarioModel extends BaseModel {
             // Añadimos hashing de contraseña para editar contraseña
             $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
+            // CONSULTA ADAPTADA para PostgreSQL
             $sql = "UPDATE $this->table SET 
-                        nombres=:nombres, 
-                        apellidos=:apellidos, 
-                        documento=:documento, 
-                        email=:email, 
-                        password=:password, 
-                        telefono=:telefono, 
-                        tipoCoordinador=:tipoCoordinador, 
-                        gestor=:gestor, 
-                        fkIdRol=:fkIdRol 
-                    WHERE idUsuario=:id";
+                        \"firstName\" = :firstName, 
+                        \"lastName\" = :lastName, 
+                        \"document\" = :document, 
+                        \"email\" = :email, 
+                        \"password\" = :password, 
+                        \"phone\" = :phone, 
+                        \"coordinadorType\" = :coordinadorType, 
+                        \"manager\" = :manager, 
+                        \"fkIdRols\" = :fkIdRols,
+                        \"updatedAt\" = NOW() 
+                    WHERE id = :id";
+                    
             $statement = $this->dbConnection->prepare($sql);
             $statement->bindParam(":id", $id, PDO::PARAM_INT);
-            $statement->bindParam(":nombres", $nombres, PDO::PARAM_STR);
-            $statement->bindParam(":apellidos", $apellidos, PDO::PARAM_STR);
-            $statement->bindParam(":documento", $documento, PDO::PARAM_STR);
+            $statement->bindParam(":firstName", $nombres, PDO::PARAM_STR);
+            $statement->bindParam(":lastName", $apellidos, PDO::PARAM_STR);
+            $statement->bindParam(":document", $documento, PDO::PARAM_STR);
             $statement->bindParam(":email", $email, PDO::PARAM_STR);
             $statement->bindParam(":password", $hashedPassword, PDO::PARAM_STR);    // Para editar el hash de la contraseña
-            $statement->bindParam(":telefono", $telefono, PDO::PARAM_STR);
-            $statement->bindParam(":tipoCoordinador", $tipoCoordinador, PDO::PARAM_STR);
-            $statement->bindParam(":gestor", $gestor, PDO::PARAM_STR);
-            $statement->bindParam(":fkIdRol", $fkIdRol, PDO::PARAM_INT);
+            $statement->bindParam(":phone", $telefono, PDO::PARAM_STR);
+            $statement->bindParam(":coordinadorType", $tipoCoordinador, PDO::PARAM_STR);
+            
+            // Convertir gestor a booleano
+            $gestorBoolean = ($gestor == '1' || $gestor === true) ? true : false;
+            $statement->bindParam(":manager", $gestorBoolean, PDO::PARAM_BOOL);
+            
+            $statement->bindParam(":fkIdRols", $fkIdRol, PDO::PARAM_INT);
             $result = $statement->execute();
             return $result;
         } catch (PDOException $ex) {
-            echo "No se pudo editar el usuario".$ex->getMessage();
+            echo "No se pudo editar el usuario: ".$ex->getMessage();
+            return false;
         }
     }
 
     public function removeUsuario($id) {
         try {
-            $sql = "DELETE FROM $this->table WHERE idUsuario=:id";
+            $sql = "DELETE FROM $this->table WHERE id = :id";
             $statement = $this->dbConnection->prepare($sql);
             $statement->bindParam(":id", $id, PDO::PARAM_INT);
             $result = $statement->execute();
             return $result;
         } catch (PDOException $ex) {
-            echo "No se pudo eliminar el usuario".$ex->getMessage();
+            echo "No se pudo eliminar el usuario: ".$ex->getMessage();
+            return false;
         }
     }
 
     // Función para validar el login del usuario | Para usar o heredar funcion en el controlador de loginController
-    public function validarLogin($email, $password){  // Contraseñaque llega del formulario
-        $sql = "SELECT * FROM $this->table WHERE email=:email";
-        $statement = $this->dbConnection->prepare($sql);
-        $statement->bindParam(':email', $email);
-        $statement->execute();
-        $resultSet = [];
-        while($row = $statement->fetch(PDO::FETCH_OBJ)){
-            $resultSet [] = $row;
-        }
-
-        if(count($resultSet) > 0){
-            $hash = $resultSet[0]->password; // Hash guardado en la base de datos
-            // Verificar contraseña con hash almacenado
-            if(password_verify($password, $hash)){            // password_verify verifica las contraseñas hasheadas y no textto plano 123.
-                $_SESSION['id'] = $resultSet[0]->idUsuario;     // ***Veridficar si los datos aqui son exactamente de los de la BD
-                $_SESSION['nombres'] = $resultSet[0]->nombres;
-                $_SESSION['apellidos'] = $resultSet[0]->apellidos;
-                $_SESSION['nombre'] = $resultSet[0]->nombres . ' ' . $resultSet[0]->apellidos; // Nombre completo
-                $_SESSION['rol'] = $resultSet[0]->fkIdRol;       // REVISAR ESTO COMO CAPRTURAR EL ROL PARA USAR EN USUARIO
-                $_SESSION['timeout'] = time();
-                session_regenerate_id();
-                return true;
+    public function validarLogin($email, $password){  // Contraseña que llega del formulario
+        try {
+            // CONSULTA ADAPTADA para PostgreSQL - nombres de columnas en inglés
+            $sql = "SELECT * FROM $this->table WHERE email = :email";
+            $statement = $this->dbConnection->prepare($sql);
+            $statement->bindParam(':email', $email);
+            $statement->execute();
+            $resultSet = [];
+            while($row = $statement->fetch(PDO::FETCH_OBJ)){
+                $resultSet [] = $row;
             }
+
+            if(count($resultSet) > 0){
+                $hash = $resultSet[0]->password; // Hash guardado en la base de datos
+                // Verificar contraseña con hash almacenado
+                if(password_verify($password, $hash)){            // password_verify verifica las contraseñas hasheadas y no texto plano 123.
+                    // VARIABLES DE SESIÓN ACTUALIZADAS con nombres de PostgreSQL
+                    $_SESSION['id'] = $resultSet[0]->id;                    // Cambiado de idUsuario a id
+                    $_SESSION['nombres'] = $resultSet[0]->firstName;        // Cambiado de nombres a firstName
+                    $_SESSION['apellidos'] = $resultSet[0]->lastName;       // Cambiado de apellidos a lastName
+                    $_SESSION['nombre'] = $resultSet[0]->firstName . ' ' . $resultSet[0]->lastName; // Nombre completo
+                    $_SESSION['rol'] = $resultSet[0]->{"fkIdRols"};             // Cambiado de fkIdRol a fkIdRols
+                    $_SESSION['timeout'] = time();
+                    session_regenerate_id();
+                    return true;
+                }
+            }
+            return false;
+        } catch (PDOException $ex) {
+            error_log("Error en validarLogin: " . $ex->getMessage());
+            return false;
         }
-        return false;
     }
 
     // Funcion para enviar el nombre del Rol a la card de viewReporte.php
     public function getAll():array {
         try {
-            $sql = "SELECT usuario.*, rol.nombre AS nombreRol 
-                    FROM usuario 
-                    LEFT JOIN rol ON usuario.fkIdRol = rol.idRol";
+            // CONSULTA ADAPTADA para PostgreSQL - unión con tabla 'rols'
+            $sql = "SELECT users.*, rols.name AS nombreRol 
+                    FROM users 
+                    LEFT JOIN rols ON users.\"fkIdRols\" = rols.id";
             $statement = $this->dbConnection->prepare($sql);
             $statement->execute();
             return $statement->fetchAll(PDO::FETCH_OBJ);
@@ -169,7 +188,7 @@ class UsuarioModel extends BaseModel {
     // Funcion para verificar importacion excel que no este repetido
     public function getUsuarioPorEmail($email) {
         try {
-            $sql = "SELECT * FROM usuario WHERE email = ? LIMIT 1";
+            $sql = "SELECT * FROM users WHERE email = ? LIMIT 1";
             $stmt = $this->dbConnection->prepare($sql);
             $stmt->execute([$email]);
             return $stmt->fetch(PDO::FETCH_OBJ);
@@ -179,12 +198,116 @@ class UsuarioModel extends BaseModel {
         }
     }
 
-    // Funcion para crear notificaión al crear un reporte
+    // =========================================================================
+    // NUEVOS MÉTODOS PARA RECUPERACIÓN DE CONTRASEÑA
+    // =========================================================================
+
+    /**
+     * Método para guardar el token de recuperación de contraseña
+     * @param string $email Email del usuario
+     * @param string $token Token generado para recuperación
+     * @param string $expiry Fecha de expiración del token (formato PostgreSQL)
+     * @return bool True si se actualizó correctamente
+     */
+    public function guardarTokenRecuperacion($email, $token, $expiry) {
+        try {
+            $sql = "UPDATE $this->table 
+                    SET passwordResetToken = :token, 
+                        passwordResetExpires = :expiry,
+                        updatedAt = NOW()
+                    WHERE email = :email";
+                    
+            $statement = $this->dbConnection->prepare($sql);
+            $statement->bindParam(":token", $token, PDO::PARAM_STR);
+            $statement->bindParam(":expiry", $expiry, PDO::PARAM_STR);
+            $statement->bindParam(":email", $email, PDO::PARAM_STR);
+            
+            return $statement->execute();
+        } catch (PDOException $ex) {
+            error_log("Error al guardar token de recuperación: " . $ex->getMessage());
+            return false;
+        }
+    }
+
+    /**
+     * Método para buscar usuario por token de recuperación válido
+     * @param string $token Token de recuperación
+     * @return mixed Usuario si el token es válido, false si no
+     */
+    public function buscarPorToken($token) {
+        try {
+            $sql = "SELECT * FROM $this->table 
+                    WHERE passwordResetToken = :token 
+                    AND passwordResetExpires > NOW()";
+                    
+            $statement = $this->dbConnection->prepare($sql);
+            $statement->bindParam(":token", $token, PDO::PARAM_STR);
+            $statement->execute();
+            
+            return $statement->fetch(PDO::FETCH_OBJ);
+        } catch (PDOException $ex) {
+            error_log("Error al buscar por token: " . $ex->getMessage());
+            return false;
+        }
+    }
+
+    /**
+     * Método para actualizar contraseña y limpiar token
+     * @param int $id ID del usuario
+     * @param string $newPassword Nueva contraseña hasheada
+     * @return bool True si se actualizó correctamente
+     */
+    public function actualizarPassword($id, $newPassword) {
+        try {
+            $hashedPassword = password_hash($newPassword, PASSWORD_DEFAULT);
+            
+            $sql = "UPDATE $this->table 
+                    SET password = :password,
+                        passwordResetToken = NULL,
+                        passwordResetExpires = NULL,
+                        updatedAt = NOW()
+                    WHERE id = :id";
+                    
+            $statement = $this->dbConnection->prepare($sql);
+            $statement->bindParam(":password", $hashedPassword, PDO::PARAM_STR);
+            $statement->bindParam(":id", $id, PDO::PARAM_INT);
+            
+            return $statement->execute();
+        } catch (PDOException $ex) {
+            error_log("Error al actualizar password: " . $ex->getMessage());
+            return false;
+        }
+    }
+
+    /**
+     * Método para limpiar token de recuperación (por si expira)
+     * @param string $email Email del usuario
+     * @return bool True si se limpió correctamente
+     */
+    public function limpiarToken($email) {
+        try {
+            $sql = "UPDATE $this->table 
+                    SET passwordResetToken = NULL,
+                        passwordResetExpires = NULL,
+                        updatedAt = NOW()
+                    WHERE email = :email";
+                    
+            $statement = $this->dbConnection->prepare($sql);
+            $statement->bindParam(":email", $email, PDO::PARAM_STR);
+            
+            return $statement->execute();
+        } catch (PDOException $ex) {
+            error_log("Error al limpiar token: " . $ex->getMessage());
+            return false;
+        }
+    }
+
+    // Funcion para crear notificación al crear un reporte
     // public function getUsuariosByRol($roles) {
     //     if (empty($roles)) return [];
         
     //     $placeholders = implode(',', array_fill(0, count($roles), '?'));
-    //     $sql = "SELECT * FROM usuario WHERE fkIdRol IN ($placeholders)";
+    //     $sql = "SELECT * FROM users WHERE fkIdRols IN ($placeholders)";
     //     $stmt = $this->dbConnection->prepare($sql);
         
     //     // Bindear cada valor individualmente

@@ -41,10 +41,21 @@ class ProgramaFormacionController extends BaseController {
             // Obtener detalles del usuario
             $usuarioModel = new UsuarioModel();
             $usuario = $usuarioModel->getUsuario($_SESSION['id']);
-            
-            // Obtener nombre del rol
+
+            // Version basica
+            // VERIFICAR SI EL USUARIO EXISTE Y TIENE LA PROPIEDAD CORRECTA
+            // if ($usuario !== null && property_exists($usuario, 'fkIdRols')) {
+            //     // Obtener nombre del rol - USANDO EL NOMBRE CORRECTO DE LA COLUMNA
+            //     $rolModel = new RolModel();
+            //     $rol = $rolModel->getRol($usuario->{"fkIdRols"});
+            //     // usar 'name' en lugar de 'nombre'
+            //     $rolNombre = ($rol !== null && property_exists($rol, 'name')) ? $rol->name : "Usuario";
+            // }
+
+            // Version basica
+            //Obtener nombre del rol
             $rolModel = new RolModel();
-            $rol = $rolModel->getRol($usuario->fkIdRol);
+            $rol = $rolModel->getRol($usuario->{"fkIdRols"});
             $rolNombre = $rol->nombre ?? "Usuario";
         }
         
@@ -67,11 +78,22 @@ class ProgramaFormacionController extends BaseController {
             // Obtener detalles del usuario
             $usuarioModel = new UsuarioModel();
             $usuario = $usuarioModel->getUsuario($_SESSION['id']);
-            
+
             // Obtener nombre del rol
-            $rolModel = new RolModel();
-            $rol = $rolModel->getRol($usuario->fkIdRol);
-            $rolNombre = $rol->nombre ?? "Usuario";
+            // VERIFICAR SI EL USUARIO EXISTE Y TIENE LA PROPIEDAD CORRECTA
+            if ($usuario !== null && property_exists($usuario, 'fkIdRols')) {
+                // Obtener nombre del rol - USANDO EL NOMBRE CORRECTO DE LA COLUMNA
+                $rolModel = new RolModel();
+                $rol = $rolModel->getRol($usuario->{"fkIdRols"});
+                // usar 'name' en lugar de 'nombre'
+                $rolNombre = ($rol !== null && property_exists($rol, 'name')) ? $rol->name : "Usuario";
+            }
+            
+            // Version basica
+            // Obtener nombre del rol
+            // $rolModel = new RolModel();
+            // $rol = $rolModel->getRol($usuario->fkIdRol);
+            // $rolNombre = $rol->nombre ?? "Usuario";
         }
         
         // Llamamos a la vista
@@ -112,11 +134,22 @@ class ProgramaFormacionController extends BaseController {
             // Obtener detalles del usuario
             $usuarioModel = new UsuarioModel();
             $usuario = $usuarioModel->getUsuario($_SESSION['id']);
-            
+
             // Obtener nombre del rol
-            $rolModel = new RolModel();
-            $rol = $rolModel->getRol($usuario->fkIdRol);
-            $rolNombre = $rol->nombre ?? "Usuario";
+            // VERIFICAR SI EL USUARIO EXISTE Y TIENE LA PROPIEDAD CORRECTA
+            if ($usuario !== null && property_exists($usuario, 'fkIdRols')) {
+                // Obtener nombre del rol - USANDO EL NOMBRE CORRECTO DE LA COLUMNA
+                $rolModel = new RolModel();
+                $rol = $rolModel->getRol($usuario->{"fkIdRols"});
+                // usar 'name' en lugar de 'nombre'
+                $rolNombre = ($rol !== null && property_exists($rol, 'name')) ? $rol->name : "Usuario";
+            }
+            
+            // Version basica
+            // Obtener nombre del rol
+            // $rolModel = new RolModel();
+            // $rol = $rolModel->getRol($usuario->fkIdRol);
+            // $rolNombre = $rol->nombre ?? "Usuario";
         }
         
         $data = [
@@ -140,11 +173,22 @@ class ProgramaFormacionController extends BaseController {
             // Obtener detalles del usuario
             $usuarioModel = new UsuarioModel();
             $usuario = $usuarioModel->getUsuario($_SESSION['id']);
-            
+
             // Obtener nombre del rol
-            $rolModel = new RolModel();
-            $rol = $rolModel->getRol($usuario->fkIdRol);
-            $rolNombre = $rol->nombre ?? "Usuario";
+            // VERIFICAR SI EL USUARIO EXISTE Y TIENE LA PROPIEDAD CORRECTA
+            if ($usuario !== null && property_exists($usuario, 'fkIdRols')) {
+                // Obtener nombre del rol - USANDO EL NOMBRE CORRECTO DE LA COLUMNA
+                $rolModel = new RolModel();
+                $rol = $rolModel->getRol($usuario->{"fkIdRols"});
+                // CORREGIDO: usar 'name' en lugar de 'nombre'
+                $rolNombre = ($rol !== null && property_exists($rol, 'name')) ? $rol->name : "Usuario";
+            }
+            
+            // Version basica
+            // Obtener nombre del rol
+            // $rolModel = new RolModel();
+            // $rol = $rolModel->getRol($usuario->fkIdRol);
+            // $rolNombre = $rol->nombre ?? "Usuario";
         }
         
         $data = [
@@ -183,9 +227,20 @@ class ProgramaFormacionController extends BaseController {
             $usuario = $usuarioModel->getUsuario($_SESSION['id']);
             
             // Obtener nombre del rol
-            $rolModel = new RolModel();
-            $rol = $rolModel->getRol($usuario->fkIdRol);
-            $rolNombre = $rol->nombre ?? "Usuario";
+            // VERIFICAR SI EL USUARIO EXISTE Y TIENE LA PROPIEDAD CORRECTA
+            if ($usuario !== null && property_exists($usuario, 'fkIdRols')) {
+                // Obtener nombre del rol - USANDO EL NOMBRE CORRECTO DE LA COLUMNA
+                $rolModel = new RolModel();
+                $rol = $rolModel->getRol($usuario->{"fkIdRols"});
+                // CORREGIDO: usar 'name' en lugar de 'nombre'
+                $rolNombre = ($rol !== null && property_exists($rol, 'name')) ? $rol->name : "Usuario";
+            }
+
+            // Version antigua
+            // Obtener nombre del rol
+            // $rolModel = new RolModel();
+            // $rol = $rolModel->getRol($usuario->fkIdRol);
+            // $rolNombre = $rol->nombre ?? "Usuario";
         }
 
         $data = [

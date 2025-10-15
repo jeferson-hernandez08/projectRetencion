@@ -21,12 +21,12 @@
         <img src="/img/warning.svg" alt="Advertencia" class="confirmation-icon">
         <h2 class="confirmation-title">¿Está seguro de realizar esta acción?</h2>
         <p class="confirmation-message">
-            Se eliminará permanentemente este programa de formación #<?php echo $programaFormacion->idProgramaFormacion ?>,
-            programa de formación <?php echo $programaFormacion->nombre ?>
+            Se eliminará permanentemente este programa de formación #<?php echo $programaFormacion->id ?>,
+            programa de formación <?php echo $programaFormacion->name ?>
         </p>
         
         <form action="/programaFormacion/remove" method="post">
-            <input type="hidden" value="<?php echo $programaFormacion->idProgramaFormacion ?>" name="txtId">
+            <input type="hidden" value="<?php echo $programaFormacion->id ?>" name="txtId">
             <div class="confirmation-buttons">
                 <button type="submit" class="btn-confirm">Confirmar</button>
                 <a href="/programaFormacion/view" class="btn-cancel">Cancelar</a>

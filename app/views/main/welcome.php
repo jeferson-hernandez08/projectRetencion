@@ -19,9 +19,9 @@
                     <p>Como <strong>Instructor</strong>, puedes hacer seguimiento a casos de aprendices y reportar situaciones de los aprendices.</p>
                 <?php elseif($rolUsuario == 'Coordinador'): ?>
                     <p>Como <strong>Coordinador</strong>, puedes administrar programas, grupos, aprendices, gestionar categorías, causas, estrategias de intervención, realizar reportes, intervenciones, gestion de usuarios y seguimiento institucional.</p>
-                <?php elseif($rolUsuario == 'Profesional Bienestar'): ?>
+                <?php elseif($rolUsuario == 'Profesional de Bienestar'): ?>
                     <p>Como <strong>Profesional de Bienestar</strong>, puedes administrar programas, grupos, aprendices, gestionar categorías, causas, estrategias de intervención, realizar reportes, intervenciones, gestion de usuarios y seguimiento institucional.</p>
-                <?php elseif($rolUsuario == 'Vocero'): ?>
+                <?php elseif($rolUsuario == 'Aprendiz Vocero'): ?>
                     <p>Como <strong>Vocero</strong>, puedes hacer seguimiento a casos de aprendices y reportar situaciones de los aprendices. </p>
                 <?php else: ?>
                     <p>Como <strong><?php echo $rolUsuario; ?></strong>, tienes acceso a funciones específicas del sistema de retención estudiantil.</p>
@@ -51,7 +51,7 @@
                         <a href="/reporte/view" class="btn-accion"><i class="fas fa-chart-line"></i> Ver Reportes</a>
                         <a href="/intervencion/new" class="btn-accion"><i class="fas fa-hand-holding-heart"></i> Nueva Intervención</a>
                         <a href="/usuario/view" class="btn-accion"><i class="fas fa-users"></i> Gestionar Usuarios</a>
-                    <?php elseif($rolUsuario == 'Profesional Bienestar'): ?>
+                    <?php elseif($rolUsuario == 'Profesional de Bienestar'): ?>
                         <a href="/programaFormacion/view" class="btn-accion"><i class="fas fa-chalkboard-teacher"></i> Ver Programas</a>
                         <a href="/grupo/view" class="btn-accion"><i class="fas fa-graduation-cap"></i> Ver Grupos</a>
                         <a href="/aprendiz/new" class="btn-accion"><i class="fas fa-user-graduate"></i> Crear Aprendices</a>
@@ -61,7 +61,7 @@
                         <a href="/reporte/view" class="btn-accion"><i class="fas fa-chart-line"></i> Ver Reportes</a>
                         <a href="/intervencion/new" class="btn-accion"><i class="fas fa-hand-holding-heart"></i> Nueva Intervención</a>
                         <a href="/usuario/view" class="btn-accion"><i class="fas fa-users"></i> Gestionar Usuarios</a>
-                    <?php elseif($rolUsuario == 'Vocero'): ?>
+                    <?php elseif($rolUsuario == 'Aprendiz Vocero'): ?>
                         <a href="/reporte/new" class="btn-accion"><i class="fas fa-flag"></i> Nuevo Reporte</a>
                         <a href="/aprendiz/view" class="btn-accion"><i class="fas fa-user-graduate"></i> Aprendices</a>
                     <?php endif; ?>

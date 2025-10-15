@@ -11,19 +11,21 @@ class RolModel extends BaseModel {
         ?int $idRol = null,
         ?string $nombre = null
     ) {
-        $this->table = "rol";
+        $this->table = "rols";  // Cambiado de "rol" a "rols" para PostgreSQL
         // Se llama al constructor del padre
         parent::__construct();
     }
 
     public function saveRol($nombre) {
         try {
-            $sql = "INSERT INTO $this->table (nombre) VALUES (:nombre)";
+            // CONSULTA ADAPTADA para PostgreSQL con nombres de columnas en inglés
+            // Se incluyen createdAt y updatedAt que son NOT NULL en PostgreSQL
+            $sql = "INSERT INTO $this->table (name, createdAt, updatedAt) VALUES (:name, NOW(), NOW())";
             // 1. Se prepara la consulta
             $statement = $this->dbConnection->prepare($sql);
 
-            // 2. BindParam para sanitizar los datos de entrada
-            $statement->bindParam('nombre', $nombre, PDO::PARAM_STR);
+            // 2. BindParam para sanitizar los datos de entrada - NOMBRE ADAPTADO
+            $statement->bindParam('name', $nombre, PDO::PARAM_STR);
 
             // 3. Ejecutar la consulta
             $result = $statement->execute();
@@ -36,13 +38,16 @@ class RolModel extends BaseModel {
 
     public function getRol($id) {
         try {
-            $sql = "SELECT * FROM $this->table WHERE idRol=:id";
+            // CONSULTA ADAPTADA para PostgreSQL - nombre de columna cambiado
+            $sql = "SELECT * FROM $this->table WHERE id = :id";
             $statement = $this->dbConnection->prepare($sql);
             $statement->bindParam(":id", $id, PDO::PARAM_INT);
             $statement->execute();
             $result = $statement->fetchAll(PDO::FETCH_OBJ);
             //print_r($result);
-            return $result[0];
+            //return $result[0];
+            // VERIFICAR SI HAY RESULTADOS ANTES DE ACCEDER
+            return count($result) > 0 ? $result[0] : null;
         } catch (PDOException $ex) {
             echo "Error al obtener el rol: " . $ex->getMessage();
             return null;
@@ -51,10 +56,11 @@ class RolModel extends BaseModel {
 
     public function editRol($id, $nombre) {
         try {
-            $sql = "UPDATE $this->table SET nombre=:nombre WHERE idRol=:id";
+            // CONSULTA ADAPTADA para PostgreSQL - nombres de columnas actualizados
+            $sql = "UPDATE $this->table SET name = :name, updatedAt = NOW() WHERE id = :id";
             $statement = $this->dbConnection->prepare($sql);
             $statement->bindParam(":id", $id, PDO::PARAM_INT);
-            $statement->bindParam(":nombre", $nombre, PDO::PARAM_STR);
+            $statement->bindParam(":name", $nombre, PDO::PARAM_STR);
             $result = $statement->execute();
             return $result;
         } catch (PDOException $ex) {
@@ -65,7 +71,8 @@ class RolModel extends BaseModel {
 
     public function removeRol($id) {
         try {
-            $sql = "DELETE FROM $this->table WHERE idRol=:id";
+            // CONSULTA ADAPTADA para PostgreSQL - nombre de columna cambiado
+            $sql = "DELETE FROM $this->table WHERE id = :id";
             $statement = $this->dbConnection->prepare($sql);
             $statement->bindParam(":id", $id, PDO::PARAM_INT);
             $result = $statement->execute();
@@ -73,6 +80,41 @@ class RolModel extends BaseModel {
         } catch (PDOException $ex) {
             echo "No se pudo eliminar el rol: ".$ex->getMessage();
             return false;
+        }
+    }
+
+    /**
+     * Método para obtener todos los roles - Override del método getAll del BaseModel
+     * @return array Array de objetos con todos los roles
+     */
+    public function getAll(): array {
+        try {
+            $sql = "SELECT * FROM $this->table ORDER BY name";
+            $statement = $this->dbConnection->prepare($sql);
+            $statement->execute();
+            return $statement->fetchAll(PDO::FETCH_OBJ);
+        } catch (PDOException $ex) {
+            error_log("Error al obtener todos los roles: " . $ex->getMessage());
+            return [];
+        }
+    }
+
+    /**
+     * Método para obtener rol por nombre
+     * @param string $nombre Nombre del rol a buscar
+     * @return mixed Objeto del rol si existe, null si no
+     */
+    public function getRolPorNombre($nombre) {
+        try {
+            $sql = "SELECT * FROM $this->table WHERE name = :name";
+            $statement = $this->dbConnection->prepare($sql);
+            $statement->bindParam(":name", $nombre, PDO::PARAM_STR);
+            $statement->execute();
+            $result = $statement->fetchAll(PDO::FETCH_OBJ);
+            return count($result) > 0 ? $result[0] : null;
+        } catch (PDOException $ex) {
+            error_log("Error al obtener rol por nombre: " . $ex->getMessage());
+            return null;
         }
     }
 
