@@ -26,20 +26,25 @@ class GrupoModel extends BaseModel {
 
     public function saveGrupo($ficha, $inicioLectiva, $finLectiva, $inicioPractica, $finPractica, $nombreGestor, $jornada, $modalidad, $fkIdProgramaFormacion) {
         try {
+            // Debug: verificar el valor de ficha
+            error_log("🔍 Valor de ficha recibido: '$ficha'");
+            
             // CONSULTA ADAPTADA para PostgreSQL con nombres de columnas en inglés
             // Se incluyen createdAt y updatedAt que son NOT NULL en PostgreSQL
-            $sql = "INSERT INTO $this->table (file, \"trainingStart\", \"trainingEnd\", \"practiceStart\", \"practiceEnd\", \"managerName\", shift, modality, \"fkIdTrainingPrograms\", \"createdAt\", \"updatedAt\) 
-                    VALUES (:file, :trainingStart, :trainingEnd, :practiceStart, :practiceEnd, :managerName, :shift, :modality, :fkIdTrainingPrograms, NOW(), NOW())";
+            $sql = "INSERT INTO $this->table (\"file\", \"trainingStart\", \"trainingEnd\", \"practiceStart\", \"practiceEnd\", \"managerName\", \"shift\", \"modality\", \"fkIdTrainingPrograms\", \"createdAt\", \"updatedAt\") 
+                VALUES (:file, :trainingStart, :trainingEnd, :practiceStart, :practiceEnd, :managerName, :shift, :modality, :fkIdTrainingPrograms, NOW(), NOW())";
+
+                error_log("🔍 SQL: " . $sql);
                     
             // 1. Se prepara la consulta
             $statement = $this->dbConnection->prepare($sql);
 
             // 2. BindParam para sanitizar los datos de entrada - NOMBRES ADAPTADOS
             $statement->bindParam('file', $ficha, PDO::PARAM_STR);
-            $statement->bindParam('trainingStart', $inicioLectiva, PDO::PARAM_STR);
-            $statement->bindParam('trainingEnd', $finLectiva, PDO::PARAM_STR);
-            $statement->bindParam('practiceStart', $inicioPractica, PDO::PARAM_STR);
-            $statement->bindParam('practiceEnd', $finPractica, PDO::PARAM_STR);
+            $statement->bindParam('trainingStart', $inicioLectiva, $inicioLectiva ? PDO::PARAM_STR : PDO::PARAM_NULL);
+            $statement->bindParam('trainingEnd', $finLectiva, $finLectiva ? PDO::PARAM_STR : PDO::PARAM_NULL);
+            $statement->bindParam('practiceStart', $inicioPractica, $inicioPractica ? PDO::PARAM_STR : PDO::PARAM_NULL);
+            $statement->bindParam('practiceEnd', $finPractica, $finPractica ? PDO::PARAM_STR : PDO::PARAM_NULL);
             $statement->bindParam('managerName', $nombreGestor, PDO::PARAM_STR);
             $statement->bindParam('shift', $jornada, PDO::PARAM_STR);
             $statement->bindParam('modality', $modalidad, PDO::PARAM_STR);
@@ -63,7 +68,7 @@ class GrupoModel extends BaseModel {
     public function getAllWithPrograma() {
         try {
             // CONSULTA ADAPTADA para PostgreSQL - nombres de tablas y columnas actualizados
-            $sql = "SELECT groups.*, training_programs.name AS nombrePrograma 
+            $sql = "SELECT groups.*, training_programs.name AS \"nombrePrograma\" 
                     FROM groups 
                     INNER JOIN training_programs 
                     ON groups.\"fkIdTrainingPrograms\" = training_programs.id";
@@ -81,7 +86,7 @@ class GrupoModel extends BaseModel {
     public function getGrupo($id) {
         try {
             // CONSULTA ADAPTADA para PostgreSQL - nombres de tablas y columnas actualizados
-            $sql = "SELECT groups.*, training_programs.name AS nombrePrograma 
+            $sql = "SELECT groups.*, training_programs.name AS \"nombrePrograma\" 
                     FROM groups 
                     INNER JOIN training_programs 
                     ON groups.\"fkIdTrainingPrograms\" = training_programs.id 
@@ -117,10 +122,10 @@ class GrupoModel extends BaseModel {
             $statement = $this->dbConnection->prepare($sql);
             $statement->bindParam(":id", $id, PDO::PARAM_INT);
             $statement->bindParam(":file", $ficha, PDO::PARAM_STR);
-            $statement->bindParam(":trainingStart", $inicioLectiva, PDO::PARAM_STR);
-            $statement->bindParam(":trainingEnd", $finLectiva, PDO::PARAM_STR);
-            $statement->bindParam(":practiceStart", $inicioPractica, PDO::PARAM_STR);
-            $statement->bindParam(":practiceEnd", $finPractica, PDO::PARAM_STR);
+            $statement->bindParam(":trainingStart", $inicioLectiva, $inicioLectiva ? PDO::PARAM_STR : PDO::PARAM_NULL);
+            $statement->bindParam(":trainingEnd", $finLectiva, $finLectiva ? PDO::PARAM_STR : PDO::PARAM_NULL);
+            $statement->bindParam(":practiceStart", $inicioPractica, $inicioPractica ? PDO::PARAM_STR : PDO::PARAM_NULL);
+            $statement->bindParam(":practiceEnd", $finPractica, $finPractica ? PDO::PARAM_STR : PDO::PARAM_NULL);
             $statement->bindParam(":managerName", $nombreGestor, PDO::PARAM_STR);
             $statement->bindParam(":shift", $jornada, PDO::PARAM_STR);
             $statement->bindParam(":modality", $modalidad, PDO::PARAM_STR);

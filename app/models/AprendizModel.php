@@ -28,7 +28,7 @@ class AprendizModel extends BaseModel {
         try {
             // CONSULTA ADAPTADA para PostgreSQL con nombres de columnas en inglés
             // Se incluyen createdAt y updatedAt que son NOT NULL en PostgreSQL
-            $sql = "INSERT INTO $this->table (documentType, document, firtsName, lastName, phone, email, status, quarter, fkIdGroups, createdAt, updatedAt) 
+            $sql = "INSERT INTO $this->table (\"documentType\", document, \"firtsName\", \"lastName\", phone, email, status, quarter, \"fkIdGroups\", \"createdAt\", \"updatedAt\") 
                     VALUES (:documentType, :document, :firtsName, :lastName, :phone, :email, :status, :quarter, :fkIdGroups, NOW(), NOW())";
                     
             // 1. Se prepara la consulta
@@ -58,10 +58,10 @@ class AprendizModel extends BaseModel {
     public function getAllWithGrupo() {
         try {
             // CONSULTA ADAPTADA para PostgreSQL - nombres de tablas y columnas actualizados
-            $sql = "SELECT apprentices.*, groups.file AS fichaGrupo, training_programs.name AS nombrePrograma 
+            $sql = "SELECT apprentices.*, groups.file AS \"fichaGrupo\", training_programs.name AS \"nombrePrograma\"
                     FROM apprentices 
-                    INNER JOIN groups ON apprentices.fkIdGroups = groups.id
-                    INNER JOIN training_programs ON groups.fkIdTrainingPrograms = training_programs.id";
+                    INNER JOIN groups ON apprentices.\"fkIdGroups\" = groups.id
+                    INNER JOIN training_programs ON groups.\"fkIdTrainingPrograms\" = training_programs.id";
                     
             $statement = $this->dbConnection->prepare($sql);
             $statement->execute();
@@ -76,10 +76,10 @@ class AprendizModel extends BaseModel {
     public function getAprendiz($id) {
         try {
             // CONSULTA ADAPTADA para PostgreSQL - nombres de tablas y columnas actualizados
-            $sql = "SELECT apprentices.*, groups.file AS fichaGrupo, training_programs.name AS nombrePrograma 
+            $sql = "SELECT apprentices.*, groups.file AS \"fichaGrupo\", training_programs.name AS \"nombrePrograma\"
                     FROM apprentices 
-                    INNER JOIN groups ON apprentices.fkIdGroups = groups.id
-                    INNER JOIN training_programs ON groups.fkIdTrainingPrograms = training_programs.id
+                    INNER JOIN groups ON apprentices.\"fkIdGroups\" = groups.id
+                    INNER JOIN training_programs ON groups.\"fkIdTrainingPrograms\" = training_programs.id
                     WHERE apprentices.id = :id";
                     
             $statement = $this->dbConnection->prepare($sql);
@@ -97,9 +97,9 @@ class AprendizModel extends BaseModel {
         try {
             // CONSULTA ADAPTADA para PostgreSQL - nombres de columnas actualizados
             $sql = "UPDATE $this->table SET 
-                        documentType = :documentType, 
+                        \"documentType\" = :documentType, 
                         document = :document, 
-                        firtsName = :firtsName, 
+                        \"firtsName\" = :firtsName, 
                         lastName = :lastName, 
                         phone = :phone, 
                         email = :email, 

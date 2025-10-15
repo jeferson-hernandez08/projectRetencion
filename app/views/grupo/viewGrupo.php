@@ -100,14 +100,14 @@
             <?php foreach ($grupos as $value): ?>
                 <div class="report-card">
                     <div class="card-header">
-                        <span class="report-id">ID Grupo : <?php echo $value->idGrupo; ?></span>
-                        <span class="grupo-ficha">Ficha: <?php echo $value->ficha; ?></span>
+                        <span class="report-id">ID Grupo : <?php echo $value->id; ?></span>
+                        <span class="grupo-ficha">Ficha: <?php echo $value->file; ?></span>
                     </div>
                     
                     <div class="card-body">
                         <div class="report-info">
                             <div class="info-label"><i class="fas fa-id-badge"></i> Ficha:</div>
-                            <div class="info-value"><?php echo $value->ficha; ?></div>
+                            <div class="info-value"><?php echo $value->file; ?></div>
                         </div>
 
                         <div class="report-info">
@@ -119,24 +119,24 @@
 
                         <div class="report-info">
                             <div class="info-label"><i class="fas fa-clock"></i> Jornada:</div>
-                            <div class="info-value"><?php echo (!empty ($value->jornada)) ? htmlspecialchars($value->jornada) : 'No asignado'; ?></div>
+                            <div class="info-value"><?php echo (!empty ($value->shift)) ? htmlspecialchars($value->shift) : 'No asignado'; ?></div>
                         </div>
                         
                         <div class="report-info">
                             <div class="info-label"><i class="fas fa-user-tie"></i> Gestor:</div>
-                            <div class="info-value"><?php echo $value->nombreGestor ?? 'No asignado'; ?></div>
+                            <div class="info-value"><?php echo $value->managerName ?? 'No asignado'; ?></div>
                         </div>
                     </div>
 
                     <div class="card-footer">
                         <div class="card-actions">
-                            <a href="/grupo/view/<?php echo $value->idGrupo; ?>" class="action-btn consultar" title="Ver detalles">
+                            <a href="/grupo/view/<?php echo $value->id; ?>" class="action-btn consultar" title="Ver detalles">
                                 <i class="fas fa-eye"></i> Detalles
                             </a>
-                            <a href="/grupo/edit/<?php echo $value->idGrupo; ?>" class="action-btn editar" title="Editar grupo">
+                            <a href="/grupo/edit/<?php echo $value->id; ?>" class="action-btn editar" title="Editar grupo">
                                 <i class="fas fa-edit"></i> Editar
                             </a>
-                            <a href="/grupo/delete/<?php echo $value->idGrupo; ?>" class="action-btn eliminar" title="Eliminar grupo">
+                            <a href="/grupo/delete/<?php echo $value->id; ?>" class="action-btn eliminar" title="Eliminar grupo">
                                 <i class="fas fa-trash"></i> Eliminar
                             </a>
                         </div>

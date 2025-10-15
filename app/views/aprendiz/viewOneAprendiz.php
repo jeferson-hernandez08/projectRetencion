@@ -18,7 +18,7 @@
                         <div class='record-one__details'>
                             <div class='record-one__row'>
                                 <span class='record-one__label'>ID:</span>
-                                <span class='record-one__value'>$aprendiz->idAprendiz</span>
+                                <span class='record-one__value'>$aprendiz->id</span>
                             </div>
                             <div class='record-one__row'>
                                 <span class='record-one__label'>Tipo Documento:</span>

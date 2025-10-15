@@ -73,7 +73,7 @@
                     <?php
                         if (isset($programas) && is_array($programas)) {
                             foreach ($programas as $key => $value) {
-                                echo "<option value='".$value->idProgramaFormacion."'>".$value->nombre."</option>";
+                                echo "<option value='".$value->id."'>".$value->name."</option>";
                             }
                         } else {
                             echo "ERROR";

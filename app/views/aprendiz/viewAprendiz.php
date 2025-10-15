@@ -99,14 +99,14 @@
             <?php foreach ($aprendices as $value): ?>
                 <div class="report-card">
                     <div class="card-header">
-                        <span class="report-id">ID Aprendiz : <?php echo $value->idAprendiz; ?></span>
+                        <span class="report-id">ID Aprendiz : <?php echo $value->id; ?></span>
                         <span class="aprendiz-email">Email: <?php echo (!empty ($value->email)) ? htmlspecialchars($value->email) : 'No asignado'; ?></span>
                     </div>
                     
                     <div class="card-body">
                         <div class="report-info">
                             <div class="info-label"><i class="fas fa-user"></i> Nombres:</div>
-                            <div class="info-value"><?php echo $value->nombres ?? 'No especificado'; ?></div>
+                            <div class="info-value"><?php echo $value->firtsName ?? 'No especificado'; ?></div>
                         </div>
                         
                         <div class="report-info">
@@ -116,12 +116,12 @@
                         
                         <div class="report-info">
                             <div class="info-label"><i class="fas fa-phone"></i> Teléfono:</div>
-                            <div class="info-value"><?php echo (!empty ($value->telefono)) ? htmlspecialchars($value->telefono) : 'No asignado'; ?></div>
+                            <div class="info-value"><?php echo (!empty ($value->phone)) ? htmlspecialchars($value->phone) : 'No asignado'; ?></div>
                         </div>
                         
                         <div class="report-info">
                             <div class="info-label"><i class="fas fa-info-circle"></i> Estado:</div>
-                            <div class="info-value"><?php echo $value->estado ?? 'No especificado'; ?></div>
+                            <div class="info-value"><?php echo $value->status ?? 'No especificado'; ?></div>
                         </div>
                         
                         
@@ -143,7 +143,7 @@
                         
                         <div class="report-info">
                             <div class="info-label"><i class="fas fa-calendar-alt"></i> Trimestre:</div>
-                            <?php echo (!empty($value->trimestre)) ? htmlspecialchars($value->trimestre) : 'No asignado'; ?>
+                            <?php echo (!empty($value->quarter )) ? htmlspecialchars($value->quarter ) : 'No asignado'; ?>
                         </div>
 
                         <div class="report-info">
@@ -154,13 +154,13 @@
                     
                     <div class="card-footer">
                         <div class="card-actions">
-                            <a href="/aprendiz/view/<?php echo $value->idAprendiz; ?>" class="action-btn consultar" title="Ver detalles">
+                            <a href="/aprendiz/view/<?php echo $value->id; ?>" class="action-btn consultar" title="Ver detalles">
                                 <i class="fas fa-eye"></i> Detalles
                             </a>
-                            <a href="/aprendiz/edit/<?php echo $value->idAprendiz; ?>" class="action-btn editar" title="Editar aprendiz">
+                            <a href="/aprendiz/edit/<?php echo $value->id; ?>" class="action-btn editar" title="Editar aprendiz">
                                 <i class="fas fa-edit"></i> Editar
                             </a>
-                            <a href="/aprendiz/delete/<?php echo $value->idAprendiz; ?>" class="action-btn eliminar" title="Eliminar aprendiz">
+                            <a href="/aprendiz/delete/<?php echo $value->id; ?>" class="action-btn eliminar" title="Eliminar aprendiz">
                                 <i class="fas fa-trash"></i> Eliminar
                             </a>
                         </div>
