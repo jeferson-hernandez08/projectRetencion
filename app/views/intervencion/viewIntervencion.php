@@ -99,3 +99,49 @@
     }
 
 </style>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const searchInput = document.getElementById('searchAprendizHeader');
+    const clearBtn = document.getElementById('clearSearchHeader');
+    const reportCards = document.querySelectorAll('.report-card');
+
+    if (searchInput && clearBtn) {
+        searchInput.addEventListener('input', function() {
+            const searchTerm = this.value.toLowerCase().trim();
+            
+            if (searchTerm) {
+                clearBtn.style.display = 'flex';
+            } else {
+                clearBtn.style.display = 'none';
+            }
+
+            reportCards.forEach(card => {
+                const aprendizElement = card.querySelector('.aprendiz-destacado');
+                
+                if (aprendizElement) {
+                    const nombreAprendiz = aprendizElement.textContent.toLowerCase();
+                    
+                    if (nombreAprendiz.includes(searchTerm)) {
+                        card.style.display = 'block';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        });
+
+        clearBtn.addEventListener('click', function() {
+            searchInput.value = '';
+            clearBtn.style.display = 'none';
+            
+            reportCards.forEach(card => {
+                card.style.display = 'block';
+            });
+            
+            searchInput.focus();
+        });
+    }
+});
+</script>

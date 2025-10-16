@@ -11,7 +11,63 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
-        
+        /* Estilos del buscador para tema claro */
+        .header-search-reportes .search-wrapper-reportes {
+            background-color: #f5f5f5;
+            border: 1px solid #e0e0e0;
+            border-radius: 25px;
+        }
+
+        .header-search-reportes .search-input-reportes {
+            background-color: transparent;
+            color: #333;
+        }
+
+        .header-search-reportes .search-input-reportes::placeholder {
+            color: #999;
+        }
+
+        .header-search-reportes .search-icon-reportes {
+            color: #666;
+        }
+
+        .header-search-reportes .clear-btn-reportes {
+            color: #666;
+        }
+
+        .header-search-reportes .clear-btn-reportes:hover {
+            color: #333;
+            background-color: #e0e0e0;
+        }
+
+        /* Estilos del buscador para tema oscuro - mantener como está */
+        body.dark-mode .header-search-reportes .search-wrapper-reportes {
+            background-color: #2d3748;
+            border: 1px solid #4a5568;
+            border-radius: 25px;
+        }
+
+        body.dark-mode .header-search-reportes .search-input-reportes {
+            background-color: transparent;
+            color: #e2e8f0;
+        }
+
+        body.dark-mode .header-search-reportes .search-input-reportes::placeholder {
+            color: #a0aec0;
+        }
+
+        body.dark-mode .header-search-reportes .search-icon-reportes {
+            color: #cbd5e0;
+        }
+
+        body.dark-mode .header-search-reportes .clear-btn-reportes {
+            color: #cbd5e0;
+        }
+
+        body.dark-mode .header-search-reportes .clear-btn-reportes:hover {
+            color: #e2e8f0;
+            background-color: #4a5568;
+        }
     </style>
 </head>
 
@@ -221,12 +277,12 @@
     </footer>
     
     <script>
-        // Mostrar buscador solo en páginas de reportes
+        // Mostrar buscador en páginas de reportes e intervenciones
         document.addEventListener('DOMContentLoaded', function() {
             const currentPath = window.location.pathname;
             const searchReportes = document.getElementById('header-search-reportes');
             
-            if (currentPath.includes('/reporte/view')) {
+            if (currentPath.includes('/reporte/view') || currentPath.includes('/intervencion/view')) {
                 searchReportes.classList.add('active');
             }
         });
