@@ -31,7 +31,7 @@ $reporteSeleccionado = $_GET['reporteId'] ?? null;
                     <?php
                         if (isset($estrategias) && is_array($estrategias)) {
                             foreach ($estrategias as $estrategia) {
-                                echo "<option value='".$estrategia->idEstrategias."'>".$estrategia->estrategia."</option>";
+                                echo "<option value='".$estrategia->id."'>".$estrategia->strategy."</option>";
                             }
                         } else {
                             echo "ERROR";
@@ -48,8 +48,8 @@ $reporteSeleccionado = $_GET['reporteId'] ?? null;
                     <?php
                         if (isset($reportes) && is_array($reportes)) {
                             foreach ($reportes as $reporte) {
-                                $selected = ($reporteSeleccionado == $reporte->idReporte) ? 'selected' : '';
-                                echo "<option value='".$reporte->idReporte."'>".$reporte->descripcion."</option>";
+                                $selected = ($reporteSeleccionado == $reporte->id) ? 'selected' : '';
+                                echo "<option value='".$reporte->id."'>".$reporte->description."</option>";
                             }
                         } else {
                             echo "ERROR";

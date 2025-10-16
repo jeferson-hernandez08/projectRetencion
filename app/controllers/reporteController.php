@@ -165,7 +165,7 @@ class ReporteController extends BaseController {
 
                 // Obtener la descripción completa del reporte y el nombre del aprendiz
                 $reporteCompleto = $reporteObj->getReporte($idReporte);
-                $reporteDescripcion = $reporteCompleto->descripcion;
+                $reporteDescripcion = $reporteCompleto->description;
                 $aprendizNombre = $reporteCompleto->nombreAprendiz;
 
                 // Obtener todos los usuarios para enviarles el correo
@@ -362,7 +362,7 @@ class ReporteController extends BaseController {
                 
                 // Obtener estado actual para revertir si falla
                 $reporteActual = $reporteModel->getReporte($id);
-                $oldEstado = $reporteActual->estado;
+                $oldEstado = $reporteActual->state;
                 
                 // Actualizar solo el estado
                 $result = $reporteModel->updateEstado($id, $data['estado']);

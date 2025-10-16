@@ -5,11 +5,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title> <?php echo $title ?> </title>
-    <link rel="shortcut icon" href="/img/logoSenaGreen.png" type="image/x-icon"> <!-- Icono de la pestaña del navegador -->
+    <link rel="shortcut icon" href="/img/logoSenaGreen.png" type="image/x-icon">
     <link rel="stylesheet" href="/css/reset.css">
     <link rel="stylesheet" href="/css/styles_admin_layout.css">
-    <!-- Añadir Font Awesome para los iconos -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        
+    </style>
 </head>
 
 <body>
@@ -17,17 +20,16 @@
         <aside class="sidebar" id="sidebar">
             <div class="sidebar-content">
                 <div class="logo">
-                    <img src="/img/logoSenaProyect7.png" alt="logoImg">  <!--  ../../../public -->
-                    <!-- <span class="logo-text">RetencionCPIC</span> -->
+                    <img src="/img/logoSenaProyect7.png" alt="logoImg">
                 </div>
                 <nav class="menu">
                     <ul>
                         <li><a href="/main"><i class="fas fa-home"></i><span class="info-text">Inicio</span></a></li>
-                        <?php if(isset($_SESSION['rol']) && $_SESSION['rol'] == 2): ?>    <!-- Instructor -->
+                        <?php if(isset($_SESSION['rol']) && $_SESSION['rol'] == 2): ?>
                             <li><a href="/aprendiz/view"><i class="fas fa-user-graduate"></i><span class="info-text">Aprendices</span></a></li>
                             <li><a href="/reporte/view"><i class="fas fa-chart-line"></i><span class="info-text">Reportes</span></a></li> 
                         <?php endif ?>   
-                        <?php if(isset($_SESSION['rol']) && $_SESSION['rol'] == 3): ?>     <!-- Coordinador Academico  -->
+                        <?php if(isset($_SESSION['rol']) && $_SESSION['rol'] == 3): ?>
                             <li><a href="/programaFormacion/view"><i class="fas fa-chalkboard-teacher"></i><span class="info-text">Programas</span></a></li>
                             <li><a href="/grupo/view"><i class="fas fa-graduation-cap"></i><span class="info-text">Grupos</span></a></li>
                             <li><a href="/aprendiz/view"><i class="fas fa-user-graduate"></i><span class="info-text">Aprendices</span></a></li>
@@ -38,7 +40,7 @@
                             <li><a href="/intervencion/view"><i class="fas fa-hand-holding-heart"></i><span class="info-text">Intervenciones</span></a></li>
                             <li><a href="/usuario/view"><i class="fas fa-users"></i><span class="info-text">Usuarios</span></a></li> 
                         <?php endif ?>
-                        <?php if(isset($_SESSION['rol']) && $_SESSION['rol'] == 4): ?>   <!-- Coordinador de Formacion (Profesional de Bienestar) -->
+                        <?php if(isset($_SESSION['rol']) && $_SESSION['rol'] == 4): ?>
                             <li><a href="/programaFormacion/view"><i class="fas fa-chalkboard-teacher"></i><span class="info-text">Programas</span></a></li>
                             <li><a href="/grupo/view"><i class="fas fa-graduation-cap"></i><span class="info-text">Grupos</span></a></li>
                             <li><a href="/aprendiz/view"><i class="fas fa-user-graduate"></i><span class="info-text">Aprendices</span></a></li>
@@ -49,13 +51,13 @@
                             <li><a href="/intervencion/view"><i class="fas fa-hand-holding-heart"></i><span class="info-text">Intervenciones</span></a></li>
                             <li><a href="/usuario/view"><i class="fas fa-users"></i><span class="info-text">Usuarios</span></a></li> 
                         <?php endif ?>
-                        <?php if(isset($_SESSION['rol']) && $_SESSION['rol'] == 5): ?>   <!-- Vocero -->
+                        <?php if(isset($_SESSION['rol']) && $_SESSION['rol'] == 5): ?>
                             <li><a href="/aprendiz/view"><i class="fas fa-user-graduate"></i><span class="info-text">Aprendices</span></a></li>
                             <li><a href="/reporte/view"><i class="fas fa-chart-line"></i><span class="info-text">Reportes</span></a></li>
                         <?php endif ?>
-                        <?php if(isset($_SESSION['rol']) && $_SESSION['rol'] == 1): ?>   <!-- Administrador -->
+                        <?php if(isset($_SESSION['rol']) && $_SESSION['rol'] == 1): ?>
                             <li><a href="/rol/view"><i class="fas fa-users-cog"></i><span class="info-text">Roles</span></a></li>
-                            <li><a href="/usuario/view"><i class="fas fa-users"></i><span class="info-text">Usuarios</span></a></li>    <!-- Permitimos que el administrador cree usuarios tambien -->
+                            <li><a href="/usuario/view"><i class="fas fa-users"></i><span class="info-text">Usuarios</span></a></li>
                         <?php endif ?>
                         <?php if(isset($_SESSION['nombre'])) {  ?> 
                             <li>
@@ -76,10 +78,17 @@
                         <i class="fas fa-bars"></i>
                     </button>
                     <h1> <?php echo $title ?> </h1>
-                    <div class="search-container">
-                        <i class="fas fa-search"></i>
-                        <input type="text" placeholder="Buscar...">
+                    
+                    <div class="header-search-reportes" id="header-search-reportes">
+                        <div class="search-wrapper-reportes">
+                            <i class="fas fa-search search-icon-reportes"></i>
+                            <input type="text" id="searchAprendizHeader" placeholder="Buscar aprendiz..." class="search-input-reportes">
+                            <button id="clearSearchHeader" class="clear-btn-reportes">
+                                <i class="fas fa-times"></i>
+                            </button>
+                        </div>
                     </div>
+                    
                     <div class="header-icons">
                         <div class="user-dropdown">
                             <a href="#" class="icon-link" id="user-menu-toggle">
@@ -109,26 +118,18 @@
                                 </div>
                             </div>
                         </div>
-                        <!-- <a href="#" class="icon-link"><i class="fas fa-user-circle"></i></a> -->
-                        <!-- <a href="#" class="icon-link"><i class="fas fa-bell"></i></a> -->
-                        <!-- <a href="#" class="icon-link" id="notificaciones-toggle">
-                            <i class="fas fa-bell"></i>
-                            <span class="notification-badge" id="notification-badge">0</span>
-                        </a> -->
 
                         <a href="#" class="icon-link" id="theme-toggle-link" onclick="toggleDarkMode(); return false;"><i class="fas fa-moon"></i></a>
                     </div>
                 </div>
             </header>
 
-            <!-- Ventana de notificaciones -->
             <div class="notificaciones-container" id="notificaciones-container">
                 <div class="notificaciones-header">
                     <h3>Notificaciones</h3>
                     <a href="#" id="marcar-todas-leidas">Marcar todas como leídas</a>
                 </div>
                 <div class="notificaciones-body" id="notificaciones-body">
-                    <!-- Las notificaciones se cargarán aquí con AJAX -->
                 </div>
                 <div class="notificaciones-footer">
                     <a href="#">Ver todas las notificaciones</a>
@@ -146,7 +147,6 @@
             <div class="footer-section footer-logo-container">
                 <div class="footer-logo">
                     <img src="/img/logoProyect2.png" alt="Logo RetencionCPIC">
-                    <!-- <div class="footer-logo-text">RetencionCPIC</div> -->
                 </div>
                 <p>Sistema integral para mejorar la retención de aprendices en el Centro de Procesos Industriales y Construcción (CPIC) del SENA.</p>
                 <div class="footer-social">
@@ -161,11 +161,11 @@
                 <h3>Enlaces Rápidos</h3>
                 <ul class="footer-links">
                     <li><a href="/main"><i class="fas fa-home"></i> Inicio</a></li>
-                    <?php if(isset($_SESSION['rol']) && $_SESSION['rol'] == 2): ?>   <!-- Instructor -->
+                    <?php if(isset($_SESSION['rol']) && $_SESSION['rol'] == 2): ?>
                         <li><a href="/aprendiz/view"><i class="fas fa-user-graduate"></i> Aprendices</a></li>
                         <li><a href="/reporte/view"><i class="fas fa-chart-line"></i> Reportes</a></li>       
                     <?php endif ?>
-                    <?php if(isset($_SESSION['rol']) && $_SESSION['rol'] == 3): ?>   <!-- Coordinador Academico  -->
+                    <?php if(isset($_SESSION['rol']) && $_SESSION['rol'] == 3): ?>
                         <li><a href="/programaFormacion/view"><i class="fas fa-chalkboard-teacher"></i> Programas</a></li>
                         <li><a href="/grupo/view"><i class="fas fa-graduation-cap"></i> Grupos</a></li>
                         <li><a href="/aprendiz/view"><i class="fas fa-user-graduate"></i> Aprendices</a></li>
@@ -176,7 +176,7 @@
                         <li><a href="/intervencion/view"><i class="fas fa-hand-holding-heart"></i> Intervenciones</a></li>
                         <li><a href="/usuario/view"><i class="fas fa-users"></i> Usuarios</a></li> 
                     <?php endif ?>
-                    <?php if(isset($_SESSION['rol']) && $_SESSION['rol'] == 4): ?>   <!-- Coordinador de Formacion (Profesional de Bienestar) -->
+                    <?php if(isset($_SESSION['rol']) && $_SESSION['rol'] == 4): ?>
                         <li><a href="/programaFormacion/view"><i class="fas fa-chalkboard-teacher"></i> Programas</a></li>
                         <li><a href="/grupo/view"><i class="fas fa-graduation-cap"></i> Grupos</a></li>
                         <li><a href="/aprendiz/view"><i class="fas fa-user-graduate"></i> Aprendices</a></li>
@@ -187,13 +187,13 @@
                         <li><a href="/intervencion/view"><i class="fas fa-hand-holding-heart"></i> Intervenciones</a></li>
                         <li><a href="/usuario/view"><i class="fas fa-users"></i> Usuarios</a></li>
                     <?php endif ?>
-                    <?php if(isset($_SESSION['rol']) && $_SESSION['rol'] == 5): ?>   <!-- Vocero -->
+                    <?php if(isset($_SESSION['rol']) && $_SESSION['rol'] == 5): ?>
                         <li><a href="/reporte/view"><i class="fas fa-chart-line"></i> Reportes</a></li>
                         <li><a href="/aprendiz/view"><i class="fas fa-user-graduate"></i> Aprendices</a></li>
                     <?php endif ?>
-                    <?php if(isset($_SESSION['rol']) && $_SESSION['rol'] == 1): ?>   <!-- Administrador -->
+                    <?php if(isset($_SESSION['rol']) && $_SESSION['rol'] == 1): ?>
                         <li><a href="/rol/view"><i class="fas fa-users-cog"></i> Roles</a></li>
-                        <li><a href="/usuario/view"><i class="fas fa-users"></i><span class="info-text">Usuarios</span></a></li>    <!-- Permitimos que el administrador cree usuarios tambien -->
+                        <li><a href="/usuario/view"><i class="fas fa-users"></i><span class="info-text">Usuarios</span></a></li>
                     <?php endif ?>
                 </ul>
             </div>
@@ -213,7 +213,7 @@
             <p>&copy; <?php echo date('Y'); ?> RetencionCPIC. Todos los derechos reservados.</p>
             <p>Desarrollado por ADSO 28873711 para el SENA</p>
 
-            <div class="theme-toggle" id="theme-toggle">   <!-- Boton Footer Light y Night -->
+            <div class="theme-toggle" id="theme-toggle">
                 <i class="fas fa-moon"></i>
             </div>
         </div>
@@ -221,7 +221,16 @@
     </footer>
     
     <script>
-        // Función para cambiar el icono
+        // Mostrar buscador solo en páginas de reportes
+        document.addEventListener('DOMContentLoaded', function() {
+            const currentPath = window.location.pathname;
+            const searchReportes = document.getElementById('header-search-reportes');
+            
+            if (currentPath.includes('/reporte/view')) {
+                searchReportes.classList.add('active');
+            }
+        });
+    
         function updateThemeIcon(isDark) {
             const themeIcon = document.querySelector('#theme-toggle-link i');
             if (isDark) {
@@ -233,14 +242,12 @@
             }
         }
 
-        // Función para alternar el modo oscuro
         function toggleDarkMode() {
             const isDarkMode = document.body.classList.toggle('dark-mode');
             localStorage.setItem('darkMode', isDarkMode);
             updateThemeIcon(isDarkMode);
         }
 
-        // Aplicar el tema guardado al cargar la página
         document.addEventListener('DOMContentLoaded', function() {
             const isDarkMode = localStorage.getItem('darkMode') === 'true';
             if (isDarkMode) {
@@ -249,7 +256,6 @@
             }
         });
 
-        // --- Sidebar: Mantener estado comprimido/expandido ---
         function setSidebarState(isHidden) {
             localStorage.setItem('sidebarHidden', isHidden ? '1' : '0');
         }
@@ -257,8 +263,7 @@
             return localStorage.getItem('sidebarHidden') === '1';
         }
 
-document.addEventListener('DOMContentLoaded', function() {
-            // Restaurar estado del sidebar
+        document.addEventListener('DOMContentLoaded', function() {
             const sidebar = document.getElementById('sidebar');
             const isMobile = window.innerWidth <= 768;
             
@@ -270,19 +275,15 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
             }
 
-            // BotÃ³n hamburguesa
             document.querySelector('#menu-toggle').addEventListener('click', function() {
                 if (window.innerWidth <= 768) {
-                    // En móvil: toggle de la clase sidebar-visible
                     sidebar.classList.toggle('sidebar-visible');
                 } else {
-                    // En escritorio: toggle de sidebar-hidden
                     sidebar.classList.toggle('sidebar-hidden');
                     setSidebarState(sidebar.classList.contains('sidebar-hidden'));
                 }
             });
 
-            // Cerrar sidebar en móvil al hacer clic fuera
             document.addEventListener('click', function(e) {
                 if (window.innerWidth <= 768) {
                     if (!sidebar.contains(e.target) && 
@@ -293,7 +294,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
             });
 
-            // Cerrar sidebar en móvil al hacer clic en un enlace
             const menuLinks = sidebar.querySelectorAll('.menu a');
             menuLinks.forEach(link => {
                 link.addEventListener('click', function() {
@@ -303,7 +303,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 });
             });
 
-            // Ajustar sidebar al cambiar el tamaño de la ventana
             window.addEventListener('resize', function() {
                 if (window.innerWidth > 768) {
                     sidebar.classList.remove('sidebar-visible');
@@ -315,20 +314,18 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
             });
         });
-        // ***************** Header y Footer Modo Oscuro ******************
+
         function toggleDarkMode() {
             const body = document.body;
             const isDark = body.classList.toggle('dark-mode');
             localStorage.setItem('darkMode', isDark);
 
-            // Icono del header
             const headerIcon = document.querySelector('#theme-toggle-link i');
             if (headerIcon) {
                 headerIcon.classList.toggle('fa-moon', !isDark);
                 headerIcon.classList.toggle('fa-sun', isDark);
             }
 
-            // Icono del footer
             const footerIcon = document.querySelector('#theme-toggle i');
             if (footerIcon) {
                 footerIcon.classList.toggle('fa-moon', !isDark);
@@ -336,7 +333,6 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         }
         
-        // Aplicar el tema guardado al cargar la página
         document.addEventListener('DOMContentLoaded', function() {
             const isDarkMode = localStorage.getItem('darkMode') === 'true';
             if (isDarkMode) {
@@ -346,12 +342,9 @@ document.addEventListener('DOMContentLoaded', function() {
                 themeIcon.classList.add('fa-sun');
             }
             
-            // Evento para el botón de cambio de tema
             document.getElementById('theme-toggle').addEventListener('click', toggleDarkMode);
         });
 
-        // ******************** User Dropdown Menu ***************
-        // Menú desplegable de usuario
         const userMenuToggle = document.getElementById('user-menu-toggle');
         const userDropdownContent = document.getElementById('user-dropdown-content');
         
@@ -360,22 +353,12 @@ document.addEventListener('DOMContentLoaded', function() {
             userDropdownContent.style.display = userDropdownContent.style.display === 'block' ? 'none' : 'block';
         });
         
-        // Cerrar menú al hacer clic fuera
         document.addEventListener('click', function(event) {
             if (!event.target.closest('.user-dropdown')) {
                 userDropdownContent.style.display = 'none';
             }
         });
-        
-        // Función para simular cierre de sesión
-        // document.getElementById('logout-btn').addEventListener('click', function() {
-        //     // Aquí normalmente iría la lógica de cierre de sesión
-        //     // Simulamos con un mensaje
-        //     alert('Sesión cerrada correctamente. Redirigiendo al inicio de sesión...');
-        //     window.location.href = '/login';
-        // });
 
-        // ******************** Notificaciones ********************
         document.addEventListener('DOMContentLoaded', function() {
             const notificacionesToggle = document.getElementById('notificaciones-toggle');
             const notificacionesContainer = document.getElementById('notificaciones-container');
@@ -383,7 +366,6 @@ document.addEventListener('DOMContentLoaded', function() {
             const notificationBadge = document.getElementById('notification-badge');
             const marcarTodasBtn = document.getElementById('marcar-todas-leidas');
 
-            // Función para cargar notificaciones
             function cargarNotificaciones() {
                 fetch('/notificacion/get')
                     .then(response => response.json())
@@ -427,45 +409,45 @@ document.addEventListener('DOMContentLoaded', function() {
                     });
             }
 
-            // Función para marcar notificación como leída
             function marcarComoLeida(id) {
                 fetch(`/notificacion/marcar-leida/${id}`, { method: 'POST' })
                     .then(() => cargarNotificaciones())
                     .catch(error => console.error('Error marcando como leída:', error));
             }
 
-            // Toggle notificaciones
-            notificacionesToggle.addEventListener('click', function(e) {
-                e.preventDefault();
-                e.stopPropagation();
-                notificacionesContainer.classList.toggle('show');
-                if (notificacionesContainer.classList.contains('show')) {
-                    cargarNotificaciones();
-                }
-            });
+            if (notificacionesToggle) {
+                notificacionesToggle.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    notificacionesContainer.classList.toggle('show');
+                    if (notificacionesContainer.classList.contains('show')) {
+                        cargarNotificaciones();
+                    }
+                });
+            }
 
-            // Marcar todas como leídas
-            marcarTodasBtn.addEventListener('click', function(e) {
-                e.preventDefault();
-                fetch('/notificacion/marcar-todas-leidas', { method: 'POST' })
-                    .then(() => cargarNotificaciones())
-                    .catch(error => console.error('Error marcando todas como leídas:', error));
-            });
+            if (marcarTodasBtn) {
+                marcarTodasBtn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    fetch('/notificacion/marcar-todas-leidas', { method: 'POST' })
+                        .then(() => cargarNotificaciones())
+                        .catch(error => console.error('Error marcando todas como leídas:', error));
+                });
+            }
 
-            // Cerrar notificaciones al hacer clic fuera
             document.addEventListener('click', function(e) {
-                if (!notificacionesContainer.contains(e.target) && 
+                if (notificacionesContainer && notificacionesToggle &&
+                    !notificacionesContainer.contains(e.target) && 
                     !notificacionesToggle.contains(e.target) &&
                     notificacionesContainer.classList.contains('show')) {
                     notificacionesContainer.classList.remove('show');
                 }
             });
 
-            // Cargar notificaciones cada 30 segundos
-            setInterval(cargarNotificaciones, 30000);
-
-            // Cargar inicialmente
-            cargarNotificaciones();
+            if (notificacionesToggle) {
+                setInterval(cargarNotificaciones, 30000);
+                cargarNotificaciones();
+            }
         });
     </script>
 </body>

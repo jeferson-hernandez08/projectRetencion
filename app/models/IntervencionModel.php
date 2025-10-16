@@ -22,19 +22,27 @@ class IntervencionModel extends BaseModel {
 
     public function saveIntervencion( $descripcion, $fkIdEstrategias, $fkIdReporte, $fkIdUsuario) {   // Eliminamos la variable $fechaCreacion, para generacion automatica
         try {
+            // Generar fecha automática | Colombia - Similar a ReporteModel
+            date_default_timezone_set('America/Bogota');
+            $fechaCreacion = date('Y-m-d H:i:s');
+            $fechaActual = date('Y-m-d H:i:s'); // Para createdAt y updatedAt
+
             // CONSULTA ADAPTADA para PostgreSQL con nombres de columnas en inglés
             // Se usa NOW() para las fechas automáticas de PostgreSQL
-            $sql = "INSERT INTO $this->table (creationDate, description, fkIdStrategies, fkIdReports, fkIdUsers, createdAt, updatedAt) 
-                    VALUES (NOW(), :description, :fkIdStrategies, :fkIdReports, :fkIdUsers, NOW(), NOW())";
+            $sql = "INSERT INTO $this->table (\"creationDate\", description, \"fkIdStrategies\", \"fkIdReports\", \"fkIdUsers\", \"createdAt\", \"updatedAt\") 
+                    VALUES (:creationDate, :description, :fkIdStrategies, :fkIdReports, :fkIdUsers, :createdAt, :updatedAt)";
                     
             // 1. Se prepara la consulta
             $statement = $this->dbConnection->prepare($sql);
 
             // 2. BindParam para sanitizar los datos de entrada - NOMBRES ADAPTADOS
+            $statement->bindParam('creationDate', $fechaCreacion, PDO::PARAM_STR);
             $statement->bindParam('description', $descripcion, PDO::PARAM_STR);
             $statement->bindParam('fkIdStrategies', $fkIdEstrategias, PDO::PARAM_INT);
             $statement->bindParam('fkIdReports', $fkIdReporte, PDO::PARAM_INT);
             $statement->bindParam('fkIdUsers', $fkIdUsuario, PDO::PARAM_INT);
+            $statement->bindParam('createdAt', $fechaActual, PDO::PARAM_STR);
+            $statement->bindParam('updatedAt', $fechaActual, PDO::PARAM_STR);
 
             // 3. Ejecutar la consulta
             $result = $statement->execute();
@@ -48,13 +56,13 @@ class IntervencionModel extends BaseModel {
     public function getIntervencion($id) {
         try {
             // CONSULTA ADAPTADA para PostgreSQL - nombres de tablas y columnas actualizados
-            $sql = "SELECT interventions.*, strategies.strategy AS nombreEstrategia, 
-                    reports.description AS descripcionReporte, 
-                    CONCAT(users.firstName, ' ', users.lastName) AS nombreUsuario
+            $sql = "SELECT interventions.*, strategies.strategy AS \"nombreEstrategia\", 
+                    reports.description AS \"descripcionReporte\", 
+                    CONCAT(users.\"firstName\", ' ', users.\"lastName\") AS \"nombreUsuario\"
                     FROM interventions 
-                    INNER JOIN strategies ON interventions.fkIdStrategies = strategies.id
-                    INNER JOIN reports ON interventions.fkIdReports = reports.id
-                    INNER JOIN users ON interventions.fkIdUsers = users.id
+                    INNER JOIN strategies ON interventions.\"fkIdStrategies\" = strategies.id
+                    INNER JOIN reports ON interventions.\"fkIdReports\" = reports.id
+                    INNER JOIN users ON interventions.\"fkIdUsers\" = users.id
                     WHERE interventions.id = :id";
                     
             $statement = $this->dbConnection->prepare($sql);
@@ -70,13 +78,17 @@ class IntervencionModel extends BaseModel {
 
     public function editIntervencion($id, $descripcion, $fkIdEstrategias, $fkIdReporte, $fkIdUsuario) {  // Se elimina $fechaCreacion, fecha automática.
         try {
+            // Generar fecha actual | Colombia - Similar a ReporteModel
+            date_default_timezone_set('America/Bogota');
+            $fechaActual = date('Y-m-d H:i:s');
+
             // CONSULTA ADAPTADA para PostgreSQL - nombres de columnas actualizados
             $sql = "UPDATE $this->table SET  
                         description = :description, 
-                        fkIdStrategies = :fkIdStrategies, 
-                        fkIdReports = :fkIdReports, 
-                        fkIdUsers = :fkIdUsers,
-                        updatedAt = NOW() 
+                        \"fkIdStrategies\" = :fkIdStrategies, 
+                        \"fkIdReports\" = :fkIdReports, 
+                        \"fkIdUsers\" = :fkIdUsers,
+                        \"updatedAt\" = :updatedAt 
                     WHERE id = :id";       // Se elimina fechaCreacion=:fechaCreacion, para fecha automática.
                     
             $statement = $this->dbConnection->prepare($sql);
@@ -86,6 +98,7 @@ class IntervencionModel extends BaseModel {
             $statement->bindParam(":fkIdStrategies", $fkIdEstrategias, PDO::PARAM_INT);
             $statement->bindParam(":fkIdReports", $fkIdReporte, PDO::PARAM_INT);
             $statement->bindParam(":fkIdUsers", $fkIdUsuario, PDO::PARAM_INT);
+            $statement->bindParam(":updatedAt", $fechaActual, PDO::PARAM_STR);
             $result = $statement->execute();
             return $result;
         } catch (PDOException $ex) {
@@ -112,13 +125,13 @@ class IntervencionModel extends BaseModel {
     public function getByReporteId($idReporte) {
         try {
             // CONSULTA ADAPTADA para PostgreSQL - nombres de tablas y columnas actualizados
-            $sql = "SELECT interventions.*, strategies.strategy AS nombreEstrategia, 
-                    CONCAT(users.firstName, ' ', users.lastName) AS nombreUsuario
+            $sql = "SELECT interventions.*, strategies.strategy AS \"nombreEstrategia\", 
+                    CONCAT(users.\"firstName\", ' ', users.\"lastName\") AS \"nombreUsuario\"
                     FROM interventions 
-                    INNER JOIN strategies ON interventions.fkIdStrategies = strategies.id
-                    INNER JOIN users ON interventions.fkIdUsers = users.id
-                    WHERE interventions.fkIdReports = :idReporte
-                    ORDER BY interventions.creationDate DESC";
+                    INNER JOIN strategies ON interventions.\"fkIdStrategies\" = strategies.id
+                    INNER JOIN users ON interventions.\"fkIdUsers\" = users.id
+                    WHERE interventions.\"fkIdReports\" = :idReporte
+                    ORDER BY interventions.\"creationDate\" DESC";
                     
             $statement = $this->dbConnection->prepare($sql);
             $statement->bindParam(":idReporte", $idReporte, PDO::PARAM_INT);

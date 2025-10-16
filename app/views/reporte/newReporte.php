@@ -31,7 +31,7 @@
                                 <?php
                                     if (isset($categorias) && is_array($categorias)) {
                                         foreach ($categorias as $categoria) {
-                                            echo "<option value='".$categoria->idCategoria."'>".$categoria->nombre."</option>";  // Aqui era el ERROR nombre de la colomna nombre
+                                            echo "<option value='".$categoria->id."'>".$categoria->name."</option>";  // Aqui era el ERROR nombre de la colomna nombre
                                         }
                                     } else {
                                         echo "<option value=''>No hay categorias disponibles</option>";
@@ -49,7 +49,7 @@
                                     if (isset($causas) && is_array($causas)) {
                                         foreach ($causas as $causa) {
                                             //echo "<option value='".$causa->idCausa."'>".$causa->causa."</option>";
-                                            echo "<option value='".$causa->idCausa."' data-categoria='".$causa->fkIdCategoria."'>".$causa->causa."</option>";    // Se agrega data-categoria con el ID de su categoría correspondiente, esto es para el filtrado.
+                                            echo "<option value='".$causa->id."' data-categoria='".$causa->fkIdCategories."'>".$causa->cause."</option>";    // Se agrega data-categoria con el ID de su categoría correspondiente, esto es para el filtrado.
                                         }
                                     } else {
                                         echo "<option value=''>No hay causas disponibles</option>";
@@ -111,8 +111,8 @@
                     <?php
                         if (isset($aprendices) && is_array($aprendices)) {
                             foreach ($aprendices as $aprendiz) {
-                                $nombreCompletoAprendiz = $aprendiz->nombres . ' ' . $aprendiz->apellidos;
-                                echo "<option value='".$aprendiz->idAprendiz."'>".$nombreCompletoAprendiz."</option>";
+                                $nombreCompletoAprendiz = $aprendiz->firtsName . ' ' . $aprendiz->lastName;
+                                echo "<option value='".$aprendiz->id."'>".$nombreCompletoAprendiz."</option>";
 
                             }
                         } else {

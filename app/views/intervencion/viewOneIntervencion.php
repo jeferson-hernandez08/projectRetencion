@@ -15,15 +15,15 @@
                         <div class='record-one__details'>
                             <div class='record-one__row'>
                                 <span class='record-one__label'>ID:</span>
-                                <span class='record-one__value'>{$intervencion->idIntervencion}</span>
+                                <span class='record-one__value'>{$intervencion->id}</span>
                             </div>
                             <div class='record-one__row'>
                                 <span class='record-one__label'>Fecha Creación:</span>
-                                <span class='record-one__value'>".date('d/m/Y H:i', strtotime($intervencion->fechaCreacion))."</span>
+                                <span class='record-one__value'>".date('d/m/Y H:i', strtotime($intervencion->creationDate))."</span>
                             </div>
                             <div class='record-one__row'>
                                 <span class='record-one__label'>Descripción:</span>
-                                <span class='record-one__value'>{$intervencion->descripcion}</span>
+                                <span class='record-one__value'>{$intervencion->description}</span>
                             </div>
                             <div class='record-one__row'>
                                 <span class='record-one__label'>Estrategia:</span>

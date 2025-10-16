@@ -26,20 +26,28 @@ class ReporteModel extends BaseModel {
             // Forzar estado "Registrado" al crear
             $estado = "Registrado"; // <-- Aseguramos el valor fijo del campo registrado, usuario mayor interactividad.
 
+            // Generar fecha automática | Colombia 
+            date_default_timezone_set('America/Bogota');
+            $fechaCreacion = date('Y-m-d H:i:s');
+            $fechaActual = date('Y-m-d H:i:s'); // Para createdAt y updatedAt
+
             // CONSULTA ADAPTADA para PostgreSQL con nombres de columnas en inglés
             // Se usa NOW() para las fechas automáticas de PostgreSQL
             $sql = "INSERT INTO $this->table (\"creationDate\", description, addressing, state, \"fkIdApprentices\", \"fkIdUsers\", \"createdAt\", \"updatedAt\") 
-                    VALUES (NOW(), :description, :addressing, :state, :fkIdApprentices, :fkIdUsers, NOW(), NOW())";
+                    VALUES (:creationDate, :description, :addressing, :state, :fkIdApprentices, :fkIdUsers, :createdAt, :updatedAt)";
                     
             // 1. Se prepara la consulta
             $statement = $this->dbConnection->prepare($sql);
 
             // 2. BindParam para sanitizar los datos de entrada - NOMBRES ADAPTADOS
+            $statement->bindParam('creationDate', $fechaCreacion, PDO::PARAM_STR);
             $statement->bindParam('description', $descripcion, PDO::PARAM_STR);
             $statement->bindParam('addressing', $direccionamiento, PDO::PARAM_STR);
             $statement->bindParam('state', $estado, PDO::PARAM_STR);
             $statement->bindParam('fkIdApprentices', $fkIdAprendiz, PDO::PARAM_INT);
             $statement->bindParam('fkIdUsers', $fkIdUsuario, PDO::PARAM_INT);
+            $statement->bindParam('createdAt', $fechaActual, PDO::PARAM_STR);
+            $statement->bindParam('updatedAt', $fechaActual, PDO::PARAM_STR);
 
             // 3. Ejecutar la consulta
             // $result = $statement->execute();
@@ -78,6 +86,10 @@ class ReporteModel extends BaseModel {
 
     public function editReporte($id, $descripcion, $direccionamiento, $estado, $fkIdAprendiz, $fkIdUsuario) {  // Se elimina $fechaCreacion, fecha automática.
         try {
+            // Generar fecha actual | Colombia
+            date_default_timezone_set('America/Bogota');
+            $fechaActual = date('Y-m-d H:i:s');
+
             // CONSULTA ADAPTADA para PostgreSQL - nombres de columnas actualizados
             $sql = "UPDATE $this->table SET 
                         description = :description, 
@@ -85,7 +97,7 @@ class ReporteModel extends BaseModel {
                         state = :state, 
                         \"fkIdApprentices\" = :fkIdApprentices, 
                         \"fkIdUsers\" = :fkIdUsers,
-                        \"updatedAt\" = NOW() 
+                        \"updatedAt\" = :updatedAt 
                     WHERE id = :id";       // Se elimina fechaCreacion=:fechaCreacion, para fecha automática.
                     
             $statement = $this->dbConnection->prepare($sql);
@@ -96,6 +108,7 @@ class ReporteModel extends BaseModel {
             $statement->bindParam(":state", $estado, PDO::PARAM_STR);
             $statement->bindParam(":fkIdApprentices", $fkIdAprendiz, PDO::PARAM_INT);
             $statement->bindParam(":fkIdUsers", $fkIdUsuario, PDO::PARAM_INT);
+            $statement->bindParam(":updatedAt", $fechaActual, PDO::PARAM_STR);
             $result = $statement->execute();
             return $result;
         } catch (PDOException $ex) {
@@ -139,15 +152,21 @@ class ReporteModel extends BaseModel {
 
     public function guardarRelacionesCausa($idReporte, $causas) {
         try {
+            // Generar fecha actual | Colombia
+            date_default_timezone_set('America/Bogota');
+            $fechaActual = date('Y-m-d H:i:s');
+
             foreach ($causas as $causa) {
                 // Acceder correctamente al valor de causaId
                 $idCausa = $causa['causaId'];
 
                 // CONSULTA ADAPTADA para PostgreSQL - nombres de tabla y columnas actualizados
-                $sql = "INSERT INTO causes_reports (\"fkIdReports\", \"fkIdCauses\") VALUES (:idReporte, :idCausa)";
+                $sql = "INSERT INTO causes_reports (\"fkIdReports\", \"fkIdCauses\", \"createdAt\", \"updatedAt\") VALUES (:idReporte, :idCausa, :createdAt, :updatedAt)";
                 $statement = $this->dbConnection->prepare($sql);
                 $statement->bindParam(':idReporte', $idReporte, PDO::PARAM_INT);
                 $statement->bindParam(':idCausa', $idCausa, PDO::PARAM_INT);
+                $statement->bindParam(':createdAt', $fechaActual, PDO::PARAM_STR);
+                $statement->bindParam(':updatedAt', $fechaActual, PDO::PARAM_STR);
                 $statement->execute();
             }
             return true;
@@ -160,11 +179,16 @@ class ReporteModel extends BaseModel {
     // Funcion para cambio de estado del aprendiz en viewReporte
     public function updateEstado($id, $estado) {
         try {
+            // Generar fecha actual | Colombia
+            date_default_timezone_set('America/Bogota');
+            $fechaActual = date('Y-m-d H:i:s');
+
             // CONSULTA ADAPTADA para PostgreSQL
-            $sql = "UPDATE $this->table SET state = :state, \"updatedAt\" = NOW() WHERE id = :id";
+            $sql = "UPDATE $this->table SET state = :state, \"updatedAt\" = :updatedAt WHERE id = :id";
             $statement = $this->dbConnection->prepare($sql);
             $statement->bindParam(":id", $id, PDO::PARAM_INT);
             $statement->bindParam(":state", $estado, PDO::PARAM_STR);
+            $statement->bindParam(":updatedAt", $fechaActual, PDO::PARAM_STR);
             return $statement->execute();
         } catch (PDOException $ex) {
             error_log("Error al actualizar estado: " . $ex->getMessage());

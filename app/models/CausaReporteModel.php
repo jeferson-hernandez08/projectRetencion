@@ -20,7 +20,7 @@ class CausaReporteModel extends BaseModel {
         try {
             // CONSULTA ADAPTADA para PostgreSQL con nombres de columnas en inglés
             // Se incluyen createdAt y updatedAt que son NOT NULL en PostgreSQL
-            $sql = "INSERT INTO $this->table (fkIdReports, fkIdCauses, createdAt, updatedAt) 
+            $sql = "INSERT INTO $this->table (\"fkIdReports\", \"fkIdCauses\", \"createdAt\", \"updatedAt\") 
                     VALUES (:fkIdReports, :fkIdCauses, NOW(), NOW())";
                     
             // 1. Se prepara la consulta
@@ -46,9 +46,9 @@ class CausaReporteModel extends BaseModel {
             // CONSULTA ADAPTADA para PostgreSQL - nombres de tablas y columnas actualizados
             $sql = "SELECT cr.*, c.cause, r.description AS reporte_descripcion
                     FROM causes_reports cr
-                    INNER JOIN causes c ON cr.fkIdCauses = c.id
-                    INNER JOIN reports r ON cr.fkIdReports = r.id
-                    WHERE cr.fkIdReports = :fkIdReports AND cr.fkIdCauses = :fkIdCauses";
+                    INNER JOIN causes c ON cr.\"fkIdCauses\" = c.id
+                    INNER JOIN reports r ON cr.\"fkIdReports\" = r.id
+                    WHERE cr.\"fkIdReports\" = :fkIdReports AND cr.\"fkIdCauses\" = :fkIdCauses";
                     
             $statement = $this->dbConnection->prepare($sql);
             $statement->bindParam(":fkIdReports", $fkIdReporte, PDO::PARAM_INT);
@@ -85,7 +85,7 @@ class CausaReporteModel extends BaseModel {
     public function deleteCausaReporte($fkIdReporte, $fkIdCausa) {
         try {
             // CONSULTA ADAPTADA para PostgreSQL - nombres de columnas actualizados
-            $sql = "DELETE FROM $this->table WHERE fkIdReports = :fkIdReports AND fkIdCauses = :fkIdCauses";
+            $sql = "DELETE FROM $this->table WHERE \"fkIdReports\" = :fkIdReports AND \"fkIdCauses\" = :fkIdCauses";
 
             $statement = $this->dbConnection->prepare($sql);
             $statement->bindParam(":fkIdReports", $fkIdReporte, PDO::PARAM_INT);
@@ -108,8 +108,8 @@ class CausaReporteModel extends BaseModel {
             // CONSULTA ADAPTADA para PostgreSQL - nombres de tablas y columnas actualizados
             $sql = "SELECT causes.* 
                     FROM causes_reports 
-                    INNER JOIN causes ON causes_reports.fkIdCauses = causes.id
-                    WHERE causes_reports.fkIdReports = :fkIdReports";
+                    INNER JOIN causes ON causes_reports.\"fkIdCauses\" = causes.id
+                    WHERE causes_reports.\"fkIdReports\" = :fkIdReports";
                     
             $statement = $this->dbConnection->prepare($sql);
             $statement->bindParam(":fkIdReports", $fkIdReporte, PDO::PARAM_INT);
@@ -127,9 +127,9 @@ class CausaReporteModel extends BaseModel {
             // CONSULTA ADAPTADA para PostgreSQL - nombres de tablas y columnas actualizados
             $sql = "SELECT cr.*, r.description AS reporte_descripcion, c.cause AS causa_nombre
                     FROM causes_reports cr
-                    JOIN reports r ON cr.fkIdReports = r.id
-                    JOIN causes c ON cr.fkIdCauses = c.id
-                    ORDER BY cr.fkIdReports";
+                    JOIN reports r ON cr.\"fkIdReports\" = r.id
+                    JOIN causes c ON cr.\"fkIdCauses\" = c.id
+                    ORDER BY cr.\"fkIdReports\"";
                     
             $statement = $this->dbConnection->prepare($sql);
             $statement->execute();
@@ -144,8 +144,8 @@ class CausaReporteModel extends BaseModel {
         try {
             // CONSULTA ADAPTADA para PostgreSQL - nombres de tablas y columnas actualizados
             $sql = "SELECT c.* FROM causes c
-                    JOIN causes_reports cr ON c.id = cr.fkIdCauses
-                    WHERE cr.fkIdReports = :idReporte";
+                    JOIN causes_reports cr ON c.id = cr.\"fkIdCauses\"
+                    WHERE cr.\"fkIdReports\" = :idReporte";
                     
             $statement = $this->dbConnection->prepare($sql);
             $statement->bindParam(':idReporte', $idReporte, PDO::PARAM_INT);
@@ -161,7 +161,7 @@ class CausaReporteModel extends BaseModel {
         try {
             // CONSULTA ADAPTADA para PostgreSQL - nombres de columnas actualizados
             $sql = "SELECT COUNT(*) FROM $this->table 
-                    WHERE fkIdReports = :fkIdReports AND fkIdCauses = :fkIdCauses";
+                    WHERE \"fkIdReports\" = :fkIdReports AND \"fkIdCauses\" = :fkIdCauses";
                     
             $statement = $this->dbConnection->prepare($sql);
             $statement->bindParam(':fkIdReports', $fkIdReporte, PDO::PARAM_INT);

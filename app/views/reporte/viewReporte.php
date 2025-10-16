@@ -16,9 +16,15 @@
             <a href="/reporte/new" class="create-report-btn">Crear Nuevo Reporte</a>
         </div>
     <?php else: ?>
+        <div id="noResultsMessage" class="no-records-message" style="display: none;">
+            <div class="no-records-icon">🔍</div>
+            <h3>No se encontraron resultados</h3>
+            <p>No hay reportes que coincidan con tu búsqueda.</p>
+        </div>
+        
         <div class="report-cards-container">
             <?php foreach ($reportes as $value): ?>
-                <div class="report-card">
+                <div class="report-card" data-aprendiz="<?php echo strtolower($value->nombreAprendiz); ?>">
                     <div class="card-header">
                         <span class="report-id">Reporte # <?php echo $value->id; ?></span>
                         <span class="report-date">Creación: <?php echo date('d/m/Y H:i', strtotime($value->creationDate)); ?></span>
@@ -73,5 +79,60 @@
 
 <script src="/js/estadoSelectViewReporte.js"></script>
 <script>  
+    // Filtro de búsqueda por aprendiz desde el header
+    document.addEventListener('DOMContentLoaded', function() {
+        const searchInput = document.getElementById('searchAprendizHeader');
+        const clearBtn = document.getElementById('clearSearchHeader');
+        const reportCards = document.querySelectorAll('.report-card');
+        const noResultsMessage = document.getElementById('noResultsMessage');
+        const reportCardsContainer = document.querySelector('.report-cards-container');
+        
+        if (searchInput) {
+            searchInput.addEventListener('input', function() {
+                const searchTerm = this.value.toLowerCase().trim();
+                let visibleCount = 0;
+                
+                // Mostrar/ocultar botón de limpiar
+                if (clearBtn) {
+                    clearBtn.style.display = searchTerm ? 'flex' : 'none';
+                }
+                
+                reportCards.forEach(function(card) {
+                    const aprendizName = card.getAttribute('data-aprendiz');
+                    
+                    if (aprendizName.includes(searchTerm)) {
+                        card.style.display = 'block';
+                        visibleCount++;
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+                
+                // Mostrar mensaje si no hay resultados
+                if (visibleCount === 0 && searchTerm !== '') {
+                    if (noResultsMessage) noResultsMessage.style.display = 'block';
+                    if (reportCardsContainer) reportCardsContainer.style.display = 'none';
+                } else {
+                    if (noResultsMessage) noResultsMessage.style.display = 'none';
+                    if (reportCardsContainer) reportCardsContainer.style.display = 'grid';
+                }
+            });
+            
+            // Botón para limpiar búsqueda
+            if (clearBtn) {
+                clearBtn.addEventListener('click', function() {
+                    searchInput.value = '';
+                    this.style.display = 'none';
+                    reportCards.forEach(function(card) {
+                        card.style.display = 'block';
+                    });
+                    if (noResultsMessage) noResultsMessage.style.display = 'none';
+                    if (reportCardsContainer) reportCardsContainer.style.display = 'grid';
+                    searchInput.focus();
+                });
+            }
+        }
+    });
+    
     // Pegar aquí para realizar pruebas
 </script>

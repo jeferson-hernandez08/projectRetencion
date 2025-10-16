@@ -21,7 +21,7 @@ class EstrategiasModel extends BaseModel {
         try {
             // CONSULTA ADAPTADA para PostgreSQL con nombres de columnas en inglés
             // Se incluyen createdAt y updatedAt que son NOT NULL en PostgreSQL
-            $sql = "INSERT INTO $this->table (strategy, fkIdCategories, createdAt, updatedAt) 
+            $sql = "INSERT INTO $this->table (strategy, \"fkIdCategories\", \"createdAt\", \"updatedAt\") 
                     VALUES (:strategy, :fkIdCategories, NOW(), NOW())";
                     
             // 1. Se prepara la consulta
@@ -45,10 +45,10 @@ class EstrategiasModel extends BaseModel {
     public function getEstrategias($id) {
         try {
             // CONSULTA ADAPTADA para PostgreSQL - nombres de tablas y columnas actualizados
-            $sql = "SELECT strategies.*, categories.name AS nombreCategoria 
+            $sql = "SELECT strategies.*, categories.name AS \"nombreCategoria\" 
                     FROM strategies 
                     INNER JOIN categories 
-                    ON strategies.fkIdCategories = categories.id 
+                    ON strategies.\"fkIdCategories\" = categories.id 
                     WHERE strategies.id = :id";
                     
             $statement = $this->dbConnection->prepare($sql);
@@ -67,8 +67,8 @@ class EstrategiasModel extends BaseModel {
             // CONSULTA ADAPTADA para PostgreSQL - nombres de columnas actualizados
             $sql = "UPDATE $this->table SET 
                         strategy = :strategy, 
-                        fkIdCategories = :fkIdCategories,
-                        updatedAt = NOW() 
+                        \"fkIdCategories\" = :fkIdCategories,
+                        \"updatedAt\" = NOW() 
                     WHERE id = :id";
                     
             $statement = $this->dbConnection->prepare($sql);
@@ -100,9 +100,9 @@ class EstrategiasModel extends BaseModel {
     public function getAll():array {      // Mandar a cards nombreCategoria en viewCategorias.php
         try {
             // CONSULTA ADAPTADA para PostgreSQL - nombres de tablas y columnas actualizados
-            $sql = "SELECT strategies.*, categories.name AS nombreCategoria 
+            $sql = "SELECT strategies.*, categories.name AS \"nombreCategoria\" 
                     FROM strategies 
-                    LEFT JOIN categories ON strategies.fkIdCategories = categories.id";
+                    LEFT JOIN categories ON strategies.\"fkIdCategories\" = categories.id";
                     
             $statement = $this->dbConnection->prepare($sql);
             $statement->execute();

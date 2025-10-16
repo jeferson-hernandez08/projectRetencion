@@ -18,11 +18,11 @@
     <?php else: ?>
         <div class="report-cards-container">
             <?php foreach ($intervenciones as $intervencion): 
-                $fechaFormateada = date('d/m/Y H:i', strtotime($intervencion->fechaCreacion));
+                $fechaFormateada = date('d/m/Y H:i', strtotime($intervencion->creationDate));
             ?>
                 <div class="report-card">
                     <div class="card-header">
-                        <span class="report-id">Intervención ID # <?php echo $intervencion->idIntervencion; ?></span>
+                        <span class="report-id">Intervención ID # <?php echo $intervencion->id; ?></span>
                         <span class="intervencion-fecha">Creación: <?php echo $fechaFormateada; ?></span>
                     </div>
                     
@@ -36,9 +36,9 @@
                             <div class="info-label">Descripción:</div>
                             <div class="info-value"><?php 
                                 // Mostramos solo los primeros 100 caracteres de la descripción
-                                echo strlen($intervencion->descripcion) > 100 
-                                    ? substr($intervencion->descripcion, 0, 100) . '...' 
-                                    : $intervencion->descripcion; 
+                                echo strlen($intervencion->description ) > 100 
+                                    ? substr($intervencion->description , 0, 100) . '...' 
+                                    : $intervencion->description ; 
                             ?></div>
                         </div>
 
@@ -61,13 +61,13 @@
                     
                     <div class="card-footer">
                         <div class="card-actions">
-                            <a href="/intervencion/view/<?php echo $intervencion->idIntervencion; ?>" class="action-btn consultar" title="Ver detalles">
+                            <a href="/intervencion/view/<?php echo $intervencion->id; ?>" class="action-btn consultar" title="Ver detalles">
                                 <i class="fas fa-eye"></i> Detalles
                             </a>
-                            <a href="/intervencion/edit/<?php echo $intervencion->idIntervencion; ?>" class="action-btn editar" title="Editar intervención">
+                            <a href="/intervencion/edit/<?php echo $intervencion->id; ?>" class="action-btn editar" title="Editar intervención">
                                 <i class="fas fa-edit"></i> Editar
                             </a>
-                            <a href="/intervencion/delete/<?php echo $intervencion->idIntervencion; ?>" class="action-btn eliminar" title="Eliminar intervención">
+                            <a href="/intervencion/delete/<?php echo $intervencion->id; ?>" class="action-btn eliminar" title="Eliminar intervención">
                                 <i class="fas fa-trash"></i> Eliminar
                             </a>
                         </div>

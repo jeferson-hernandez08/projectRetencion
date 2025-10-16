@@ -9,7 +9,7 @@
             <!-- Campo ID (oculto) -->
             <div class="form-group">
                 <label for="txtId">ID de la Intervención</label>
-                <input type="text" readonly value="<?php echo $intervencion->idIntervencion ?>" name="txtId" id="txtId" class="form-control">
+                <input type="text" readonly value="<?php echo $intervencion->id ?>" name="txtId" id="txtId" class="form-control">
             </div>
 
             <!-- Campo Fecha de Creación -->
@@ -21,7 +21,7 @@
             <!-- Campo Descripción -->
             <div class="form-group">
                 <label for="txtDescripcion">Descripción</label>
-                <textarea name="txtDescripcion" id="txtDescripcion" class="form-control" rows="4"><?php echo $intervencion->descripcion ?></textarea>
+                <textarea name="txtDescripcion" id="txtDescripcion" class="form-control" rows="4"><?php echo $intervencion->description ?></textarea>
             </div>
 
             <!-- Campo Estrategia -->
@@ -32,8 +32,8 @@
                     <?php
                         if (isset($estrategias) && is_array($estrategias)) {
                             foreach ($estrategias as $estrategia) {
-                                $selected = ($intervencion->fkIdEstrategias == $estrategia->idEstrategias) ? 'selected' : '';
-                                echo "<option value='".$estrategia->idEstrategias."' $selected>".$estrategia->estrategia."</option>";
+                                $selected = ($intervencion->fkIdStrategies == $estrategia->id) ? 'selected' : '';
+                                echo "<option value='".$estrategia->id."' $selected>".$estrategia->strategy."</option>";
                             }
                         } else {
                             echo "ERROR";
@@ -50,8 +50,8 @@
                     <?php
                         if (isset($reportes) && is_array($reportes)) {
                             foreach ($reportes as $reporte) {
-                                $selected = ($intervencion->fkIdReporte == $reporte->idReporte) ? 'selected' : '';
-                                echo "<option value='".$reporte->idReporte."' $selected>".$reporte->descripcion."</option>";
+                                $selected = ($intervencion->fkIdReports == $reporte->id) ? 'selected' : '';
+                                echo "<option value='".$reporte->id."' $selected>".$reporte->description."</option>";
                             }
                         } else {
                             echo "ERROR";
@@ -62,11 +62,19 @@
 
             <!-- Campo Usuario -->
             <!-- Campo Usuario (oculto y mostrado) -->
-            <input type="hidden" name="txtFkIdUsuario" value="<?php echo $usuarioActual->idUsuario; ?>">
+            <input type="hidden" name="txtFkIdUsuario" value="<?php echo $usuarioActual->id; ?>">
             <!-- Campo Usuario (mostrar en el edit) -->
             <div class="form-group">
                 <label>Usuario Resposable</label>
-                <input type="text" class="form-control" value="<?php echo $usuarioActual->nombre; ?>" readonly>
+                <?php
+                    // CORRECCIÓN: Construir el nombre completo correctamente
+                    $nombreCompleto = '';
+                    if (isset($usuarioActual)) {
+                        $nombreCompleto = ($usuarioActual->firstName ?? '') . ' ' . ($usuarioActual->lastName ?? '');
+                        $nombreCompleto = trim($nombreCompleto);
+                    }
+                ?>
+                <input type="text" class="form-control" value="<?php echo htmlspecialchars($nombreCompleto); ?>" readonly>
             </div>
             
             <!-- <div class="form-group">

@@ -21,12 +21,12 @@
         <img src="/img/warning.svg" alt="Advertencia" class="confirmation-icon">
         <h2 class="confirmation-title">¿Está seguro de realizar esta acción?</h2>
         <p class="confirmation-message">
-            Se eliminará permanentemente la intervención #<?php echo $intervencion->idIntervencion ?> 
-            creado el <?php echo date('d/m/Y', strtotime($intervencion->fechaCreacion)) ?>
+            Se eliminará permanentemente la intervención #<?php echo $intervencion->id ?> 
+            creado el <?php echo date('d/m/Y', strtotime($intervencion->creationDate)) ?>
         </p>
         
         <form action="/intervencion/remove" method="post">
-            <input type="hidden" value="<?php echo $intervencion->idIntervencion ?>" name="txtId">
+            <input type="hidden" value="<?php echo $intervencion->id ?>" name="txtId">
             <div class="confirmation-buttons">
                 <button type="submit" class="btn-confirm">Confirmar</button>
                 <a href="/intervencion/view" class="btn-cancel">Cancelar</a>
