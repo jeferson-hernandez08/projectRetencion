@@ -351,10 +351,11 @@
     justify-content: flex-end;
 }
 
-i.fa-file-excel {
-    font-size: 23px;
-    color: #FFFFFFFF; /* Blanco */
+i.fa-upload, i.fa-times {
+    color: white;
 }
+
+
 </style>
 
 <script>
