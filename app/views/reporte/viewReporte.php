@@ -30,18 +30,18 @@
             ?>
                 <div class="report-card" data-aprendiz="<?php echo strtolower($value->nombreAprendiz); ?>">
                     <div class="card-header">
-                        <span class="report-id">Reporte # <?php echo $value->id; ?></span>
-                        <span class="report-date">Creación: <?php echo $fechaFormateada; ?></span>
+                        <span class="report-id">Reporte ID # <?php echo $value->id; ?></span>
+                        <span class="report-date"><i class="far fa-calendar-alt"></i> Creación: <?php echo $fechaFormateada; ?></span>
                     </div>
                     
                     <div class="card-body">
                         <div class="report-info">
-                            <div class="info-label">Aprendiz:</div>
+                            <div class="info-label"><i class="fas fa-user-graduate"></i> Aprendiz:</div>
                             <div class="info-value"><?php echo $value->nombreAprendiz; ?></div>
                         </div>
                         
                         <div class="report-info">
-                            <div class="info-label">Estado:</div>
+                            <div class="info-label"><i class="fas fa-tasks"></i> Estado:</div>
                             <div class="status-container">
                                 <select class="estado-select" data-id="<?php echo $value->id; ?>">
                                     <option value="Registrado" <?= ($value->state == 'Registrado') ? 'selected' : '' ?>>Registrado</option>
@@ -54,7 +54,7 @@
                         </div>
                         
                         <div class="report-info">
-                            <div class="info-label">Direccionamiento:</div>
+                            <div class="info-label"><i class="fas fa-road"></i> Direccionamiento:</div>
                             <div class="info-value"><?php echo $value->addressing; ?></div>
                         </div>
                     </div>
@@ -80,6 +80,63 @@
         </div>
     <?php endif; ?>
 </div>
+
+<style>
+/* --- Fecha: separa icono --- */
+.report-date i { margin-right: 6px; }
+
+/* --- Fila de info con flex --- */
+.report-info {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 6px;
+  line-height: 1.35;
+}
+
+/* --- Etiqueta fija (icono + texto) --- */
+.report-info .info-label {
+  display: inline-flex;
+  align-items: center;
+  font-weight: 600;
+  color: #1a1a1a;
+  flex: 0 0 170px;   /* ancho fijo para que no se corte “Direccionamiento:” */
+  white-space: nowrap;
+}
+
+/* --- Valor fluido con elipsis correcta --- */
+.report-info .info-value {
+  flex: 1 1 auto;    /* ocupa el resto */
+  min-width: 0;      /* IMPORTANTÍSIMO para que elipsis funcione en flex */
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap; /* una sola línea; quita esta línea si quieres que haga salto */
+  color: #333;
+  font-weight: 500;
+}
+
+/* --- Ícono en la etiqueta --- */
+.report-info .info-label i {
+  margin-right: 6px;
+  color: #007f3d; /* verde SENA */
+}
+
+/* --- Responsive: en pantallas angostas, pasa a dos líneas --- */
+@media (max-width: 640px) {
+  .report-info {
+    align-items: flex-start;
+  }
+  .report-info .info-label {
+    flex: 0 0 140px;   /* un poco más angosto */
+  }
+  .report-info .info-value {
+    white-space: normal;   /* permite varias líneas en móviles */
+    word-break: break-word;
+  }
+}
+
+
+</style>
 
 <script src="/js/estadoSelectViewReporte.js"></script>
 <script>  

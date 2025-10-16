@@ -81,7 +81,7 @@
             <?php foreach ($programas as $programa): ?>
                 <div class="report-card">
                     <div class="card-header">
-                        <span class="report-id">ID Programa : <?php echo $programa->id; ?></span>
+                        <span class="report-id">Programa ID # <?php echo $programa->id; ?></span>
                     </div>
                     
                     <div class="card-body">

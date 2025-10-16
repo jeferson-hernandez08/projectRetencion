@@ -26,14 +26,14 @@
                 <div class="report-card">
                     <div class="card-header">
                         <span class="report-id">Intervención ID # <?php echo $intervencion->id; ?></span>
-                        <span class="intervencion-fecha">Creación: <?php echo $fechaFormateada; ?></span>
+                        <span class="intervencion-fecha"><i class="far fa-calendar-alt"></i> Creación: <?php echo $fechaFormateada; ?></span>
                     </div>
                     
                     <div class="card-body">
                         <!-- NUEVO: Mostrar el aprendiz -->
                         <?php if (isset($intervencion->nombreAprendiz)): ?>
                             <div class="report-info">
-                                <div class="info-label">Intervención del aprendiz:</div>
+                                <div class="info-label"><i class="fas fa-user-graduate"></i> Aprendiz:</div>
                                 <div class="info-value aprendiz-destacado"><?php echo $intervencion->nombreAprendiz; ?></div>
                             </div>
                         <?php endif; ?>
@@ -89,9 +89,13 @@
 </div>
 
 <style>
+    /* --- Fecha: separa icono --- */
+    .intervencion-fecha i { margin-right: 6px; }
+    
     .aprendiz-destacado {
         font-weight: bold;
         color: #2c3e50;
         font-size: 1.1em;
     }
+
 </style>

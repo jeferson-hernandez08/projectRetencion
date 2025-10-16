@@ -4,30 +4,30 @@
             <a href="/reporte/view"><img src="/img/back.svg"></a>
         </div>
         <!-- <div class="create">
-            <a href="/intervencion/new?reporteId=<?php echo $reporte->idReporte; ?>">
+            <a href="/intervencion/new?reporteId=<?php echo $reporte->id; ?>">
                 <button>+ Nueva Intervención</button>
             </a>
         </div> -->
     </div>
     <div class="info">
         <div class="info-header">
-            <h2>Reporte #<?php echo $reporte->idReporte; ?></h2>
+            <h2>Reporte ID #<?php echo $reporte->id; ?></h2>
             <div class="info-grid">
                 <div class="info-field">
                     <div class="info-label">📊 Estado:</div>
-                    <div class="info-value status-<?php echo strtolower($reporte->estado); ?>">
-                        <?php echo $reporte->estado; ?>
+                    <div class="info-value status-<?php echo strtolower($reporte->state); ?>">
+                        <?php echo $reporte->state; ?>
                     </div>
                 </div>
                 
                 <div class="info-field">
                     <div class="info-label">📅 Fecha Creación:</div>
-                    <div class="info-value"><?php echo $reporte->fechaCreacion; ?></div>
+                    <div class="info-value"><?php echo $reporte->creationDate; ?></div>
                 </div>
 
                 <div class="info-field" style="grid-column: 1 / -1;">
                     <div class="info-label">📝 Descripción:</div>
-                    <div class="info-value"><?php echo $reporte->descripcion; ?></div>
+                    <div class="info-value"><?php echo $reporte->description; ?></div>
                 </div>
                 
                 <div class="info-field">
@@ -61,15 +61,15 @@
                         <div class='record-one__details'>
                             <div class='record-one__row'>
                                 <span class='record-one__label'>ID Intervención:</span>
-                                <span class='record-one__value'><?php echo $intervencion->idIntervencion; ?></span>
+                                <span class='record-one__value'><?php echo $intervencion->id; ?></span>
                             </div>
                             <div class='record-one__row'>
                                 <span class='record-one__label'>Fecha:</span>
-                                <span class='record-one__value'><?php echo $intervencion->fechaCreacion; ?></span>
+                                <span class='record-one__value'><?php echo $intervencion->creationDate; ?></span>
                             </div>
                             <div class='record-one__row'>
                                 <span class='record-one__label'>Descripción:</span>
-                                <span class='record-one__value'><?php echo $intervencion->descripcion; ?></span>
+                                <span class='record-one__value'><?php echo $intervencion->description; ?></span>
                             </div>
                             <div class='record-one__row'>
                                 <span class='record-one__label'>Estrategia:</span>
@@ -81,7 +81,7 @@
                             </div>
                         </div>
                         <!-- <div class="buttons">
-                            <a href='/intervencion/view/<?php echo $intervencion->idIntervencion; ?>'><button>Consultar</button></a>
+                            <a href='/intervencion/view/<?php echo $intervencion->id; ?>'><button>Consultar</button></a>
                         </div> -->
                     </div>
                 <?php endforeach; ?>

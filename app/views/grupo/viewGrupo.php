@@ -100,7 +100,7 @@
             <?php foreach ($grupos as $value): ?>
                 <div class="report-card">
                     <div class="card-header">
-                        <span class="report-id">ID Grupo : <?php echo $value->id; ?></span>
+                        <span class="report-id">Grupo ID # <?php echo $value->id; ?></span>
                         <span class="grupo-ficha">Ficha: <?php echo $value->file; ?></span>
                     </div>
                     
