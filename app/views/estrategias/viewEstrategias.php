@@ -20,14 +20,14 @@
             <?php foreach ($estrategias as $value): ?>
                 <div class="report-card">
                     <div class="card-header">
-                        <span class="report-id">Estrategia ID # <?php echo $value->idEstrategias; ?></span>
+                        <span class="report-id">Estrategia ID # <?php echo $value->id; ?></span>
                         <span class="estrategia-categoria">Categoría: <?php echo $value->nombreCategoria ?? 'Sin categoría'; ?></span>
                     </div>
                     
                     <div class="card-body">
                         <div class="report-info">
                             <div class="info-label">Estrategia:</div>
-                            <div class="info-value"><?php echo $value->estrategia; ?></div>
+                            <div class="info-value"><?php echo $value->strategy; ?></div>
                         </div>
 
                         <div class="report-info">
@@ -38,13 +38,13 @@
                     
                     <div class="card-footer">
                         <div class="card-actions">
-                            <a href="/estrategias/view/<?php echo $value->idEstrategias; ?>" class="action-btn consultar" title="Ver detalles">
+                            <a href="/estrategias/view/<?php echo $value->id; ?>" class="action-btn consultar" title="Ver detalles">
                                 <i class="fas fa-eye"></i> Detalles
                             </a>
-                            <a href="/estrategias/edit/<?php echo $value->idEstrategias; ?>" class="action-btn editar" title="Editar estrategia">
+                            <a href="/estrategias/edit/<?php echo $value->id; ?>" class="action-btn editar" title="Editar estrategia">
                                 <i class="fas fa-edit"></i> Editar
                             </a>
-                            <a href="/estrategias/delete/<?php echo $value->idEstrategias; ?>" class="action-btn eliminar" title="Eliminar estrategia">
+                            <a href="/estrategias/delete/<?php echo $value->id; ?>" class="action-btn eliminar" title="Eliminar estrategia">
                                 <i class="fas fa-trash"></i> Eliminar
                             </a>
                         </div>

@@ -9,13 +9,13 @@
             <!-- Campo ID (oculto) -->
             <div class="form-group">
                 <label for="txtId">Id de la estrategia</label>
-                <input type="text" readonly value="<?php echo $estrategia->idEstrategias ?>" name="txtId" id="txtId" class="form-control">
+                <input type="text" readonly value="<?php echo $estrategia->id ?>" name="txtId" id="txtId" class="form-control">
             </div>
 
             <!-- Campo Nombre de la estrategia -->
             <div class="form-group">
                 <label for="txtEstrategia">Nombre de la estrategia</label>
-                <input type="text" value="<?php echo $estrategia->estrategia ?>" name="txtEstrategia" id="txtEstrategia" class="form-control">
+                <input type="text" value="<?php echo $estrategia->strategy ?>" name="txtEstrategia" id="txtEstrategia" class="form-control">
             </div>
 
             <!-- Campo Categoría -->
@@ -26,10 +26,10 @@
                     <?php
                         if (isset($categorias) && is_array($categorias)) {
                             foreach ($categorias as $key => $value) {
-                                if ($estrategia->fkIdCategoria == $value->idCategoria) {
-                                    echo "<option value='".$value->idCategoria."' selected>".$value->nombre."</option>";
+                                if ($estrategia->fkIdCategories == $value->id) {
+                                    echo "<option value='".$value->id."' selected>".$value->name."</option>";
                                 } else {
-                                    echo "<option value='".$value->idCategoria."'>".$value->nombre."</option>";
+                                    echo "<option value='".$value->id."'>".$value->name."</option>";
                                 }
                             }
                         } else {

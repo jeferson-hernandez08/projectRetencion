@@ -40,7 +40,7 @@ class RolController extends BaseController {
             
             // Obtener nombre del rol
             $rolModel = new RolModel();
-            $rol = $rolModel->getRol($usuario->fkIdRol);
+            $rol = $rolModel->getRol($usuario->{"fkIdRols"});
             $rolNombre = $rol->nombre ?? "Usuario";
         }
         
@@ -67,7 +67,7 @@ class RolController extends BaseController {
             
             // Obtener nombre del rol
             $rolModel = new RolModel();
-            $rol = $rolModel->getRol($usuario->fkIdRol);
+            $rol = $rolModel->getRol($usuario->{"fkIdRols"});
             $rolNombre = $rol->nombre ?? "Usuario";
         }
         
@@ -110,7 +110,7 @@ class RolController extends BaseController {
             
             // Obtener nombre del rol
             $rolModel = new RolModel();
-            $rol = $rolModel->getRol($usuario->fkIdRol);
+            $rol = $rolModel->getRol($usuario->{"fkIdRols"});
             $rolNombre = $rol->nombre ?? "Usuario";
         }
         
@@ -138,7 +138,7 @@ class RolController extends BaseController {
             
             // Obtener nombre del rol
             $rolModel = new RolModel();
-            $rol = $rolModel->getRol($usuario->fkIdRol);
+            $rol = $rolModel->getRol($usuario->{"fkIdRols"});
             $rolNombre = $rol->nombre ?? "Usuario";
         }
         
@@ -164,7 +164,7 @@ class RolController extends BaseController {
 
     public function deleteRol($id) {   // Render Vista deleteRol.php
         $rolObj = new RolModel();
-        $rol = $rolObj->getRol($id);
+        $rolAEliminar = $rolObj->getRol($id);
 
         // Obtener información del usuario y rol para el card icon user cerrar sesion
         $rolNombre = "Usuario";
@@ -177,13 +177,13 @@ class RolController extends BaseController {
             
             // Obtener nombre del rol
             $rolModel = new RolModel();
-            $rol = $rolModel->getRol($usuario->fkIdRol);
-            $rolNombre = $rol->nombre ?? "Usuario";
+            $rolUsuario = $rolModel->getRol($usuario->{"fkIdRols"});
+            $rolNombre = $rolUsuario->name ?? "Usuario";
         }
 
         $data = [
             "title" => "Eliminar Rol",
-            "rol" => $rol,
+            "rol" => $rolAEliminar,
             "nombreUsuario" => $nombreUsuario,   // Enviamos datos para el card icon user cerrar sesion
             "rolUsuario" => $rolNombre
         ];

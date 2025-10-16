@@ -22,7 +22,7 @@ class CategoriaModel extends BaseModel {
         try {
             // CONSULTA ADAPTADA para PostgreSQL con nombres de columnas en inglés
             // Se incluyen createdAt y updatedAt que son NOT NULL en PostgreSQL
-            $sql = "INSERT INTO $this->table (name, description, addressing, createdAt, updatedAt) 
+            $sql = "INSERT INTO $this->table (name, description, addressing, \"createdAt\", \"updatedAt\") 
                     VALUES (:name, :description, :addressing, NOW(), NOW())";
                     
             // 1. Se prepara la consulta
@@ -61,7 +61,7 @@ class CategoriaModel extends BaseModel {
     public function editCategoria($id, $nombre, $descripcion, $direccionamiento) {
         try {
             // CONSULTA ADAPTADA para PostgreSQL - nombres de columnas actualizados
-            $sql = "UPDATE $this->table SET name = :name, description = :description, addressing = :addressing, updatedAt = NOW() WHERE id = :id";
+            $sql = "UPDATE $this->table SET name = :name, description = :description, addressing = :addressing, \"updatedAt\" = NOW() WHERE id = :id";
             $statement = $this->dbConnection->prepare($sql);
             $statement->bindParam(":id", $id, PDO::PARAM_INT);
             $statement->bindParam(":name", $nombre, PDO::PARAM_STR);

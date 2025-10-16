@@ -18,7 +18,10 @@
     <?php else: ?>
         <div class="report-cards-container">
             <?php foreach ($intervenciones as $intervencion): 
-                $fechaFormateada = date('d/m/Y H:i', strtotime($intervencion->creationDate));
+                // Usar DateTime para manejar correctamente la zona horaria
+                $fecha = new DateTime($intervencion->creationDate, new DateTimeZone('UTC'));
+                $fecha->setTimezone(new DateTimeZone('America/Bogota'));
+                $fechaFormateada = $fecha->format('d/m/Y H:i');
             ?>
                 <div class="report-card">
                     <div class="card-header">
@@ -27,10 +30,13 @@
                     </div>
                     
                     <div class="card-body">
-                        <div class="report-info">
-                            <div class="info-label">Fecha Creación:</div>
-                            <div class="info-value"><?php echo $fechaFormateada; ?></div>
-                        </div>
+                        <!-- NUEVO: Mostrar el aprendiz -->
+                        <?php if (isset($intervencion->nombreAprendiz)): ?>
+                            <div class="report-info">
+                                <div class="info-label">Intervención del aprendiz:</div>
+                                <div class="info-value aprendiz-destacado"><?php echo $intervencion->nombreAprendiz; ?></div>
+                            </div>
+                        <?php endif; ?>
 
                         <div class="report-info">
                             <div class="info-label">Descripción:</div>
@@ -42,8 +48,6 @@
                             ?></div>
                         </div>
 
-                        
-                        
                         <?php if (isset($intervencion->nombreEstrategia)): ?>
                         <div class="report-info">
                             <div class="info-label">Estrategia:</div>
@@ -57,6 +61,12 @@
                             <div class="info-value"><?php echo $intervencion->nombreUsuario; ?></div>
                         </div>
                         <?php endif; ?>
+
+                        <div class="report-info">
+                            <div class="info-label">Fecha Creación:</div>
+                            <div class="info-value"><?php echo $fechaFormateada; ?></div>
+                        </div>
+
                     </div>
                     
                     <div class="card-footer">
@@ -77,3 +87,11 @@
         </div>
     <?php endif; ?>
 </div>
+
+<style>
+    .aprendiz-destacado {
+        font-weight: bold;
+        color: #2c3e50;
+        font-size: 1.1em;
+    }
+</style>

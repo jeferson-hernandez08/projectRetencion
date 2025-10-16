@@ -16,19 +16,19 @@
                         <div class='record-one__details'>
                             <div class='record-one__row'>
                                 <span class='record-one__label'>ID:</span>
-                                <span class='record-one__value'>{$categoria->idCategoria}</span>
+                                <span class='record-one__value'>{$categoria->id}</span>
                             </div>
                             <div class='record-one__row'>
                                 <span class='record-one__label'>Nombre:</span>
-                                <span class='record-one__value'>{$categoria->nombre}</span>
+                                <span class='record-one__value'>{$categoria->name}</span>
                             </div>
                             <div class='record-one__row'>
                                 <span class='record-one__label'>Descripción:</span>
-                                <span class='record-one__value'>{$categoria->descripcion}</span>
+                                <span class='record-one__value'>{$categoria->description}</span>
                             </div>
                             <div class='record-one__row'>
                                 <span class='record-one__label'>Direccionamiento:</span>
-                                <span class='record-one__value'>{$categoria->direccionamiento}</span>
+                                <span class='record-one__value'>{$categoria->addressing}</span>
                             </div>
                         </div>
                       </div>";

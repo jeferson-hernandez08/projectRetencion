@@ -7,6 +7,10 @@
     <div class="info">
         <?php
             if($reporte && is_object($reporte)) {
+                // DateTime para manejar correctamente la zona horaria
+                $fecha = new DateTime($reporte->creationDate);
+                $fechaFormateada = $fecha->format('d/m/Y H:i');
+
                 echo "<div class='record-one'>
                         <div class='record-one__header'>
                             <div class='record-one__icon'>📝</div>
@@ -19,7 +23,7 @@
                             </div>
                             <div class='record-one__row'>
                                 <span class='record-one__label'>Fecha Creación:</span>
-                                <span class='record-one__value'>{$reporte->creationDate}</span>
+                                <span class='record-one__value'>{$fechaFormateada}</span>
                             </div>
                             <div class='record-one__row'>
                                 <span class='record-one__label'>Descripción:</span>

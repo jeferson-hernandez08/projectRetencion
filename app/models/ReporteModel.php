@@ -201,9 +201,10 @@ class ReporteModel extends BaseModel {
         try {
             // CONSULTA ADAPTADA para PostgreSQL - nombres de tablas y columnas actualizados
             $sql = "SELECT reports.*, 
-                        CONCAT(apprentices.\"firtsName\", ' ', apprentices.\"lastName\") AS \"nombreAprendiz\" 
-                    FROM reports 
-                    INNER JOIN apprentices ON reports.\"fkIdApprentices\" = apprentices.id";
+                       CONCAT(apprentices.\"firtsName\", ' ', apprentices.\"lastName\") AS \"nombreAprendiz\" 
+                FROM reports 
+                INNER JOIN apprentices ON reports.\"fkIdApprentices\" = apprentices.id
+                ORDER BY reports.\"creationDate\" DESC";
                     
             $statement = $this->dbConnection->prepare($sql);
             $statement->execute();

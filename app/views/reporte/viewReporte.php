@@ -23,11 +23,15 @@
         </div>
         
         <div class="report-cards-container">
-            <?php foreach ($reportes as $value): ?>
+            <?php foreach ($reportes as $value): 
+                // Usar DateTime para manejar correctamente la zona horaria
+                $fecha = new DateTime($value->creationDate);
+                $fechaFormateada = $fecha->format('d/m/Y H:i');
+            ?>
                 <div class="report-card" data-aprendiz="<?php echo strtolower($value->nombreAprendiz); ?>">
                     <div class="card-header">
                         <span class="report-id">Reporte # <?php echo $value->id; ?></span>
-                        <span class="report-date">Creación: <?php echo date('d/m/Y H:i', strtotime($value->creationDate)); ?></span>
+                        <span class="report-date">Creación: <?php echo $fechaFormateada; ?></span>
                     </div>
                     
                     <div class="card-body">

@@ -15,11 +15,11 @@
                         <div class='record-one__details'>
                             <div class='record-one__row'>
                                 <span class='record-one__label'>ID:</span>
-                                <span class='record-one__value'>{$estrategia->idEstrategias}</span>
+                                <span class='record-one__value'>{$estrategia->id}</span>
                             </div>
                             <div class='record-one__row'>
                                 <span class='record-one__label'>Estrategia:</span>
-                                <span class='record-one__value'>{$estrategia->estrategia}</span>
+                                <span class='record-one__value'>{$estrategia->strategy}</span>
                             </div>
                             <div class='record-one__row'>
                                 <span class='record-one__label'>Categoría:</span>

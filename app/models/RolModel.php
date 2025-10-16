@@ -20,7 +20,7 @@ class RolModel extends BaseModel {
         try {
             // CONSULTA ADAPTADA para PostgreSQL con nombres de columnas en inglés
             // Se incluyen createdAt y updatedAt que son NOT NULL en PostgreSQL
-            $sql = "INSERT INTO $this->table (name, createdAt, updatedAt) VALUES (:name, NOW(), NOW())";
+            $sql = "INSERT INTO $this->table (name, \"createdAt\", \"updatedAt\") VALUES (:name, NOW(), NOW())";
             // 1. Se prepara la consulta
             $statement = $this->dbConnection->prepare($sql);
 
@@ -57,7 +57,7 @@ class RolModel extends BaseModel {
     public function editRol($id, $nombre) {
         try {
             // CONSULTA ADAPTADA para PostgreSQL - nombres de columnas actualizados
-            $sql = "UPDATE $this->table SET name = :name, updatedAt = NOW() WHERE id = :id";
+            $sql = "UPDATE $this->table SET name = :name, \"updatedAt\" = NOW() WHERE id = :id";
             $statement = $this->dbConnection->prepare($sql);
             $statement->bindParam(":id", $id, PDO::PARAM_INT);
             $statement->bindParam(":name", $nombre, PDO::PARAM_STR);

@@ -42,8 +42,34 @@
                 </select>
             </div>
 
-            <!-- Campo Reporte -->
+            <!-- Campo Reporte - mostrar aprendiz (ACTUALIZADO) -->
             <div class="form-group">
+                <label for="txtFkIdReporte">Reporte Relacionado</label>
+                <select name="txtFkIdReporte" id="txtFkIdReporte" class="form-control" required>
+                    <option value="">Selecciona un reporte</option>
+                    <?php
+                        if (isset($reportes) && is_array($reportes)) {
+                            foreach ($reportes as $reporte) {
+                                $selected = ($intervencion->fkIdReports == $reporte->id) ? 'selected' : '';
+                                // Mostrar descripción del reporte y nombre del aprendiz
+                                $textoOpcion = "Reporte #{$reporte->id} - Aprendiz: {$reporte->nombreAprendiz}";
+                                if (!empty($reporte->description)) {
+                                    $descripcionCorta = strlen($reporte->description) > 50 
+                                        ? substr($reporte->description, 0, 50) . '...' 
+                                        : $reporte->description;
+                                    $textoOpcion .= " - Desc: {$descripcionCorta}";
+                                }
+                                echo "<option value='".$reporte->id."' $selected>".$textoOpcion."</option>";
+                            }
+                        } else {
+                            echo "<option value=''>No hay reportes disponibles</option>";
+                        }
+                    ?>
+                </select>
+            </div>
+
+            <!-- Campo Reporte -->
+            <!-- <div class="form-group">
                 <label for="txtFkIdReporte">Reporte Relacionado</label>
                 <select name="txtFkIdReporte" id="txtFkIdReporte" class="form-control">
                     <option value="">Selecciona un reporte</option>
@@ -58,7 +84,7 @@
                         }
                     ?>
                 </select>
-            </div>
+            </div> -->
 
             <!-- Campo Usuario -->
             <!-- Campo Usuario (oculto y mostrado) -->

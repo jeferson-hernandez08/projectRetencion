@@ -56,13 +56,16 @@ class IntervencionModel extends BaseModel {
     public function getIntervencion($id) {
         try {
             // CONSULTA ADAPTADA para PostgreSQL - nombres de tablas y columnas actualizados
+            // CONSULTA para incluir el nombre del aprendiz
             $sql = "SELECT interventions.*, strategies.strategy AS \"nombreEstrategia\", 
                     reports.description AS \"descripcionReporte\", 
-                    CONCAT(users.\"firstName\", ' ', users.\"lastName\") AS \"nombreUsuario\"
+                    CONCAT(users.\"firstName\", ' ', users.\"lastName\") AS \"nombreUsuario\",
+                    CONCAT(apprentices.\"firtsName\", ' ', apprentices.\"lastName\") AS \"nombreAprendiz\"
                     FROM interventions 
                     INNER JOIN strategies ON interventions.\"fkIdStrategies\" = strategies.id
                     INNER JOIN reports ON interventions.\"fkIdReports\" = reports.id
                     INNER JOIN users ON interventions.\"fkIdUsers\" = users.id
+                    INNER JOIN apprentices ON reports.\"fkIdApprentices\" = apprentices.id
                     WHERE interventions.id = :id";
                     
             $statement = $this->dbConnection->prepare($sql);
@@ -139,6 +142,31 @@ class IntervencionModel extends BaseModel {
             return $statement->fetchAll(PDO::FETCH_OBJ);
         } catch (PDOException $ex) {
             echo "Error al obtener las intervenciones: " . $ex->getMessage();
+            return [];
+        }
+    }
+
+    // ----- NUEVOO
+    public function getAll(): array {
+        try {
+            // CONSULTA ACTUALIZADA para incluir el nombre del aprendiz
+            $sql = "SELECT interventions.*, 
+                        strategies.strategy AS \"nombreEstrategia\", 
+                        CONCAT(users.\"firstName\", ' ', users.\"lastName\") AS \"nombreUsuario\",
+                        CONCAT(apprentices.\"firtsName\", ' ', apprentices.\"lastName\") AS \"nombreAprendiz\",
+                        reports.description AS \"descripcionReporte\"
+                    FROM interventions 
+                    INNER JOIN strategies ON interventions.\"fkIdStrategies\" = strategies.id
+                    INNER JOIN reports ON interventions.\"fkIdReports\" = reports.id
+                    INNER JOIN users ON interventions.\"fkIdUsers\" = users.id
+                    INNER JOIN apprentices ON reports.\"fkIdApprentices\" = apprentices.id
+                    ORDER BY interventions.\"creationDate\" DESC";
+                    
+            $statement = $this->dbConnection->prepare($sql);
+            $statement->execute();
+            return $statement->fetchAll(PDO::FETCH_OBJ);
+        } catch (PDOException $ex) {
+            echo "Error al obtener todas las intervenciones: " . $ex->getMessage();
             return [];
         }
     }

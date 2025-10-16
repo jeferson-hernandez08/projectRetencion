@@ -15,11 +15,11 @@
                         <div class='record-one__details'>
                             <div class='record-one__row'>
                                 <span class='record-one__label'>ID:</span>
-                                <span class='record-one__value'>{$rol->idRol}</span>
+                                <span class='record-one__value'>{$rol->id}</span>
                             </div>
                             <div class='record-one__row'>
                                 <span class='record-one__label'>Nombre:</span>
-                                <span class='record-one__value'>{$rol->nombre}</span>
+                                <span class='record-one__value'>{$rol->name}</span>
                             </div>
                         </div>
                       </div>";

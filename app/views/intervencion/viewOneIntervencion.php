@@ -7,6 +7,9 @@
     <div class="info">
         <?php
             if($intervencion && is_object($intervencion)) {
+                // Usamos DateTime para manejar correctamente la zona horaria
+                $fecha = new DateTime($intervencion->creationDate);
+                $fechaFormateada = $fecha->format('d/m/Y H:i');
                 echo "<div class='record-one'>
                         <div class='record-one__header'>
                             <div class='record-one__icon'>📝</div>
@@ -19,7 +22,12 @@
                             </div>
                             <div class='record-one__row'>
                                 <span class='record-one__label'>Fecha Creación:</span>
-                                <span class='record-one__value'>".date('d/m/Y H:i', strtotime($intervencion->creationDate))."</span>
+                                <span class='record-one__value'>{$fechaFormateada}</span>
+                            </div>
+                             <!-- NUEVO: Mostrar el aprendiz -->
+                            <div class='record-one__row'>
+                                <span class='record-one__label'>Intervención del aprendiz:</span>
+                                <span class='record-one__value' style='font-weight: bold; color: #2c3e50;'>{$intervencion->nombreAprendiz}</span>
                             </div>
                             <div class='record-one__row'>
                                 <span class='record-one__label'>Descripción:</span>

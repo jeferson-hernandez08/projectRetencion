@@ -20,26 +20,26 @@
             <?php foreach ($roles as $rol): ?>
                 <div class="report-card">
                     <div class="card-header">
-                        <span class="report-id">Rol ID # <?php echo $rol->idRol; ?></span>
-                        <span class="aprendiz-email"><?php echo $rol->nombre; ?></span>
+                        <span class="report-id">Rol ID # <?php echo $rol->id; ?></span>
+                        <span class="aprendiz-email"><?php echo $rol->name; ?></span>
                     </div>
                     
                     <div class="card-body">
                         <div class="report-info">
                             <div class="info-label">Nombre:</div>
-                            <div class="info-value"><?php echo $rol->nombre; ?></div>
+                            <div class="info-value"><?php echo $rol->name; ?></div>
                         </div>
                     </div>
                     
                     <div class="card-footer">
                         <div class="card-actions">
-                            <a href="/rol/view/<?php echo $rol->idRol; ?>" class="action-btn consultar" title="Ver detalles">
+                            <a href="/rol/view/<?php echo $rol->id; ?>" class="action-btn consultar" title="Ver detalles">
                                 <i class="fas fa-eye"></i> Detalles
                             </a>
-                            <a href="/rol/edit/<?php echo $rol->idRol; ?>" class="action-btn editar" title="Editar rol">
+                            <a href="/rol/edit/<?php echo $rol->id; ?>" class="action-btn editar" title="Editar rol">
                                 <i class="fas fa-edit"></i> Editar
                             </a>
-                            <a href="/rol/delete/<?php echo $rol->idRol; ?>" class="action-btn eliminar" title="Eliminar rol">
+                            <a href="/rol/delete/<?php echo $rol->id; ?>" class="action-btn eliminar" title="Eliminar rol">
                                 <i class="fas fa-trash"></i> Eliminar
                             </a>
                         </div>

@@ -20,36 +20,36 @@
             <?php foreach ($categorias as $value): ?>
                 <div class="report-card">
                     <div class="card-header">
-                        <span class="report-id">Categoría ID # <?php echo $value->idCategoria; ?></span>
-                        <span class="aprendiz-email">Nombre: <?php echo $value->nombre; ?></span>
+                        <span class="report-id">Categoría ID # <?php echo $value->id; ?></span>
+                        <span class="aprendiz-email"><?php echo $value->name; ?></span>
                     </div>
                     
                     <div class="card-body">
                         <div class="report-info">
                             <div class="info-label">Nombre Categoría:</div>
-                            <div class="info-value"><?php echo $value->nombre; ?></div>
+                            <div class="info-value"><?php echo $value->name; ?></div>
                         </div>
 
                         <div class="report-info">
                             <div class="info-label">Descripción:</div>
-                            <div class="info-value"><?php echo $value->descripcion; ?></div>
+                            <div class="info-value"><?php echo $value->description; ?></div>
                         </div>
                         
                         <div class="report-info">
                             <div class="info-label">Direccionamiento:</div>
-                            <div class="info-value"><?php echo $value->direccionamiento; ?></div>
+                            <div class="info-value"><?php echo $value->addressing; ?></div>
                         </div>
                     </div>
                     
                     <div class="card-footer">
                         <div class="card-actions">
-                            <a href="/categoria/view/<?php echo $value->idCategoria; ?>" class="action-btn consultar" title="Ver detalles">
+                            <a href="/categoria/view/<?php echo $value->id; ?>" class="action-btn consultar" title="Ver detalles">
                                 <i class="fas fa-eye"></i> Detalles
                             </a>
-                            <a href="/categoria/edit/<?php echo $value->idCategoria; ?>" class="action-btn editar" title="Editar categoría">
+                            <a href="/categoria/edit/<?php echo $value->id; ?>" class="action-btn editar" title="Editar categoría">
                                 <i class="fas fa-edit"></i> Editar
                             </a>
-                            <a href="/categoria/delete/<?php echo $value->idCategoria; ?>" class="action-btn eliminar" title="Eliminar categoría">
+                            <a href="/categoria/delete/<?php echo $value->id; ?>" class="action-btn eliminar" title="Eliminar categoría">
                                 <i class="fas fa-trash"></i> Eliminar
                             </a>
                         </div>

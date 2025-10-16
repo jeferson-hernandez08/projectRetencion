@@ -30,6 +30,10 @@ abstract class BaseModel {     // Base model es el padre de todos los modelos
             
             // Configurar encoding CORREGIDO para PostgreSQL
             $this->dbConnection->exec("SET client_encoding TO 'UTF8'");
+
+            // **CONFIGURACIÓN DE ZONA HORARIA PARA POSTGRESQL - AGREGADO**
+            // Esto asegura que PostgreSQL use la misma zona horaria que PHP
+            $this->dbConnection->exec("SET timezone = 'America/Bogota';");
             
         } catch (PDOException $ex) {
             echo "Error de conexión a la base de datos: " . $ex->getMessage();
