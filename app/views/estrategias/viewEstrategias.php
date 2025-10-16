@@ -4,8 +4,12 @@
             <a href="/estrategias/view"><img src="/img/back.svg"></a>
         </div>
         <div class="create">
-            <a href="/estrategias/new"><button>+</button></a>
-        </div>
+        <a href="/estrategias/new">
+            <button>
+            <i class="fa fa-plus-circle"></i> Crear estrategia
+            </button>
+        </a>
+</div>
     </div>
     
     <?php if (empty($estrategias)): ?>

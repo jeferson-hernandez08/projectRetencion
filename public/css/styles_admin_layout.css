@@ -370,44 +370,43 @@ div.record {
 }
 
 .create {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 50%;
-    transition: .2s all ease-in;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 50%;
+  transition: 0.2s all ease-in;
 }
 
+/* Botón adaptado para texto + ícono */
 .create button {
-    background-color: #008000;
-    border: none;
-    border-radius: 50%;
-    height: 45px;
-    width: 45px;
-    color: white;
-    font-size: 28px;
-    cursor: pointer;
-    transition: all 0.2s ease;
-    box-shadow: 0 4px 8px rgba(67, 97, 238, 0.3);
-    position: relative;
-    overflow: hidden;
+  background-color: #008000;
+  border: none;
+  border-radius: 30px;
+  height: 45px;
+  padding: 0 16px; /* Espacio lateral para el texto */
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  gap: 8px; /* Espacio entre ícono y texto */
 }
 
-/* Eliminamos el ::before anterior y usamos el contenido directamente */
-.create button {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding-bottom: 4px; /* Ajuste fino para centrado visual */
-}
-
+/* Efectos hover */
 .create:hover {
-    transform: scale(1.05);
+  transform: scale(1.05);
 }
 
 .create button:hover {
-    background-color: #00ff00;
-    box-shadow: 0 6px 12px rgba(67, 97, 238, 0.4);
+  background-color: #00b300;
 }
+
+/* Quitar subrayado del enlace */
+.create a {
+  text-decoration: none;
+}
+
 
 .form-group button{
     cursor: pointer;
@@ -600,16 +599,7 @@ body.dark-mode .buttons button:hover {
     background-color: #006400; /* Verde más oscuro */
 }
 
-body.dark-mode .create button {
-    background-color: #008000; /* Verde */
-    color: #ffffff;
-    box-shadow: 0 4px 8px rgba(99, 102, 241, 0.3);
-}
 
-body.dark-mode .create button:hover {
-    background-color: #006400; /* Verde más oscuro */
-    box-shadow: 0 6px 12px rgba(99, 102, 241, 0.4);
-}
 
 body.dark-mode .form-group button {
     background-color: #008000; /* Verde */
@@ -663,6 +653,46 @@ body.dark-mode .menu a:hover {
     background-color: rgba(255, 255, 255, 0.1);
     color: #ffffff;
 }
+
+/* Cambiar color de iconos en modo oscuro */
+body.dark-mode i.fas {
+    color: #8bc34a;
+}
+
+
+body.dark-mode .sidebar .menu a i {
+    color: #8bc34a;
+}
+
+body.dark-mode .header-icons .icon-link {
+    color: #8bc34a;
+}
+
+body.dark-mode .header-icons .icon-link:hover {
+    color: #9ccc65; /* Un tono más claro para el hover */
+}
+
+body.dark-mode .dropdown-item i {
+    color: #8bc34a;
+}
+
+body.dark-mode .footer-links i {
+    color: #8bc34a;
+}
+
+body.dark-mode .footer-contact i {
+    color: #8bc34a;
+}
+
+body.dark-mode i.fa-file-excel {
+    color: white !important;
+}
+
+i.fa-file-excel {
+    color: white;
+}
+
+
 
 .menu-toggle {
     cursor: pointer;

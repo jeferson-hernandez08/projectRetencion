@@ -4,8 +4,12 @@
             <a href="/reporte/view"><img src="/img/back.svg"></a>
         </div>
         <div class="create">
-            <a href="/reporte/new"><button>+</button></a>
-        </div>
+        <a href="/reporte/new">
+            <button>
+            <i class="fa fa-plus-circle"></i> Crear reporte
+            </button>
+        </a>
+</div>
     </div>
     
     <?php if (empty($reportes)): ?>

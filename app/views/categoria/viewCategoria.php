@@ -4,8 +4,12 @@
             <a href="/categoria/view"><img src="/img/back.svg"></a>
         </div>
         <div class="create">
-            <a href="/categoria/new"><button>+</button></a>
-        </div>
+        <a href="/categoria/new">
+            <button>
+            <i class="fa fa-plus-circle"></i> Crear categoría
+            </button>
+        </a>
+</div>
     </div>
     
     <?php if (empty($categorias)): ?>

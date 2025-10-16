@@ -4,8 +4,12 @@
             <a href="/causaReporte/view"><img src="/img/back.svg"></a>
         </div>
         <div class="create">
-            <a href="/causaReporte/new"><button>+</button></a>
-        </div>
+        <a href="/causaReporte/new">
+            <button>
+            <i class="fa fa-plus-circle"></i> Crear causa de reporte
+            </button>
+        </a>
+</div>
     </div>
     <div class="info">
         <?php

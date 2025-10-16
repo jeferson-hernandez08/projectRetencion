@@ -4,8 +4,12 @@
             <a href="/causa/view"><img src="/img/back.svg"></a>
         </div>
         <div class="create">
-            <a href="/causa/new"><button>+</button></a>
-        </div>
+        <a href="/causa/new">
+            <button>
+                <i class="fa fa-plus-circle"></i> Crear causa
+            </button>
+        </a>
+</div>
     </div>
     
     <?php if (empty($causas)): ?>

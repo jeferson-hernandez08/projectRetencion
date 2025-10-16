@@ -4,7 +4,11 @@
             <a href="/aprendiz/view"><img src="/img/back.svg"></a>
         </div>
         <div class="create">
-            <a href="/aprendiz/new"><button>+</button></a>
+            <a href="/aprendiz/new">
+            <button>
+                <i class="fa fa-plus-circle"></i> Crear aprendiz
+            </button>
+            </a>
         </div>
         <div>
              <!-- Botón para importar desde Excel -->

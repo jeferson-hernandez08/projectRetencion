@@ -4,8 +4,12 @@
             <a href="/grupo/view"><img src="/img/back.svg"></a>
         </div>
         <div class="create">
-            <a href="/grupo/new"><button>+</button></a>
-        </div>
+        <a href="/grupo/new">
+            <button>
+            <i class="fa fa-plus-circle"></i> Crear grupo
+            </button>
+        </a>
+</div>
         <div>
              <!-- Botón para importar desde Excel -->
             <a href="#" id="btn-importar-excel" class="btn-importar">

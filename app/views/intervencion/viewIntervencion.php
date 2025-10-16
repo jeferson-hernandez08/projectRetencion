@@ -4,8 +4,12 @@
             <a href="/intervencion/view"><img src="/img/back.svg"></a>
         </div>
         <div class="create">
-            <a href="/intervencion/new"><button>+</button></a>
-        </div>
+        <a href="/intervencion/new">
+            <button>
+            <i class="fa fa-plus-circle"></i> Crear intervención
+            </button>
+        </a>
+</div>
     </div>
     
     <?php if (empty($intervenciones)): ?>
