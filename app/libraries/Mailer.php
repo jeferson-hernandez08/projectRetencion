@@ -87,7 +87,7 @@ class Mailer {
                             <p><strong>Aprendiz Involucrado:</strong> {$aprendizNombre}</p>
                             <p>Por favor, inicie sesión en el sistema para revisar los detalles y tomar las acciones necesarias.</p>
                             <p style='text-align: center; margin-top: 30px;'>
-                                <a href='http://localhost/projectRetencion/public/login/init' class='button'>Acceder al Sistema</a>
+                                
                             </p>
                         </div>
                         <div class='footer'>

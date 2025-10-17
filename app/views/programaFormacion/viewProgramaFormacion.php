@@ -355,6 +355,10 @@ i.fa-upload, i.fa-times {
     color: white;
 }
 
+i.fa-check {
+    color: white;
+}
+
 
 </style>
 

@@ -10,6 +10,16 @@ return [         // Prueba cimmit | base contrller , programa formacion controll
         "action" => 'logoutLogin'
     ],
 
+     // Recuperación de contraseña
+    '/recuperarPassword' => [
+        "controller" => 'App\Controllers\RecuperarPasswordController',
+        "action" => 'mostrarFormulario'
+    ],
+    '/recuperarPassword/procesar' => [
+        "controller" => 'App\Controllers\RecuperarPasswordController',
+        "action" => 'procesarRecuperacion'
+    ],
+
     // Redirigir raíz al login
     "/" => [
         'controller' => 'App\Controllers\loginController',

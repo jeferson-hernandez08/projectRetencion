@@ -319,4 +319,87 @@ class UsuarioModel extends BaseModel {
     //     return $stmt->fetchAll(PDO::FETCH_OBJ);
     // }
 
+        // =========================================================================
+    // MÉTODOS PARA RECUPERACIÓN DE CONTRASEÑA - ACTUALIZADOS
+    // =========================================================================
+
+    /**
+     * Método para buscar usuario por email y documento
+     * @param string $email Email institucional
+     * @param string $document Número de documento
+     * @return mixed Usuario si existe, false si no
+     */
+    public function buscarPorEmailYDocumento($email, $document) {
+        try {
+            $sql = "SELECT * FROM $this->table 
+                    WHERE email = :email 
+                    AND document = :document 
+                    LIMIT 1";
+                    
+            $statement = $this->dbConnection->prepare($sql);
+            $statement->bindParam(":email", $email, PDO::PARAM_STR);
+            $statement->bindParam(":document", $document, PDO::PARAM_STR);
+            $statement->execute();
+            
+            return $statement->fetch(PDO::FETCH_OBJ);
+        } catch (PDOException $ex) {
+            error_log("Error al buscar por email y documento: " . $ex->getMessage());
+            return false;
+        }
+    }
+
+    /**
+     * Método para actualizar contraseña directamente
+     * @param string $email Email del usuario
+     * @param string $newPassword Nueva contraseña hasheada
+     * @return bool True si se actualizó correctamente
+     */
+    public function actualizarPasswordPorEmail($email, $newPassword) {
+        try {
+            $hashedPassword = password_hash($newPassword, PASSWORD_DEFAULT);
+            
+            $sql = "UPDATE $this->table 
+                    SET password = :password,
+                        updatedAt = NOW()
+                    WHERE email = :email";
+                    
+            $statement = $this->dbConnection->prepare($sql);
+            $statement->bindParam(":password", $hashedPassword, PDO::PARAM_STR);
+            $statement->bindParam(":email", $email, PDO::PARAM_STR);
+            
+            return $statement->execute();
+        } catch (PDOException $ex) {
+            error_log("Error al actualizar password por email: " . $ex->getMessage());
+            return false;
+        }
+    }
+
+    /**
+     * Método para generar contraseña aleatoria segura
+     * @param int $length Longitud de la contraseña (por defecto 10)
+     * @return string Contraseña generada
+     */
+    public function generarPasswordAleatoria($length = 10) {
+        $uppercase = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        $lowercase = 'abcdefghijklmnopqrstuvwxyz';
+        $numbers = '0123456789';
+        $special = '!@#$%&*';
+        
+        // Aseguramos al menos un carácter de cada tipo
+        $password = $uppercase[rand(0, strlen($uppercase) - 1)];
+        $password .= $lowercase[rand(0, strlen($lowercase) - 1)];
+        $password .= $numbers[rand(0, strlen($numbers) - 1)];
+        $password .= $special[rand(0, strlen($special) - 1)];
+        
+        // Completamos el resto de la longitud
+        $allCharacters = $uppercase . $lowercase . $numbers . $special;
+        for ($i = 4; $i < $length; $i++) {
+            $password .= $allCharacters[rand(0, strlen($allCharacters) - 1)];
+        }
+        
+        // Mezclamos la contraseña para que no sea predecible
+        return str_shuffle($password);
+    }
+
+
 }

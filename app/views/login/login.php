@@ -31,8 +31,12 @@
                     <button type="submit" class="login-button">Ingresar</button>
                 </form>
                 <div class="system-footer">
+                    <p><a href="/password/forgot">¿Olvidaste tu contraseña?</a></p>
                     <p>Seguimiento y apoyo para aprendices</p>
                 </div>
+                <!-- <div class="system-footer">
+                    <p>Seguimiento y apoyo para aprendices</p>
+                </div> -->
             </div>
         </div>
     </div>
