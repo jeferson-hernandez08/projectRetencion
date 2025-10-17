@@ -8,7 +8,7 @@
         <form action="/reporte/update" method="post">
             <!-- Campo ID (oculto) -->
             <div class="form-group">
-                <label for="txtId">Id del reporte</label>
+                <label for="txtId"><i class="fas fa-id-card"></i>Id del reporte</label>
                 <input type="text" readonly value="<?php echo $reporte->id ?>" name="txtId" id="txtId" class="form-control">
             </div>
 
@@ -20,13 +20,13 @@
             
             <!-- Campo Descripción -->
             <div class="form-group">
-                <label for="txtDescripcion">Descripción</label>
+                <label for="txtDescripcion"><i class="fas fa-align-left"></i> Descripción</label>
                 <textarea name="txtDescripcion" id="txtDescripcion" class="form-control" required><?php echo $reporte->description ?></textarea>
             </div>
 
             <!-- Campo Direccionamiento (select) -->
             <div class="form-group">
-                <label for="txtDireccionamiento">Direccionamiento</label>
+                <label for="txtDireccionamiento"><i class="fas fa-route"></i> Direccionamiento</label>
                 <select name="txtDireccionamiento" id="txtDireccionamiento" class="form-control" required>
                     <option value="Coordinador académico" <?php echo ($reporte->addressing == 'Coordinador académico') ? 'selected' : '' ?>>Coordinador académico</option>
                     <option value="Coordinador de formación" <?php echo ($reporte->addressing == 'Coordinador de formación') ? 'selected' : '' ?>>Coordinador de formación</option>
@@ -35,7 +35,7 @@
 
             <!-- Campo Estado (select) -->
             <div class="form-group">
-                <label for="txtEstado">Estado</label>
+                <label for="txtEstado"><i class="fas fa-info-circle"></i> Estado</label>
                 <select name="txtEstado" id="txtEstado" class="form-control" required>
                     <option value="Registrado" <?php echo ($reporte->state == 'Registrado') ? 'selected' : '' ?>>Registrado</option>
                     <option value="En proceso" <?php echo ($reporte->state == 'En proceso') ? 'selected' : '' ?>>En proceso</option>
@@ -46,7 +46,7 @@
 
             <!-- Campo Aprendiz -->
             <div class="form-group">
-                <label for="txtFkIdAprendiz">Aprendiz</label>
+                <label for="txtFkIdAprendiz"><i class="fas fa-user-graduate"></i> Aprendiz</label>
                 <select name="txtFkIdAprendiz" id="txtFkIdAprendiz" class="form-control" required>
                     <option value="">Selecciona un aprendiz</option>
                     <?php
@@ -68,7 +68,7 @@
             <input type="hidden" name="txtFkIdUsuario" value="<?php echo $usuarioActual->id; ?>">
             <!-- Campo Usuario (mostrar en el edit) -->
             <div class="form-group">
-                <label>Usuario</label>
+                <label><i class="fas fa-user"></i> Usuario</label>
                 <input type="text" class="form-control" value="<?php echo $usuarioActual->firstName . ' ' . $usuarioActual->lastName; ?>" readonly>
             </div>
             <!-- <div class="form-group">
@@ -90,7 +90,7 @@
 
             <!-- Botón de Guardar -->
             <div class="form-group">
-                <button type="submit">Editar</button>
+                <button type="submit"><i class="fas fa-pen-to-square"></i> Editar</button>
             </div>
         </form>
     </div>

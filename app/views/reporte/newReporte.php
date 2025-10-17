@@ -8,18 +8,18 @@
         <form action="/reporte/create" method="post">
             <!-- Campo Descripción -->
             <div class="form-group">
-                <label for="txtDescripcion">Descripción</label>
+                <label for="txtDescripcion"><i class="fas fa-align-left"></i> Descripción</label>
                 <textarea name="txtDescripcion" id="txtDescripcion" class="form-control" required></textarea>
             </div>
 
             <!-- *********************************************************** Commit -->
-            <label for="txtFkIdReporte">Causas</label>
+            <label for="txtFkIdReporte"><i class="fas fa-exclamation-triangle"></i> Causas</label>
             <div class="info-causa-reporte">
                 <div class="new-causa-reporte">
                     <div> 
                         <!-- Campo Categoria -->
                         <div class="form-group">
-                            <label for="txtFkIdCategoria">Categoria</label>
+                            <label for="txtFkIdCategoria"><i class="fas fa-tags"></i> Categoria</label>
                             <select name="txtFkIdCategoria" id="txtFkIdCategoria" class="form-control">
                                 <option value="">Selecciona una categoria</option>
                                 <?php
@@ -36,7 +36,7 @@
             
                         <!-- Campo Causa -->
                         <div class="form-group">
-                            <label for="txtFkIdCausa">Causa</label>
+                            <label for="txtFkIdCausa"><i class="fas fa-list-alt"></i> Causa</label>
                             <select name="txtFkIdCausa" id="txtFkIdCausa" class="form-control">
                                 <option value="">Selecciona una causa</option>
                                 <?php
@@ -72,7 +72,7 @@
 
             <!-- Campo Direccionamiento (select) -->
             <div class="form-group">
-                <label for="txtDireccionamiento">Direccionamiento</label>
+                <label for="txtDireccionamiento"><i class="fas fa-route"></i>Direccionamiento</label>
                 <select name="txtDireccionamiento" id="txtDireccionamiento" class="form-control" required>
                     <option value="" selected disabled>Seleccione un tipo de direccionamiento</option>
                     <option value="Coordinador académico">Coordinador académico</option>
@@ -85,7 +85,7 @@
 
             <!-- Campo Aprendiz con búsqueda mejorada -->
             <div class="form-group">
-                <label for="txtFkIdAprendiz">Aprendiz</label>
+                <label for="txtFkIdAprendiz"><i class="fas fa-user-graduate"></i> Aprendiz</label>
                 <div class="custom-select-wrapper">
                     <div class="custom-select-trigger" id="selectTrigger">
                         <span id="selectedAprendiz">Selecciona un aprendiz</span>
@@ -118,13 +118,13 @@
 
             <!-- Mostrar nombre del usuario actual -->
             <div class="form-group">
-                <label>Usuario</label>
+                <label><i class="fas fa-user"></i> Usuario</label>
                 <input type="text" class="form-control" value="<?php echo $_SESSION['nombre']; ?>" readonly>
             </div>
 
             <!-- Botón de Guardar -->
             <div class="form-group">
-                <button type="submit">Guardar</button>
+                <button type="submit"><i class="fas fa-save"></i> Guardar</button>
             </div>
         </form>
     </div>

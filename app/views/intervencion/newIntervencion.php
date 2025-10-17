@@ -13,13 +13,13 @@ $reporteSeleccionado = $_GET['reporteId'] ?? null;
         <form action="/intervencion/create" method="post">
             <!-- Campo Descripción -->
             <div class="form-group">
-                <label for="txtDescripcion">Descripción</label>
+                <label for="txtDescripcion"><i class="fas fa-align-left"></i> Descripción</label>
                 <textarea name="txtDescripcion" id="txtDescripcion" class="form-control" rows="4" required></textarea>
             </div>
 
             <!-- Campo Estrategia -->
             <div class="form-group">
-                <label for="txtFkIdEstrategias">Estrategia</label>
+                <label for="txtFkIdEstrategias"><i class="fas fa-chess-knight"></i> Estrategia</label>
                 <select name="txtFkIdEstrategias" id="txtFkIdEstrategias" class="form-control" required>
                     <option value="">Selecciona una estrategia</option>
                     <?php
@@ -36,7 +36,7 @@ $reporteSeleccionado = $_GET['reporteId'] ?? null;
 
             <!-- Campo Reporte con búsqueda mejorada -->
             <div class="form-group">
-                <label for="txtFkIdReporte">Reporte Relacionado</label>
+                <label for="txtFkIdReporte"><i class="fas fa-file-alt"></i> Reporte Relacionado</label>
                 <div class="custom-select-wrapper">
                     <div class="custom-select-trigger" id="selectReporteTrigger">
                         <span id="selectedReporte">Selecciona un reporte</span>
@@ -77,13 +77,13 @@ $reporteSeleccionado = $_GET['reporteId'] ?? null;
 
             <!-- Mostrar nombre del usuario responsable actual -->
              <div class="form-group">
-                <label>Usuario Responsable</label>
+                <label><i class="fas fa-user"></i> Usuario Responsable</label>
                 <input type="text" class="form-control" value="<?php echo $_SESSION['nombre']; ?>" readonly>
             </div>
 
             <!-- Botón de Guardar -->
             <div class="form-group">
-                <button type="submit">Guardar</button>
+                <button type="submit"><i class="fas fa-save"></i> Guardar</button>
             </div>
         </form>
     </div>
