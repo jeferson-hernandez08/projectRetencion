@@ -8,7 +8,7 @@
         <form action="/intervencion/update" method="post">
             <!-- Campo ID (oculto) -->
             <div class="form-group">
-                <label for="txtId">ID de la Intervención</label>
+                <label for="txtId"><i class="fas fa-id-card"></i> ID de la Intervención</label>
                 <input type="text" readonly value="<?php echo $intervencion->id ?>" name="txtId" id="txtId" class="form-control">
             </div>
 
@@ -20,13 +20,13 @@
             
             <!-- Campo Descripción -->
             <div class="form-group">
-                <label for="txtDescripcion">Descripción</label>
+                <label for="txtDescripcion"><i class="fas fa-align-left"></i> Descripción</label>
                 <textarea name="txtDescripcion" id="txtDescripcion" class="form-control" rows="4"><?php echo $intervencion->description ?></textarea>
             </div>
 
             <!-- Campo Estrategia -->
             <div class="form-group">
-                <label for="txtFkIdEstrategias">Estrategia</label>
+                <label for="txtFkIdEstrategias"><i class="fas fa-chess-knight"></i> Estrategia</label>
                 <select name="txtFkIdEstrategias" id="txtFkIdEstrategias" class="form-control">
                     <option value="">Selecciona una estrategia</option>
                     <?php
@@ -44,7 +44,7 @@
 
             <!-- Campo Reporte - mostrar aprendiz (ACTUALIZADO) -->
             <div class="form-group">
-                <label for="txtFkIdReporte">Reporte Relacionado</label>
+                <label for="txtFkIdReporte"><i class="fas fa-file-alt"></i> Reporte Relacionado</label>
                 <select name="txtFkIdReporte" id="txtFkIdReporte" class="form-control" required>
                     <option value="">Selecciona un reporte</option>
                     <?php
@@ -91,7 +91,7 @@
             <input type="hidden" name="txtFkIdUsuario" value="<?php echo $usuarioActual->id; ?>">
             <!-- Campo Usuario (mostrar en el edit) -->
             <div class="form-group">
-                <label>Usuario Resposable</label>
+                <label><i class="fas fa-user"></i> Usuario Resposable</label>
                 <?php
                     // CORRECCIÓN: Construir el nombre completo correctamente
                     $nombreCompleto = '';
@@ -122,7 +122,7 @@
 
             <!-- Botón de Guardar -->
             <div class="form-group">
-                <button type="submit">Actualizar</button>
+                <button type="submit"><i class="fas fa-pen-to-square"></i> Editar Intervención</button>
             </div>
         </form>
     </div>

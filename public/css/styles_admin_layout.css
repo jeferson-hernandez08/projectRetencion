@@ -433,7 +433,7 @@ div.record {
 
 .form-group {
     /* border: red solid 1px; */
-    /* margin-top: 10px; */       /* este presentaba problema de desbordamiento  */
+    margin-top: 10px;        /* este presentaba problema de desbordamiento | Se descomenta para espacios 22/10/2025 */
     display: flex;
     justify-content: center;
     align-items: start;
@@ -2167,6 +2167,22 @@ i.fa-comments {
 
 i.fa-trash {
     color: white;
+}
+
+/* ========== ESTILOS ESPECÍFICOS PARA ICONOS DE CRUD EN MODO OSCURO ========== */
+body.dark-mode i.fa-eye,
+body.dark-mode i.fa-edit,
+body.dark-mode i.fa-comments,
+body.dark-mode i.fa-trash {
+    color: white !important;
+}
+
+/* Iconos en botones de formularios */
+body.dark-mode .form-group button i,      /* Este es el icono de crar y editar de los formularios para modo noche ponemos white important*/
+body.dark-mode .create button i,
+body.dark-mode .btn-confirm i,
+body.dark-mode .btn-cancel i {
+    color: white !important;
 }
 
 .action-btn:hover {

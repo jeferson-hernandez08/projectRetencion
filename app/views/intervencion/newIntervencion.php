@@ -83,7 +83,7 @@ $reporteSeleccionado = $_GET['reporteId'] ?? null;
 
             <!-- Botón de Guardar -->
             <div class="form-group">
-                <button type="submit"><i class="fas fa-save"></i> Guardar</button>
+                <button type="submit"><i class="fas fa-save"></i> Guardar Intervención</button>
             </div>
         </form>
     </div>
