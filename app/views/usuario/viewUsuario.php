@@ -405,6 +405,151 @@ i.fa-file-excel {
     font-size: 23px;
     color: #FFFFFFFF; /* Blanco */
 }
+
+i.fa-upload, i.fa-times {
+    color: white;
+}
+
+i.fa-check {
+    color: white;
+}
+
+/* ========== ESTILOS PARA MODO OSCURO DEL MODAL DE IMPORTAR EXCEL ========== */
+body.dark-mode .modal-content {
+    background-color: #2d3748;
+    border: 1px solid #4a5568;
+}
+
+body.dark-mode .modal-header {
+    border-bottom: 1px solid #4a5568;
+    background: linear-gradient(135deg, #0d1b2a 0%, #1a2a3a 100%);
+}
+
+body.dark-mode .modal-header h3 {
+    color: #e0e0e0;
+}
+
+body.dark-mode .close {
+    color: #a0aec0;
+}
+
+body.dark-mode .close:hover {
+    color: #e0e0e0;
+}
+
+body.dark-mode .modal-body {
+    background-color: #2d3748;
+    color: #e0e0e0;
+}
+
+body.dark-mode .alert-info {
+    background-color: #1e3a5f;
+    border: 1px solid #2d4a6f;
+    color: #e0e0e0;
+}
+
+body.dark-mode .format-table {
+    border: 1px solid #4a5568;
+}
+
+body.dark-mode .format-table th {
+    background-color: #1a202c;
+    color: #e0e0e0;
+    border: 1px solid #4a5568;
+}
+
+body.dark-mode .format-table td {
+    background-color: #2d3748;
+    color: #e0e0e0;
+    border: 1px solid #4a5568;
+}
+
+body.dark-mode .form-label {
+    color: #e0e0e0;
+}
+
+body.dark-mode .form-control {
+    background-color: #4a5568;
+    border: 1px solid #4a5568;
+    color: #e0e0e0;
+}
+
+body.dark-mode .form-control::placeholder {
+    color: #a0aec0;
+}
+
+body.dark-mode .form-text {
+    color: #a0aec0;
+}
+
+body.dark-mode .btn-primary {
+    background: #3498db;
+    color: white;
+}
+
+body.dark-mode .btn-primary:hover {
+    background: #2980b9;
+}
+
+body.dark-mode .btn-secondary {
+    background: #6c757d;
+    color: white;
+}
+
+body.dark-mode .btn-secondary:hover {
+    background: #5a6268;
+}
+
+body.dark-mode .btn-success {
+    background: #28a745;
+    color: white;
+}
+
+body.dark-mode .btn-success:hover {
+    background: #218838;
+}
+
+body.dark-mode .alert-success {
+    background: #155724;
+    border: 1px solid #1e7e34;
+    color: #d4edda;
+}
+
+body.dark-mode .alert-danger {
+    background: #721c24;
+    border: 1px solid #86181d;
+    color: #f8d7da;
+}
+
+/* Estilos específicos para el botón de importar en modo oscuro */
+body.dark-mode .btn-importar {
+    background: #28a745;
+    color: white;
+}
+
+body.dark-mode .btn-importar:hover {
+    background: #218838;
+    color: white;
+}
+
+body.dark-mode .btn-importar-empty {
+    background: #28a745;
+    color: white;
+}
+
+body.dark-mode .btn-importar-empty:hover {
+    background: #218838;
+    color: white;
+}
+
+/* Iconos en modo oscuro para el modal */
+body.dark-mode .btn-importar i,
+body.dark-mode .btn-importar-empty i,
+body.dark-mode .btn-primary i,
+body.dark-mode .btn-secondary i,
+body.dark-mode .btn-success i {
+    color: white !important;
+}
 </style>
 
 <script>
