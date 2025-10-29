@@ -4,13 +4,29 @@
 define("INACTIVE_TIME", 1);
 define("MAIN_APP_ROUTE", __DIR__.'/../app/');
 
-// Configuración para PostgreSQL en Render
-define("DRIVER", 'pgsql');  // Cambiado de 'mysql' a 'pgsql'
-define("HOST", 'dpg-d3ofl53ipnbc73fva8pg-a.oregon-postgres.render.com'); // Host de Render PostgreSQL
-define("USERNAME_DB", 'projectretention711_3c2x_user'); // Usuario de la BD en Render
-define("PASSWORD_DB", 'bTspe32vczTss47SKDcnLRCfZ0CoaIKI'); // Password de Render
-define("DATABASE", 'projectretention711_3c2x');  // Nombre de la base de datos en Render
-define("PORT", 5432); // Puerto estándar de PostgreSQL
+// Configuración para PostgreSQL en Render usando las varaibles de entorno
+$databaseUrl = getenv('DATABASE_URL');
+
+if ($databaseUrl) {
+    // Parsear DATABASE_URL formato: postgresql://user:pass@host:port/dbname
+    $dbParts = parse_url($databaseUrl);
+    
+    define("DRIVER", 'pgsql');
+    define("HOST", $dbParts['host']);
+    define("USERNAME_DB", $dbParts['user']);
+    define("PASSWORD_DB", $dbParts['pass']);
+    define("DATABASE", ltrim($dbParts['path'], '/'));
+    define("PORT", $dbParts['port']);
+} else {
+    // Configuración local de desarrollo
+    define("DRIVER", 'pgsql');  // Cambiado de 'mysql' a 'pgsql'
+    define("HOST", 'dpg-d3ofl53ipnbc73fva8pg-a.oregon-postgres.render.com'); // Host de Render PostgreSQL
+    define("USERNAME_DB", 'projectretention711_3c2x_user'); // Usuario de la BD en Render
+    define("PASSWORD_DB", 'bTspe32vczTss47SKDcnLRCfZ0CoaIKI'); // Password de Render
+    define("DATABASE", 'projectretention711_3c2x');  // Nombre de la base de datos en Render
+    define("PORT", 5432); // Puerto estándar de PostgreSQL
+}
+
 define("CHARSET", 'utf8'); // Charset para PostgreSQL
 
 // Nota: Se eliminaron COLLATION ya que PostgreSQL maneja collation de forma diferente
