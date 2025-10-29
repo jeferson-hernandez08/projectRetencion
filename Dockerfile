@@ -1,0 +1,48 @@
+# -------------------------------
+# Etapa 1: Construcción de dependencias con Composer
+# -------------------------------
+FROM php:8.2-cli AS composer_builder
+
+# Instalar herramientas necesarias
+RUN apt-get update && apt-get install -y unzip git curl
+
+# Instalar Composer globalmente
+RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+
+# Copiar archivos de Composer y ejecutar instalación
+WORKDIR /app
+COPY composer.json composer.lock* ./
+RUN composer install --no-interaction --no-progress --prefer-dist
+
+# -------------------------------
+# Etapa 2: Imagen final con Apache + PHP
+# -------------------------------
+FROM php:8.2-apache
+
+# Instalar extensiones necesarias para PostgreSQL
+RUN docker-php-ext-install pdo pdo_pgsql
+
+# Habilitar mod_rewrite (muy importante para rutas dinámicas)
+RUN a2enmod rewrite
+
+# Copiar dependencias desde la etapa anterior
+COPY --from=composer_builder /app/vendor /var/www/html/vendor
+
+# Copiar todo el código de la aplicación al contenedor
+COPY . /var/www/html/
+
+# Establecer el directorio público (donde está tu index.php)
+WORKDIR /var/www/html/public
+
+# Configurar Apache para permitir .htaccess
+RUN echo "<Directory /var/www/html/public>\n\
+    AllowOverride All\n\
+    Require all granted\n\
+</Directory>" > /etc/apache2/conf-available/app.conf \
+    && a2enconf app
+
+# Exponer el puerto 80
+EXPOSE 80
+
+# Comando por defecto de inicio
+CMD ["apache2-foreground"]
