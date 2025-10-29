@@ -3,13 +3,13 @@
 # -------------------------------
 FROM php:8.2-cli AS composer_builder
 
-# Instalar herramientas necesarias + dependencias para GD
+# Instalar herramientas necesarias + dependencias para GD y ZIP
 RUN apt-get update && apt-get install -y \
-    unzip git curl libpng-dev libjpeg-dev libfreetype6-dev
+    unzip git curl libpng-dev libjpeg-dev libfreetype6-dev libzip-dev
 
-# Instalar extensión GD (para PHPSpreadsheet)
+# Instalar extensiones GD y ZIP
 RUN docker-php-ext-configure gd --with-freetype --with-jpeg \
-    && docker-php-ext-install gd
+    && docker-php-ext-install gd zip
 
 # Instalar Composer globalmente
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
