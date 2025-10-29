@@ -3,8 +3,13 @@
 # -------------------------------
 FROM php:8.2-cli AS composer_builder
 
-# Instalar herramientas necesarias
-RUN apt-get update && apt-get install -y unzip git curl
+# Instalar herramientas necesarias + dependencias para GD
+RUN apt-get update && apt-get install -y \
+    unzip git curl libpng-dev libjpeg-dev libfreetype6-dev
+
+# Instalar extensión GD (para PHPSpreadsheet)
+RUN docker-php-ext-configure gd --with-freetype --with-jpeg \
+    && docker-php-ext-install gd
 
 # Instalar Composer globalmente
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
@@ -19,11 +24,13 @@ RUN composer install --no-interaction --no-progress --prefer-dist
 # -------------------------------
 FROM php:8.2-apache
 
-# Instalar dependencias necesarias del sistema (PostgreSQL + utilidades)
-RUN apt-get update && apt-get install -y libpq-dev libzip-dev unzip git
+# Instalar dependencias necesarias del sistema (PostgreSQL + ZIP + GD)
+RUN apt-get update && apt-get install -y \
+    libpq-dev libzip-dev libpng-dev libjpeg-dev libfreetype6-dev unzip git
 
-# Instalar extensiones necesarias para PostgreSQL y ZIP
-RUN docker-php-ext-install pdo pdo_pgsql zip
+# Instalar extensiones necesarias
+RUN docker-php-ext-configure gd --with-freetype --with-jpeg \
+    && docker-php-ext-install pdo pdo_pgsql zip gd
 
 # Habilitar mod_rewrite (muy importante para rutas dinámicas)
 RUN a2enmod rewrite
