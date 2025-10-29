@@ -19,8 +19,11 @@ RUN composer install --no-interaction --no-progress --prefer-dist
 # -------------------------------
 FROM php:8.2-apache
 
-# Instalar extensiones necesarias para PostgreSQL
-RUN docker-php-ext-install pdo pdo_pgsql
+# Instalar dependencias necesarias del sistema (PostgreSQL + utilidades)
+RUN apt-get update && apt-get install -y libpq-dev libzip-dev unzip git
+
+# Instalar extensiones necesarias para PostgreSQL y ZIP
+RUN docker-php-ext-install pdo pdo_pgsql zip
 
 # Habilitar mod_rewrite (muy importante para rutas dinámicas)
 RUN a2enmod rewrite
