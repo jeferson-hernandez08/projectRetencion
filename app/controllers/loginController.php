@@ -5,7 +5,7 @@ namespace App\Controllers;
 use App\Controllers\BaseController;
 use App\Models\UsuarioModel;
 
-require_once MAIN_APP_ROUTE . '../controllers/BaseController.php';
+require_once MAIN_APP_ROUTE . '../controllers/baseController.php';
 require_once MAIN_APP_ROUTE . '../models/UsuarioModel.php';
 
 class LoginController extends BaseController {
