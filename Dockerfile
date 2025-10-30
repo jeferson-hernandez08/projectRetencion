@@ -21,7 +21,7 @@ RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local
 WORKDIR /app
 COPY composer.json composer.lock* ./
 
-# ✅ Importante: ignorar comprobación de plataforma en Composer (por seguridad extra)
+# ✅ Ignorar requerimiento de ZIP para compatibilidad de compilación
 RUN composer install --no-interaction --no-progress --prefer-dist --ignore-platform-req=ext-zip
 
 # -------------------------------
@@ -37,27 +37,33 @@ RUN apt-get update && apt-get install -y \
 RUN docker-php-ext-configure gd --with-freetype --with-jpeg \
     && docker-php-ext-install pdo pdo_pgsql zip gd
 
-# Habilitar mod_rewrite (muy importante para rutas dinámicas)
+# Habilitar mod_rewrite
 RUN a2enmod rewrite
 
 # Copiar dependencias desde la etapa anterior
 COPY --from=composer_builder /app/vendor /var/www/html/vendor
 
-# Copiar todo el código de la aplicación al contenedor
+# Copiar todo el código de la aplicación
 COPY . /var/www/html/
 
-# Establecer el directorio público (donde está tu index.php)
-WORKDIR /var/www/html/public
+# ✅ Cambiar DocumentRoot a /var/www/html/public
+RUN sed -i 's|/var/www/html|/var/www/html/public|g' /etc/apache2/sites-available/000-default.conf
 
-# Configurar Apache para permitir .htaccess
+# ✅ Agregar ServerName para eliminar advertencia
+RUN echo "ServerName localhost" >> /etc/apache2/apache2.conf
+
+# Configurar Apache para permitir .htaccess en la carpeta public
 RUN echo "<Directory /var/www/html/public>\n\
     AllowOverride All\n\
     Require all granted\n\
 </Directory>" > /etc/apache2/conf-available/app.conf \
     && a2enconf app
 
+# Establecer directorio de trabajo
+WORKDIR /var/www/html/public
+
 # Exponer el puerto 80
 EXPOSE 80
 
-# Comando por defecto de inicio
+# Comando por defecto
 CMD ["apache2-foreground"]
