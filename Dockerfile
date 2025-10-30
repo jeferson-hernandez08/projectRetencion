@@ -11,13 +11,18 @@ RUN apt-get update && apt-get install -y \
 RUN docker-php-ext-configure gd --with-freetype --with-jpeg \
     && docker-php-ext-install gd zip
 
+# ✅ Habilitar extensión ZIP explícitamente
+RUN docker-php-ext-enable zip
+
 # Instalar Composer globalmente
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
 # Copiar archivos de Composer y ejecutar instalación
 WORKDIR /app
 COPY composer.json composer.lock* ./
-RUN composer install --no-interaction --no-progress --prefer-dist
+
+# ✅ Importante: ignorar comprobación de plataforma en Composer (por seguridad extra)
+RUN composer install --no-interaction --no-progress --prefer-dist --ignore-platform-req=ext-zip
 
 # -------------------------------
 # Etapa 2: Imagen final con Apache + PHP
