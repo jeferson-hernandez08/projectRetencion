@@ -18,6 +18,8 @@ class LoginController extends BaseController {
     }
 
     public function initLogin() {
+        $errors = ''; // ✅ evita el warning
+        
         if (isset($_POST['txtEmailUser']) && isset($_POST['txtPasswordUser'])) {
             $user = trim($_POST['txtEmailUser']) ?? null;
             $password = trim($_POST['txtPasswordUser']) ?? null;

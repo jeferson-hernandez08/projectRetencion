@@ -49,7 +49,8 @@ class BaseController {
         echo "<br>Formatea un número";
     }
     public function redirectTo($view){
-        echo "<br>Reenvía la pagina";
+        // echo "<br>Reenvía la pagina";
         header("location: /$view");
+        exit; // importante para detener la ejecución
     }
 }
