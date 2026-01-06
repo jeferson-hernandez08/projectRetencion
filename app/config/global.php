@@ -1,6 +1,6 @@
 <?php
 
-// Tiempo inactivo de 1 minuto | commit de prueba ingreso postgres
+// Tiempo inactivo de 1 minuto | commit de prueba ingreso postgres ...
 define("INACTIVE_TIME", 1);
 define("MAIN_APP_ROUTE", __DIR__.'/../app/');
 
