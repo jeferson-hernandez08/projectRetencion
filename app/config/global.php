@@ -20,10 +20,10 @@ if ($databaseUrl) {
 } else {
     // Configuración local de desarrollo
     define("DRIVER", 'pgsql');  // Cambiado de 'mysql' a 'pgsql'
-    define("HOST", 'dpg-d3ofl53ipnbc73fva8pg-a.oregon-postgres.render.com'); // Host de Render PostgreSQL
-    define("USERNAME_DB", 'projectretention711_3c2x_user'); // Usuario de la BD en Render
-    define("PASSWORD_DB", 'bTspe32vczTss47SKDcnLRCfZ0CoaIKI'); // Password de Render
-    define("DATABASE", 'projectretention711_3c2x');  // Nombre de la base de datos en Render
+    define("HOST", 'dpg-d5ftsdm3jp1c738assfg-a.oregon-postgres.render.com'); // Host de Render PostgreSQL
+    define("USERNAME_DB", 'projectretention711_ofpz_user'); // Usuario de la BD en Render
+    define("PASSWORD_DB", '1PhlJrQTmrrFrtyulb7LYszuB51gOfhK'); // Password de Render
+    define("DATABASE", 'projectretention711_ofpz');  // Nombre de la base de datos en Render
     define("PORT", 5432); // Puerto estándar de PostgreSQL
 }
 
