@@ -112,12 +112,34 @@ body.dark-mode .logo-text {
     transition: all 0.3s ease;
 }
 
+/* LAYOUT PARA EL HEADER CENTRADO */
 .header-container{
     width: 100%;
     display: flex;
     align-items: center;
     justify-content: space-between;
     position: relative;
+}
+
+.header-left {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    flex-shrink: 0;
+    min-width: 0;
+}
+
+.header-center {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    min-width: 0;
+}
+
+.header-right {
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
 }
 
 /* Centrar el h1 dentro del header-container */
@@ -2577,6 +2599,22 @@ body.dark-mode .create-report-btn {
         flex-wrap: nowrap;
         gap: 15px;
         align-items: center;
+    }
+
+    .header-left {
+        order: 1;
+        flex: 1;
+        min-width: 0;
+    }
+
+    .header-right {
+        order: 2;
+    }
+    
+    .header-center {
+        order: 3;
+        flex: 0 0 100%;
+        margin-top: 10px;
     }
     
     .header-container h1 {

@@ -130,47 +130,53 @@
         <main class="main-content">
             <header class="header">
                 <div class="header-container">
-                    <button class="menu-toggle" id="menu-toggle">
-                        <i class="fas fa-bars"></i>
-                    </button>
-                    <h1> <?php echo $title ?> </h1>
-                    
-                    <div class="header-search-reportes" id="header-search-reportes">
-                        <div class="search-wrapper-reportes">
-                            <i class="fas fa-search search-icon-reportes"></i>
-                            <input type="text" id="searchAprendizHeader" placeholder="Buscar aprendiz..." class="search-input-reportes">
-                            <button id="clearSearchHeader" class="clear-btn-reportes">
-                                <i class="fas fa-times"></i>
-                            </button>
-                        </div>
+                    <div class="header-left">
+                        <button class="menu-toggle" id="menu-toggle">
+                            <i class="fas fa-bars"></i>
+                        </button>
+                        <h1> <?php echo $title ?> </h1>
                     </div>
                     
-                    <div class="header-icons">
-                        <div class="user-dropdown">
-                            <a href="#" class="icon-link" id="user-menu-toggle">
-                                <i class="fas fa-user-circle"></i>
-                            </a>
-                            <div class="dropdown-content" id="user-dropdown-content">
-                                <div class="dropdown-header">
-                                    <i class="fas user-card fa-user-circle"></i>
-                                    <h3><?php echo $rolUsuario; ?></h3>
-                                    <p><?php echo $nombreUsuario; ?></p>
-                                </div>
-                                <div class="dropdown-body">
-                                    <a href="#" class="dropdown-item">
-                                        <i class="fas fa-user"></i> Mi Perfil
-                                    </a>
-                                    <a href="#" class="dropdown-item">
-                                        <i class="fas fa-cog"></i> Configuración
-                                    </a>
-                                    <a href="#" class="dropdown-item">
-                                        <i class="fas fa-question-circle"></i> Ayuda
-                                    </a>
-                                </div>
-                                <div class="dropdown-footer">
-                                    <a href="/login/logout" class="logout-btn">
-                                        <span class="info-text">Cerrar sesión</span>
-                                    </a>
+                    <div class="header-center">
+                        <div class="header-search-reportes" id="header-search-reportes">
+                            <div class="search-wrapper-reportes">
+                                <i class="fas fa-search search-icon-reportes"></i>
+                                <input type="text" id="searchAprendizHeader" placeholder="Buscar aprendiz..." class="search-input-reportes">
+                                <button id="clearSearchHeader" class="clear-btn-reportes">
+                                    <i class="fas fa-times"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="header-right">
+                        <div class="header-icons">
+                            <div class="user-dropdown">
+                                <a href="#" class="icon-link" id="user-menu-toggle">
+                                    <i class="fas fa-user-circle"></i>
+                                </a>
+                                <div class="dropdown-content" id="user-dropdown-content">
+                                    <div class="dropdown-header">
+                                        <i class="fas user-card fa-user-circle"></i>
+                                        <h3><?php echo $rolUsuario; ?></h3>
+                                        <p><?php echo $nombreUsuario; ?></p>
+                                    </div>
+                                    <div class="dropdown-body">
+                                        <a href="#" class="dropdown-item">
+                                            <i class="fas fa-user"></i> Mi Perfil
+                                        </a>
+                                        <a href="#" class="dropdown-item">
+                                            <i class="fas fa-cog"></i> Configuración
+                                        </a>
+                                        <a href="#" class="dropdown-item">
+                                            <i class="fas fa-question-circle"></i> Ayuda
+                                        </a>
+                                    </div>
+                                    <div class="dropdown-footer">
+                                        <a href="/login/logout" class="logout-btn">
+                                            <span class="info-text">Cerrar sesión</span>
+                                        </a>
+                                    </div>
                                 </div>
                             </div>
                         </div>
