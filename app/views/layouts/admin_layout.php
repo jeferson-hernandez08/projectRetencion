@@ -134,7 +134,7 @@
                         <button class="menu-toggle" id="menu-toggle">
                             <i class="fas fa-bars"></i>
                         </button>
-                        <h1> <?php echo $title ?> </h1>
+                        <h1 class="page-title"> <?php echo $title ?> </h1>
                     </div>
                     
                     <div class="header-center">
