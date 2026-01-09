@@ -2460,11 +2460,10 @@ body.dark-mode .create-report-btn {
     }
     
     /* HEADER */
-    .header-container h1 {
+    .header-container > .header-left > .page-title {
         font-size: 1.4rem;
         max-width: 45%;
     }
-    
     
     .header-icons .icon-link {
         font-size: 20px;
