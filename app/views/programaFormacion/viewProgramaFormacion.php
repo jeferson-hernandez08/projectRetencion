@@ -1,12 +1,12 @@
 <div class="data-container">
     <div class="navegate-group">
-        <div class="back">
+        <!-- <div class="back">
             <a href="/programaFormacion/view"><img src="/img/back.svg"></a>
-        </div>
+        </div> -->
         <div class="create">
             <a href="/programaFormacion/new">
                 <button>
-                <i class="fa fa-plus-circle"></i> Crear programa de formación
+                    <i class="fa fa-plus-circle"></i> <p>Crear programa de formación</p>
                 </button>
             </a>
         </div>
@@ -127,7 +127,7 @@
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    padding: 2px 20px;
+    padding: 5px 20px;
     background: #28a745;
     color: white;
     text-decoration: none;

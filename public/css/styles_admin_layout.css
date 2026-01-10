@@ -2484,6 +2484,10 @@ body.dark-mode .create-report-btn {
     .footer-logo-text {
         font-size: 1.5rem;
     }
+    
+    .create button p {
+        display: none;
+    }  
 }
 
 /* Móviles grandes (481px - 768px) */
@@ -2767,6 +2771,10 @@ body.dark-mode .create-report-btn {
     .action-btn {
         width: 100%;
     }
+
+    .create button p {
+        display: none;
+    } 
 }
 
 /* Móviles pequeños (320px - 480px) */
