@@ -2797,9 +2797,7 @@ body.dark-mode .create-report-btn {
     .menu-toggle {
         font-size: 20px;
     }
-    
-
-    
+     
     .header-icons {
         gap: 10px;
     }
@@ -2811,7 +2809,6 @@ body.dark-mode .create-report-btn {
     .menu-toggle {
         font-size: 20px;
     }
-    
     
     .header-icons {
         gap: 8px;
@@ -2883,12 +2880,6 @@ body.dark-mode .create-report-btn {
     .buttons button {
         padding: 0.6em;
         font-size: 0.85rem;
-    }
-    
-    .create button {
-        height: 40px;
-        width: 40px;
-        font-size: 24px;
     }
     
     /* DROPDOWN DE USUARIO */
