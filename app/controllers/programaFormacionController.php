@@ -192,7 +192,7 @@ class ProgramaFormacionController extends BaseController {
         }
         
         $data = [
-            "title" => "Programas de Formación",
+            "title" => "Editar Programa de Formación",
             "programa" => $programaInfo,
             "nombreUsuario" => $nombreUsuario,   // Enviamos datos para el card icon user cerrar sesion
             "rolUsuario" => $rolNombre
