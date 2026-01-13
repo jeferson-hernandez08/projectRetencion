@@ -1,12 +1,13 @@
 <div class="data-container">
     <div class="navegate-group">
-        <div class="back">
+        <!-- <div class="back">
             <a href="/intervencion/view"><img src="/img/back.svg"></a>
-        </div>
+        </div> -->
         <div class="create">
         <a href="/intervencion/new">
             <button>
             <i class="fa fa-plus-circle"></i> Crear intervención
+            <!-- <i class="fa fa-plus-circle"></i> <p>Crear intervención</p> // p: Para opcion otro modo responsive-->
             </button>
         </a>
 </div>

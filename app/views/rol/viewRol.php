@@ -1,15 +1,16 @@
 <div class="data-container">
     <div class="navegate-group">
-        <div class="back">
+        <!-- <div class="back">
             <a href="/rol/view"><img src="/img/back.svg"></a>
-        </div>
+        </div> -->
         <div class="create">
-        <a href="/rol/new">
-            <button>
-            <i class="fa fa-plus-circle"></i> Crear rol
-            </button>
-        </a>
-</div>
+            <a href="/rol/new">
+                <button>
+                    <i class="fa fa-plus-circle"></i> Crear rol
+                    <!-- <i class="fa fa-plus-circle"></i> <p>Crear rol</p> p: para responsive-->
+                </button>
+            </a>
+        </div>
     </div>
     
     <?php if (empty($roles)): ?>
