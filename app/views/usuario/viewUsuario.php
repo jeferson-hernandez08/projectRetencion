@@ -4,12 +4,12 @@
             <a href="/usuario/view"><img src="/img/back.svg"></a>
         </div> -->
         <div class="create">
-        <a href="/usuario/new">
-            <button>
-            <i class="fa fa-plus-circle"></i> <p>Crear usuario</p>
-            </button>
-        </a>
-</div>
+            <a href="/usuario/new">
+                <button>
+                    <i class="fa fa-plus-circle"></i> <p>Crear usuario</p>
+                </button>
+            </a>
+        </div>
         <div>
              <!-- Botón para importar desde Excel -->
             <a href="#" id="btn-importar-excel" class="btn-importar">

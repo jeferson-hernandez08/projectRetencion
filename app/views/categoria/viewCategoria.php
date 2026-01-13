@@ -1,15 +1,16 @@
 <div class="data-container">
     <div class="navegate-group">
-        <div class="back">
+        <!-- <div class="back">
             <a href="/categoria/view"><img src="/img/back.svg"></a>
-        </div>
+        </div> -->
         <div class="create">
-        <a href="/categoria/new">
-            <button>
-            <i class="fa fa-plus-circle"></i> Crear categoría
-            </button>
-        </a>
-</div>
+            <a href="/categoria/new">
+                <button>
+                    <i class="fa fa-plus-circle"></i> Crear categoría
+                    <!-- <i class="fa fa-plus-circle"></i> <p>Crear categoría</p> // Se agrega p para opcion modo responsive -->
+                </button>
+            </a>
+        </div>
     </div>
     
     <?php if (empty($categorias)): ?>

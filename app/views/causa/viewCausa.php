@@ -1,12 +1,13 @@
 <div class="data-container">
     <div class="navegate-group">
-        <div class="back">
+        <!-- <div class="back">
             <a href="/causa/view"><img src="/img/back.svg"></a>
-        </div>
+        </div> -->
         <div class="create">
         <a href="/causa/new">
             <button>
                 <i class="fa fa-plus-circle"></i> Crear causa
+                <!-- <i class="fa fa-plus-circle"></i> <p>Crear causa</p> // Se agrega p para opcion modo responsive -->
             </button>
         </a>
 </div>
