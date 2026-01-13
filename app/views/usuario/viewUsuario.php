@@ -1,12 +1,12 @@
 <div class="data-container">
     <div class="navegate-group">
-        <div class="back">
+        <!-- <div class="back">
             <a href="/usuario/view"><img src="/img/back.svg"></a>
-        </div>
+        </div> -->
         <div class="create">
         <a href="/usuario/new">
             <button>
-            <i class="fa fa-plus-circle"></i> Crear usuario
+            <i class="fa fa-plus-circle"></i> <p>Crear usuario</p>
             </button>
         </a>
 </div>
@@ -177,7 +177,7 @@
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    padding: 2px 20px;
+    padding: 5px 20px;
     background: #28a745;
     color: white;
     text-decoration: none;
@@ -402,7 +402,7 @@
 }
 
 i.fa-file-excel {
-    font-size: 23px;
+    /* font-size: 23px; */
     color: #FFFFFFFF; /* Blanco */
 }
 
