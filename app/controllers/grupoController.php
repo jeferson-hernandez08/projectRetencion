@@ -81,7 +81,7 @@ class GrupoController extends BaseController {
         
         // Llamamos a la vista
         $data = [
-            "title"         => "Grupos",
+            "title"         => "Crear Grupo",
             "programas"     => $programas,
             "nombreUsuario" => $nombreUsuario,   // Enviamos datos para el card icon user cerrar sesion
             "rolUsuario"    => $rolNombre
@@ -135,7 +135,7 @@ class GrupoController extends BaseController {
         }
 
         $data = [
-            "title"     => "Grupos",
+            "title"     => "Detalle del Grupo",
             'grupo'     => $grupoInfo,
             "nombreUsuario" => $nombreUsuario,   // Enviamos datos para el card icon user cerrar sesion
             "rolUsuario"    => $rolNombre
@@ -165,7 +165,7 @@ class GrupoController extends BaseController {
         }
 
         $data = [
-            "title"     => "Grupos",
+            "title"     => "Editar Grupo",
             "grupo"     => $grupoInfo,
             "programas" => $programasInfo,
             "nombreUsuario" => $nombreUsuario,   // Enviamos datos para el card icon user cerrar sesion

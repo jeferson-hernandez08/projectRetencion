@@ -98,7 +98,7 @@ class ProgramaFormacionController extends BaseController {
         
         // Llamamos a la vista
         $data = [
-            "title" => "Programas de Formación",
+            "title" => "Crear Programa de Formación",
             "nombreUsuario" => $nombreUsuario,   // Enviamos datos para el card icon user cerrar sesion
             "rolUsuario" => $rolNombre
         ];
@@ -153,7 +153,7 @@ class ProgramaFormacionController extends BaseController {
         }
         
         $data = [
-            "title" => "Programas de Formación",
+            "title" => "Detalle del Programa de Formación",
             'programa' => $programaInfo,
             "nombreUsuario" => $nombreUsuario,   // Enviamos datos para el card icon user cerrar sesion
             "rolUsuario" => $rolNombre
@@ -192,7 +192,7 @@ class ProgramaFormacionController extends BaseController {
         }
         
         $data = [
-            "title" => "Editar Programa de Formación",
+            "title" => "Editar Programa de Formación",   // Titulos dinámicos
             "programa" => $programaInfo,
             "nombreUsuario" => $nombreUsuario,   // Enviamos datos para el card icon user cerrar sesion
             "rolUsuario" => $rolNombre

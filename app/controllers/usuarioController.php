@@ -76,7 +76,7 @@ class UsuarioController extends BaseController {
         
         // Llamamos a la vista
         $data = [
-            "title" => "Usuarios",
+            "title" => "Crear Usuario",
             "roles" => $roles,
             "nombreUsuario" => $nombreUsuario,   // Enviamos datos para el card icon user cerrar sesion
             "rolUsuario" => $rolNombre
@@ -130,7 +130,7 @@ class UsuarioController extends BaseController {
         }
 
         $data = [
-            "title" => "Usuarios",
+            "title" => "Detalle del Usuario",
             'usuario' => $usuarioInfo,
             "nombreUsuario" => $nombreUsuario,   // Enviamos datos para el card icon user cerrar sesion
             "rolUsuario" => $rolNombre
@@ -160,7 +160,7 @@ class UsuarioController extends BaseController {
         }
 
         $data = [
-            "title" => "Usuarios",
+            "title" => "Editar Usuario",
             "usuario" => $usuarioInfo,
             "roles" => $rolesInfo,
             "nombreUsuario" => $nombreUsuario,   // Enviamos datos para el card icon user cerrar sesion

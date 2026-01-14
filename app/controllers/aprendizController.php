@@ -81,7 +81,7 @@ class AprendizController extends BaseController {
         
         // Llamamos a la vista
         $data = [
-            "title" => "Aprendices",
+            "title" => "Crear Aprendiz",
             "grupos" => $grupos,
             "nombreUsuario" => $nombreUsuario,   // Enviamos datos para el card icon user cerrar sesion
             "rolUsuario" => $rolNombre
@@ -135,7 +135,7 @@ class AprendizController extends BaseController {
         }
 
         $data = [
-            "title" => "Aprendices",
+            "title" => "Detalle del Aprendiz",
             'aprendiz' => $aprendizInfo,
             "nombreUsuario" => $nombreUsuario,   // Enviamos datos para el card icon user cerrar sesion
             "rolUsuario" => $rolNombre
@@ -165,7 +165,7 @@ class AprendizController extends BaseController {
         }
 
         $data = [
-            "title" => "Aprendices",
+            "title" => "Editar Aprendiz",
             "aprendiz" => $aprendizInfo,
             "grupos" => $gruposInfo,
             "nombreUsuario" => $nombreUsuario,   // Enviamos datos para el card icon user cerrar sesion
