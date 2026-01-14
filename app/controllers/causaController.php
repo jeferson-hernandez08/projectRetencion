@@ -79,7 +79,7 @@ class CausaController extends BaseController {
         
         // Llamamos a la vista
         $data = [
-            "title"         => "Causas",
+            "title"         => "Crear Causa",
             "categorias"   => $categorias,
             "nombreUsuario" => $nombreUsuario,   // Enviamos datos para el card icon user cerrar sesion
             "rolUsuario" => $rolNombre
@@ -125,7 +125,7 @@ class CausaController extends BaseController {
         }
         
         $data = [
-            "title"     => "Causas",
+            "title"     => "Detalle de la Causa",
             'causa'     => $causaInfo,
             "nombreUsuario" => $nombreUsuario,   // Enviamos datos para el card icon user cerrar sesion
             "rolUsuario" => $rolNombre
@@ -155,7 +155,7 @@ class CausaController extends BaseController {
         }
         
         $data = [
-            "title"       => "Causas",
+            "title"       => "Editar Causa",
             "causa"      => $causaInfo,
             "categorias" => $categorias,
             "nombreUsuario" => $nombreUsuario,   // Enviamos datos para el card icon user cerrar sesion

@@ -118,7 +118,7 @@ class CategoriaController extends BaseController {
         }
         
         $data = [
-            "title" => "Detalle Categoría",
+            "title" => "Detalle de la Categoría",
             'categoria' => $categoriaInfo,
             "nombreUsuario" => $nombreUsuario,   // Enviamos datos para el card icon user cerrar sesion
             "rolUsuario" => $rolNombre
