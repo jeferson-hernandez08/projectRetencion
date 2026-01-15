@@ -111,7 +111,7 @@ class ReporteController extends BaseController {
         
         // Llamamos a la vista
         $data = [
-            "title" => "Reportes",
+            "title" => "Crear Reporte",
             // "usuarios" => $usuarios,      // Ya no necesitamos cargar los usuarios
             "aprendices" => $aprendices,
 
@@ -205,7 +205,7 @@ class ReporteController extends BaseController {
         }
 
         $data = [
-            "title" => "Reportes",
+            "title" => "Detalle del Reporte",
             'reporte' => $reporteInfo,
             "nombreUsuario" => $nombreUsuario,   // Enviamos datos para el card icon user cerrar sesion
             "rolUsuario" => $rolNombre
@@ -240,7 +240,7 @@ class ReporteController extends BaseController {
         }
         
         $data = [
-            "title" => "Reportes",
+            "title" => "Editar Reporte",
             "reporte" => $reporteInfo,
             "aprendices" => $aprendicesInfo,
             "nombreUsuario" => $nombreUsuario,   // Enviamos datos para el card icon user cerrar sesion

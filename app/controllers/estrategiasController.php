@@ -80,7 +80,7 @@ class EstrategiasController extends BaseController {
         
         // Llamamos a la vista
         $data = [
-            "title" => "Estrategias",
+            "title" => "Crear Estrategia",
             "categorias" => $categorias,
             "nombreUsuario" => $nombreUsuario,   // Enviamos datos para el card icon user cerrar sesion
             "rolUsuario" => $rolNombre
@@ -125,7 +125,7 @@ class EstrategiasController extends BaseController {
         }
 
         $data = [
-            "title" => "Estrategias",
+            "title" => "Detalle de la Estrategia",
             'estrategia' => $estrategiaInfo,
             "nombreUsuario" => $nombreUsuario,   // Enviamos datos para el card icon user cerrar sesion
             "rolUsuario" => $rolNombre
@@ -155,7 +155,7 @@ class EstrategiasController extends BaseController {
         }
 
         $data = [
-            "title" => "Estrategias",
+            "title" => "Editar Estrategia",
             "estrategia" => $estrategiaInfo,
             "categorias" => $categoriasInfo,
             "nombreUsuario" => $nombreUsuario,   // Enviamos datos para el card icon user cerrar sesion

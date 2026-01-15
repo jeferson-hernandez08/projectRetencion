@@ -86,7 +86,7 @@ class IntervencionController extends BaseController {
         
         // Llamamos a la vista
         $data = [
-            "title" => "Intervenciones",
+            "title" => "Crear Intervención",
             "estrategias" => $estrategias,
             "reportes" => $reportes,
             //"usuarios" => $usuarios,
@@ -147,7 +147,7 @@ class IntervencionController extends BaseController {
         }
 
         $data = [
-            "title" => "Intervenciones",
+            "title" => "Detalle de la Intervención",
             'intervencion' => $intervencionInfo,
             "nombreUsuario" => $nombreUsuario,   // Enviamos datos para el card icon user cerrar sesion
             "rolUsuario" => $rolNombre
@@ -187,7 +187,7 @@ class IntervencionController extends BaseController {
         }
         
         $data = [
-            "title" => "Intervenciones",
+            "title" => "Editar Intervención",
             "intervencion" => $intervencionInfo,
             "estrategias" => $estrategias,
             "reportes" => $reportes,
@@ -237,7 +237,7 @@ class IntervencionController extends BaseController {
         }
         
         $data = [
-            "title" => "Eliminar Intervencion",
+            "title" => "Eliminar Intervención",
             "intervencion" => $intervencion,
             "nombreUsuario" => $nombreUsuario,   // Enviamos datos para el card icon user cerrar sesion
             "rolUsuario" => $rolNombre
