@@ -73,7 +73,7 @@ class RolController extends BaseController {
         
         // Llamamos a la vista
         $data = [
-            "title" => "Roles",
+            "title" => "Crear Nuevo Rol",
             "nombreUsuario" => $nombreUsuario,   // Enviamos datos para el card icon user cerrar sesion
             "rolUsuario" => $rolNombre
         ];
@@ -115,7 +115,7 @@ class RolController extends BaseController {
         }
         
         $data = [
-            "title" => "Roles",
+            "title" => "Detalle del Rol",
             'rol' => $rolInfo,
             "nombreUsuario" => $nombreUsuario,   // Enviamos datos para el card icon user cerrar sesion
             "rolUsuario" => $rolNombre
@@ -143,7 +143,7 @@ class RolController extends BaseController {
         }
         
         $data = [
-            "title" => "Roles",
+            "title" => "Editar Rol",
             "rol" => $rolInfo,
             "nombreUsuario" => $nombreUsuario,   // Enviamos datos para el card icon user cerrar sesion
             "rolUsuario" => $rolNombre
