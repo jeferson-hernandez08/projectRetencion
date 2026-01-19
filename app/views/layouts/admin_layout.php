@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
-        /* Estilos del buscador para tema claro */
+        /* Estilos del buscador para tema claro ¨*/
         .header-search-reportes .search-wrapper-reportes {
             background-color: #f5f5f5;
             border: 1px solid #e0e0e0;
