@@ -1,4 +1,4 @@
-    <?php
+    <?php   // Para correrlo : Ruta/test.drivers.php
     echo "<h3>🔍 Test de Drivers PDO y Conexión PostgreSQL</h3>";
 
     // 1. Verificar drivers PDO disponibles
